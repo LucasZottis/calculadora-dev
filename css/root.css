@@ -25,6 +25,7 @@ header {
 
 main {
     background-color: var(--secundary-color);
+    height: 90vh;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
