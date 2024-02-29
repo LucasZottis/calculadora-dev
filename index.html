@@ -4,27 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Página de ferramentas de geração e validação de informações. 
+        Realiza cálculos necessário em diversas áreas.">
 
     <title>Calculadora Dev</title>
 
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap.min.css" rel="preload" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="styles.css">
+    </noscript>
+
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
     <header class="p-2 text-center fs-5 text">
-        <span class="header-page">
+        <h1 class="header-page">
             Calculadora Dev
-        </span>
+        </h1>
     </header>
 
-    <main class="container" >
+    <main class="container">
         <div class="row justify-content-center w-75 mx-auto">
             <div class="col col-12 col-lg-6 col-sm-12 ">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">Conversor de tempo</h5>
+                        <h1 class="card-title fs-5">Conversor de tempo</h1>
                         <p class="card-text text-truncate">
                             Faça conversões de horas para minutos, segundos e número decimal.
                         </p>
@@ -38,13 +46,13 @@
             <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Validador de CPF
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CPF é válido.
                         </p>
-                        <a href="Validadores/cpf.html" class="btn primary-button ">
+                        <a href="validadores/cpf.html" class="btn primary-button ">
                             Acessar
                         </a>
                     </div>
@@ -54,13 +62,13 @@
             <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Validador de CNPJ
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CNPJ é válido.
                         </p>
-                        <a href="Validadores/cnpj.html" class="btn primary-button ">
+                        <a href="validadores/cnpj.html" class="btn primary-button ">
                             Acessar
                         </a>
                     </div>
@@ -70,9 +78,9 @@
             <!-- <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Gerador de CPF
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CPF é válido.
                         </p>
@@ -86,9 +94,9 @@
             <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Gerador de CNPJ
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CNPJ é válido.
                         </p>
@@ -102,9 +110,9 @@
             <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Contador de letras
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CNPJ é válido.
                         </p>
@@ -118,9 +126,9 @@
             <div class="col col-12 col-lg-6 col-sm-12">
                 <div class="card my-2">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h1 class="card-title fs-5">
                             Indentador de script SQL
-                        </h5>
+                        </h1>
                         <p class="card-text">
                             Verifique se um CNPJ é válido.
                         </p>
@@ -133,7 +141,7 @@
         </div>
     </main>
 </body>
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+<!-- <script src="js/bootstrap/bootstrap.min.js"></script> -->
+<!-- <script src="js/bootstrap/bootstrap.bundle.min.js"></script> -->
 
 </html>

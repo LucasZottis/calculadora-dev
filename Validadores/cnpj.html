@@ -7,7 +7,9 @@
 
     <title>Calculadora Dev</title>
 
-    <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap/bootstrap.min.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+
     <link rel="stylesheet" href="../css/root.css">
     <link rel="stylesheet" href="../css/validadores/cnpj.css">
 </head>
@@ -31,12 +33,6 @@
                     onclick="injetarResultadoValidacao()" />
                 <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2" style="display: none !important;"></p>
             </div>
-            <!-- <div id="cmp-resultado" class="d-flex align-items-center text-center" style="width: 30%; display: none !important;">
-                <div class="mx-auto">
-                    <p id="lbl-cnpj" class="m-0 fs-5"></p>
-                    <p id="lbl-resultado" class="m-0 fs-5"></p>
-                </div>
-            </div> -->
         </div>
 
         <hr>
@@ -123,8 +119,8 @@
             </p>
         </div>
     </main>
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../js/bootstrap/bootstrap.min.js"></script> -->
+    <!-- <script src="../js/bootstrap/bootstrap.bundle.min.js"></script> -->
 </body>
 
 </html>
