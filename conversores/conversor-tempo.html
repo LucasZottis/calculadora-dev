@@ -19,7 +19,7 @@
         </h1>
     </header>
 
-    <main class="container">
+    <main class="container py-2">
         <div class="text-center">
             <h1 class="fs-3">
                 Você sabia que é possível transformar um valor de tempo expresso em horas, minutos e segundos em um
@@ -33,47 +33,62 @@
         </div>
         <hr>
         <form>
-            <div class="mb-2">
-                <label for="txt-hours" class="form-label">
-                    Horas
-                </label>
-                <input type="number" class="form-control" id="txt-horas" onblur="aoSairCampo()">
-            </div>
-            <div class="mb-2">
-                <label for="txt-minutes" class="form-label">
-                    Minutos
-                </label>
-                <input type="number" class="form-control" id="txt-minutos" onblur="aoSairCampo()">
-            </div>
-            <div class="mb-2">
-                <label for="txt-seconds" class="form-label">
-                    Segundos
-                </label>
-                <input type="number" class="form-control" id="txt-segundos" onblur="aoSairCampo()">
-            </div>
-            <div class="mb-2">
-                <label for="txt-decimal-value" class="form-label">
-                    Valor decimal
-                </label>
-                <input type="number" class="form-control" id="txt-decimal" onblur="aoSairCampo()">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3 mb-2">
+                    <label for="txt-hours" class="form-label">
+                        Horas
+                    </label>
+                    <input type="number" class="form-control" id="txt-horas" onblur="aoSairCampo()">
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-2">
+                    <label for="txt-minutes" class="form-label">
+                        Minutos
+                    </label>
+                    <input type="number" class="form-control" id="txt-minutos" onblur="aoSairCampo()">
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-2">
+                    <label for="txt-seconds" class="form-label">
+                        Segundos
+                    </label>
+                    <input type="number" class="form-control" id="txt-segundos" onblur="aoSairCampo()">
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-2">
+                    <label for="txt-decimal-value" class="form-label">
+                        Valor decimal
+                    </label>
+                    <input type="number" class="form-control" id="txt-decimal" onblur="aoSairCampo()">
+                </div>
             </div>
         </form>
 
-        <div class="row fs-5 text">
-            <span class="col">Horas em decimal</span>
-            <span class="col text-end" id="lbl-hora-convertida">0,00</span>
-        </div>
-        <div class="row fs-5 text">
-            <span class="col">Minutos em decimal</span>
-            <span class="col text-end" id="lbl-minuto-convertido">0,00</span>
-        </div>
-        <div class="row fs-5 text">
-            <span class="col">Segundos em decimal</span>
-            <span class="col text-end" id="lbl-segundo-convertido">0,00</span>
-        </div>
-        <div class="row fs-5 text">
-            <span class="col">Hora convertida</span>
-            <span class="col text-end" id="lbl-valor-decimal">0,00</span>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="row fs-5 text">
+                    <span class="col-6">Horas</span>
+                    <span class="col-6 text-end" id="lbl-hora-convertida">0,00</span>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="row fs-5 text">
+                    <span class="col-6">Minutos</span>
+                    <span class="col-6 text-end" id="lbl-minuto-convertido">0,00</span>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="row fs-5 text">
+                    <span class="col-6">Segundos</span>
+                    <span class="col-6 text-end" id="lbl-segundo-convertido">0,00</span>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="row fs-5 text">
+                    <span class="col-6">Decimal</span>
+                    <span class="col-6 text-end" id="lbl-valor-decimal">0,00</span>
+                </div>
+            </div>
         </div>
 
         <hr>
