@@ -11,6 +11,11 @@
     --bs-primary-rgb: var(--primary-color) !important;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 body {
     font-size: 16px;
 }
