@@ -37,43 +37,43 @@
                 <label for="txt-hours" class="form-label">
                     Horas
                 </label>
-                <input type="number" class="form-control" id="txt-hours" aria-describedby="emailHelp">
+                <input type="number" class="form-control" id="txt-horas" onblur="aoSairCampo()">
             </div>
             <div class="mb-2">
                 <label for="txt-minutes" class="form-label">
                     Minutos
                 </label>
-                <input type="number" class="form-control" id="txt-minutes" aria-describedby="emailHelp">
+                <input type="number" class="form-control" id="txt-minutos" onblur="aoSairCampo()">
             </div>
             <div class="mb-2">
                 <label for="txt-seconds" class="form-label">
                     Segundos
                 </label>
-                <input type="number" class="form-control" id="txt-seconds" aria-describedby="emailHelp">
+                <input type="number" class="form-control" id="txt-segundos" onblur="aoSairCampo()">
             </div>
             <div class="mb-2">
                 <label for="txt-decimal-value" class="form-label">
                     Valor decimal
                 </label>
-                <input type="number" class="form-control" id="txt-decimal-value" aria-describedby="emailHelp">
+                <input type="number" class="form-control" id="txt-decimal" onblur="aoSairCampo()">
             </div>
         </form>
-        
+
         <div class="row fs-5 text">
             <span class="col">Horas em decimal</span>
-            <span class="col text-end">0,00</span>
+            <span class="col text-end" id="lbl-hora-convertida">0,00</span>
         </div>
         <div class="row fs-5 text">
             <span class="col">Minutos em decimal</span>
-            <span class="col text-end">0,00</span>
+            <span class="col text-end" id="lbl-minuto-convertido">0,00</span>
         </div>
         <div class="row fs-5 text">
             <span class="col">Segundos em decimal</span>
-            <span class="col text-end">0,00</span>
+            <span class="col text-end" id="lbl-segundo-convertido">0,00</span>
         </div>
         <div class="row fs-5 text">
             <span class="col">Hora convertida</span>
-            <span class="col text-end">0,00</span>
+            <span class="col text-end" id="lbl-valor-decimal">0,00</span>
         </div>
 
         <hr>
@@ -108,7 +108,8 @@
     </main>
 </body>
 
-<!-- <script src="../js/bootstrap/bootstrap.min.js"></script> -->
+<script src="../js/conversores/conversor-tempo.js"></script>
+<!-- <script src="../js/bootstrap/bootstrap.min.js"></> -->
 <!-- <script src="../js/bootstrap/bootstrap.bundle.min.js"></script> -->
 
 </html>
