@@ -21,8 +21,8 @@ body {
 }
 
 .primary-button {
-    background-color: var(--primary-color);
-    color: var(--secundary-color);
+    background-color: var(--primary-color) !important;
+    color: var(--secundary-color) !important;
 }
 
 .texto-explicativo {
