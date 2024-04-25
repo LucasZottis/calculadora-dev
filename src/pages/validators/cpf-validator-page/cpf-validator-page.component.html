@@ -2,12 +2,12 @@
     <div class="mx-auto" style="width: 30%;">
         <label for="txt-cpf" class="form-label">Digite o CPF</label>
         <input type="text" class="form-control text-center" id="txt-cpf" maxlength="14" name="txt-cpf"
-            placeholder="000.000.000-00" [(ngModel)]="cpf">
+            placeholder="000.000.000-00" [(ngModel)]="cpf" (keypress)="onKeypress($event)" (paste)="onPaste($event)">
         <input type="button" class="btn primary-button mt-2 w-100" value="Validar" (click)="validate()" />
         @if(result !== undefined) {
-            <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2" [style]="style">
-                {{ result }}
-            </p>
+        <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
+            {{ result }}
+        </p>
         }
     </div>
 </form>
