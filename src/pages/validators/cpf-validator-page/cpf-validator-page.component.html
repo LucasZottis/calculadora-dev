@@ -1,9 +1,9 @@
 <form class="pt-2">
     <div class="mx-auto" style="width: 30%;">
         <label for="txt-cpf" class="form-label">Digite o CPF</label>
-        <input type="text" class="form-control text-center" id="txt-cpf" maxlength="14"
+        <input type="text" class="form-control text-center" id="txt-cpf" maxlength="14" name="txt-cpf"
             placeholder="000.000.000-00" [(ngModel)]="cpf">
-        <input type="submit" class="btn primary-button mt-2 w-100" value="Validar" (click)="validate()" />
+        <input type="button" class="btn primary-button mt-2 w-100" value="Validar" (click)="validate()" />
         @if(result !== undefined) {
             <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2" [style]="style">
                 {{ result }}

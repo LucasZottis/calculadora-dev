@@ -19,11 +19,11 @@ export class CpfValidatorPageComponent {
   cpf: string = "";
 
   private getFirstDigit(cpf: string): string {
-    return cpf.split("")[10];
+    return cpf.split("")[9];
   }
 
   private getSecondDigit(cpf: string): string {
-    return cpf.split("")[11];
+    return cpf.split("")[10];
   }
 
   private getDigits(cpf: string): string {
@@ -35,10 +35,6 @@ export class CpfValidatorPageComponent {
 
     digits.split("").forEach(digito => {
       resultado += Number(digito) * initialValue--;
-      // valorInicialContador--;
-
-      // if (valorInicialContador < 2)
-      //     valorInicialContador = 9;
     });
 
     var resto = resultado % 11;
@@ -56,7 +52,7 @@ export class CpfValidatorPageComponent {
   }
 
   private validateSecondDigit(cpf: string): boolean {
-    return this.validateDigit(this.getDigits(cpf), this.getSecondDigit(cpf), 11);
+    return this.validateDigit(this.getDigits(cpf) + this.getFirstDigit(cpf), this.getSecondDigit(cpf), 11);
   }
 
   private removeMask(cpf: string): string {
@@ -64,25 +60,19 @@ export class CpfValidatorPageComponent {
   }
 
   public validate(): void {
-    // let formatoValido = (this.cpf !== null || this.cpf !== undefined);
+    let formatoValido = (this.cpf !== null || this.cpf !== undefined);
 
-    // if (!formatoValido)
-    //   return;
+    if (!formatoValido)
+      return;
 
-    // this.cpf = this.removeMask(this.cpf);
+    this.cpf = this.removeMask(this.cpf);
 
-    // // var digitosCalculadores = obterDigitos(cpf);
-    // // var primeiroDigito = obterPrimeiroDigito(cpf);
-    // // var segundoDigito = obterSegundoDigito(cpf);
-
-    // if (this.validateFirstDigit(this.cpf) && this.validateSecondDigit(this.cpf)) {
-    //   this.result = "Válido";
-    //   this.style = "color: green";
-    // } else {
-    //   this.result = "Inválido";
-    //   this.style = "color: red";
-    // }
-
-    console.log(this.cpf);
+    if (this.validateFirstDigit(this.cpf) && this.validateSecondDigit(this.cpf)) {
+      this.result = "Válido";
+      this.style = "color: green";
+    } else {
+      this.result = "Inválido";
+      this.style = "color: red";
+    }
   }
 }
