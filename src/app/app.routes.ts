@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CnpjGeneratorPageComponent } from 'src/pages/generators/cnpj-generator-page/cnpj-generator-page.component';
 import { CpfGeneratorPageComponent } from 'src/pages/generators/cpf-generator-page/cpf-generator-page.component';
 import { HomePageComponent } from 'src/pages/home-page/home-page.component';
 import { TimeConverterPageComponent } from 'src/pages/time-converter-page/time-converter-page.component';
@@ -13,5 +14,5 @@ export const routes: Routes = [
     {path: 'validadores/cnpj', component: CnpjValidatorPageComponent},
 
     {path: 'geradores/cpf', component: CpfGeneratorPageComponent},
-    {path: 'geradores/cnpj', component: CpfGeneratorPageComponent},
+    {path: 'geradores/cnpj', component: CnpjGeneratorPageComponent},
 ];
