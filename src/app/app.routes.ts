@@ -4,15 +4,18 @@ import { CpfGeneratorPageComponent } from 'src/pages/generators/cpf-generator-pa
 import { HomePageComponent } from 'src/pages/home-page/home-page.component';
 import { TimeConverterPageComponent } from 'src/pages/time-converter-page/time-converter-page.component';
 import { CnpjValidatorPageComponent } from 'src/pages/validators/cnpj-validator-page/cnpj-validator-page.component';
-import {    CpfValidatorPageComponent } from 'src/pages/validators/cpf-validator-page/cpf-validator-page.component';
+import { CpfValidatorPageComponent } from 'src/pages/validators/cpf-validator-page/cpf-validator-page.component';
 
 export const routes: Routes = [
-    {path: '', component: HomePageComponent},
-    {path: 'conversores/conversor-tempo', component: TimeConverterPageComponent},
+    { path: '', component: HomePageComponent },
+    { path: 'conversores/conversor-tempo', component: TimeConverterPageComponent },
 
-    {path: 'validadores/cpf', component: CpfValidatorPageComponent},
-    {path: 'validadores/cnpj', component: CnpjValidatorPageComponent},
+    { path: 'validadores/cpf', component: CpfValidatorPageComponent },
+    { path: 'validadores/cnpj', component: CnpjValidatorPageComponent },
 
-    {path: 'geradores/cpf', redirectTo:"./geradores/cpf", component: CpfGeneratorPageComponent},
-    {path: 'geradores/cnpj', component: CnpjGeneratorPageComponent},
+    { path: 'geradores/cpf', component: CpfGeneratorPageComponent },
+    { path: 'geradores/cnpj', component: CnpjGeneratorPageComponent },
+
+    // { path: '', redirectTo: "/home", pathMatch: 'full' },
+    { path: 'geradores/cpf', redirectTo: "/src/index.html", pathMatch: 'full' },
 ];
