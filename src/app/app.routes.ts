@@ -15,7 +15,4 @@ export const routes: Routes = [
 
     { path: 'geradores/cpf', component: CpfGeneratorPageComponent },
     { path: 'geradores/cnpj', component: CnpjGeneratorPageComponent },
-
-    // { path: '', redirectTo: "/home", pathMatch: 'full' },
-    { path: 'geradores/cpf', redirectTo: "../geradores/cpf", pathMatch: 'full' },
 ];
