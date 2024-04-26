@@ -13,6 +13,6 @@ export const routes: Routes = [
     {path: 'validadores/cpf', component: CpfValidatorPageComponent},
     {path: 'validadores/cnpj', component: CnpjValidatorPageComponent},
 
-    {path: 'geradores/cpf', redirectTo:"./validadores/cpf", component: CpfGeneratorPageComponent},
+    {path: 'geradores/cpf', redirectTo:"./geradores/cpf", component: CpfGeneratorPageComponent},
     {path: 'geradores/cnpj', component: CnpjGeneratorPageComponent},
 ];
