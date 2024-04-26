@@ -13,4 +13,5 @@ export const routes: Routes = [
     {path: 'validadores/cnpj', component: CnpjValidatorPageComponent},
 
     {path: 'geradores/cpf', component: CpfGeneratorPageComponent},
+    {path: 'geradores/cnpj', component: CpfGeneratorPageComponent},
 ];
