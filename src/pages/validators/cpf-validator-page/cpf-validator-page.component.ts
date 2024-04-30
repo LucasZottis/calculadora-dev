@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PageBase } from 'src/pages/pageBase';
 
 @Component({
   selector: 'cpf-validator-page',
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './cpf-validator-page.component.scss'
 })
 
-export class CpfValidatorPageComponent {
+export class CpfValidatorPageComponent extends PageBase implements OnInit {
   result: string | undefined;
   style: string = "";
   cpf: string = "";
@@ -68,6 +69,11 @@ export class CpfValidatorPageComponent {
     });
 
     return count;
+  }
+
+  ngOnInit(): void {
+    this.addDescription('Faça a validação de CPF.');
+    this.setTitle('Validação de CPF');
   }
 
   validate(): void {

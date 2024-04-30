@@ -1,6 +1,7 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PageBase } from '../pageBase';
 
 @Component({
   selector: 'time-converter-page',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './time-converter-page.component.scss'
 })
 
-export class TimeConverterPageComponent {
+export class TimeConverterPageComponent extends PageBase implements OnInit{
   hours: number = 0;
   minutes: number = 0;
   seconds: number = 0;
@@ -57,6 +58,11 @@ export class TimeConverterPageComponent {
       + (this.time.hours / 60)
       + (this.time.hours / 3600)
       + this.time.decimal;
+  }
+
+  ngOnInit(): void {
+    this.addDescription('Converta horas, minutos e segundo para diversos formatos.');
+    this.setTitle('Conversor de tempo');
   }
 
   formatTime(): string {

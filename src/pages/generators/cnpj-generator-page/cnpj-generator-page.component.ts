@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
+import { PageBase } from 'src/pages/pageBase';
 
 @Component({
   selector: 'cnpj-generator-page',
@@ -11,9 +13,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './cnpj-generator-page.component.scss'
 })
 
-export class CnpjGeneratorPageComponent {
+export class CnpjGeneratorPageComponent extends PageBase {
   cnpj: string = "";
   masked: number = 0;
+
+  constructor(
+    meta: Meta,
+    title: Title
+  ) { 
+    super(meta, title);
+    this.addDescription('Ferramenta para geração CNPJ aleatório válido.');
+    this.setTitle('Gerador de CNPJ');
+  }
 
   private randomIntFromInterval(min: number, max: number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
