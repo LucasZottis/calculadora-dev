@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PageBase } from 'src/pages/pageBase';
 
 @Component({
   selector: 'cnpj-validator-page',
@@ -10,19 +11,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './cnpj-validator-page.component.html',
   styleUrl: './cnpj-validator-page.component.scss'
 })
-export class CnpjValidatorPageComponent implements OnInit {
-  ngOnInit(): void {
-    this.injetarDadosTabela("760718080001", 2, "corpo-primeiro-digito");
-    this.injetarDadosTabela("7607180800012", 1, "corpo-segundo-digito");
+export class CnpjValidatorPageComponent extends PageBase implements OnInit {
 
-    this.injetarSomaResultados("760718080001", 2, "resultado-soma-primeiro-digito", "Em seguida, somamos os resultados: ");
-    this.injetarSomaResultados("7607180800012", 1, "resultado-soma-segundo-digito", "Em seguida, somamos os resultados: ");
-
-    this.injetarResultadoModuloOnze("760718080001", 2, "resultado-modulo-primeiro-digito", " O resto de {S} / 11 é {R}.");
-    this.injetarResultadoModuloOnze("7607180800012", 1, "resultado-modulo-segundo-digito", " O resto de {S} / 11 é {R}.");
-    this.injetarDigito(true, "primeiro-digito");
-    this.injetarDigito(false, "segundo-digito");
-  }
   result: string | undefined;
   style: string = "";
   cnpj: string = "";
@@ -82,79 +72,7 @@ export class CnpjValidatorPageComponent implements OnInit {
 
     return count;
   }
-
-  validate(): void {
-    let formatoValido = (this.cnpj !== null || this.cnpj !== undefined);
-
-    if (!formatoValido)
-      return;
-
-    let cnpj = this.removeMask(this.cnpj);
-
-    if (this.validateFirstDigit(cnpj) && this.validateSecondDigit(cnpj)) {
-      this.result = "Válido";
-      this.style = "color: var(--primary-color)";
-    } else {
-      this.result = "Inválido";
-      this.style = "color: red";
-    }
-  }
-
-  onKeypress(e: KeyboardEvent) {
-    if (Number.isNaN(Number(e.key)))
-      e.preventDefault();
-    else {
-      let cnpj = this.removeMask(this.cnpj);
-
-      switch (cnpj.length) {
-        case 2:
-        case 5:
-          if (this.count(this.cnpj, ".") !== 2)
-            this.cnpj += ".";
-          break;
-        case 8:
-          if (this.count(this.cnpj, ".") !== 1)
-            this.cnpj += "/";
-          break;
-        case 12:
-          if (this.count(this.cnpj, ".") !== 1)
-            this.cnpj += "-";
-          break;
-      }
-    }
-  }
-
-  onPaste(args: ClipboardEvent) {
-    this.cnpj = "";
-    let value = (args.clipboardData?.getData("text") ?? "");
-    for (let index = 0; index < value.length; index++) {
-      if (!Number.isNaN(Number(value[index])) && this.cnpj.length < 18) {
-        let cnpj = this.removeMask(this.cnpj);
-
-        switch (cnpj.length) {
-          case 2:
-          case 5:
-            if (this.count(this.cnpj, ".") !== 2)
-              this.cnpj += ".";
-            break;
-          case 8:
-            if (this.count(this.cnpj, ".") !== 1)
-              this.cnpj += "/";
-            break;
-          case 12:
-            if (this.count(this.cnpj, ".") !== 1)
-              this.cnpj += "-";
-            break;
-        }
-
-        this.cnpj += value[index];
-      }
-
-    }
-
-    args.preventDefault();
-  }
-
+  
   private injetarDadosTabela(digitos: string, valorInicialContador: number, identificacao: string) {
     let corpoTabela = document.getElementById(identificacao);
 
@@ -249,5 +167,93 @@ export class CnpjValidatorPageComponent implements OnInit {
       else
         html.innerText += " " + 1;
     }
+  }
+
+  ngOnInit(): void {
+    this.injetarDadosTabela("760718080001", 2, "corpo-primeiro-digito");
+    this.injetarDadosTabela("7607180800012", 1, "corpo-segundo-digito");
+
+    this.injetarSomaResultados("760718080001", 2, "resultado-soma-primeiro-digito", "Em seguida, somamos os resultados: ");
+    this.injetarSomaResultados("7607180800012", 1, "resultado-soma-segundo-digito", "Em seguida, somamos os resultados: ");
+
+    this.injetarResultadoModuloOnze("760718080001", 2, "resultado-modulo-primeiro-digito", " O resto de {S} / 11 é {R}.");
+    this.injetarResultadoModuloOnze("7607180800012", 1, "resultado-modulo-segundo-digito", " O resto de {S} / 11 é {R}.");
+    this.injetarDigito(true, "primeiro-digito");
+    this.injetarDigito(false, "segundo-digito");
+
+    this.addDescription('Faça a validação de CNPJ.');
+    this.setTitle('Validação de CNPJ');
+  }
+
+  validate(): void {
+    let formatoValido = (this.cnpj !== null || this.cnpj !== undefined);
+
+    if (!formatoValido)
+      return;
+
+    let cnpj = this.removeMask(this.cnpj);
+
+    if (this.validateFirstDigit(cnpj) && this.validateSecondDigit(cnpj)) {
+      this.result = "Válido";
+      this.style = "color: var(--primary-color)";
+    } else {
+      this.result = "Inválido";
+      this.style = "color: red";
+    }
+  }
+
+  onKeypress(e: KeyboardEvent) {
+    if (Number.isNaN(Number(e.key)))
+      e.preventDefault();
+    else {
+      let cnpj = this.removeMask(this.cnpj);
+
+      switch (cnpj.length) {
+        case 2:
+        case 5:
+          if (this.count(this.cnpj, ".") !== 2)
+            this.cnpj += ".";
+          break;
+        case 8:
+          if (this.count(this.cnpj, ".") !== 1)
+            this.cnpj += "/";
+          break;
+        case 12:
+          if (this.count(this.cnpj, ".") !== 1)
+            this.cnpj += "-";
+          break;
+      }
+    }
+  }
+
+  onPaste(args: ClipboardEvent) {
+    this.cnpj = "";
+    let value = (args.clipboardData?.getData("text") ?? "");
+    for (let index = 0; index < value.length; index++) {
+      if (!Number.isNaN(Number(value[index])) && this.cnpj.length < 18) {
+        let cnpj = this.removeMask(this.cnpj);
+
+        switch (cnpj.length) {
+          case 2:
+          case 5:
+            if (this.count(this.cnpj, ".") !== 2)
+              this.cnpj += ".";
+            break;
+          case 8:
+            if (this.count(this.cnpj, ".") !== 1)
+              this.cnpj += "/";
+            break;
+          case 12:
+            if (this.count(this.cnpj, ".") !== 1)
+              this.cnpj += "-";
+            break;
+        }
+
+        this.cnpj += value[index];
+      }
+
+    }
+
+    args.preventDefault();
   }
 }
