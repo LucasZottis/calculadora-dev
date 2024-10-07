@@ -1,0 +1,19 @@
+header {
+    background-color: var(--primary-color);
+    color: var(--secundary-color) !important;
+    font-family: "Courier New", monospace;
+    padding: 1.5%;
+}
+
+main {
+    background-color: var(--secundary-color);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-page {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
