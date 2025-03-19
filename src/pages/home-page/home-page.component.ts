@@ -16,9 +16,9 @@ export class HomePageComponent extends PageBase {
   constructor(
     meta: Meta,
     title: Title
-  ) { 
+  ) {
     super(meta, title);
-    this.addDescription('As melhores ferramentas para desenvolvedores estão aqui!');
+    this.addDescription('Calculadoras que podem ajudar a validar soluções desenvolvidas no dia a dia.');
     this.setTitle('Página Inicial');
   }
 }
