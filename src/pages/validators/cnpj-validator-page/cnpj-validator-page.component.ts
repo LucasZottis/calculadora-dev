@@ -72,7 +72,7 @@ export class CnpjValidatorPageComponent extends PageBase implements OnInit {
 
     return count;
   }
-  
+
   private injetarDadosTabela(digitos: string, valorInicialContador: number, identificacao: string) {
     let corpoTabela = document.getElementById(identificacao);
 
@@ -181,7 +181,7 @@ export class CnpjValidatorPageComponent extends PageBase implements OnInit {
     this.injetarDigito(true, "primeiro-digito");
     this.injetarDigito(false, "segundo-digito");
 
-    this.addDescription('Faça a validação de CNPJ.');
+    this.addDescription('De vez em quando é necessário validar um CNPJ, aqui você consegue fazer.');
     this.setTitle('Validação de CNPJ');
   }
 
