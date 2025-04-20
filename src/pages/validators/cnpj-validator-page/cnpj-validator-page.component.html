@@ -4,8 +4,9 @@
             <div id="formulario">
                 <label for="txt-cnpj" class="form-label">Digite o CNPJ</label>
                 <input type="text" class="form-control text-center" id="txt-cnpj" maxlength="18" name="txt-cnpj"
-                    placeholder="00.000.000/0000-00" [(ngModel)]="cnpj" (keypress)="onKeypress($event)" (paste)="onPaste($event)">
-                <input type="button" class="btn primary-button mt-2 w-100" value="Validar" (click)="validate()" />
+                    placeholder="00.000.000/0000-00" [(ngModel)]="cnpj" (keypress)="onKeypress($event)"
+                    (paste)="onPaste($event)">
+                <input type="button" class="btn btn-primary btn-sm mt-2 w-100" value="Validar" (click)="validate()" />
                 <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
                     {{result}}
                 </p>
@@ -16,83 +17,105 @@
 
 <hr>
 
-<div class="texto-explicativo">
-    <h4 class="fw-bold text-center mb-3">Algoritmo para Validação do CNPJ</h4>
-    <p>
-        Para validar um CNPJ, primeiro é importante entender sua estrutura. Um CNPJ é composto por três
-        partes: a inscrição principal, o número de filiais e os dígitos verificadores. A validação oficial
-        do CNPJ envolve também o cálculo de um oitavo dígito, mas algumas empresas possuem números que,
-        quando validados dessa maneira, são considerados inválidos. Portanto, é mais seguro validar apenas
-        os dígitos verificadores, garantindo que nenhum CNPJ seja considerado inválido.
-    </p>
+<div class="pb-2">
+    <h4 class="fw-bold text-center mb-3">Como validar um CNPJ</h4>
+    <div class="texto-explicativo">
+        <p>
+            O CNPJ é composto por 14 dígitos de acordo com este formato: XX.XXX.XXX/XXXX-XX. Os oito primeiros dígitos
+            formam a “raiz”, que identifica a empresa. Por exemplo:
+        </p>
+        <p>
+            O CNPJ de exemplo é 11.444.777/0001-61 e cada parte do número tem um significado específico:
 
-    <h5 class="text-center mb-3">Passo 1: Validando os Dígitos Verificadores</h5>
-    <p>
-        Vamos calcular os dígitos verificadores de um CNPJ hipotético, como por exemplo, 76.071.808/0001-XX.
-        Multiplicamos cada dígito pelo peso correspondente, conforme mostrado abaixo:
-    </p>
+        </p>
 
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th scope="col" style="width: 33.3333%;">Dígitos CNPJ</th>
-                <th scope="col" style="width: 33.3333%;">Pesos</th>
-                <th scope="col" style="width: 33.3333%;">Resultado</th>
-            </tr>
-        </thead>
-        <tbody id="corpo-primeiro-digito">
-        </tbody>
-    </table>
+        <p>
+            11.444.777 – Número base da empresa (identificação única).
+        </p>
 
-    <!-- <p>Em seguida, somamos os resultados: 5 + 4 + 6 + 4 + 18 + 24 + 21 + 18 + 0 + 0 + 0 + 2 = 102</p> -->
-    <p id="resultado-soma-primeiro-digito">
-        <!-- <script>injetarSomaResultados("112223330001", 5, "resultado-soma-primeiro-digito", "Em seguida, somamos os resultados: ")</script> -->
-    </p>
-    <p id="resultado-modulo-primeiro-digito">
-        Agora, dividimos a soma pelo número 11.
-        <!-- <script>injetarResultadoModuloOnze("112223330001", 5, "resultado-modulo-primeiro-digito", " O resto de {S} / 11 é {R}.")</script> -->
-    </p>
-    <p id="primeiro-digito">
-        Se o resto for menor que 2 ou 10, o dígito verificador é 0; caso contrário, subtraímos o resto de 11
-        para
-        obter o dígito. Nesse caso, o primeiro dígito verificador é
-        <!-- <script>injetarDigito(true, "primeiro-digito")</script>. -->
-    </p>
+        <p>
+            0001 – Código da filial (matriz sempre têm 0001, filiais podem ter 0002, 0003, etc.).
+        </p>
 
-    <h5 class="text-center mb-3">Passo 2: Validando o Segundo Dígito Verificador</h5>
-    <p>
-        Agora, temos o primeiro dígito calculado, e o CNPJ fica como 11.222.333/0001-8X. Para calcular o segundo
-        dígito verificador, repetimos o processo, mas com uma sequência de multiplicadores ligeiramente
-        diferente.
-    </p>
+        <p>
+            42 – São <strong>dígitos verificadores</strong>, usados para validar a autenticidade do CNPJ.
+        </p>
 
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th scope="col" style="width: 33.3333%;">Dígitos CNPJ</th>
-                <th scope="col" style="width: 33.3333%;">Pesos</th>
-                <th scope="col" style="width: 33.3333%;">Resultado</th>
-            </tr>
-        </thead>
-        <tbody id="corpo-segundo-digito">
-            <!-- <script>injetarDadosTabela("1122233300019", 6, "corpo-segundo-digito")</script> -->
-        </tbody>
-    </table>
+        <p>
+            Os dígitos verificadores do CNPJ são gerados por um cálculo matemático baseado no número de inscrição. Eles
+            garantem que o CNPJ é válido, permitindo que sistemas da Receita Federal, bancos e e-commerces identifiquem
+            números reais e evitem fraudes.
+        </p>
 
-    <p id="resultado-soma-segundo-digito">
-        <!-- <script>injetarSomaResultados("1122233300019", 6, "resultado-soma-segundo-digito", "Em seguida, somamos os resultados: ")</script> -->
-    </p>
-    <p id="resultado-modulo-segundo-digito">
-        Agora, dividimos a soma pelo número 11.
-        <!-- <script>injetarResultadoModuloOnze("1122233300019", 6, "resultado-modulo-segundo-digito", " O resto de {S} / 11 é {R}.")</script> -->
-    </p>
-    <p id="segundo-digito">
-        Se o resto for menor que 2 ou 10, o dígito verificador é 0; caso contrário, subtraímos o resto de 11
-        para
-        obter o dígito. Nesse caso, o primeiro dígito verificador é
-        <script>injetarDigito(false, "segundo-digito")</script>.
-    </p>
-    <p id="cnpj">
-        Assim temos 76.071.808/0001-21
-    </p>
+        <p>
+            A seguir, vamos mostrar como calcular os dígitos verificadores para o CNPJ
+            <strong>11.444.777/0001-61</strong>.
+        </p>
+    </div>
+
+    <h5 class="text-center mb-3">Etapa 1 — Cálculo do Primeiro Dígito Verificador</h5>
+    <div class="texto-explicativo">
+        <p>
+            Para calcular o primeiro dígito verificador, vamos multiplicar cada um dos 12 primeiros números do CNPJ por
+            um peso específico e somar os resultados.
+        </p>
+        <p>O CNPJ base é: <strong>11.444.777/0001</strong></p>
+        <p>Pesos: <strong>5 4 3 2 9 8 7 6 5 4 3 2</strong></p>
+
+        <p>O cálculo é o seguinte:</p>
+        <pre>
+            (1×5) + (1×4) + (4×3) + (4×2) + (4×9) + (7×8) + (7×7) + (7×6) + (0×5) + (0×4) + (0×3) + (1×2) = 214
+        </pre>
+
+        <p>Agora, dividimos o total por 11 e usamos o <strong>resto da divisão</strong>:</p>
+        <pre>
+            214 ÷ 11 = 19 (resto 5)
+        </pre>
+
+        <p>
+            Como o resto da divisão foi <strong>5</strong>, subtraímos esse número de 11 para encontrar o primeiro
+            dígito verificador: <strong>11 - 5 = 6</strong>.
+        </p>
+
+        <p><strong>O primeiro dígito verificador é 6.</strong></p>
+    </div>
+
+    <h5 class="text-center mb-3">Etapa 2 — Cálculo do Segundo Dígito Verificador</h5>
+    <div class="texto-explicativo">
+        <p>
+            Agora, para calcular o segundo dígito verificador, utilizamos os 12 primeiros números, incluindo o primeiro
+            dígito verificador calculado na etapa anterior.
+        </p>
+        <p>O CNPJ agora fica: <strong>11.444.777/0001-6</strong></p>
+        <p>Pesos: <strong>6 5 4 3 2 9 8 7 6 5 4 3 2</strong></p>
+
+        <p>O cálculo é o seguinte:</p>
+        <pre>
+            (1×6) + (1×5) + (4×4) + (4×3) + (4×2) + (7×9) + (7×8) + (7×7) + (0×6) + (0×5) + (0×4) + (1×3) + (6×2) = 230
+        </pre>
+
+        <p>Dividimos o total por 11 novamente e verificamos o resto:</p>
+        <pre>
+            230 ÷ 11 = 20 (resto 10)
+        </pre>
+
+        <p>
+            Como o resto da divisão foi <strong>10</strong>, subtraímos esse número de 11 para encontrar o segundo
+            dígito verificador: <strong>11 - 10 = 1</strong>.
+        </p>
+
+        <p><strong>O segundo dígito verificador é 1.</strong></p>
+    </div>
+
+    <h5 class="text-center mb-3">Conclusão</h5>
+    <div class="texto-explicativo">
+        <p>
+            Com isso, o CNPJ completo e válido fica: <strong>11.444.777/0001-61</strong>.
+        </p>
+        <p>
+            Esse processo de cálculo dos dígitos verificadores garante que o CNPJ gerado seja válido conforme as regras
+            da Receita Federal. A verificação matemática dos dois dígitos é essencial para validar o número e evitar
+            fraudes.
+        </p>
+    </div>
 </div>

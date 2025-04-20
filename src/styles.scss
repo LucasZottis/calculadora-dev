@@ -76,23 +76,42 @@ main-layout {
     background-color: #388e3c !important;
 }
 
-.form-group {
-    margin-bottom: 15px;
+.form-label {
+    display: block !important;
+    margin-bottom: 5px !important;
+    color: #a5d6a7 !important;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #a5d6a7;
+.form-control {
+    // width: 100% !important;
+    padding: 10px !important;
+    background-color: #212121 !important;
+    border: 1px solid #2c5a2c !important;
+    border-radius: 4px !important;
+    color: #e0e0e0 !important;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    background-color: #212121;
-    border: 1px solid #2c5a2c;
-    border-radius: 4px;
-    color: #e0e0e0;
+.form-check-input:checked {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+.input-group .form-control {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-right-color: var(--bs-border-color) !important;
+}
+
+.input-group .btn-outline-secondary {
+    --bs-btn-color: white;
+    // --bs-btn-border-color: var(--bs-border-color);
+    --bs-btn-border-color: #2c5a2c !important;
+    --bs-btn-hover-bg: #1a331a;
+    --bs-btn-hover-color: #4caf50;
+    --bs-btn-hover-border-color: #2c5a2c;
+    border-left: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
 }
 
 .texto-explicativo {
