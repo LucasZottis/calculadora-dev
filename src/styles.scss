@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "FontePrincipal";
+    src: url("./assets/fonts/ChauPhilomeneOne-Regular.ttf");
+}
+
 :root {
     --bs-primary: #2e7d32 !important;
     --secundary-color: var(--bs-secondary-bg);
@@ -17,7 +22,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: "FontePrincipal" !important;
 }
 
 html,
