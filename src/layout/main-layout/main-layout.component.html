@@ -1,9 +1,41 @@
-<header class="p-2 text-center fs-5 text">
-    <h1 class="header-page">
-        <a [routerLink]="['./']">Calculadora Dev</a>
-    </h1>
-</header>
+<!-- <div style="display: flex; flex-direction: column; flex: 1;"> -->
+<nav class="sidebar">
+    <a class="sidebar-header" href="./">
+        <!-- <h1 class="fs-4">Calculadora Dev</h1> -->
+        <img src="/assets/images/header.svg" alt="" style="width: 200px;">
+    </a>
 
-<main class="container py-3">
-    <router-outlet></router-outlet>
+    <hr>
+
+    <div class="menu-items">
+        <a class="menu-item" routerLink="conversores/conversor-tempo" routerLinkActive="active">
+            <span>Conversor de Tempo</span>
+        </a>
+
+        <hr>
+
+        <a class="menu-item" routerLink="geradores/cpf" routerLinkActive="active">
+            <span>Gerador de CPF</span>
+        </a>
+        <a class="menu-item" routerLink="geradores/cnpj" routerLinkActive="active">
+            <span>Gerador de CNPJ</span>
+        </a>
+
+        <hr>
+
+        <a class="menu-item" routerLink="validadores/cpf" routerLinkActive="active">
+            <span>Validador de CPF</span>
+        </a>
+
+        <a class="menu-item" routerLink="validadores/cnpj" routerLinkActive="active">
+            <span>Validador de CNPJ</span>
+        </a>
+    </div>
+</nav>
+
+<main class="main-content">
+    <div class="router-outlet-container">
+        <router-outlet></router-outlet>
+    </div>
 </main>
+<!-- </div> -->
