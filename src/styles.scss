@@ -9,13 +9,11 @@
     --third-color: #CCCCCC;
     --primary-background-color: #333333;
     --second-background-color: #000000;
-
-    // --border-color-base: #202428;
     --border-color-base: #2c5a2c;
+
     /* Sobreescritos */
     --bs-btn-hover-bg: var(--primary-color) !important;
     --bs-primary-rgb: var(--primary-color) !important;
-    --bs-primary: var(--primary-color);
 }
 
 * {
