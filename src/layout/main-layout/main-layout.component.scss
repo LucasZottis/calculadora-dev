@@ -12,13 +12,13 @@ header {
 }
 
 .header-container .header-image img {
-    // height: ;
     width: 200px;
 }
 
 .header-container .header-menu-button {
     background-color: transparent;
     border: 1px solid var(--border-color-base);
+    color: #a5d6a7;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,6 +39,7 @@ header {
 .app-container .main-container {
     display: flex;
     flex: 1;
+    overflow-y: auto;
 }
 
 .sidebar {
@@ -109,28 +110,39 @@ header {
 
 @media (max-width: 768px) {
     .sidebar {
-        position: absolute;
+        display: flex;
         min-width: 0;
         max-width: 0;
-        width: 0;
+        padding: 0;
+        position: absolute;
         overflow: hidden;
+        transition: 
+            min-width 0.3s ease-out, 
+            max-width 0.3s ease-out, 
+            width 0.3s ease-out,
+            padding 0.3s ease-out;            
+        width: 0;
         z-index: 100;
-        /* Importante: NÃO use display: none aqui, pois impede a animação */
-        display: flex;
-        /* Mantenha sempre como flex para permitir a animação */
-        visibility: hidden;
-        /* Use visibility em vez de display: none */
-        transition: min-width 0.3s ease, max-width 0.3s ease, width 0.3s ease, visibility 0s 0.3s;
+    }
+    
+    .sidebar.expanded {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        padding: 20px;
+        transition: 
+            min-width 0.3s ease-out, 
+            max-width 0.3s ease-out, 
+            width 0.3s ease-out,
+            padding 0.3s ease-out;  
     }
 
-    .sidebar.expanded {
-        min-width: 0px;
-        // max-width: 100%;
-        /* Expandir até 100% da largura disponível */
-        width: 100%;
-        visibility: visible;
-        /* Torne visível quando expandido */
-        transition: min-width 0.3s ease, max-width 0.3s ease, width 0.3s ease, visibility 0s;
+    .sidebar-header {
+        display: none;
+    }
+
+    .sidebar-header-divisor {
+        display: none;
     }
 
     header {
