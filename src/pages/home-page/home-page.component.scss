@@ -1,0 +1,11 @@
+.card {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+@media(max-width: 768px) {
+    .card {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
