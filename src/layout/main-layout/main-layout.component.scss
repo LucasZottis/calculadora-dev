@@ -1,3 +1,46 @@
+header {
+    display: none;
+    border: 1px solid transparent;
+    border-bottom-color: var(--border-color-base);
+}
+
+.header-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.header-container .header-image img {
+    // height: ;
+    width: 200px;
+}
+
+.header-container .header-menu-button {
+    background-color: transparent;
+    border: 1px solid var(--border-color-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    width: 43px;
+}
+
+.header-container .header-menu-button:active {
+    background-color: var(--border-color-base);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.app-container .main-container {
+    display: flex;
+    flex: 1;
+}
+
 .sidebar {
     min-width: 300px;
     max-width: 300px;
@@ -18,10 +61,8 @@
     display: block;
 }
 
-.sidebar-header h2 {
-    font-size: 1.5rem !important;
-    margin-bottom: 5px;
-    color: #4caf50;
+.sidebar-header img {
+    width: 200px;
 }
 
 .menu-items {
@@ -67,28 +108,32 @@
 }
 
 @media (max-width: 768px) {
-    main-layout {
-        flex-direction: column;
-    }
-
     .sidebar {
-        min-width: 100%;
-        max-width: none;
-        height: auto;
-        padding: 10px;
+        position: absolute;
+        min-width: 0;
+        max-width: 0;
+        width: 0;
+        overflow: hidden;
+        z-index: 100;
+        /* Importante: NÃO use display: none aqui, pois impede a animação */
+        display: flex;
+        /* Mantenha sempre como flex para permitir a animação */
+        visibility: hidden;
+        /* Use visibility em vez de display: none */
+        transition: min-width 0.3s ease, max-width 0.3s ease, width 0.3s ease, visibility 0s 0.3s;
     }
 
-    .menu-items {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 10px;
+    .sidebar.expanded {
+        min-width: 0;
+        // max-width: 100%;
+        /* Expandir até 100% da largura disponível */
+        width: 100%;
+        visibility: visible;
+        /* Torne visível quando expandido */
+        transition: min-width 0.3s ease, max-width 0.3s ease, width 0.3s ease, visibility 0s;
     }
 
-    .menu-item {
-        white-space: nowrap;
-    }
-
-    .main-content {
-        height: calc(100% - 180px);
+    header {
+        display: initial;
     }
 }
