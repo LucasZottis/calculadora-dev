@@ -15,12 +15,12 @@ import { PageBase } from 'src/pages/pageBase';
 
 export class CnpjGeneratorPageComponent extends PageBase {
   cnpj: string = "";
-  masked: number = 0;
+  masked: number = 1;
 
   constructor(
     meta: Meta,
     title: Title
-  ) { 
+  ) {
     super(meta, title);
     this.addDescription('Ferramenta para geração CNPJ aleatório válido.');
     this.setTitle('Gerador de CNPJ');

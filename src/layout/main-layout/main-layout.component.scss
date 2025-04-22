@@ -1,19 +1,151 @@
 header {
-    background-color: var(--primary-color);
-    color: var(--secundary-color) !important;
-    font-family: "Courier New", monospace;
-    padding: 1.5%;
+    display: none;
+    border: 1px solid transparent;
+    border-bottom-color: var(--border-color-base);
 }
 
-main {
-    background-color: var(--secundary-color);
-    margin-left: auto;
-    margin-right: auto;
+.header-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
-.header-page {
-    font-weight: 700;
-    font-size: 1.2em;
-    margin: 0;
-    padding: 0;
+.header-container .header-image img {
+    width: 200px;
+}
+
+.header-container .header-menu-button {
+    background-color: transparent;
+    border: 1px solid var(--border-color-base);
+    color: #a5d6a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    width: 43px;
+}
+
+.header-container .header-menu-button:active {
+    background-color: var(--border-color-base);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.app-container .main-container {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar {
+    min-width: 300px;
+    max-width: 300px;
+    height: 100%;
+    background-color: #181b1e;
+    color: #b4ffb4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color-base);
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.sidebar-header img {
+    width: 200px;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    padding: 12px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a5d6a7;
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    background-color: #1a331a;
+    color: #4caf50;
+}
+
+.menu-item.active {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #121212;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.router-outlet-container {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: flex;
+        min-width: 0;
+        max-width: 0;
+        padding: 0;
+        position: absolute;
+        overflow: hidden;
+        transition: 
+            min-width 0.3s ease-out, 
+            max-width 0.3s ease-out, 
+            width 0.3s ease-out,
+            padding 0.3s ease-out;            
+        width: 0;
+        z-index: 100;
+    }
+    
+    .sidebar.expanded {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        padding: 20px;
+        transition: 
+            min-width 0.3s ease-out, 
+            max-width 0.3s ease-out, 
+            width 0.3s ease-out,
+            padding 0.3s ease-out;  
+    }
+
+    .sidebar-header {
+        display: none;
+    }
+
+    .sidebar-header-divisor {
+        display: none;
+    }
+
+    header {
+        display: initial;
+    }
 }

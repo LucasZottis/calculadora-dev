@@ -1,0 +1,10 @@
+.btn-outline-secondary {
+    --bs-btn-color: white;
+    --bs-btn-border-color: var(--bs-border-color);
+    --bs-btn-hover-bg: #1a331a;
+    --bs-btn-hover-color: #4caf50;
+    // --bs-btn-hover-border-color: #4caf50;
+    border-left: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
