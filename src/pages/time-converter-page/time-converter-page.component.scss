@@ -1,18 +1,3 @@
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-input {
-  text-align: end;
-}
-
 .watch {
   background-color: var(--second-background-color);
   border-top: 5px solid var(--border-color-base);
@@ -40,7 +25,7 @@ input {
 .display-box {
   background-color: black;
   border-radius: 8px;
-  color: #4caf50;
+  color: var(--bs-primary);
   font-size: 3rem;
   padding: 15px;
   text-align: center;
@@ -49,6 +34,16 @@ input {
   margin-bottom: 10px;
 }
 
+.display-box.main {
+  padding: 25px 15px;
+}
+
+.display-box.secondary {
+  font-size: 1.5rem !important;
+  padding: 12px 15px;
+}
+
+
 .display-section {
   display: flex;
   flex-direction: column;
@@ -56,17 +51,17 @@ input {
 }
 
 .time-display {
-  font-family: 'LCD', monospace;
+  font-family: "DS Digi" !important;
   font-size: 3.5rem;
-  color: var(--primary-color);
+  color: var(--bs-primary);
   letter-spacing: 5px;
   margin: 5px 0;
 }
 
 .decimal-display {
-  font-family: 'LCD', monospace;
+  font-family: "DS Digi" !important;
   font-size: 3.5rem;
-  color: var(--primary-color);
+  color: var(--bs-primary);
   margin: 5px 0;
 }
 
@@ -97,4 +92,11 @@ input {
 
 .direction-toggle i {
   color: var(--primary-color);
+}
+
+.sub-displays {
+  display: grid;
+  font-family: "DS Digi" !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }

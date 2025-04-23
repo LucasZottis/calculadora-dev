@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: "DS Digi";
+    src: url('./assets/fonts/DS-DIGI.TTF');
+}
+
+@font-face {
     font-family: 'Material Symbols Outlined';
     font-style: normal;
     font-weight: 400;
@@ -27,7 +32,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Chau Philomene One" !important;
+    font-family: "Chau Philomene One";
 }
 
 html,
