@@ -1,4 +1,5 @@
-<div class="text-center pt-3">
+<!-- tempo-decimal-conversor.component.html -->
+<div class="text-center mb-5">
     <h1>Converter número decimal para horas</h1>
     <p class="fs-3">
         Você sabia que é possível transformar um valor de tempo expresso em horas, minutos e segundos em um
@@ -11,85 +12,78 @@
     </p>
 </div>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6479583349031623"
-     crossorigin="anonymous"></script>
-<!-- Teste -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6479583349031623"
-     data-ad-slot="6853436541"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<!-- <hr> -->
 
-<hr>
+<div class="watch">
+    <div class="display-section">
+        <div class="display-box main">
+            <div class="display-label">Tempo</div>
+            <div class="time-display">
+                <input type="text" maxlength="3" [(ngModel)]="hoursValue" (input)="onHoursInputChange()"
+                    (blur)="onTimeInputBlur()" class="time-input hour-input">
+                <span class="time-separator">:</span>
+                <input type="text" maxlength="2" [(ngModel)]="minutesValue" (input)="onMinutesInputChange()"
+                    (blur)="onTimeInputBlur()" class="time-input minute-input">
+                <span class="time-separator">:</span>
+                <input type="text" maxlength="2" [(ngModel)]="secondsValue" (input)="onSecondsInputChange()"
+                    (blur)="onTimeInputBlur()" class="time-input second-input">
+            </div>
+        </div>
 
-<form>
-    <div class="row">
-        <div class="col-12 col-sm-6 col-lg-3 mb-2">
-            <label for="txt-horas" class="form-label">
-                Horas
-            </label>
-            <input type="number" class="form-control" id="txt-horas" name="txt-hours" min="0" step="1"
-                [(ngModel)]="time.hours" (blur)="onBlur()">
+        <div class="display-box main">
+            <div class="display-label">Decimal (Horas)</div>
+            <div class="decimal-display">{{ decimalHours.toFixed(4) }}</div>
         </div>
-        <div class="col-12 col-sm-6 col-lg-3 mb-2">
-            <label for="txt-minutos" class="form-label">
-                Minutos
-            </label>
-            <input type="number" class="form-control" id="txt-minutos" name="txt-minutes" step="1"
-                [(ngModel)]="time.minutes" (blur)="onBlur()">
-        </div>
-        <div class="col-12 col-sm-6 col-lg-3 mb-2">
-            <label for="txt-segundos" class="form-label">
-                Segundos
-            </label>
-            <input type="number" class="form-control" id="txt-segundos" name="txt-seconds" step="1"
-                [(ngModel)]="time.seconds" (blur)="onBlur()">
-        </div>
-        <div class="col-12 col-sm-6 col-lg-3 mb-2">
-            <label for="txt-decimal" class="form-label">
-                Valor decimal
-            </label>
-            <input type="number" class="form-control" id="txt-decimal" name="txt-decimal" step="1"
-                [(ngModel)]="time.decimal" (blur)="onBlur()">
-        </div>
-    </div>
-</form>
 
-<div class="row">
-    <div class="col-12 col-sm-6 col-lg-3">
-        <div class="row fs-5 text">
-            <span class="col-6">Horas</span>
-            <span class="col-6 text-end" id="lbl-hora-convertida">{{hours.toFixed(4)}}</span>
-        </div>
-    </div>
+        <div class="sub-displays">
+            <div class="display-box secondary">
+                <div class="display-label">Decimal (Minutos)</div>
+                <div class="minutes-decimal-display">{{ decimalMinutes.toFixed(4) }}</div>
+            </div>
 
-    <div class="col-12 col-sm-6 col-lg-3">
-        <div class="row fs-5 text">
-            <span class="col-6">Minutos</span>
-            <span class="col-6 text-end" id="lbl-minuto-convertido">{{minutes.toFixed(4)}}</span>
-        </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-        <div class="row fs-5 text">
-            <span class="col-6">Segundos</span>
-            <span class="col-6 text-end" id="lbl-segundo-convertido">{{seconds.toFixed(4)}}</span>
-        </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-        <div class="row fs-5 text">
-            <span class="col-6">Horas</span>
-            <span class="col-6 text-end" id="lbl-valor-decimal">{{formatTime()}}</span>
+            <div class="display-box secondary">
+                <div class="display-label">Decimal (Segundos)</div>
+                <div class="seconds-decimal-display">{{ decimalSeconds.toFixed(4) }}</div>
+            </div>
         </div>
     </div>
 </div>
 
-<hr>
+<!-- <hr> -->
+
+<div class="mt-5">
+    <h2 class="text-center fs-1">
+        Como utilizar a ferramenta
+    </h2>
+    <div class="texto-explicativo">
+        <p>
+            A utilização desta ferramenta é simples e intuitiva:
+        </p>
+        <ol>
+            <li>
+                <strong>Digite o tempo no formato HH:MM:SS</strong> - Você pode inserir os valores diretamente em cada
+                campo (horas, minutos e segundos).
+            </li>
+            <li>
+                <strong>Ajuste automático de valores</strong> - Se você digitar valores de minutos ou segundos maiores
+                que 59, a ferramenta ajustará automaticamente, incrementando a unidade superior.
+                Por exemplo, se você digitar 75 minutos, será convertido para 1 hora e 15 minutos.
+            </li>
+            <li>
+                <strong>Suporte a horas extensas</strong> - Esta ferramenta suporta até 999 horas, ideal para cálculos
+                de projetos de longa duração.
+            </li>
+        </ol>
+        <p>
+            Os resultados são exibidos automaticamente em três formatos decimais diferentes:
+        </p>
+        <ul>
+            <li><strong>Decimal (Horas)</strong>: O tempo total convertido em horas decimais.</li>
+            <li><strong>Decimal (Minutos)</strong>: O tempo total convertido em minutos decimais.</li>
+            <li><strong>Decimal (Segundos)</strong>: O tempo total convertido em segundos.</li>
+        </ul>
+    </div>
+</div>
 
 <div>
     <h2 class="text-center fs-1">

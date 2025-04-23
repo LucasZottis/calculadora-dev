@@ -6,74 +6,130 @@ import { PageBase } from '../pageBase';
 @Component({
   selector: 'time-converter-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    NgFor,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './time-converter-page.component.html',
   styleUrl: './time-converter-page.component.scss'
 })
 
-export class TimeConverterPageComponent extends PageBase implements OnInit{
-  hours: number = 0;
-  minutes: number = 0;
-  seconds: number = 0;
-  decimal: number = 0;
+export class TimeConverterPageComponent extends PageBase implements OnInit {
+  // Valores dos campos separados
+  hoursValue: string = '00';
+  minutesValue: string = '00';
+  secondsValue: string = '00';
 
-  time = {
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    decimal: 0
-  };
+  // Valores decimais calculados
+  decimalHours: number = 0;
+  decimalMinutes: number = 0;
+  decimalSeconds: number = 0;
 
-  private formatNumber(value: number): string {
-    return value < 10 ? "0" + value : value.toString();
-  }
-
-  private toHours(): number {
-    return this.time.hours
-      + this.time.minutes / 60
-      + this.time.seconds / 3600
-      + this.time.decimal;
-  }
-
-  private toMinutes(): number {
-    return this.time.hours * 60
-      + this.time.minutes
-      + this.time.seconds / 60
-      + this.time.decimal * 60;
-  }
-
-  private toSeconds(): number {
-    return this.time.hours * 3600
-      + this.time.minutes * 60
-      + this.time.seconds
-      + this.time.decimal * 3600;
-  }
-
-  private toDecimal(): number {
-    return this.time.hours
-      + (this.time.hours / 60)
-      + (this.time.hours / 3600)
-      + this.time.decimal;
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.addDescription('Converta horas, minutos e segundo para diversos formatos.');
     this.setTitle('Conversor de tempo');
+
+    // Inicia a conversão com os valores padrão
+    this.convertTimeToDecimal();
   }
 
-  formatTime(): string {
-      return this.formatNumber(this.time.hours) + ":" 
-        + this.formatNumber(this.time.minutes) + ":" 
-        + this.formatNumber(this.time.seconds);
+  // Processamento da entrada de horas
+  onHoursInputChange(): void {
+    // Realizar a conversão
+    this.convertTimeToDecimal();
+  }
+
+  // Processamento da entrada de minutos (com validação)
+  onMinutesInputChange(): void {
+    // Validar e ajustar valores > 59
+    if (this.minutesValue && parseInt(this.minutesValue, 10) > 59) {
+      if (parseInt(this.hoursValue, 10) >= 999) {
+        this.minutesValue = '59';
+      } else {
+        const hoursToAdd = Math.floor(parseInt(this.minutesValue, 10) / 60);
+        const newMinutesValue = parseInt(this.minutesValue, 10) % 60;
+
+        this.minutesValue = newMinutesValue.toString().padStart(2, '0');
+
+        // Adicionar às horas o valor excedente dos minutos
+        const currentHours = parseInt(this.hoursValue || '0', 10);
+        this.hoursValue = (currentHours + hoursToAdd).toString().padStart(2, '0');
+      }
     }
 
-  onBlur(): void {
-    this.hours = this.toHours();
-    this.minutes = this.toMinutes();
-    this.seconds = this.toSeconds();
+    // Realizar a conversão
+    this.convertTimeToDecimal();
+  }
+
+  // Processamento da entrada de segundos (com validação)
+  onSecondsInputChange(): void {
+    // Validar e ajustar valores > 59
+    if (this.secondsValue && parseInt(this.secondsValue, 10) > 59) {
+      if (parseInt(this.hoursValue, 10) >= 999) {
+        this.secondsValue = '59';
+      } else {
+        const minutesToAdd = Math.floor(parseInt(this.secondsValue, 10) / 60);
+        const newSecondsValue = parseInt(this.secondsValue, 10) % 60;
+
+        this.secondsValue = newSecondsValue.toString().padStart(2, '0');
+
+        // Adicionar aos minutos o valor excedente dos segundos
+        const currentMinutes = parseInt(this.minutesValue || '0', 10);
+        const newMinutes = currentMinutes + minutesToAdd;
+
+        // Verificar se os novos minutos excedem 59
+        if (newMinutes > 59) {
+          const hoursToAdd = Math.floor(newMinutes / 60);
+          const finalMinutes = newMinutes % 60;
+
+          this.minutesValue = finalMinutes.toString().padStart(2, '0');
+
+          // Adicionar às horas o valor excedente dos minutos
+          const currentHours = parseInt(this.hoursValue || '0', 10);
+          this.hoursValue = (currentHours + hoursToAdd).toString().padStart(2, '0');
+        } else {
+          this.minutesValue = newMinutes.toString().padStart(2, '0');
+        }
+      }
+    }
+
+    // Realizar a conversão
+    this.convertTimeToDecimal();
+  }
+
+  onTimeInputBlur() {
+    this.secondsValue = this.formatNumberInput(this.secondsValue);
+    this.minutesValue = this.formatNumberInput(this.minutesValue);
+    this.hoursValue = this.formatNumberInput(this.hoursValue);
+  }
+
+  // Formata entrada de números, restringindo a dígitos numéricos e limitando o comprimento
+  private formatNumberInput(value: string): string {
+    if (!value) return '00';
+
+    // Remover caracteres não numéricos
+    const cleanValue = value.replace(/[^0-9]/g, '');
+
+    // Garantir o preenchimento de zeros
+    const formatedValue = cleanValue ? cleanValue.padStart(2, '0') : '00';
+
+    return formatedValue
+  }
+
+  // Conversão de tempo para decimal
+  convertTimeToDecimal(): void {
+    const hours = parseInt(this.hoursValue || '0', 10);
+    const minutes = parseInt(this.minutesValue || '0', 10);
+    const seconds = parseInt(this.secondsValue || '0', 10);
+
+    // Cálculo das horas decimais
+    this.decimalHours = hours + (minutes / 60) + (seconds / 3600);
+
+    // Arredondamento para 4 casas decimais
+    this.decimalHours = parseFloat(this.decimalHours.toFixed(4));
+
+    // Conversão para minutos e segundos decimais
+    this.decimalMinutes = hours * 60 + minutes + (seconds / 60);
+    this.decimalMinutes = parseFloat(this.decimalMinutes.toFixed(4));
+
+    this.decimalSeconds = hours * 3600 + minutes * 60 + seconds;
+    this.decimalSeconds = parseFloat(this.decimalSeconds.toFixed(4));
   }
 }
