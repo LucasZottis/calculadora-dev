@@ -1,11 +1,16 @@
 @font-face {
     font-family: "Chau Philomene One";
     src: url("./assets/fonts/ChauPhilomeneOne-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
 }
 
+/* Adiciona fonte DS Digi - Fallback para quando a fonte não está disponível */
 @font-face {
     font-family: "DS Digi";
-    src: url('./assets/fonts/DS-DIGI.TTF');
+    src: url("assets/fonts/DS-DIGI.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
