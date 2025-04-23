@@ -4,18 +4,18 @@
 }
 
 @font-face {
-  font-family: 'Material Symbols Outlined';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v241/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOej.woff2) format('woff2');
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v241/kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOej.woff2) format('woff2');
 }
 
 :root {
     --bs-primary: #2e7d32 !important;
     --secundary-color: var(--bs-secondary-bg);
     --third-color: #CCCCCC;
-    --primary-background-color: #333333;
-    --second-background-color: #000000;
+    --primary-background-color: #121212;
+    --second-background-color: #181b1e;
     --border-color-base: #2c5a2c;
 
     /* Sobreescritos */
@@ -70,7 +70,7 @@ main-layout {
 }
 
 .material-symbols-outlined {
-  font-family: "Material Symbols Outlined" !important;
+    font-family: "Material Symbols Outlined" !important;
 }
 
 .btn {

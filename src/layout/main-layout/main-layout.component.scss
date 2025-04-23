@@ -46,7 +46,7 @@ header {
     min-width: 300px;
     max-width: 300px;
     height: 100%;
-    background-color: #181b1e;
+    background-color: var(--second-background-color);
     color: #b4ffb4;
     padding: 20px;
     display: flex;
@@ -97,7 +97,8 @@ header {
 .main-content {
     flex: 1;
     padding: 20px;
-    background-color: #121212;
+    // background-color: #121212;
+    background-color: var(--primary-background-color);
     height: 100%;
     overflow-y: auto;
     display: flex;
@@ -116,25 +117,25 @@ header {
         padding: 0;
         position: absolute;
         overflow: hidden;
-        transition: 
-            min-width 0.3s ease-out, 
-            max-width 0.3s ease-out, 
+        transition:
+            min-width 0.3s ease-out,
+            max-width 0.3s ease-out,
             width 0.3s ease-out,
-            padding 0.3s ease-out;            
+            padding 0.3s ease-out;
         width: 0;
         z-index: 100;
     }
-    
+
     .sidebar.expanded {
         min-width: 0;
         max-width: 100%;
         width: 100%;
         padding: 20px;
-        transition: 
-            min-width 0.3s ease-out, 
-            max-width 0.3s ease-out, 
+        transition:
+            min-width 0.3s ease-out,
+            max-width 0.3s ease-out,
             width 0.3s ease-out,
-            padding 0.3s ease-out;  
+            padding 0.3s ease-out;
     }
 
     .sidebar-header {
