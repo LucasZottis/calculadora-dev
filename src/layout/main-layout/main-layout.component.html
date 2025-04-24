@@ -1,4 +1,4 @@
-<div class="app-container">
+<!-- <div class="app-container">
     <header>
         <div class="header-container">
             <button class="header-menu-button" (click)="toggleSidebar()">
@@ -52,4 +52,77 @@
             </div>
         </main>
     </div>
+
+    <cookie-consent></cookie-consent>
+</div> -->
+
+<div class="app-container">
+    <header>
+        <div class="header-container">
+            <button class="header-menu-button" (click)="toggleSidebar()">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+            <a class="header-image" href="./">
+                <img src="/assets/images/header.svg" alt="">
+            </a>
+        </div>
+    </header>
+    <div class="main-container">
+        <nav [class]="sidebarStyle">
+            <a class="sidebar-header" href="./">
+                <img src="/assets/images/header.svg" alt="">
+            </a>
+
+            <hr class="sidebar-header-divisor">
+
+            <div class="menu-items">
+                <a class="menu-item" routerLink="conversores/conversor-tempo" routerLinkActive="active"
+                    (click)="toggleSidebar()">
+                    <span>Converter Tempo para Decimal</span>
+                </a>
+
+                <hr>
+
+                <a class="menu-item" routerLink="geradores/cpf" routerLinkActive="active" (click)="toggleSidebar()">
+                    <span>Gerador de CPF</span>
+                </a>
+                <a class="menu-item" routerLink="geradores/cnpj" routerLinkActive="active" (click)="toggleSidebar()">
+                    <span>Gerador de CNPJ</span>
+                </a>
+
+                <hr>
+
+                <a class="menu-item" routerLink="validadores/cpf" routerLinkActive="active" (click)="toggleSidebar()">
+                    <span>Validador de CPF</span>
+                </a>
+
+                <a class="menu-item" routerLink="validadores/cnpj" routerLinkActive="active" (click)="toggleSidebar()">
+                    <span>Validador de CNPJ</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="router-outlet-container">
+                <router-outlet></router-outlet>
+            </div>
+
+            <!-- Rodapé -->
+            <footer class="site-footer">
+                <div class="footer-links">
+                    <a routerLink="/politica-de-privacidade">Política de Privacidade</a>
+                    <span class="separator">|</span>
+                    <a href="#" (click)="abrirConfigCookies($event)">Configurar Cookies</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; {{ anoAtual }} Calculadora Dev. Todos os direitos reservados.
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Componente de consentimento de cookies -->
+    <cookie-consent></cookie-consent>
 </div>
