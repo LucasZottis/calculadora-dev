@@ -19,19 +19,20 @@
         <div class="row mt-2">
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rbt-format" id="rbt-masked" [value]="1"
-                        [checked]="(masked == 1)" [(ngModel)]="masked">
-                    <label class="form-check-label" for="rbt-masked">
-                        Com máscara
-                    </label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-check">
                     <input class="form-check-input" type="radio" name="rbt-format" id="rbt-naked" [value]="0"
                         [checked]="(masked == 0)" [(ngModel)]="masked">
                     <label class="form-check-label" for="rbt-naked">
                         Sem máscara
+                    </label>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rbt-format" id="rbt-masked" [value]="1"
+                        [checked]="(masked == 1)" [(ngModel)]="masked">
+                    <label class="form-check-label" for="rbt-masked">
+                        Com máscara
                     </label>
                 </div>
             </div>
@@ -50,7 +51,6 @@
         </p>
         <p>
             O CNPJ de exemplo é 11.444.777/0001-61 e cada parte do número tem um significado específico:
-
         </p>
 
         <p>

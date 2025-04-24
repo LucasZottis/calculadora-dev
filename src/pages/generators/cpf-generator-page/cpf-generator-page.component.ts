@@ -15,7 +15,7 @@ import { PageBase } from 'src/pages/pageBase';
 
 export class CpfGeneratorPageComponent extends PageBase {
   cpf: string = "";
-  masked: number = 0;
+  masked: number = 1;
 
   constructor(
     meta: Meta,
