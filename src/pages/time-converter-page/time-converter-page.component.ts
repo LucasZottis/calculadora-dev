@@ -97,7 +97,9 @@ export class TimeConverterPageComponent extends PageBase implements OnInit {
   onTimeInputBlur() {
     this.secondsValue = this.formatNumberInput(this.secondsValue);
     this.minutesValue = this.formatNumberInput(this.minutesValue);
-    this.hoursValue = this.formatNumberInput(this.hoursValue);
+
+    const hourNumber = parseInt(this.hoursValue, 10);
+    this.hoursValue = this.formatNumberInput(hourNumber.toString());
   }
 
   // Formata entrada de números, restringindo a dígitos numéricos e limitando o comprimento
