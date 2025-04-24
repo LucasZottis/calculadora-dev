@@ -15,7 +15,7 @@ export class PageBase implements OnDestroy {
     ) { }
 
     protected setTitle(title: string): void {
-        this._title.setTitle("Calculadora Dev - " + title);
+        this._title.setTitle(title + " - Calculadora Dev");
     }
 
     protected addDescription(description: string) {
