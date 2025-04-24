@@ -1,0 +1,132 @@
+.cookie-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.cookie-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.cookie-container {
+    background-color: var(--second-background-color, #181b1e);
+    border-top: 2px solid var(--border-color-base, #2c5a2c);
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    color: #a5d6a7;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: slide-up 0.3s ease-out;
+
+    @media (min-width: 768px) {
+        max-width: 90%;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        border: 1px solid var(--border-color-base, #2c5a2c);
+    }
+
+    @media (min-width: 992px) {
+        max-width: 80%;
+    }
+}
+
+.cookie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+        color: #4caf50 !important;
+    }
+}
+
+.cookie-body {
+    a {
+        color: #4caf50 !important;
+        text-decoration: underline !important;
+    }
+}
+
+.cookie-settings {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cookie-option {
+    border: 1px solid var(--border-color-base, #2c5a2c);
+    border-radius: 6px;
+    padding: 0.75rem;
+    background-color: var(--primary-background-color, #121212);
+
+    .option-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.8rem;
+            color: #a5d6a7;
+            opacity: 0.8;
+        }
+    }
+}
+
+.cookie-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 576px) {
+    .cookie-container {
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+
+    .cookie-footer {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+}

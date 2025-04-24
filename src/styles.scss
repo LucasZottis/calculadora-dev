@@ -43,12 +43,11 @@
 html,
 body {
     height: 100%;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
 }
 
 body {
-    background-color: #111111;
     color: #a5d6a7 !important;
     display: flex;
 }
