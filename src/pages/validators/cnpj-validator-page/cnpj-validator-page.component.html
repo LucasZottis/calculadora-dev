@@ -1,8 +1,10 @@
+<h1 class="text-center">Validador de CNPJ</h1>
+
 <form>
     <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 mx-auto">
             <div id="formulario">
-                <label for="txt-cnpj" class="form-label">Digite o CNPJ</label>
+                <!-- <label for="txt-cnpj" class="form-label">Digite o CNPJ</label> -->
                 <input type="text" class="form-control text-center" id="txt-cnpj" maxlength="18" name="txt-cnpj"
                     placeholder="00.000.000/0000-00" [(ngModel)]="cnpj" (keypress)="onKeypress($event)"
                     (paste)="onPaste($event)">
