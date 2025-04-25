@@ -1,11 +1,12 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IConverterService } from 'src/converters/interfaces/IConverterService';
 import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
 import { CalculatorResult } from 'src/converters/models/calculatorResult';
 import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
 import { ConverterFactoryService } from 'src/converters/services/converter-factory/converter-factory.service';
+import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
 
 @Component({
   selector: 'calculator',
@@ -15,7 +16,7 @@ import { ConverterFactoryService } from 'src/converters/services/converter-facto
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit {
-  @Input() selectedCategoryId: string = 'tempo';
+  @Input() selectedCategoryId: string = 'volume';
   @Input() selectedSourceUnitId: string = '';
   @Input() selectedTargetUnitId: string = '';
 
