@@ -1,9 +1,11 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IConverterService } from 'src/converters/interfaces/IConverterService';
 import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
 import { CalculatorResult } from 'src/converters/models/calculatorResult';
 import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
+import { ConverterFactoryService } from 'src/converters/services/converter-factory/converter-factory.service';
 
 @Component({
   selector: 'calculator',
@@ -13,39 +15,6 @@ import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit {
-  @Input() categories: CalculatorCategory[] = [
-    { id: 'tempo', name: 'Tempo', icon: 'schedule' },
-    { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
-    { id: 'peso', name: 'Peso e Massa', icon: 'scale' },
-    { id: 'area', name: 'Área', icon: 'aspect_ratio' }
-  ];
-
-  @Input() units: { [categoryId: string]: CalculatorUnit[] } = {
-    'tempo': [
-      { id: 'segundo', name: 'Segundos', symbol: 's', conversionFactor: 1 },
-      { id: 'minuto', name: 'Minutos', symbol: 'min', conversionFactor: 60 },
-      { id: 'hora', name: 'Horas', symbol: 'h', conversionFactor: 3600 },
-      { id: 'dia', name: 'Dias', symbol: 'd', conversionFactor: 86400 }
-    ],
-    'comprimento': [
-      { id: 'milimetro', name: 'Milímetros', symbol: 'mm', conversionFactor: 0.001 },
-      { id: 'centimetro', name: 'Centímetros', symbol: 'cm', conversionFactor: 0.01 },
-      { id: 'metro', name: 'Metros', symbol: 'm', conversionFactor: 1 },
-      { id: 'quilometro', name: 'Quilômetros', symbol: 'km', conversionFactor: 1000 }
-    ],
-    'peso': [
-      { id: 'miligrama', name: 'Miligramas', symbol: 'mg', conversionFactor: 0.001 },
-      { id: 'grama', name: 'Gramas', symbol: 'g', conversionFactor: 1 },
-      { id: 'quilograma', name: 'Quilogramas', symbol: 'kg', conversionFactor: 1000 },
-      { id: 'tonelada', name: 'Toneladas', symbol: 't', conversionFactor: 1000000 }
-    ],
-    'area': [
-      { id: 'metro_quadrado', name: 'Metros quadrados', symbol: 'm²', conversionFactor: 1 },
-      { id: 'hectare', name: 'Hectares', symbol: 'ha', conversionFactor: 10000 },
-      { id: 'quilometro_quadrado', name: 'Quilômetros quadrados', symbol: 'km²', conversionFactor: 1000000 }
-    ]
-  };
-
   @Input() selectedCategoryId: string = 'tempo';
   @Input() selectedSourceUnitId: string = '';
   @Input() selectedTargetUnitId: string = '';
@@ -56,61 +25,99 @@ export class CalculatorComponent implements OnInit {
   @Output() valueChange = new EventEmitter<CalculatorResult>();
   @Output() calculate = new EventEmitter<CalculatorResult>();
 
+  // Valores e estado do componente
   sourceValue: string = '0';
   targetValue: string = '0';
   activeDisplay: 'source' | 'target' = 'source';
 
+  // Estados UI
   showCategorySelector: boolean = false;
   showSourceUnitSelector: boolean = false;
   showTargetUnitSelector: boolean = false;
 
+  // Serviço de conversão atual
+  private currentService: IConverterService;
+
+  constructor(private converterFactory: ConverterFactoryService) {
+    // Inicializamos com o serviço padrão, será atualizado no ngOnInit
+    this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
+  }
+
+  // Getters para acessar informações conforme a categoria atual
+  get categories(): CalculatorCategory[] {
+    return this.converterFactory.getCategories();
+  }
+
   get selectedCategory(): CalculatorCategory {
-    return this.categories.find(c => c.id === this.selectedCategoryId) || this.categories[0];
+    return this.converterFactory.getCategoryById(this.selectedCategoryId) || this.categories[0];
   }
 
   get availableUnits(): CalculatorUnit[] {
-    return this.units[this.selectedCategoryId] || [];
+    return this.currentService.getUnits();
   }
 
-  get sourceUnit(): CalculatorUnit {
+  get sourceUnit(): CalculatorUnit | undefined {
     if (!this.selectedSourceUnitId && this.availableUnits.length > 0) {
       this.selectedSourceUnitId = this.availableUnits[0].id;
     }
-    return this.availableUnits.find(u => u.id === this.selectedSourceUnitId) || this.availableUnits[0];
+    return this.currentService.getUnitById(this.selectedSourceUnitId);
   }
 
-  get targetUnit(): CalculatorUnit {
+  get targetUnit(): CalculatorUnit | undefined {
     if (!this.selectedTargetUnitId && this.availableUnits.length > 0) {
-      this.selectedTargetUnitId = this.availableUnits.length > 1 ? this.availableUnits[1].id : this.availableUnits[0].id;
+      this.selectedTargetUnitId = this.availableUnits.length > 1
+        ? this.availableUnits[1].id
+        : this.availableUnits[0].id;
     }
-    return this.availableUnits.find(u => u.id === this.selectedTargetUnitId) || this.availableUnits[0];
+    return this.currentService.getUnitById(this.selectedTargetUnitId);
   }
 
   ngOnInit(): void {
-    // Inicialização das unidades
-    if (this.availableUnits.length > 0) {
-      if (!this.selectedSourceUnitId) {
-        this.selectedSourceUnitId = this.availableUnits[0].id;
-      }
-      if (!this.selectedTargetUnitId) {
-        this.selectedTargetUnitId = this.availableUnits.length > 1 ? this.availableUnits[1].id : this.availableUnits[0].id;
+    // Inicializar o serviço de conversão com base na categoria selecionada
+    this.updateConverterService();
+
+    // Inicializar unidades, se necessário
+    this.initializeUnits();
+  }
+
+  private updateConverterService(): void {
+    try {
+      this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
+    } catch (error) {
+      console.error('Erro ao obter serviço de conversão:', error);
+      // Fallback para o primeiro serviço disponível
+      if (this.categories.length > 0) {
+        this.selectedCategoryId = this.categories[0].id;
+        this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
       }
     }
   }
 
+  private initializeUnits(): void {
+    const units = this.currentService.getUnits();
+    if (units.length > 0) {
+      if (!this.selectedSourceUnitId) {
+        this.selectedSourceUnitId = units[0].id;
+      }
+      if (!this.selectedTargetUnitId) {
+        this.selectedTargetUnitId = units.length > 1 ? units[1].id : units[0].id;
+      }
+    }
+  }
+
+  // Manipulação de eventos UI
   onCategorySelect(categoryId: string): void {
     this.selectedCategoryId = categoryId;
     this.showCategorySelector = false;
     this.categoryChange.emit(categoryId);
 
-    // Atualizar unidades padrão para a nova categoria
-    if (this.availableUnits.length > 0) {
-      this.selectedSourceUnitId = this.availableUnits[0].id;
-      this.selectedTargetUnitId = this.availableUnits.length > 1 ? this.availableUnits[1].id : this.availableUnits[0].id;
+    // Atualizar o serviço de conversão
+    this.updateConverterService();
 
-      this.sourceUnitChange.emit(this.selectedSourceUnitId);
-      this.targetUnitChange.emit(this.selectedTargetUnitId);
-    }
+    // Atualizar unidades padrão para a nova categoria
+    this.initializeUnits();
+    this.sourceUnitChange.emit(this.selectedSourceUnitId);
+    this.targetUnitChange.emit(this.selectedTargetUnitId);
 
     this.resetCalculator();
   }
@@ -131,7 +138,6 @@ export class CalculatorComponent implements OnInit {
 
   toggleCategorySelector(): void {
     this.showCategorySelector = !this.showCategorySelector;
-
     if (this.showCategorySelector) {
       this.showSourceUnitSelector = false;
       this.showTargetUnitSelector = false;
@@ -140,7 +146,6 @@ export class CalculatorComponent implements OnInit {
 
   toggleSourceUnitSelector(): void {
     this.showSourceUnitSelector = !this.showSourceUnitSelector;
-    
     if (this.showSourceUnitSelector) {
       this.showCategorySelector = false;
       this.showTargetUnitSelector = false;
@@ -159,6 +164,7 @@ export class CalculatorComponent implements OnInit {
     this.activeDisplay = display;
   }
 
+  // Manipulação de entrada
   onSourceInputChange(event: Event): void {
     // Validar entrada: permitir apenas números e vírgula
     const input = event.target as HTMLInputElement;
@@ -193,6 +199,7 @@ export class CalculatorComponent implements OnInit {
     this.calculateReverseConversion();
   }
 
+  // Manipulação de teclado
   onDigitClick(digit: string): void {
     if (this.activeDisplay === 'source') {
       // Para o primeiro dígito, substituir o 0 inicial
@@ -262,18 +269,24 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
+  // Lógica de conversão delegada ao serviço
   calculateConversion(): void {
     if (!this.sourceUnit || !this.targetUnit) return;
 
     const sourceValue = parseFloat(this.sourceValue.replace(',', '.'));
     if (isNaN(sourceValue)) return;
 
-    // Converte para a unidade base e depois para a unidade alvo
-    const baseValue = sourceValue * (this.sourceUnit.conversionFactor || 1);
-    const targetValue = baseValue / (this.targetUnit.conversionFactor || 1);
-
-    this.targetValue = targetValue.toFixed(4).replace('.', ',');
-    this.emitValueChange();
+    try {
+      const targetValue = this.currentService.convert(
+        sourceValue,
+        this.selectedSourceUnitId,
+        this.selectedTargetUnitId
+      );
+      this.targetValue = targetValue.toFixed(4).replace('.', ',');
+      this.emitValueChange();
+    } catch (error) {
+      console.error('Erro na conversão:', error);
+    }
   }
 
   calculateReverseConversion(): void {
@@ -282,20 +295,25 @@ export class CalculatorComponent implements OnInit {
     const targetValue = parseFloat(this.targetValue.replace(',', '.'));
     if (isNaN(targetValue)) return;
 
-    // Converte para a unidade base e depois para a unidade de origem
-    const baseValue = targetValue * (this.targetUnit.conversionFactor || 1);
-    const sourceValue = baseValue / (this.sourceUnit.conversionFactor || 1);
-
-    this.sourceValue = sourceValue.toFixed(4).replace('.', ',');
-    this.emitValueChange();
+    try {
+      const sourceValue = this.currentService.convert(
+        targetValue,
+        this.selectedTargetUnitId,
+        this.selectedSourceUnitId
+      );
+      this.sourceValue = sourceValue.toFixed(4).replace('.', ',');
+      this.emitValueChange();
+    } catch (error) {
+      console.error('Erro na conversão inversa:', error);
+    }
   }
 
   private emitValueChange(): void {
     this.valueChange.emit({
       sourceValue: this.sourceValue,
       targetValue: this.targetValue,
-      sourceUnit: this.sourceUnit.id,
-      targetUnit: this.targetUnit.id
+      sourceUnit: this.selectedSourceUnitId,
+      targetUnit: this.selectedTargetUnitId
     });
   }
 
@@ -303,8 +321,8 @@ export class CalculatorComponent implements OnInit {
     this.calculate.emit({
       sourceValue: this.sourceValue,
       targetValue: this.targetValue,
-      sourceUnit: this.sourceUnit.id,
-      targetUnit: this.targetUnit.id
+      sourceUnit: this.selectedSourceUnitId,
+      targetUnit: this.selectedTargetUnitId
     });
   }
 
@@ -312,7 +330,6 @@ export class CalculatorComponent implements OnInit {
     this.sourceValue = '0';
     this.targetValue = '0';
     this.activeDisplay = 'source';
-
     this.emitValueChange();
   }
 }

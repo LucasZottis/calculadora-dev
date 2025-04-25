@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { CalculatorComponent } from 'src/converters/components/calculator/calculator.component';
-import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
-import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
+import { CalculatorResult } from 'src/converters/models/calculatorResult';
+import { ConverterFactoryService } from 'src/converters/services/converter-factory/converter-factory.service';
 import { PageBase } from 'src/pages/pageBase';
 
 @Component({
@@ -17,71 +17,30 @@ import { PageBase } from 'src/pages/pageBase';
   styleUrl: './example-page.component.scss'
 })
 export class ExamplePageComponent extends PageBase implements OnInit {
-  categorias: CalculatorCategory[] = [
-    { id: 'tempo', name: 'Tempo', icon: 'schedule' },
-    { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
-    { id: 'peso', name: 'Peso e Massa', icon: 'scale' },
-  ];
-
-  unidades: { [categoryId: string]: CalculatorUnit[] } = {
-    'tempo': [
-      { id: 'segundo', name: 'Segundos', symbol: 's', conversionFactor: 1 },
-      { id: 'minuto', name: 'Minutos', symbol: 'min', conversionFactor: 60 },
-      { id: 'hora', name: 'Horas', symbol: 'h', conversionFactor: 3600 },
-      { id: 'dia', name: 'Dias', symbol: 'd', conversionFactor: 86400 }
-    ],
-    'comprimento': [
-      { id: 'milimetro', name: 'Milímetros', symbol: 'mm', conversionFactor: 0.001 },
-      { id: 'centimetro', name: 'Centímetros', symbol: 'cm', conversionFactor: 0.01 },
-      { id: 'metro', name: 'Metros', symbol: 'm', conversionFactor: 1 },
-      { id: 'quilometro', name: 'Quilômetros', symbol: 'km', conversionFactor: 1000 }
-    ],
-    'peso': [
-      { id: 'miligrama', name: 'Miligramas', symbol: 'mg', conversionFactor: 0.001 },
-      { id: 'grama', name: 'Gramas', symbol: 'g', conversionFactor: 1 },
-      { id: 'quilograma', name: 'Quilogramas', symbol: 'kg', conversionFactor: 1000 },
-      { id: 'tonelada', name: 'Toneladas', symbol: 't', conversionFactor: 1000000 }
-    ]
-  };
-
+  // Valores selecionados
   categoriaSelecionada: string = 'tempo';
-  unidadeOrigemSelecionada: string = 'hora';
-  unidadeDestinoSelecionada: string = 'minuto';
+  unidadeOrigemSelecionada: string = '';
+  unidadeDestinoSelecionada: string = '';
   valorOrigem: string = '0';
   valorDestino: string = '0';
 
   constructor(
     meta: Meta,
-    title: Title
+    title: Title,
+    private converterFactory: ConverterFactoryService
   ) {
     super(meta, title);
-    this.addDescription('Ferramenta para conversão de unidades de tempo, comprimento e peso com calculadora interativa.');
+    this.addDescription('Ferramenta para conversão de unidades com calculadora interativa. Converta entre diferentes unidades de medida rapidamente.');
     this.setTitle('Conversor de Unidades');
   }
 
   ngOnInit(): void {
-    // Verifica se as unidades padrão estão definidas
-    if (this.unidades[this.categoriaSelecionada] && this.unidades[this.categoriaSelecionada].length > 0) {
-      if (!this.unidadeOrigemSelecionada) {
-        this.unidadeOrigemSelecionada = this.unidades[this.categoriaSelecionada][0].id;
-      }
-      if (!this.unidadeDestinoSelecionada) {
-        this.unidadeDestinoSelecionada = this.unidades[this.categoriaSelecionada].length > 1
-          ? this.unidades[this.categoriaSelecionada][1].id
-          : this.unidades[this.categoriaSelecionada][0].id;
-      }
-    }
+    // Inicializa o componente com as configurações padrão
+    this.atualizarTitulo();
   }
 
   onCategoriaChange(categoria: string): void {
     this.categoriaSelecionada = categoria;
-    // Ajusta as unidades padrão para a nova categoria
-    if (this.unidades[categoria] && this.unidades[categoria].length > 0) {
-      this.unidadeOrigemSelecionada = this.unidades[categoria][0].id;
-      this.unidadeDestinoSelecionada = this.unidades[categoria].length > 1
-        ? this.unidades[categoria][1].id
-        : this.unidades[categoria][0].id;
-    }
     this.atualizarTitulo();
   }
 
@@ -93,34 +52,49 @@ export class ExamplePageComponent extends PageBase implements OnInit {
     this.unidadeDestinoSelecionada = unidade;
   }
 
-  onValorChange(valores: { sourceValue: string, targetValue: string }): void {
+  onValorChange(valores: CalculatorResult): void {
     this.valorOrigem = valores.sourceValue;
     this.valorDestino = valores.targetValue;
   }
 
-  calcular(valores: { sourceValue: string, targetValue: string }): void {
-    // Já é calculado automaticamente no componente da calculadora
+  calcular(valores: CalculatorResult): void {
+    // A conversão já é realizada pelo componente Calculator
     console.log('Valores calculados:', valores);
   }
 
   private atualizarTitulo(): void {
     let titulo = 'Conversor de ';
+    let descricao = 'Ferramenta para conversão de ';
 
-    switch (this.categoriaSelecionada) {
-      case 'tempo':
-        titulo += 'Tempo';
-        this.addDescription('Ferramenta para conversão de unidades de tempo como segundos, minutos, horas e dias. Calculadora interativa com conversão instantânea.');
-        break;
-      case 'comprimento':
-        titulo += 'Comprimento';
-        this.addDescription('Ferramenta para conversão de unidades de comprimento como milímetros, centímetros, metros e quilômetros. Cálculo automático e preciso.');
-        break;
-      case 'peso':
-        titulo += 'Peso e Massa';
-        this.addDescription('Ferramenta para conversão de unidades de peso e massa como miligramas, gramas, quilogramas e toneladas. Interface intuitiva e fácil de usar.');
-        break;
+    const categoria = this.converterFactory.getCategoryById(this.categoriaSelecionada);
+    if (categoria) {
+      switch (categoria.id) {
+        case 'tempo':
+          titulo += 'Tempo';
+          descricao += 'unidades de tempo como segundos, minutos, horas e dias. Calculadora interativa com conversão instantânea.';
+          break;
+        case 'comprimento':
+          titulo += 'Comprimento';
+          descricao += 'unidades de comprimento como milímetros, centímetros, metros e quilômetros. Cálculo automático e preciso.';
+          break;
+        case 'peso':
+          titulo += 'Peso e Massa';
+          descricao += 'unidades de peso e massa como miligramas, gramas, quilogramas e toneladas. Interface intuitiva e fácil de usar.';
+          break;
+        case 'area':
+          titulo += 'Área';
+          descricao += 'unidades de área como metros quadrados, hectares e quilômetros quadrados. Calculadora com precisão para medições de terrenos e espaços.';
+          break;
+        default:
+          titulo += 'Unidades';
+          descricao += 'diferentes unidades de medida com precisão e facilidade.';
+      }
+    } else {
+      titulo += 'Unidades';
+      descricao += 'diferentes unidades de medida com precisão e facilidade.';
     }
 
     this.setTitle(titulo);
+    this.addDescription(descricao);
   }
 }

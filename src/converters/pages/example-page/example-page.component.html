@@ -1,3 +1,5 @@
+<!-- src/converters/pages/example-page/example-page.component.html -->
+
 <div class="text-center mb-5">
     <h1>Conversor de Unidades</h1>
     <p class="fs-3">
@@ -5,11 +7,11 @@
     </p>
 </div>
 
-<calculator [categories]="categorias" [units]="unidades" [selectedCategoryId]="categoriaSelecionada"
-    [selectedSourceUnitId]="unidadeOrigemSelecionada" [selectedTargetUnitId]="unidadeDestinoSelecionada"
-    (categoryChange)="onCategoriaChange($event)" (sourceUnitChange)="onUnidadeOrigemChange($event)"
-    (targetUnitChange)="onUnidadeDestinoChange($event)" (valueChange)="onValorChange($event)"
-    (calculate)="calcular($event)">
+<!-- O componente calculator agora usa os serviços de conversão internamente -->
+<calculator [selectedCategoryId]="categoriaSelecionada" [selectedSourceUnitId]="unidadeOrigemSelecionada"
+    [selectedTargetUnitId]="unidadeDestinoSelecionada" (categoryChange)="onCategoriaChange($event)"
+    (sourceUnitChange)="onUnidadeOrigemChange($event)" (targetUnitChange)="onUnidadeDestinoChange($event)"
+    (valueChange)="onValorChange($event)" (calculate)="calcular($event)">
 </calculator>
 
 <div class="mt-5">
@@ -39,6 +41,7 @@
             <li>Para converter de horas para minutos: multiplicamos por 60</li>
             <li>Para converter de metros para quilômetros: dividimos por 1000</li>
             <li>Para converter de gramas para quilogramas: dividimos por 1000</li>
+            <li>Para converter de metros quadrados para hectares: dividimos por 10000</li>
         </ul>
         <p>
             Todas as conversões são feitas com precisão de 4 casas decimais, garantindo resultados precisos para suas
