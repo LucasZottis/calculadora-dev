@@ -1,0 +1,146 @@
+<div class="calculator-container">
+    <!-- Seletor de categoria -->
+    <div class="category-selector">
+        <div class="selected-category" (click)="toggleCategorySelector()">
+            @if (selectedCategory.icon) {
+            <span class="material-symbols-outlined">
+                {{ selectedCategory.icon }}
+            </span>
+            }
+            <span>{{ selectedCategory.name }}</span>
+            <span class="material-symbols-outlined dropdown-icon">
+                expand_more
+            </span>
+        </div>
+
+        <!-- Dropdown de categorias -->
+        @if (showCategorySelector) {
+        <div class="category-dropdown">
+            @for(category of categories; track category.id) {
+            <div class="category-item" [class.active]="category.id === selectedCategoryId"
+                (click)="onCategorySelect(category.id)">
+                @if (category.icon) {
+                <span class="material-symbols-outlined">
+                    {{ category.icon }}
+                </span>
+                }
+                <span>{{ category.name }}</span>
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Único display com seletores à esquerda -->
+    <div class="unified-display">
+        <!-- Display principal com seletores -->
+        <div class="unified-display-row">
+            <!-- Seletor de origem -->
+            <div class="unit-selector-mini" (click)="toggleSourceUnitSelector()">
+                <span>{{ sourceUnit?.symbol }}</span>
+                @if (!showSourceUnitSelector) {
+                <span class="material-symbols-outlined dropdown-icon">
+                    arrow_drop_down
+                </span>
+                } @else {
+                <span class="material-symbols-outlined dropdown-icon">
+                    arrow_drop_up
+                </span>
+                }
+            </div>
+
+            <!-- Dropdown de unidades de origem -->
+            @if (showSourceUnitSelector) {
+            <div class="unit-dropdown">
+                @for (unit of availableUnits; track unit.id) {
+                <div class="unit-item" [class.active]="unit.id === selectedSourceUnitId"
+                    (click)="onSourceUnitSelect(unit.id)">
+                    <span>{{ unit.name }}</span>
+                </div>
+                }
+
+            </div>
+            }
+
+            <!-- Input do valor de origem -->
+            <input type="text" class="calculator-input" [class.active]="activeDisplay === 'source'"
+                [(ngModel)]="sourceValue" (focus)="setActiveDisplay('source')" (input)="onSourceInputChange($event)"
+                inputmode="numeric" />
+        </div>
+
+        <!-- Linha do valor de destino -->
+        <div class="unified-display-row">
+            <!-- Seletor de destino -->
+            <div class="unit-selector-mini" (click)="toggleTargetUnitSelector()">
+                <span>{{ targetUnit?.symbol }}</span>
+                @if (!showTargetUnitSelector) {
+                <span class="material-symbols-outlined dropdown-icon">
+                    arrow_drop_down
+                </span>
+                }@else {
+                <span class="material-symbols-outlined dropdown-icon">
+                    arrow_drop_up
+                </span>
+                }
+            </div>
+
+            <!-- Dropdown de unidades de destino -->
+            @if(showTargetUnitSelector) {
+            <div class="unit-dropdown">
+                @for (unit of availableUnits; track unit.id) {
+                <div class="unit-item" [class.active]="unit.id === selectedTargetUnitId"
+                    (click)="onTargetUnitSelect(unit.id)">
+                    <span>{{ unit.name }}</span>
+                </div>
+                }
+            </div>
+            }
+
+            <!-- Input do valor de destino -->
+            <input type="text" class="calculator-input" [class.active]="activeDisplay === 'target'"
+                [(ngModel)]="targetValue" (focus)="setActiveDisplay('target')" (input)="onTargetInputChange($event)"
+                inputmode="numeric" />
+        </div>
+    </div>
+
+    <!-- Teclado da calculadora -->
+    <div class="calculator-keypad">
+        <div class="row gap-1">
+            <div class="col-9">
+                <div class="row gap-1">
+                    <button class="col key" (click)="onDigitClick('1')">1</button>
+                    <button class="col key" (click)="onDigitClick('2')">2</button>
+                    <button class="col key" (click)="onDigitClick('3')">3</button>
+                </div>
+
+                <div class="row gap-1">
+                    <button class="col key" (click)="onDigitClick('4')">4</button>
+                    <button class="col key" (click)="onDigitClick('5')">5</button>
+                    <button class="col key" (click)="onDigitClick('6')">6</button>
+                </div>
+
+                <div class="row gap-1">
+                    <button class="col key" (click)="onDigitClick('7')">7</button>
+                    <button class="col key" (click)="onDigitClick('8')">8</button>
+                    <button class="col key" (click)="onDigitClick('9')">9</button>
+                </div>
+
+                <div class="row gap-1">
+                    <button class="col key" disabled></button>
+                    <button class="col key" (click)="onDigitClick('0')">0</button>
+                    <button class="col key" disabled></button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row gap-3" style="height: 48%;">
+                    <button class="col key operation-key" (click)="onOperationClick('AC')">AC</button>
+                    <button class="col key operation-key">
+                        <span class="material-symbols-outlined">
+                            backspace
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
