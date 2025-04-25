@@ -1,0 +1,48 @@
+<div class="text-center mb-5">
+    <h1>Conversor de Unidades</h1>
+    <p class="fs-3">
+        Converta facilmente entre diferentes unidades de medida.
+    </p>
+</div>
+
+<calculator [categories]="categorias" [units]="unidades" [selectedCategoryId]="categoriaSelecionada"
+    [selectedSourceUnitId]="unidadeOrigemSelecionada" [selectedTargetUnitId]="unidadeDestinoSelecionada"
+    (categoryChange)="onCategoriaChange($event)" (sourceUnitChange)="onUnidadeOrigemChange($event)"
+    (targetUnitChange)="onUnidadeDestinoChange($event)" (valueChange)="onValorChange($event)"
+    (calculate)="calcular($event)">
+</calculator>
+
+<div class="mt-5">
+    <h2 class="text-center fs-1">Como utilizar a ferramenta</h2>
+    <div class="texto-explicativo">
+        <p>
+            Use a calculadora para inserir o valor na unidade de origem e obter automaticamente o resultado na unidade
+            de destino.
+        </p>
+        <ol>
+            <li>Selecione a categoria de conversão no topo (tempo, comprimento, etc.).</li>
+            <li>Escolha as unidades de origem e destino nos respectivos seletores.</li>
+            <li>Clique no display onde deseja inserir o valor (superior ou inferior).</li>
+            <li>Use o teclado da calculadora para inserir o valor desejado.</li>
+            <li>A conversão é calculada automaticamente para você!</li>
+        </ol>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h2 class="text-center fs-1">Fórmulas de Conversão</h2>
+    <div class="texto-explicativo">
+        <p>
+            As conversões utilizam fatores de conversão padrão entre as unidades. Por exemplo:
+        </p>
+        <ul>
+            <li>Para converter de horas para minutos: multiplicamos por 60</li>
+            <li>Para converter de metros para quilômetros: dividimos por 1000</li>
+            <li>Para converter de gramas para quilogramas: dividimos por 1000</li>
+        </ul>
+        <p>
+            Todas as conversões são feitas com precisão de 4 casas decimais, garantindo resultados precisos para suas
+            necessidades.
+        </p>
+    </div>
+</div>
