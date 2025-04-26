@@ -1,6 +1,6 @@
 // src/converters/services/converter.service.interface.ts
 
-import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
+import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 
 export interface IConverterService {
     /**

@@ -3,11 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CalculatorComponent } from 'src/converters/components/calculator/calculator.component';
-import { CalculatorResult } from 'src/converters/models/calculatorResult';
+import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
 import { PageBase } from 'src/pages/pageBase';
-import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
+import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 import { WeightMassConverterService } from '../../services/weight-mass/weight-mass-converter.service';
+import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';
 
 @Component({
   selector: 'weight-mass-converter-page',

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { ConvertersMenuComponent } from 'src/converters/components/converters-menu/converters-menu.component';
-import { VolumeConverterMenuComponent } from 'src/converters/components/volume-converter-menu/volume-converter-menu.component';
+import { VolumeConverterMenuComponent } from 'src/converters/volume/components/volume-converter-menu/volume-converter-menu.component';
 import { CookieConsentComponent } from 'src/shared/cookie-consent/cookie-consent.component';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { filter } from 'rxjs';

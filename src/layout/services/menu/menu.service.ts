@@ -1,6 +1,6 @@
 // src/services/menu/menu.service.ts
 import { Injectable } from '@angular/core';
-import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
+import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
 import { WeightMassConverterService } from 'src/converters/weight-and-mass/services/weight-mass/weight-mass-converter.service';
 import { MenuConversor } from 'src/layout/models/menuConversor';
 

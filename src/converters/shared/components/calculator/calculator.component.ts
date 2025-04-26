@@ -1,12 +1,12 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IConverterService } from 'src/converters/interfaces/IConverterService';
-import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
-import { CalculatorResult } from 'src/converters/models/calculatorResult';
-import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
-import { ConverterFactoryService } from 'src/converters/services/converter-factory/converter-factory.service';
-import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
+import { IConverterService } from 'src/converters/shared/interfaces/IConverterService';
+import { CalculatorCategory } from 'src/converters/shared/models/calculatorCategory';
+import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
+import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
+import { ConverterFactoryService } from 'src/converters/shared/services/converter-factory/converter-factory.service';
+import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
 
 @Component({
   selector: 'calculator',

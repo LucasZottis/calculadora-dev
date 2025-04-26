@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IConverterService } from 'src/converters/interfaces/IConverterService';
-import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
+import { IConverterService } from 'src/converters/shared/interfaces/IConverterService';
+import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 
 @Injectable({
   providedIn: 'root'
