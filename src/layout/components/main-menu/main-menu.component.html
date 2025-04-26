@@ -1,0 +1,39 @@
+<!-- src/layout/menus/menu-principal/menu-principal.component.html -->
+<div class="menu-items">
+    <a class="menu-item" (click)="onAbrirMenuConversores()">
+        <span class="material-symbols-outlined">
+            sync_alt
+        </span>
+        <span>Conversores</span>
+    </a>
+
+    <a class="menu-item" routerLink="geradores/cpf" routerLinkActive="active" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            pin
+        </span>
+        <span>Gerador de CPF</span>
+    </a>
+
+    <a class="menu-item" routerLink="geradores/cnpj" routerLinkActive="active" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            business
+        </span>
+        <span>Gerador de CNPJ</span>
+    </a>
+
+    <hr>
+
+    <a class="menu-item" routerLink="validadores/cpf" routerLinkActive="active" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            person_check
+        </span>
+        <span>Validador de CPF</span>
+    </a>
+
+    <a class="menu-item" routerLink="validadores/cnpj" routerLinkActive="active" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            fact_check
+        </span>
+        <span>Validador de CNPJ</span>
+    </a>
+</div>

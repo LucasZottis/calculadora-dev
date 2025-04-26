@@ -70,34 +70,6 @@ header {
     width: 200px;
 }
 
-.menu-items {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.menu-item {
-    padding: 12px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #a5d6a7;
-    text-decoration: none;
-}
-
-.menu-item:hover {
-    background-color: #1a331a;
-    color: #4caf50;
-}
-
-.menu-item.active {
-    background-color: #2e7d32;
-    color: #ffffff;
-}
-
 .main-content {
     flex: 1;
     background-color: var(--primary-background-color);

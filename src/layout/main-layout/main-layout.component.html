@@ -1,3 +1,4 @@
+<!-- src/layout/main-layout/main-layout.component.html -->
 <div class="app-container">
     <header>
         <div class="header-container">
@@ -7,66 +8,39 @@
                 </span>
             </button>
             <a class="header-image" href="./">
-                <img src="/assets/images/header.svg" alt="">
+                <img src="/assets/images/header.svg" alt="Calculadora Dev">
             </a>
         </div>
     </header>
     <div class="main-container">
         <nav [class]="sidebarStyle">
             <a class="sidebar-header" href="./">
-                <img src="/assets/images/header.svg" alt="">
+                <img src="/assets/images/header.svg" alt="Calculadora Dev">
             </a>
 
             <hr class="sidebar-header-divisor">
 
-            <div class="menu-items">
-                <a class="menu-item" routerLink="conversores/conversor-tempo" routerLinkActive="active"
-                    (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        schedule
-                    </span>
-                    <span>Converter Tempo para Decimal</span>
-                </a>
+            <!-- Menu Principal -->
+            @if (menuAtual === 'principal') {
+            <main-menu (abrirMenuConversores)="abrirMenuConversores()" (toggleSidebar)="toggleSidebar()">
+            </main-menu>
+            }
 
-                <a class="menu-item" routerLink="conversores/volume" routerLinkActive="active"
-                    (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        deployed_code
-                    </span>
-                    <span>Conversor de Volume</span>
-                </a>
+            <!-- Menu de Conversores -->
+            @if (menuAtual === 'conversores') {
+            <converters-menu (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
+                (abrirMenuConversor)="abrirMenuConversor($event)" (toggleSidebar)="toggleSidebar()">
+            </converters-menu>
+            }
 
-                <hr>
+            <!-- Menu de Opções do Conversor Específico -->
+            @if (menuAtual === 'volume') {
+            <volume-converter-menu [tipoConversor]="conversorSelecionado"
+                (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
+                (toggleSidebar)="toggleSidebar()">
+            </volume-converter-menu>
+            }
 
-                <a class="menu-item" routerLink="geradores/cpf" routerLinkActive="active" (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        pin
-                    </span>
-                    <span>Gerador de CPF</span>
-                </a>
-                <a class="menu-item" routerLink="geradores/cnpj" routerLinkActive="active" (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        business
-                    </span>
-                    <span>Gerador de CNPJ</span>
-                </a>
-
-                <hr>
-
-                <a class="menu-item" routerLink="validadores/cpf" routerLinkActive="active" (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        person_check
-                    </span>
-                    <span>Validador de CPF</span>
-                </a>
-
-                <a class="menu-item" routerLink="validadores/cnpj" routerLinkActive="active" (click)="toggleSidebar()">
-                    <span class="material-symbols-outlined">
-                        fact_check
-                    </span>
-                    <span>Validador de CNPJ</span>
-                </a>
-            </div>
         </nav>
 
         <main class="main-content">

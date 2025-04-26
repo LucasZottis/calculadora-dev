@@ -1,0 +1,72 @@
+// src/layout/menus/menu-conversor-especifico/menu-conversor-especifico.component.scss
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a5d6a7;
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    background-color: #1a331a;
+    color: #4caf50;
+}
+
+.menu-item.active {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.menu-back,
+.menu-home {
+    margin-bottom: 5px;
+}
+
+.menu-back {
+    color: #a5d6a7;
+    background-color: rgba(76, 175, 80, 0.05);
+
+    &:hover {
+        background-color: rgba(76, 175, 80, 0.15);
+    }
+}
+
+.menu-home {
+    color: #a5d6a7;
+}
+
+.menu-subtitle {
+    padding: 10px 15px;
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #4caf50 !important;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-items a.menu-item.active {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border-radius: 5px;
+}

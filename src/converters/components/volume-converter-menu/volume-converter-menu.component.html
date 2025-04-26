@@ -1,0 +1,42 @@
+<!-- src/layout/menus/menu-conversor-especifico/menu-conversor-especifico.component.html -->
+<div class="menu-items">
+    @if (conversorAtivo) {
+    <h5 class="menu-subtitle" *ngIf="">
+        {{ conversorAtivo.nome }}
+    </h5>
+    }
+
+    <!-- Opções de Conversão Dinâmicas -->
+    <a *ngFor="let opcao of opcoesConversao" class="menu-item" [routerLink]="opcao.rota" routerLinkActive="active"
+        (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            swap_horiz
+        </span>
+        <span>{{ opcao.nome }}</span>
+    </a>
+
+    <!-- Link para o conversor geral -->
+    <!-- <a class="menu-item" [routerLink]="'/conversores/' + tipoConversor" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            calculate
+        </span>
+        <span>Todas as Conversões</span>
+    </a> -->
+
+    <hr>
+
+    <a class="menu-item menu-back" (click)="onVoltarParaConversores()">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+        <span>Voltar para Conversores</span>
+    </a>
+
+    <a class="menu-item menu-home" (click)="onVoltarParaMenuPrincipal()">
+        <span class="material-symbols-outlined">
+            home
+        </span>
+        <span>Menu Principal</span>
+    </a>
+</div>
