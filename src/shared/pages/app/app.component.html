@@ -1,0 +1,13 @@
+<router-outlet></router-outlet>
+
+<!-- Rodapé -->
+<footer class="site-footer">
+    <div class="footer-links">
+        <a routerLink="/politica-de-privacidade">Política de Privacidade</a>
+        <span class="separator">|</span>
+        <a href="#" (click)="abrirConfigCookies($event)">Configurar Cookies</a>
+    </div>
+    <div class="footer-copyright">
+        &copy; {{ anoAtual }} Calculadora Dev. Todos os direitos reservados.
+    </div>
+</footer>

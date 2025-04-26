@@ -56,6 +56,7 @@ export class MenuService {
       id: 'volume',
       nome: 'Conversor de Volume',
       icone: 'deployed_code',
+      rotaLayout:'conversores/volume',
       rotas: rotas
     };
 
@@ -107,6 +108,7 @@ export class MenuService {
       id: 'peso-massa',
       nome: 'Conversor de Peso e Massa',
       icone: 'weight',
+      rotaLayout: 'conversores/peso-e-massa',
       rotas: rotas
     };
 

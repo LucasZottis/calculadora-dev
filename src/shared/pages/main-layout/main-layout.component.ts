@@ -28,7 +28,6 @@ import { ConvertersMenuComponent } from 'src/converters/shared/components/conver
 export class MainLayoutComponent {
   sidebarExpanded: boolean = false;
   sidebarStyle = 'sidebar';
-  anoAtual: number = new Date().getFullYear();
 
   // Estados do menu
   menuAtual: 'principal' | 'conversores' | 'volume' | 'peso-massa' = 'principal';
@@ -80,12 +79,5 @@ export class MainLayoutComponent {
   abrirMenuConversor(tipo: string): void {
     this.conversorSelecionado = tipo;
     this.menuAtual = 'volume';
-  }
-
-  abrirConfigCookies(event: Event): void {
-    event.preventDefault();
-
-    // Dispara um evento personalizado para abrir o modal de cookies
-    window.dispatchEvent(new CustomEvent('mostrar-cookie-dialog'));
   }
 }

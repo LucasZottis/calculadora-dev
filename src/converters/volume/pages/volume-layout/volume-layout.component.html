@@ -1,0 +1,43 @@
+<div class="app-container">
+    <header class="d-md-none">
+        <div class="header-container">
+            <button class="header-menu-button" (click)="toggleSidebar()">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <a class="header-image" routerLink="/">
+                <img src="/assets/images/header.svg" alt="Calculadora Dev">
+            </a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav [class]="sidebarStyle">
+            <a class="sidebar-header d-none d-md-block" routerLink="/">
+                <img src="/assets/images/header.svg" alt="Calculadora Dev">
+            </a>
+
+            <hr class="sidebar-header-divisor d-none d-md-block">
+
+            <volume-converter-menu (toggleSidebar)="toggleSidebar()"></volume-converter-menu>
+        </nav>
+
+        <main class="main-content">
+            <div class="router-outlet-container">
+                <router-outlet></router-outlet>
+            </div>
+
+            <footer class="site-footer">
+                <div class="footer-links">
+                    <a routerLink="/politica-de-privacidade">Política de Privacidade</a>
+                    <span class="separator">|</span>
+                    <a href="#" (click)="abrirConfigCookies($event)">Configurar Cookies</a>
+                </div>
+                <div class="footer-copyright">
+                    &copy; {{ anoAtual }} Calculadora Dev. Todos os direitos reservados.
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <cookie-consent></cookie-consent>
+</div>

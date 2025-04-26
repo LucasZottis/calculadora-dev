@@ -26,15 +26,13 @@
             </main-menu>
             }
 
-            <!-- Menu de Conversores -->
             @if (menuAtual === 'conversores') {
             <converters-menu (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
                 (abrirMenuConversor)="abrirMenuConversor($event)" (toggleSidebar)="toggleSidebar()">
             </converters-menu>
             }
 
-            <!-- Menu de Opções do Conversor Específico -->
-            @if (menuAtual === 'volume') {
+            <!--@if (menuAtual === 'volume') {
             <volume-converter-menu [tipoConversor]="conversorSelecionado"
                 (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
                 (toggleSidebar)="toggleSidebar()">
@@ -46,7 +44,7 @@
                 (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
                 (toggleSidebar)="toggleSidebar()">
             </weight-mass-converter-menu>
-            }
+            } -->
 
         </nav>
 
@@ -54,18 +52,6 @@
             <div class="router-outlet-container">
                 <router-outlet></router-outlet>
             </div>
-
-            <!-- Rodapé -->
-            <footer class="site-footer">
-                <div class="footer-links">
-                    <a routerLink="/politica-de-privacidade">Política de Privacidade</a>
-                    <span class="separator">|</span>
-                    <a href="#" (click)="abrirConfigCookies($event)">Configurar Cookies</a>
-                </div>
-                <div class="footer-copyright">
-                    &copy; {{ anoAtual }} Calculadora Dev. Todos os direitos reservados.
-                </div>
-            </footer>
         </main>
     </div>
 

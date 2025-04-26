@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { ConverterRegistration } from "./shared/models/converterRegistration";
+import { ConverterRegistration } from "./models/converterRegistration";
 
 export const ADDITIONAL_CONVERTERS = new InjectionToken<ConverterRegistration[]>('ADDITIONAL_CONVERTERS');
 

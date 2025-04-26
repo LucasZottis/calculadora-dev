@@ -1,7 +1,7 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PageBase } from '../../shared/pages/pageBase';
+import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
   selector: 'time-converter-page',

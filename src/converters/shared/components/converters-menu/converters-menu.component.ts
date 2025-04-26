@@ -2,11 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuConversor } from 'src/shared/models/menuConversor';
 import { MenuService } from 'src/shared/services/menu/menu.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'converters-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './converters-menu.component.html',
   styleUrl: './converters-menu.component.scss'
 })
@@ -25,8 +26,8 @@ export class ConvertersMenuComponent {
     this.voltarParaMenuPrincipal.emit();
   }
 
-  onAbrirMenuConversor(tipo: string): void {
-    this.abrirMenuConversor.emit(tipo);
-    this.toggleSidebar.emit();
-  }
+  // onAbrirMenuConversor(tipo: string): void {
+  //   this.abrirMenuConversor.emit(tipo);
+  //   this.toggleSidebar.emit();
+  // }
 }

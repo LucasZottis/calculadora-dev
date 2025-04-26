@@ -2,8 +2,8 @@ import { Inject, Injectable, Injector, Optional } from '@angular/core';
 import { IConverterService } from 'src/converters/shared/interfaces/IConverterService';
 import { CalculatorCategory } from 'src/converters/shared/models/calculatorCategory';
 import { ConverterRegistration } from 'src/converters/shared/models/converterRegistration';
-import { ADDITIONAL_CONVERTERS } from 'src/converters/provider';
 import { VolumeConverterService } from '../../../volume/services/volume-converter/volume-converter.service';
+import { ADDITIONAL_CONVERTERS } from '../../provider';
 
 @Injectable({
   providedIn: 'root'

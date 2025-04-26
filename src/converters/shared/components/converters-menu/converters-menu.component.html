@@ -1,7 +1,7 @@
 <!-- src/layout/menus/menu-conversores/menu-conversores.component.html -->
 <div class="menu-items">
     @for(conversor of conversoresDisponiveis; track conversor.nome) {
-    <a class="menu-item" (click)="onAbrirMenuConversor(conversor.id)">
+    <a class="menu-item" [routerLink]="[conversor.rotaLayout]" routerLinkActive="router-link-active">
         <span class="material-symbols-outlined">
             {{ conversor.icone }}
         </span>
