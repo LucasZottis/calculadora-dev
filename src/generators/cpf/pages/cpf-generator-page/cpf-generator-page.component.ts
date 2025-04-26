@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
-import { PageBase } from 'src/pages/pageBase';
+import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
-  selector: 'cnpj-generator-page',
+  selector: 'cpf-generator-page',
   standalone: true,
   imports: [
     FormsModule
   ],
-  templateUrl: './cnpj-generator-page.component.html',
-  styleUrl: './cnpj-generator-page.component.scss'
+  templateUrl: './cpf-generator-page.component.html',
+  styleUrl: './cpf-generator-page.component.scss'
 })
 
-export class CnpjGeneratorPageComponent extends PageBase {
-  cnpj: string = "";
+export class CpfGeneratorPageComponent extends PageBase {
+  cpf: string = "";
   masked: number = 1;
 
   constructor(
@@ -22,8 +22,8 @@ export class CnpjGeneratorPageComponent extends PageBase {
     title: Title
   ) {
     super(meta, title);
-    this.addDescription('Ferramenta para geração CNPJ aleatório válido.');
-    this.setTitle('Gerador de CNPJ');
+    this.addDescription('Ferramenta para geração CPF aleatório válido.');
+    this.setTitle('Gerador de CPF');
   }
 
   private randomIntFromInterval(min: number, max: number) { // min and max included 
@@ -48,12 +48,8 @@ export class CnpjGeneratorPageComponent extends PageBase {
   private generateDigit(digits: string, initialValue: number): string {
     let resultado = 0;
 
-    digits.split("").forEach(digit => {
-      resultado += Number(digit) * initialValue;
-      initialValue--;
-
-      if (initialValue < 2)
-        initialValue = 9;
+    digits.split("").forEach(digito => {
+      resultado += Number(digito) * initialValue--;
     });
 
     var resto = resultado % 11;
@@ -67,31 +63,26 @@ export class CnpjGeneratorPageComponent extends PageBase {
   }
 
   private generate(): void {
-    this.cnpj = "";
+    this.cpf = "";
 
     do {
-      switch (this.cnpj.length) {
-        case 2:
-        case 6:
-          if (this.count(this.cnpj, ".") < 2 && this.masked)
-            this.cnpj += ".";
+      switch (this.cpf.length) {
+        case 3:
+        case 7:
+          if (this.count(this.cpf, ".") < 2 && this.masked)
+            this.cpf += ".";
           break;
       }
 
-      this.cnpj += this.randomIntFromInterval(0, 9);
+      this.cpf += this.randomIntFromInterval(0, 9);
 
-    } while (this.removeMask(this.cnpj).length < 8)
-
-    if (this.masked)
-      this.cnpj += "/";
-
-    this.cnpj += "0001";
+    } while (this.removeMask(this.cpf).length < 9)
 
     if (this.masked)
-      this.cnpj += "-";
+      this.cpf += "-";
 
-    this.cnpj += this.generateDigit(this.removeMask(this.cnpj), 5);
-    this.cnpj += this.generateDigit(this.removeMask(this.cnpj), 6);
+    this.cpf += this.generateDigit(this.removeMask(this.cpf), 10);
+    this.cpf += this.generateDigit(this.removeMask(this.cpf), 11);
   }
 
   onClickGenerate(): void {
@@ -99,7 +90,7 @@ export class CnpjGeneratorPageComponent extends PageBase {
   }
 
   onClickCopy(): void {
-    if (this.cnpj !== "")
-      navigator.clipboard.writeText(this.cnpj)
+    if (this.cpf !== "")
+      navigator.clipboard.writeText(this.cpf)
   }
 }

@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
-import { PageBase } from 'src/pages/pageBase';
+import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
-  selector: 'cpf-generator-page',
+  selector: 'cnpj-generator-page',
   standalone: true,
   imports: [
     FormsModule
   ],
-  templateUrl: './cpf-generator-page.component.html',
-  styleUrl: './cpf-generator-page.component.scss'
+  templateUrl: './cnpj-generator-page.component.html',
+  styleUrl: './cnpj-generator-page.component.scss'
 })
 
-export class CpfGeneratorPageComponent extends PageBase {
-  cpf: string = "";
+export class CnpjGeneratorPageComponent extends PageBase {
+  cnpj: string = "";
   masked: number = 1;
 
   constructor(
     meta: Meta,
     title: Title
-  ) { 
+  ) {
     super(meta, title);
-    this.addDescription('Ferramenta para geração CPF aleatório válido.');
-    this.setTitle('Gerador de CPF');
+    this.addDescription('Ferramenta para geração CNPJ aleatório válido.');
+    this.setTitle('Gerador de CNPJ');
   }
 
   private randomIntFromInterval(min: number, max: number) { // min and max included 
@@ -48,8 +48,12 @@ export class CpfGeneratorPageComponent extends PageBase {
   private generateDigit(digits: string, initialValue: number): string {
     let resultado = 0;
 
-    digits.split("").forEach(digito => {
-      resultado += Number(digito) * initialValue--;
+    digits.split("").forEach(digit => {
+      resultado += Number(digit) * initialValue;
+      initialValue--;
+
+      if (initialValue < 2)
+        initialValue = 9;
     });
 
     var resto = resultado % 11;
@@ -63,26 +67,31 @@ export class CpfGeneratorPageComponent extends PageBase {
   }
 
   private generate(): void {
-    this.cpf = "";
+    this.cnpj = "";
 
     do {
-      switch (this.cpf.length) {
-        case 3:
-        case 7:
-          if (this.count(this.cpf, ".") < 2 && this.masked)
-            this.cpf += ".";
+      switch (this.cnpj.length) {
+        case 2:
+        case 6:
+          if (this.count(this.cnpj, ".") < 2 && this.masked)
+            this.cnpj += ".";
           break;
       }
 
-      this.cpf += this.randomIntFromInterval(0, 9);
+      this.cnpj += this.randomIntFromInterval(0, 9);
 
-    } while (this.removeMask(this.cpf).length < 9)
+    } while (this.removeMask(this.cnpj).length < 8)
 
     if (this.masked)
-      this.cpf += "-";
+      this.cnpj += "/";
 
-    this.cpf += this.generateDigit(this.removeMask(this.cpf), 10);
-    this.cpf += this.generateDigit(this.removeMask(this.cpf), 11);
+    this.cnpj += "0001";
+
+    if (this.masked)
+      this.cnpj += "-";
+
+    this.cnpj += this.generateDigit(this.removeMask(this.cnpj), 5);
+    this.cnpj += this.generateDigit(this.removeMask(this.cnpj), 6);
   }
 
   onClickGenerate(): void {
@@ -90,7 +99,7 @@ export class CpfGeneratorPageComponent extends PageBase {
   }
 
   onClickCopy(): void {
-    if (this.cpf !== "")
-      navigator.clipboard.writeText(this.cpf)
+    if (this.cnpj !== "")
+      navigator.clipboard.writeText(this.cnpj)
   }
 }

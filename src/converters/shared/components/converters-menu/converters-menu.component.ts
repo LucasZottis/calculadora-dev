@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuConversor } from 'src/layout/models/menuConversor';
-import { MenuService } from 'src/layout/services/menu/menu.service';
+import { MenuConversor } from 'src/shared/models/menuConversor';
+import { MenuService } from 'src/shared/services/menu/menu.service';
 
 @Component({
   selector: 'converters-menu',

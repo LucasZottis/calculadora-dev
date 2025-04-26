@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
-import { ConvertersMenuComponent } from 'src/converters/components/converters-menu/converters-menu.component';
 import { VolumeConverterMenuComponent } from 'src/converters/volume/components/volume-converter-menu/volume-converter-menu.component';
-import { CookieConsentComponent } from 'src/shared/cookie-consent/cookie-consent.component';
-import { MainMenuComponent } from '../components/main-menu/main-menu.component';
+import { CookieConsentComponent } from 'src/shared/components/cookie-consent/cookie-consent.component';
 import { filter } from 'rxjs';
 import { WeightMassConverterMenuComponent } from 'src/converters/weight-and-mass/components/weight-mass-converter-menu/weight-mass-converter-menu.component';
+import { MainMenuComponent } from 'src/shared/components/main-menu/main-menu.component';
+import { ConvertersMenuComponent } from 'src/converters/shared/components/converters-menu/converters-menu.component';
 
 @Component({
   selector: 'main-layout',

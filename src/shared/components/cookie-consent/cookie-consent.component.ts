@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CookieConfig, CookieService } from 'src/services/cookie/cookie.service';
+import { CookieConfig, CookieService } from 'src/shared/services/cookie/cookie.service';
 
 @Component({
   selector: 'cookie-consent',

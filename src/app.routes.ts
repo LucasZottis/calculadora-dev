@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { VolumeConverterPageComponent } from 'src/converters/pages/volume-converter-page/volume-converter-page.component';
-import { CnpjGeneratorPageComponent } from 'src/pages/generators/cnpj-generator-page/cnpj-generator-page.component';
-import { CpfGeneratorPageComponent } from 'src/pages/generators/cpf-generator-page/cpf-generator-page.component';
+import { CnpjGeneratorPageComponent } from 'src/generators/cnpj/pages/cnpj-generator-page/cnpj-generator-page.component';
+import { CpfGeneratorPageComponent } from 'src/generators/cpf/pages/cpf-generator-page/cpf-generator-page.component';
 import { HomePageComponent } from 'src/pages/home-page/home-page.component';
 import { PrivacyPolicyPageComponent } from 'src/pages/privacy-police-page/privacy-policy-page.component';
 import { TimeConverterPageComponent } from 'src/pages/time-converter-page/time-converter-page.component';
-import { CnpjValidatorPageComponent } from 'src/pages/validators/cnpj-validator-page/cnpj-validator-page.component';
-import { CpfValidatorPageComponent } from 'src/pages/validators/cpf-validator-page/cpf-validator-page.component';
+import { CnpjValidatorPageComponent } from 'src/validators/cnpj/pages/cnpj-validator-page/cnpj-validator-page.component';
+import { CpfValidatorPageComponent } from 'src/validators/cpf/pages/cpf-validator-page/cpf-validator-page.component';
 import { WeightMassConverterPageComponent } from './converters/weight-and-mass/pages/weight-mass-converter-page/weight-mass-converter-page.component';
 
 export const routes: Routes = [

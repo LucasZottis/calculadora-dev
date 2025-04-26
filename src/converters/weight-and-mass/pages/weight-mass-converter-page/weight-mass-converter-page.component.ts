@@ -4,7 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
-import { PageBase } from 'src/pages/pageBase';
+import { PageBase } from 'src/shared/pages/pageBase';
 import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 import { WeightMassConverterService } from '../../services/weight-mass/weight-mass-converter.service';
 import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';

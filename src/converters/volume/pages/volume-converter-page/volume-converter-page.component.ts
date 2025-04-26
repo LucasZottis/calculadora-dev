@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
 import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
-import { PageBase } from 'src/pages/pageBase';
+import { PageBase } from 'src/shared/pages/pageBase';
 import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';
 
