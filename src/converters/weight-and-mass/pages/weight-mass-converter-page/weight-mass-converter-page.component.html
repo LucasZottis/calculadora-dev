@@ -1,0 +1,121 @@
+<div class="text-center mb-5">
+    <h1>Conversor de Peso e Massa</h1>
+    <p class="fs-3">
+        Converta facilmente entre diferentes unidades de peso e massa com precisão.
+    </p>
+</div>
+
+<!-- Instruções de uso -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+        <p>
+            Esta calculadora permite converter entre diversas unidades de peso e massa, incluindo medidas métricas e
+            imperiais. Basta selecionar as unidades de origem e destino, e inserir o valor a ser convertido.
+        </p>
+        <ol>
+            <li>Escolha a unidade de origem (de onde deseja converter)</li>
+            <li>Escolha a unidade de destino (para onde deseja converter)</li>
+            <li>Digite o valor na unidade de origem</li>
+            <li>O resultado será calculado automaticamente</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Componente de calculadora -->
+<calculator [selectedCategoryId]="categoriaSelecionada" [selectedSourceUnitId]="unidadeOrigemSelecionada"
+    [selectedTargetUnitId]="unidadeDestinoSelecionada" (categoryChange)="onCategoriaChange($event)"
+    (sourceUnitChange)="onUnidadeOrigemChange($event)" (targetUnitChange)="onUnidadeDestinoChange($event)"
+    (valueChange)="onValorChange($event)" (calculate)="calcular($event)">
+</calculator>
+
+<!-- Explicação da fórmula de cálculo -->
+<div class="mt-5 card" *ngIf="mostrarFormula">
+    <div class="card-body">
+        <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+        <p>{{ formulaDescricao }}</p>
+        <div class="bg-dark text-light p-3 rounded">
+            <pre class="mb-0">{{ formulaCalculo }}</pre>
+        </div>
+    </div>
+</div>
+
+<!-- Links para conversões populares -->
+<div class="mt-5">
+    <h2 class="text-center fs-4">Conversões Populares</h2>
+    <div class="row g-3 mt-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let conversao of conversoesSugeridas">
+            <a [routerLink]="['/conversores/peso-massa', conversao.url]" class="text-decoration-none">
+                <div class="card h-100 conversion-card">
+                    <div class="card-body d-flex align-items-center justify-content-center text-center">
+                        <span class="material-symbols-outlined me-2">swap_horiz</span>
+                        {{ conversao.nome }}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de links para outros conversores (comentada por enquanto) -->
+<!--
+<div class="mt-5">
+  <h2 class="text-center fs-4">Outros Conversores</h2>
+  <div class="row g-3 mt-2">
+    <div class="col-12 col-sm-6 col-md-4">
+      <a routerLink="/conversores/comprimento" class="text-decoration-none">
+        <div class="card h-100 converter-card">
+          <div class="card-body d-flex align-items-center justify-content-center text-center">
+            <span class="material-symbols-outlined me-2">straighten</span>
+            Conversor de Comprimento
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <a routerLink="/conversores/volume" class="text-decoration-none">
+        <div class="card h-100 converter-card">
+          <div class="card-body d-flex align-items-center justify-content-center text-center">
+            <span class="material-symbols-outlined me-2">water_full</span>
+            Conversor de Volume
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+      <a routerLink="/conversores/temperatura" class="text-decoration-none">
+        <div class="card h-100 converter-card">
+          <div class="card-body d-flex align-items-center justify-content-center text-center">
+            <span class="material-symbols-outlined me-2">device_thermostat</span>
+            Conversor de Temperatura
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- Informações adicionais -->
+<div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Peso e Massa</h2>
+    <div class="texto-explicativo">
+        <p>
+            Peso e massa são conceitos distintos, embora frequentemente utilizados de maneira intercambiável no dia a
+            dia.
+            A massa é a quantidade de matéria em um objeto, enquanto o peso é a força gravitacional exercida sobre essa
+            massa.
+            Existem diversos sistemas de medição de peso e massa em uso ao redor do mundo:
+        </p>
+        <ul>
+            <li><strong>Sistema Internacional (SI)</strong>: Grama (g), Quilograma (kg), Tonelada métrica (t)</li>
+            <li><strong>Sistema Imperial</strong>: Onça (oz), Libra (lb), Pedra (st), Toneladas (curta e longa)</li>
+            <li><strong>Outras unidades</strong>: Quilates (para gemas e metais preciosos), Grão (usado em farmácia e
+                balística)</li>
+        </ul>
+        <p>
+            Todos os cálculos são realizados com alta precisão usando fatores de conversão padrão.
+            A unidade base utilizada para todas as conversões é o grama (g).
+        </p>
+    </div>
+</div>

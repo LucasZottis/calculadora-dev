@@ -41,6 +41,13 @@
             </volume-converter-menu>
             }
 
+            @if (menuAtual === 'peso-massa') {
+            <weight-mass-converter-menu [tipoConversor]="conversorSelecionado"
+                (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
+                (toggleSidebar)="toggleSidebar()">
+            </weight-mass-converter-menu>
+            }
+
         </nav>
 
         <main class="main-content">

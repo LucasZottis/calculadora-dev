@@ -7,14 +7,19 @@ import { PrivacyPolicyPageComponent } from 'src/pages/privacy-police-page/privac
 import { TimeConverterPageComponent } from 'src/pages/time-converter-page/time-converter-page.component';
 import { CnpjValidatorPageComponent } from 'src/pages/validators/cnpj-validator-page/cnpj-validator-page.component';
 import { CpfValidatorPageComponent } from 'src/pages/validators/cpf-validator-page/cpf-validator-page.component';
+import { WeightMassConverterPageComponent } from './converters/weight-and-mass/pages/weight-mass-converter-page/weight-mass-converter-page.component';
 
 export const routes: Routes = [
     { path: '', component: HomePageComponent },
     { path: 'conversores/conversor-tempo', component: TimeConverterPageComponent },
 
     // Novas rotas para o conversor de volume
-    { path: 'conversores/volume', component: VolumeConverterPageComponent },
+    // { path: 'conversores/volume', component: VolumeConverterPageComponent },
     { path: 'conversores/volume/:conversion', component: VolumeConverterPageComponent },
+
+    // Rotas para o conversor de peso e massa
+    // { path: 'conversores/peso-massa', component: WeightMassConverterPageComponent },
+    { path: 'conversores/peso-massa/:conversion', component: WeightMassConverterPageComponent },
 
     { path: 'validadores/cpf', component: CpfValidatorPageComponent },
     { path: 'validadores/cnpj', component: CnpjValidatorPageComponent },

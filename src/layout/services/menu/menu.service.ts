@@ -1,6 +1,7 @@
 // src/services/menu/menu.service.ts
 import { Injectable } from '@angular/core';
 import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
+import { WeightMassConverterService } from 'src/converters/weight-and-mass/services/weight-mass/weight-mass-converter.service';
 import { MenuConversor } from 'src/layout/models/menuConversor';
 
 @Injectable({
@@ -9,7 +10,10 @@ import { MenuConversor } from 'src/layout/models/menuConversor';
 export class MenuService {
   private conversoresDisponiveis: MenuConversor[] = [];
 
-  constructor(private volumeConverterService: VolumeConverterService) {
+  constructor(
+    private volumeConverterService: VolumeConverterService,
+    private weightMassConverterService: WeightMassConverterService
+  ) {
     // Inicializar conversores
     this.inicializarConversores();
   }
@@ -17,6 +21,9 @@ export class MenuService {
   private inicializarConversores(): void {
     // Gerar menu para conversor de volume
     this.registrarConversorVolume();
+
+    // Gerar menu para conversor de peso e massa
+    this.registrarConversorPesoMassa();
   }
 
   private registrarConversorVolume(): void {
@@ -55,7 +62,58 @@ export class MenuService {
     this.conversoresDisponiveis.push(conversorVolume);
   }
 
-  // Diretamente lendo o serviço
+  private registrarConversorPesoMassa(): void {
+    // Obter todas as unidades de peso e massa
+    const unidades = this.weightMassConverterService.getUnits();
+    const rotas: { nome: string, rota: string }[] = [];
+
+    // Gerar rotas para combinações populares de conversão
+    const combinacoesPopulares = [
+      { origem: 'grama', destino: 'quilograma' },
+      { origem: 'quilograma', destino: 'grama' },
+      { origem: 'miligrama', destino: 'grama' },
+      { origem: 'quilograma', destino: 'libra' },
+      { origem: 'libra', destino: 'quilograma' },
+      { origem: 'grama', destino: 'onca' },
+      { origem: 'onca', destino: 'grama' },
+      { origem: 'quilograma', destino: 'tonelada-metrica' },
+      { origem: 'tonelada-metrica', destino: 'quilograma' },
+      { origem: 'miligrama', destino: 'micrograma' },
+      { origem: 'quilates', destino: 'grama' },
+      { origem: 'grama', destino: 'quilates' }
+    ];
+
+    for (const combo of combinacoesPopulares) {
+      const unidadeOrigem = this.weightMassConverterService.getUnitById(combo.origem);
+      const unidadeDestino = this.weightMassConverterService.getUnitById(combo.destino);
+
+      if (unidadeOrigem && unidadeDestino) {
+        // Gerar URL amigável para a rota
+        const urlRota = this.weightMassConverterService.generateConversionUrl(
+          combo.origem,
+          combo.destino
+        );
+
+        // Adicionar à lista de rotas
+        rotas.push({
+          nome: `${unidadeOrigem.name} para ${unidadeDestino.name}`,
+          rota: `/conversores/peso-massa/${urlRota}`
+        });
+      }
+    }
+
+    // Registrar o conversor de peso e massa com as rotas populares
+    const conversorPesoMassa: MenuConversor = {
+      id: 'peso-massa',
+      nome: 'Conversor de Peso e Massa',
+      icone: 'weight',
+      rotas: rotas
+    };
+
+    this.conversoresDisponiveis.push(conversorPesoMassa);
+  }
+
+  // Método público para acessar a lista de conversores disponíveis
   getConversoresDisponiveis(): MenuConversor[] {
     return this.conversoresDisponiveis;
   }

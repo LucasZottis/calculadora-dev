@@ -1,0 +1,135 @@
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a5d6a7;
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    background-color: #1a331a;
+    color: #4caf50;
+}
+
+.menu-item.active {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: rgba(76, 175, 80, 0.05);
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+
+    .material-symbols-outlined {
+        color: #a5d6a7;
+        margin-right: 8px;
+        font-size: 20px;
+    }
+
+    input {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #a5d6a7;
+        font-size: 14px;
+
+        &::placeholder {
+            color: rgba(165, 214, 167, 0.7);
+        }
+    }
+}
+
+.menu-item {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #a5d6a7;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #1a331a;
+        color: #4caf50;
+    }
+
+    &.active {
+        background-color: #2e7d32;
+        color: #ffffff;
+    }
+}
+
+.menu-back,
+.menu-home {
+    margin-bottom: 5px;
+}
+
+.menu-back {
+    color: #a5d6a7;
+    background-color: rgba(76, 175, 80, 0.05);
+
+    &:hover {
+        background-color: rgba(76, 175, 80, 0.15);
+    }
+}
+
+.menu-home {
+    color: #a5d6a7;
+}
+
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #a5d6a7;
+    text-align: center;
+    opacity: 0.7;
+
+    .material-symbols-outlined {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #2c5a2c;
+    margin: 10px 0;
+    opacity: 0.5;
+}

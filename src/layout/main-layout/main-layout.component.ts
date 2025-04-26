@@ -6,6 +6,7 @@ import { VolumeConverterMenuComponent } from 'src/converters/components/volume-c
 import { CookieConsentComponent } from 'src/shared/cookie-consent/cookie-consent.component';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { filter } from 'rxjs';
+import { WeightMassConverterMenuComponent } from 'src/converters/weight-and-mass/components/weight-mass-converter-menu/weight-mass-converter-menu.component';
 
 @Component({
   selector: 'main-layout',
@@ -17,7 +18,8 @@ import { filter } from 'rxjs';
     CookieConsentComponent,
     MainMenuComponent,
     ConvertersMenuComponent,
-    VolumeConverterMenuComponent
+    VolumeConverterMenuComponent,
+    WeightMassConverterMenuComponent
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
@@ -29,7 +31,7 @@ export class MainLayoutComponent {
   anoAtual: number = new Date().getFullYear();
 
   // Estados do menu
-  menuAtual: 'principal' | 'conversores' | 'volume' = 'principal';
+  menuAtual: 'principal' | 'conversores' | 'volume' | 'peso-massa' = 'principal';
   conversorSelecionado: string = '';
 
   constructor(
