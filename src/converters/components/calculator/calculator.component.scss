@@ -131,34 +131,35 @@
 }
 
 // Dropdown de unidades
+// Modificação no dropdown de unidades
 .unit-dropdown {
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 120px;
-    z-index: 1050;
-    background-color: var(--second-background-color, #181b1e);
-    border: 1px solid var(--border-color-base, #2c5a2c);
-    border-radius: 6px;
-    max-height: 180px;
-    overflow-y: auto;
+  position: fixed; // Mudando para 'fixed' em vez de 'absolute'
+  z-index: 9999; // Z-index muito alto para garantir que fique acima de tudo
+  background-color: var(--second-background-color, #181b1e);
+  border: 1px solid var(--border-color-base, #2c5a2c);
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  width: 120px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); // Sombra mais forte
 
-    .unit-item {
-        padding: 8px 12px;
-        cursor: pointer;
-        color: #a5d6a7;
-        text-align: left;
+  .unit-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #a5d6a7;
+    text-align: left;
 
-        &:hover {
-            background-color: rgba(76, 175, 80, 0.1);
-        }
-
-        &.active {
-            background-color: var(--bs-primary, #2e7d32);
-            color: white;
-        }
+    &:hover {
+      background-color: rgba(76, 175, 80, 0.1);
     }
+
+    &.active {
+      background-color: var(--bs-primary, #2e7d32);
+      color: white;
+    }
+  }
 }
+
 
 // Input da calculadora
 .calculator-input {
@@ -182,7 +183,7 @@
 
 // Teclado da calculadora
 .calculator-keypad {
-    z-index: 0;
+    z-index: 0 !important;
 
     .keypad-row {
         display: flex;

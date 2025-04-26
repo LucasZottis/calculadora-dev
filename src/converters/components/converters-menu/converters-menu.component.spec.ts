@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExamplePageComponent } from './example-page.component';
+import { ConvertersMenuComponent } from './converters-menu.component';
 
-describe('ExamplePageComponent', () => {
-  let component: ExamplePageComponent;
-  let fixture: ComponentFixture<ExamplePageComponent>;
+describe('ConvertersMenuComponent', () => {
+  let component: ConvertersMenuComponent;
+  let fixture: ComponentFixture<ConvertersMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExamplePageComponent]
+      imports: [ConvertersMenuComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ExamplePageComponent);
+    fixture = TestBed.createComponent(ConvertersMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

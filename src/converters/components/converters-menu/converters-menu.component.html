@@ -1,0 +1,18 @@
+<!-- src/layout/menus/menu-conversores/menu-conversores.component.html -->
+<div class="menu-items">
+    <a *ngFor="let conversor of conversoresDisponiveis" class="menu-item" (click)="onAbrirMenuConversor(conversor.id)">
+        <span class="material-symbols-outlined">
+            {{ conversor.icone }}
+        </span>
+        <span>{{ conversor.nome }}</span>
+    </a>
+
+    <hr>
+
+    <a class="menu-item menu-back" (click)="onVoltarParaMenuPrincipal()">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+        <span>Voltar para o Menu Principal</span>
+    </a>
+</div>

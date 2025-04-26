@@ -1,10 +1,9 @@
-// src/converters/services/converter-factory.service.ts
-
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Injector, Optional } from '@angular/core';
 import { IConverterService } from 'src/converters/interfaces/IConverterService';
 import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
 import { ConverterRegistration } from 'src/converters/models/converterRegistration';
 import { ADDITIONAL_CONVERTERS } from 'src/converters/provider';
+import { VolumeConverterService } from '../volume-converter/volume-converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,16 @@ export class ConverterFactoryService {
   private serviceMap: Map<string, IConverterService> = new Map();
 
   constructor(
+    private injector: Injector,
     @Optional() @Inject(ADDITIONAL_CONVERTERS) private additionalConverters?: ConverterRegistration[]
   ) {
+    // Registrar categoria de volume por padrão
+    this.categories.push({
+      id: 'volume',
+      name: 'Volume',
+      icon: 'water_full'
+    });
+
     // Registrar conversores adicionais
     this.registerAdditionalConverters();
   }
@@ -57,9 +64,9 @@ export class ConverterFactoryService {
   }
 
   /**
-   * Retorna o serviço de conversão adequado para a categoria especificada
-   * @param categoryId ID da categoria
-   */
+  * Retorna o serviço de conversão adequado para a categoria especificada
+  * @param categoryId ID da categoria
+  */
   getConverterService(categoryId: string): IConverterService {
     // Verificar no mapa de serviços
     const service = this.serviceMap.get(categoryId);
@@ -69,6 +76,9 @@ export class ConverterFactoryService {
 
     // Fallback para o switch case
     switch (categoryId) {
+      case 'volume':
+        // Injetar o serviço dinamicamente
+        return this.injector.get(VolumeConverterService);
       // case 'tempo':
       //   return this.timeService;
       // case 'comprimento':
