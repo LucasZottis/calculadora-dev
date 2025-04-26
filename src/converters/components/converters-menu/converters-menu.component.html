@@ -1,11 +1,13 @@
 <!-- src/layout/menus/menu-conversores/menu-conversores.component.html -->
 <div class="menu-items">
-    <a *ngFor="let conversor of conversoresDisponiveis" class="menu-item" (click)="onAbrirMenuConversor(conversor.id)">
+    @for(conversor of conversoresDisponiveis; track conversor.nome) {
+    <a class="menu-item" (click)="onAbrirMenuConversor(conversor.id)">
         <span class="material-symbols-outlined">
             {{ conversor.icone }}
         </span>
         <span>{{ conversor.nome }}</span>
     </a>
+    }
 
     <hr>
 
