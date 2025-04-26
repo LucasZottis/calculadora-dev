@@ -36,7 +36,7 @@
         <!-- Display principal com seletores -->
         <div class="unified-display-row">
             <!-- Seletor de origem -->
-            <div class="unit-selector-mini" (click)="toggleSourceUnitSelector()">
+            <div class="unit-selector-mini source-unit-selector-mini" (click)="toggleSourceUnitSelector($event)">
                 <span>{{ sourceUnit?.symbol }}</span>
                 @if (!showSourceUnitSelector) {
                 <span class="material-symbols-outlined dropdown-icon">
@@ -71,7 +71,7 @@
         <!-- Linha do valor de destino -->
         <div class="unified-display-row">
             <!-- Seletor de destino -->
-            <div class="unit-selector-mini" (click)="toggleTargetUnitSelector()">
+            <div class="unit-selector-mini target-unit-selector-mini" (click)="toggleTargetUnitSelector($event)">
                 <span>{{ targetUnit?.symbol }}</span>
                 @if (!showTargetUnitSelector) {
                 <span class="material-symbols-outlined dropdown-icon">

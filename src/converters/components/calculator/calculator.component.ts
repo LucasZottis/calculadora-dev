@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IConverterService } from 'src/converters/interfaces/IConverterService';
 import { CalculatorCategory } from 'src/converters/models/calculatorCategory';
@@ -15,7 +15,7 @@ import { VolumeConverterService } from 'src/converters/services/volume-converter
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.scss']
 })
-export class CalculatorComponent implements OnInit {
+export class CalculatorComponent implements OnInit, OnDestroy {
   @Input() selectedCategoryId: string = 'volume';
   @Input() selectedSourceUnitId: string = '';
   @Input() selectedTargetUnitId: string = '';
@@ -38,6 +38,7 @@ export class CalculatorComponent implements OnInit {
 
   // Serviço de conversão atual
   private currentService: IConverterService;
+  private documentClickListener: any;
 
   constructor(private converterFactory: ConverterFactoryService) {
     // Inicializamos com o serviço padrão, será atualizado no ngOnInit
@@ -79,6 +80,14 @@ export class CalculatorComponent implements OnInit {
 
     // Inicializar unidades, se necessário
     this.initializeUnits();
+
+    this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
+    document.addEventListener('click', this.documentClickListener);
+  }
+
+  ngOnDestroy(): void {
+    // Remover event listener quando o componente for destruído
+    document.removeEventListener('click', this.documentClickListener);
   }
 
   private updateConverterService(): void {
@@ -104,6 +113,36 @@ export class CalculatorComponent implements OnInit {
         this.selectedTargetUnitId = units.length > 1 ? units[1].id : units[0].id;
       }
     }
+  }
+
+  // Método para lidar com cliques no documento
+  private onDocumentClick(event: MouseEvent): void {
+    // Verificar se há algum dropdown aberto
+    if (!this.showSourceUnitSelector && !this.showTargetUnitSelector && !this.showCategorySelector) {
+      return;
+    }
+
+    // Verificar se o clique foi dentro de um elemento seletor ou dropdown
+    const target = event.target as HTMLElement;
+    const isClickInsideSourceSelector = this.isClickInsideElement(target, 'source-unit-selector-mini');
+    const isClickInsideTargetSelector = this.isClickInsideElement(target, 'target-unit-selector-mini');
+    const isClickInsideCategorySelector = this.isClickInsideElement(target, 'category-selector');
+    const isClickInsideDropdown = target.closest('.unit-dropdown') !== null ||
+      target.closest('.category-dropdown') !== null;
+
+    // Se não clicou em nenhum elemento relacionado a seletores ou dropdowns, fecha todos
+    if (!isClickInsideSourceSelector && !isClickInsideTargetSelector &&
+      !isClickInsideCategorySelector && !isClickInsideDropdown) {
+      this.showSourceUnitSelector = false;
+      this.showTargetUnitSelector = false;
+      this.showCategorySelector = false;
+    }
+  }
+
+  // Método auxiliar para verificar se o clique foi dentro de um elemento específico
+  private isClickInsideElement(element: HTMLElement, className: string): boolean {
+    return element.classList.contains(className) ||
+      element.closest(`.${className}`) !== null;
   }
 
   // Manipulação de eventos UI
@@ -137,27 +176,56 @@ export class CalculatorComponent implements OnInit {
     this.calculateConversion();
   }
 
-  toggleCategorySelector(): void {
-    this.showCategorySelector = !this.showCategorySelector;
-    if (this.showCategorySelector) {
-      this.showSourceUnitSelector = false;
-      this.showTargetUnitSelector = false;
-    }
-  }
+  // toggleCategorySelector(event?: MouseEvent): void {
+  //   if (event) {
+  //     event.stopPropagation();
+  //   }
 
-  toggleSourceUnitSelector(): void {
+  //   this.showCategorySelector = !this.showCategorySelector;
+  //   if (this.showCategorySelector) {
+  //     this.showSourceUnitSelector = false;
+  //     this.showTargetUnitSelector = false;
+  //   }
+  // }
+
+  toggleSourceUnitSelector(event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
     this.showSourceUnitSelector = !this.showSourceUnitSelector;
+
     if (this.showSourceUnitSelector) {
       this.showCategorySelector = false;
       this.showTargetUnitSelector = false;
+      // Posicionar o dropdown corretamente após renderização
+      setTimeout(() => this.positionDropdown('source'), 0);
     }
   }
 
-  toggleTargetUnitSelector(): void {
+  toggleTargetUnitSelector(event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
     this.showTargetUnitSelector = !this.showTargetUnitSelector;
     if (this.showTargetUnitSelector) {
       this.showCategorySelector = false;
       this.showSourceUnitSelector = false;
+      // Posicionar o dropdown corretamente após renderização
+      setTimeout(() => this.positionDropdown('target'), 0);
+    }
+  }
+
+  private positionDropdown(type: 'source' | 'target'): void {
+    const selectorId = type === 'source' ? 'sourceUnitSelector' : 'targetUnitSelector';
+    const dropdown = document.querySelector(`.unit-dropdown`);
+    const trigger = document.querySelector(`.${type === 'source' ? 'source' : 'target'}-unit-selector-mini`);
+
+    if (dropdown && trigger) {
+      const rect = trigger.getBoundingClientRect();
+      (dropdown as HTMLElement).style.top = `${rect.bottom}px`;
+      (dropdown as HTMLElement).style.left = `${rect.left}px`;
     }
   }
 
