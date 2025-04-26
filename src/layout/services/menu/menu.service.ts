@@ -1,33 +1,59 @@
 // src/services/menu/menu.service.ts
 import { Injectable } from '@angular/core';
-
-export interface MenuConversor {
-  id: string;
-  nome: string;
-  icone: string;
-  rotas: { nome: string, rota: string }[];
-}
+import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
+import { MenuConversor } from 'src/layout/models/menuConversor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
-  private conversoresDisponiveis: MenuConversor[] = [
-    {
+  private conversoresDisponiveis: MenuConversor[] = [];
+
+  constructor(private volumeConverterService: VolumeConverterService) {
+    // Inicializar conversores
+    this.inicializarConversores();
+  }
+
+  private inicializarConversores(): void {
+    // Gerar menu para conversor de volume
+    this.registrarConversorVolume();
+  }
+
+  private registrarConversorVolume(): void {
+    // Obter todas as unidades de volume
+    const unidades = this.volumeConverterService.getUnits();
+    const rotas: { nome: string, rota: string }[] = [];
+
+    // Gerar todas as combinações possíveis de conversão
+    for (const unidadeOrigem of unidades) {
+      for (const unidadeDestino of unidades) {
+        // Não incluir conversões para a mesma unidade
+        if (unidadeOrigem.id !== unidadeDestino.id) {
+          // Gerar URL amigável para a rota
+          const urlRota = this.volumeConverterService.generateConversionUrl(
+            unidadeOrigem.id,
+            unidadeDestino.id
+          );
+
+          // Adicionar à lista de rotas
+          rotas.push({
+            nome: `${unidadeOrigem.name} para ${unidadeDestino.name}`,
+            rota: `/conversores/volume/${urlRota}`
+          });
+        }
+      }
+    }
+
+    // Registrar o conversor de volume com todas as rotas
+    const conversorVolume: MenuConversor = {
       id: 'volume',
       nome: 'Conversor de Volume',
       icone: 'water_full',
-      rotas: [
-        { nome: 'Litros para Mililitros', rota: '/conversores/volume/litros-para-mililitros' },
-        { nome: 'Mililitros para Litros', rota: '/conversores/volume/mililitros-para-litros' },
-        { nome: 'Galão (EUA) para Litros', rota: '/conversores/volume/galao-eua-para-litros' },
-        { nome: 'Xícara (EUA) para Mililitros', rota: '/conversores/volume/xicara-eua-para-mililitros' },
-        { nome: 'Onça Fluída (EUA) para Mililitros', rota: '/conversores/volume/onca-fluida-eua-para-mililitros' },
-        { nome: 'Litros para Metro Cúbico', rota: '/conversores/volume/litros-para-metro-cubico' }
-      ]
-    }
-    // Aqui você pode adicionar mais conversores no futuro
-  ];
+      rotas: rotas
+    };
+
+    this.conversoresDisponiveis.push(conversorVolume);
+  }
 
   // Diretamente lendo o serviço
   getConversoresDisponiveis(): MenuConversor[] {
