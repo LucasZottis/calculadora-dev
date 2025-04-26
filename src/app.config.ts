@@ -1,9 +1,9 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { routes } from './app.routes';
 import { provideConverters } from 'src/converters/provider';
 import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [

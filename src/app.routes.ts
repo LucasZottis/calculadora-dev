@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ExamplePageComponent } from 'src/converters/pages/example-page/example-page.component';
 import { VolumeConverterPageComponent } from 'src/converters/pages/volume-converter-page/volume-converter-page.component';
 import { CnpjGeneratorPageComponent } from 'src/pages/generators/cnpj-generator-page/cnpj-generator-page.component';
 import { CpfGeneratorPageComponent } from 'src/pages/generators/cpf-generator-page/cpf-generator-page.component';
@@ -12,7 +11,6 @@ import { CpfValidatorPageComponent } from 'src/pages/validators/cpf-validator-pa
 export const routes: Routes = [
     { path: '', component: HomePageComponent },
     { path: 'conversores/conversor-tempo', component: TimeConverterPageComponent },
-    { path: 'conversores/exemplo-calculadora', component: ExamplePageComponent },
 
     // Novas rotas para o conversor de volume
     { path: 'conversores/volume', component: VolumeConverterPageComponent },
