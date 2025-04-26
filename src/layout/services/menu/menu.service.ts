@@ -48,7 +48,7 @@ export class MenuService {
     const conversorVolume: MenuConversor = {
       id: 'volume',
       nome: 'Conversor de Volume',
-      icone: 'water_full',
+      icone: 'deployed_code',
       rotas: rotas
     };
 
