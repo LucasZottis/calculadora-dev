@@ -7,6 +7,7 @@ import { CalculatorComponent } from 'src/converters/components/calculator/calcul
 import { CalculatorResult } from 'src/converters/models/calculatorResult';
 import { VolumeConverterService } from 'src/converters/services/volume-converter/volume-converter.service';
 import { PageBase } from 'src/pages/pageBase';
+import { CalculatorUnit } from 'src/converters/models/calculatorUnit';
 
 @Component({
   selector: 'volume-converter-page',
@@ -138,21 +139,41 @@ export class VolumeConverterPageComponent extends PageBase implements OnInit {
 
     if (isNaN(valorOrigemNum) || isNaN(valorDestinoNum)) return;
 
+    // Obtém a unidade base do conversor atual
+    const unidadeBase = this.obterUnidadeBase();
+    if (!unidadeBase) return;
+
     // Gera a descrição da fórmula
     this.formulaDescricao = `Para converter de ${unidadeOrigem.name} (${unidadeOrigem.symbol}) para ${unidadeDestino.name} (${unidadeDestino.symbol}):`;
 
-    // Gera o cálculo detalhado
+    // Gera o cálculo detalhado e formatado
     if (unidadeOrigem.conversionFactor === unidadeDestino.conversionFactor) {
       this.formulaCalculo = `${this.valorOrigem} ${unidadeOrigem.symbol} = ${this.valorDestino} ${unidadeDestino.symbol}`;
     } else {
-      // Versão detalhada da fórmula
+      // Versão detalhada da fórmula com melhor formatação e quebra de linhas
       const fatorOrigem = unidadeOrigem.conversionFactor || 1;
       const fatorDestino = unidadeDestino.conversionFactor || 1;
+      const valorBaseCalc = valorOrigemNum * fatorOrigem;
+      const valorBaseStr = valorBaseCalc.toFixed(4);
 
-      this.formulaCalculo = `1. Converter ${this.valorOrigem} ${unidadeOrigem.symbol} para mililitros (unidade base): ${this.valorOrigem} × ${fatorOrigem} = ${(valorOrigemNum * fatorOrigem).toFixed(4)} ml 2. Converter de mililitros para ${unidadeDestino.name}: ${(valorOrigemNum * fatorOrigem).toFixed(4)} ÷ ${fatorDestino} = ${this.valorDestino} ${unidadeDestino.symbol}`;
+      this.formulaCalculo =
+        `1. Converter ${this.valorOrigem} ${unidadeOrigem.symbol} para ${unidadeBase.name} (unidade base):
+   ${this.valorOrigem} × ${fatorOrigem} = ${valorBaseStr} ${unidadeBase.symbol}
+
+2. Converter ${valorBaseStr} ${unidadeBase.symbol} para ${unidadeDestino.name}:
+   ${valorBaseStr} ÷ ${fatorDestino} = ${this.valorDestino} ${unidadeDestino.symbol}`;
     }
 
     this.mostrarFormula = true;
+  }
+
+  /**
+    * Obtém a unidade de referência para a explicação da fórmula
+    * Usa a unidade de origem selecionada pelo usuário
+    */
+  private obterUnidadeBase(): CalculatorUnit | null {
+    // Usa a unidade origem selecionada como referência para explicar a conversão direta
+    return this.volumeService.getUnitById(this.unidadeOrigemSelecionada) ?? null;
   }
 
   // Método para gerar conversões populares sugeridas
