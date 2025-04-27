@@ -8,25 +8,6 @@ import { PrivacyPolicyPageComponent } from './shared/pages/privacy-police-page/p
 import { MainLayoutComponent } from './shared/pages/main-layout/main-layout.component';
 
 export const routes: Routes = [
-    // { path: '', component: HomePageComponent },
-    // { path: 'conversores/conversor-tempo', component: TimeConverterPageComponent },
-
-    // // Novas rotas para o conversor de volume
-    // // { path: 'conversores/volume', component: VolumeConverterPageComponent },
-    // { path: 'conversores/volume/:conversion', component: VolumeConverterPageComponent },
-
-    // // Rotas para o conversor de peso e massa
-    // // { path: 'conversores/peso-massa', component: WeightMassConverterPageComponent },
-    // { path: 'conversores/peso-massa/:conversion', component: WeightMassConverterPageComponent },
-
-    // { path: 'validadores/cpf', component: CpfValidatorPageComponent },
-    // { path: 'validadores/cnpj', component: CnpjValidatorPageComponent },
-
-    // { path: 'geradores/cpf', component: CpfGeneratorPageComponent },
-    // { path: 'geradores/cnpj', component: CnpjGeneratorPageComponent },
-
-    // { path: 'politica-de-privacidade', component: PrivacyPolicyPageComponent },
-
     {
         path: '',
         component: MainLayoutComponent,

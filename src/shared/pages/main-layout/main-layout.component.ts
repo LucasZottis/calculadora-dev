@@ -7,6 +7,7 @@ import { filter } from 'rxjs';
 import { WeightMassConverterMenuComponent } from 'src/converters/weight-and-mass/components/weight-mass-converter-menu/weight-mass-converter-menu.component';
 import { MainMenuComponent } from 'src/shared/components/main-menu/main-menu.component';
 import { ConvertersMenuComponent } from 'src/converters/shared/components/converters-menu/converters-menu.component';
+import { FooterComponent } from 'src/shared/components/footer/footer.component';
 
 @Component({
   selector: 'main-layout',
@@ -15,11 +16,9 @@ import { ConvertersMenuComponent } from 'src/converters/shared/components/conver
     RouterModule,
     RouterOutlet,
     CommonModule,
-    CookieConsentComponent,
     MainMenuComponent,
     ConvertersMenuComponent,
-    VolumeConverterMenuComponent,
-    WeightMassConverterMenuComponent
+    FooterComponent
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'

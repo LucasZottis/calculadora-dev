@@ -31,6 +31,7 @@
     /* Sobreescritos */
     --bs-btn-hover-bg: var(--primary-color) !important;
     --bs-primary-rgb: var(--primary-color) !important;
+    --bs-body-bg: var(--primary-background-color);
 }
 
 * {
@@ -53,8 +54,9 @@ body {
 }
 
 a {
-    text-decoration: none !important;
     color: inherit !important;
+    cursor: pointer;
+    text-decoration: none !important;
 }
 
 hr {

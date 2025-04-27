@@ -1,5 +1,14 @@
 <!-- src/converters/components/volume-converter-menu/volume-converter-menu.component.html -->
 <div class="menu-items">
+    <!-- <a class="menu-item menu-back" (click)="onVoltarParaConversores()">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+        <span>Voltar para Conversores</span>
+    </a>
+
+    <hr> -->
+
     <a class="menu-item" routerLink="/conversores/volume/mililitros-para-litros" routerLinkActive="active"
         (click)="onToggleSidebar()">
         <span class="material-symbols-outlined">
@@ -172,21 +181,5 @@
             swap_horiz
         </span>
         <span>Colher de Chá (RU) para Mililitros</span>
-    </a>
-
-    <hr>
-
-    <a class="menu-item menu-back" (click)="onVoltarParaConversores()">
-        <span class="material-symbols-outlined">
-            arrow_back
-        </span>
-        <span>Voltar para Conversores</span>
-    </a>
-
-    <a class="menu-item menu-home" (click)="onVoltarParaMenuPrincipal()">
-        <span class="material-symbols-outlined">
-            home
-        </span>
-        <span>Menu Principal</span>
     </a>
 </div>

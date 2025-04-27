@@ -15,7 +15,7 @@ export class MainMenuComponent {
 
   onAbrirMenuConversores(): void {
     this.abrirMenuConversores.emit();
-    this.toggleSidebar.emit();
+    // this.toggleSidebar.emit();
   }
 
   onToggleSidebar(): void {

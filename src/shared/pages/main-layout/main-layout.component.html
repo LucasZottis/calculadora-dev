@@ -31,30 +31,14 @@
                 (abrirMenuConversor)="abrirMenuConversor($event)" (toggleSidebar)="toggleSidebar()">
             </converters-menu>
             }
-
-            <!--@if (menuAtual === 'volume') {
-            <volume-converter-menu [tipoConversor]="conversorSelecionado"
-                (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
-                (toggleSidebar)="toggleSidebar()">
-            </volume-converter-menu>
-            }
-
-            @if (menuAtual === 'peso-massa') {
-            <weight-mass-converter-menu [tipoConversor]="conversorSelecionado"
-                (voltarParaConversores)="abrirMenuConversores()" (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
-                (toggleSidebar)="toggleSidebar()">
-            </weight-mass-converter-menu>
-            } -->
-
         </nav>
 
         <main class="main-content">
             <div class="router-outlet-container">
                 <router-outlet></router-outlet>
             </div>
+
+            <footer-layout></footer-layout>
         </main>
     </div>
-
-    <!-- Componente de consentimento de cookies -->
-    <cookie-consent></cookie-consent>
 </div>

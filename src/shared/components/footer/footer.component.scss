@@ -1,0 +1,47 @@
+/* Estilos para o footer */
+.site-footer {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--second-background-color, #181b1e);
+    border-top: 1px solid var(--border-color-base, #2c5a2c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    a {
+        color: #a5d6a7;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #4caf50;
+            text-decoration: underline;
+        }
+    }
+
+    .separator {
+        color: var(--border-color-base, #2c5a2c);
+    }
+}
+
+.footer-copyright {
+    color: #a5d6a7;
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
