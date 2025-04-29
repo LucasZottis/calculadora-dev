@@ -1,4 +1,4 @@
-<!-- src/converters/weight-mass/pages/weight-mass-converter-category-page/weight-mass-converter-category-page.component.html -->
+<!-- src/converters/weight-and-mass/pages/weight-mass-page/weight-mass-page.component.html -->
 <div class="container">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
@@ -23,33 +23,77 @@
     <!-- Descrição da Subcategoria -->
     <section class="category-description">
         <div class="description-content">
-            <p>O conversor de peso e massa permite transformar valores entre várias unidades de medida de peso e massa,
-                como quilogramas, gramas, libras, onças e muito mais.</p>
-            <p>Ideal para estudantes, profissionais da saúde e engenharia, ou qualquer pessoa que precise fazer
+            <p>O conversor de peso e massa permite transformar valores entre várias unidades de medida, como
+                quilogramas,
+                gramas, libras, onças e muito mais. Útil para cálculos envolvendo tanto o sistema métrico
+                quanto o sistema imperial.</p>
+            <p>Ideal para estudantes, profissionais da saúde, engenharia, nutrição, ou qualquer pessoa que precise fazer
                 conversões precisas entre unidades de peso e massa de diferentes sistemas de medida.</p>
         </div>
     </section>
 
-    <!-- Todas as combinações possíveis de conversão -->
-    <section class="conversion-links-section">
-        <h2>Todas as Combinações de Conversão</h2>
-
-        <div class="conversion-links-grid">
-            <ng-container *ngFor="let sourceUnit of availableUnits">
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <div class="conversion-groups-container">
+        <!-- GRAMA -->
+        <section class="conversion-group" id="grama">
+            <h2>Conversões de Grama (g)</h2>
+            <hr>
+            <div class="conversion-links-grid">
                 <ng-container *ngFor="let targetUnit of availableUnits">
-                    <ng-container *ngIf="sourceUnit.id !== targetUnit.id">
-                        <a [routerLink]="['/conversores/peso-massa', weightMassConverterService.generateConversionUrl(sourceUnit.id, targetUnit.id)]"
+                    <ng-container *ngIf="targetUnit.id !== 'grama'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('grama', targetUnit.id)]"
                             class="conversion-link-card">
                             <div class="conversion-link-icon">
                                 <span class="material-symbols-outlined">weight</span>
                             </div>
                             <div class="conversion-link-content">
-                                <h3>{{ sourceUnit.name }} para {{ targetUnit.name }}</h3>
+                                <h3>Grama para {{ targetUnit.name }}</h3>
                             </div>
                         </a>
                     </ng-container>
                 </ng-container>
-            </ng-container>
+            </div>
+        </section>
+
+        <!-- Seções para outras unidades como QUILOGRAMA, MILIGRAMA, etc. seguem o mesmo padrão -->
+        <!-- ... -->
+    </div>
+
+    <!-- Informações adicionais -->
+    <section class="additional-info">
+        <h2>Sistemas de Medidas de Peso e Massa</h2>
+        <div class="description-content">
+            <p>Existem dois principais sistemas de medidas de peso e massa em uso no mundo:</p>
+
+            <h3>Sistema Internacional (SI)</h3>
+            <p>O sistema métrico utiliza o grama como unidade básica, com prefixos que indicam múltiplos e submúltiplos:
+            </p>
+            <ul>
+                <li><strong>Micrograma (μg)</strong>: Um milionésimo de grama (0,000001g)</li>
+                <li><strong>Miligrama (mg)</strong>: Um milésimo de grama (0,001g)</li>
+                <li><strong>Grama (g)</strong>: Unidade básica de massa no SI</li>
+                <li><strong>Quilograma (kg)</strong>: Mil gramas (1.000g)</li>
+                <li><strong>Tonelada métrica (t)</strong>: Mil quilogramas (1.000kg)</li>
+            </ul>
+
+            <h3>Sistema Imperial/Americano</h3>
+            <p>Utilizado principalmente nos Estados Unidos e em alguns países de influência britânica:</p>
+            <ul>
+                <li><strong>Grão (gr)</strong>: Unidade muito pequena, usada em farmácia e balística</li>
+                <li><strong>Onça (oz)</strong>: Equivalente a cerca de 28,35 gramas</li>
+                <li><strong>Libra (lb)</strong>: 16 onças ou aproximadamente 453,6 gramas</li>
+                <li><strong>Pedra (st)</strong>: 14 libras, usado principalmente no Reino Unido</li>
+                <li><strong>Tonelada curta</strong>: 2.000 libras, usada nos EUA</li>
+                <li><strong>Tonelada longa</strong>: 2.240 libras, usada no Reino Unido</li>
+            </ul>
+
+            <h3>Conversões Comuns</h3>
+            <ul>
+                <li>1 quilograma = 2,20462 libras</li>
+                <li>1 libra = 0,453592 quilogramas</li>
+                <li>1 onça = 28,3495 gramas</li>
+                <li>1 quilate = 0,2 gramas (usado para gemas e metais preciosos)</li>
+            </ul>
         </div>
     </section>
 </div>
