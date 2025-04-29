@@ -1,30 +1,28 @@
 <!-- src/shared/components/header/header.component.html -->
 <header class="site-header">
-    <div class="container">
-        <div class="header-main">
-            <div class="header-logo">
-                <a routerLink="/">
-                    <img src="/assets/images/header.svg" alt="Calculadora Dev">
-                </a>
-            </div>
-
-            <div class="search-container">
-                <form (submit)="onSearch($event)">
-                    <div class="search-input-wrapper">
-                        <span class="material-symbols-outlined search-icon">search</span>
-                        <input type="text" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Pesquisar..."
-                            class="search-input" aria-label="Pesquisar calculadoras">
-                    </div>
-                </form>
-            </div>
+    <div class="header-main">
+        <div class="header-logo">
+            <a routerLink="/">
+                <img src="/assets/images/header.svg" alt="Calculadora Dev">
+            </a>
         </div>
 
-        <nav class="main-nav">
-            <ul class="nav-categories">
-                <li><a routerLink="/conversores" routerLinkActive="active">Conversores</a></li>
-                <li><a routerLink="/validadores" routerLinkActive="active">Validadores</a></li>
-                <li><a routerLink="/geradores" routerLinkActive="active">Geradores</a></li>
-            </ul>
-        </nav>
+        <div class="search-container">
+            <form (submit)="onSearch($event)">
+                <div class="search-input-wrapper">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" [(ngModel)]="searchQuery" name="searchQuery" placeholder="Pesquisar..."
+                        class="search-input" aria-label="Pesquisar calculadoras">
+                </div>
+            </form>
+        </div>
     </div>
+
+    <nav class="main-nav">
+        <ul class="nav-categories">
+            <li><a routerLink="/conversores" routerLinkActive="active">Conversores</a></li>
+            <li><a routerLink="/validadores" routerLinkActive="active">Validadores</a></li>
+            <li><a routerLink="/geradores" routerLinkActive="active">Geradores</a></li>
+        </ul>
+    </nav>
 </header>
