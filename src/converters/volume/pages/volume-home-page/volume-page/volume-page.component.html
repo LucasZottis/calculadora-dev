@@ -1,4 +1,4 @@
-<!-- src/converters/volume/pages/volume-converter-category-page/volume-converter-category-page.component.html -->
+<!-- src/converters/volume/pages/volume-home-page/volume-page/volume-page.component.html -->
 <div class="container">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
@@ -30,26 +30,313 @@
         </div>
     </section>
 
-    <!-- Todas as combinações possíveis de conversão -->
-    <section class="conversion-links-section">
-        <h2>Todas as Combinações de Conversão</h2>
+    <!-- Instruções de uso -->
+    <section class="usage-instructions">
+        <h2>Como usar este conversor</h2>
+        <div class="description-content">
+            <p>Selecione abaixo a unidade de origem e a unidade de destino desejada para acessar um conversor específico, ou use o conversor principal para alternar entre qualquer unidade.</p>
+            <div class="action-buttons">
+                <a routerLink="/conversores/volume" class="btn btn-primary">
+                    <span class="material-symbols-outlined">calculate</span>
+                    Usar Conversor Principal
+                </a>
+            </div>
+        </div>
+    </section>
 
-        <div class="conversion-links-grid">
-            <ng-container *ngFor="let sourceUnit of availableUnits">
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <div class="conversion-groups-container">
+        <!-- MILILITROS -->
+        <section class="conversion-group" id="mililitros">
+            <h2>Conversões de Mililitros (ml)</h2>
+            <hr>
+            <div class="conversion-links-grid">
                 <ng-container *ngFor="let targetUnit of availableUnits">
-                    <ng-container *ngIf="sourceUnit.id !== targetUnit.id">
-                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl(sourceUnit.id, targetUnit.id)]"
+                    <ng-container *ngIf="targetUnit.id !== 'mililitros'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('mililitros', targetUnit.id)]"
                             class="conversion-link-card">
                             <div class="conversion-link-icon">
                                 <span class="material-symbols-outlined">deployed_code</span>
                             </div>
                             <div class="conversion-link-content">
-                                <h3>{{ sourceUnit.name }} para {{ targetUnit.name }}</h3>
+                                <h3>Mililitros para {{ targetUnit.name }}</h3>
                             </div>
                         </a>
                     </ng-container>
                 </ng-container>
-            </ng-container>
+            </div>
+        </section>
+
+        <!-- LITROS -->
+        <section class="conversion-group" id="litros">
+            <h2>Conversões de Litros (l)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'litros'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('litros', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Litros para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- METROS CÚBICOS -->
+        <section class="conversion-group" id="metro-cubico">
+            <h2>Conversões de Metros Cúbicos (m³)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'metro-cubico'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('metro-cubico', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Metros Cúbicos para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- DECÍMETRO CÚBICO -->
+        <section class="conversion-group" id="decimetro-cubico">
+            <h2>Conversões de Decímetros Cúbicos (dm³)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'decimetro-cubico'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('decimetro-cubico', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Decímetros Cúbicos para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- CENTÍMETRO CÚBICO -->
+        <section class="conversion-group" id="centimetro-cubico">
+            <h2>Conversões de Centímetros Cúbicos (cm³)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'centimetro-cubico'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('centimetro-cubico', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Centímetros Cúbicos para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- DECILITRO -->
+        <section class="conversion-group" id="decilitro">
+            <h2>Conversões de Decilitros (dl)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'decilitro'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('decilitro', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Decilitros para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- CENTILITRO -->
+        <section class="conversion-group" id="centilitro">
+            <h2>Conversões de Centilitros (cl)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'centilitro'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('centilitro', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Centilitros para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- HECTOLITRO -->
+        <section class="conversion-group" id="hectolitro">
+            <h2>Conversões de Hectolitros (hl)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'hectolitro'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('hectolitro', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Hectolitros para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- GALÃO (EUA) -->
+        <section class="conversion-group" id="galao-eua">
+            <h2>Conversões de Galões (EUA)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'galao-eua'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('galao-eua', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Galões (EUA) para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- ONÇA FLUIDA (EUA) -->
+        <section class="conversion-group" id="onca-fluida-eua">
+            <h2>Conversões de Onças Fluidas (EUA)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'onca-fluida-eua'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('onca-fluida-eua', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Onças Fluidas (EUA) para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- ONÇA FLUIDA (REINO UNIDO) -->
+        <section class="conversion-group" id="onca-fluida-ru">
+            <h2>Conversões de Onças Fluidas (Reino Unido)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'onca-fluida-ru'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('onca-fluida-ru', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Onças Fluidas (Reino Unido) para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- XÍCARA (EUA) -->
+        <section class="conversion-group" id="xicara-eua">
+            <h2>Conversões de Xícaras (EUA)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'xicara-eua'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('xicara-eua', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Xícaras (EUA) para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- COLHER DE CHÁ (REINO UNIDO) -->
+        <section class="conversion-group" id="colher-cha-ru">
+            <h2>Conversões de Colheres de Chá (Reino Unido)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'colher-cha-ru'">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl('colher-cha-ru', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Colheres de Chá (Reino Unido) para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+    </div>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            <a href="#mililitros" class="unit-chip">Mililitros (ml)</a>
+            <a href="#litros" class="unit-chip">Litros (l)</a>
+            <a href="#metro-cubico" class="unit-chip">Metros Cúbicos (m³)</a>
+            <a href="#decimetro-cubico" class="unit-chip">Decímetros Cúbicos (dm³)</a>
+            <a href="#centimetro-cubico" class="unit-chip">Centímetros Cúbicos (cm³)</a>
+            <a href="#decilitro" class="unit-chip">Decilitros (dl)</a>
+            <a href="#centilitro" class="unit-chip">Centilitros (cl)</a>
+            <a href="#hectolitro" class="unit-chip">Hectolitros (hl)</a>
+            <a href="#galao-eua" class="unit-chip">Galões (EUA)</a>
+            <a href="#onca-fluida-eua" class="unit-chip">Onças Fluidas (EUA)</a>
+            <a href="#onca-fluida-ru" class="unit-chip">Onças Fluidas (Reino Unido)</a>
+            <a href="#xicara-eua" class="unit-chip">Xícaras (EUA)</a>
+            <a href="#colher-cha-ru" class="unit-chip">Colheres de Chá (Reino Unido)</a>
         </div>
     </section>
 </div>
