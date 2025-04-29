@@ -15,14 +15,9 @@ export const routes: Routes = [
         children: [
             { path: '', component: HomePageComponent },
 
-            {
-                path: 'validadores',
-                component: ValidatorsPageComponent,
-                children: [
-                    { path: 'cpf', component: CpfValidatorPageComponent },
-                    { path: 'cnpj', component: CnpjValidatorPageComponent },
-                ]
-            },
+            { path: 'validadores', component: ValidatorsPageComponent, },
+            { path: 'validadores/cpf', component: CpfValidatorPageComponent, },
+            { path: 'validadores/cnpj', component: CnpjValidatorPageComponent, },
 
             // Rotas para geradores
             { path: 'geradores/cpf', component: CpfGeneratorPageComponent },
