@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VolumeHomePageComponent } from './volume-home-page.component';
+import { ValidatorsPageComponent } from './validators-page.component';
 
-describe('VolumeHomePageComponent', () => {
-  let component: VolumeHomePageComponent;
-  let fixture: ComponentFixture<VolumeHomePageComponent>;
+describe('ValidatorsPageComponent', () => {
+  let component: ValidatorsPageComponent;
+  let fixture: ComponentFixture<ValidatorsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VolumeHomePageComponent]
+      imports: [ValidatorsPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(VolumeHomePageComponent);
+    fixture = TestBed.createComponent(ValidatorsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

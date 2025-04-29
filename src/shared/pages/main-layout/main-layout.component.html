@@ -1,44 +1,16 @@
-<!-- src/layout/main-layout/main-layout.component.html -->
-<div class="app-container">
-    <header>
-        <div class="header-container">
-            <button class="header-menu-button" (click)="toggleSidebar()">
-                <span class="material-symbols-outlined">
-                    menu
-                </span>
-            </button>
-            <a class="header-image" href="./">
-                <img src="/assets/images/header.svg" alt="Calculadora Dev">
-            </a>
-        </div>
-    </header>
-    <div class="main-container">
-        <nav [class]="sidebarStyle">
-            <a class="sidebar-header" href="./">
-                <img src="/assets/images/header.svg" alt="Calculadora Dev">
-            </a>
+<!-- src/shared/pages/main-layout/main-layout.component.html -->
+<div class="page-wrapper">
+    <!-- Header global -->
+    <app-header></app-header>
 
-            <hr class="sidebar-header-divisor">
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <router-outlet></router-outlet>
+    </main>
 
-            <!-- Menu Principal -->
-            @if (menuAtual === 'principal') {
-            <main-menu (abrirMenuConversores)="abrirMenuConversores()" (toggleSidebar)="toggleSidebar()">
-            </main-menu>
-            }
-
-            @if (menuAtual === 'conversores') {
-            <converters-menu (voltarParaMenuPrincipal)="abrirMenuPrincipal()"
-                (abrirMenuConversor)="abrirMenuConversor($event)" (toggleSidebar)="toggleSidebar()">
-            </converters-menu>
-            }
-        </nav>
-
-        <main class="main-content">
-            <div class="router-outlet-container">
-                <router-outlet></router-outlet>
-            </div>
-
-            <footer-layout></footer-layout>
-        </main>
-    </div>
+    <!-- Rodapé global -->
+    <footer-layout></footer-layout>
 </div>
+
+<!-- Consentimento de cookies -->
+<cookie-consent></cookie-consent>

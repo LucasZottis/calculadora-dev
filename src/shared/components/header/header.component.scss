@@ -1,0 +1,127 @@
+/* src/shared/components/header/header.component.scss */
+.site-header {
+    background-color: var(--second-background-color);
+    border-bottom: 1px solid var(--border-color-base);
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-logo {
+    flex: 0 0 200px;
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.search-container {
+    flex: 1;
+    max-width: 600px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a5d6a7;
+    opacity: 0.7;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border-radius: 25px;
+    border: 1px solid var(--border-color-base);
+    background-color: var(--primary-background-color);
+    color: #a5d6a7;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: none;
+        border-color: var(--bs-primary);
+        box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+    }
+
+    &::placeholder {
+        color: #a5d6a7;
+        opacity: 0.5;
+    }
+}
+
+.main-nav {
+    width: 100%;
+}
+
+.nav-categories {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    li {
+        margin: 0;
+
+        a {
+            color: #a5d6a7;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: rgba(76, 175, 80, 0.1);
+                color: #4caf50;
+            }
+
+            &.active {
+                color: #ffffff;
+                background-color: var(--bs-primary);
+            }
+        }
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-logo {
+        flex: none;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .search-container {
+        max-width: 100%;
+    }
+}

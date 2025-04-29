@@ -1,111 +1,78 @@
-<h1 class="text-center">Calculadora Dev</h1>
-
-<h4 class="text-center">Ferramentas para devs usar no seu dia a dia</h4>
-
-<div class="row justify-content-center mx-auto g-3">
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title fs-5">Conversor de tempo</h1>
-                <p class="card-text text-truncate">
-                    Faça conversões de horas para minutos, segundos e número decimal.
-                </p>
-                <a [routerLink]="['./conversores/conversor-tempo']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
+<!-- src/shared/pages/home-page/home-page.component.html -->
+<div class="container">
+    <!-- Hero Banner -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Calculadoras e Validadores para Desenvolvedores</h1>
+                <p class="hero-subtitle">Ferramentas gratuitas para facilitar seu dia a dia no desenvolvimento</p>
+            </div>
+            <div class="hero-image-placeholder">
+                <!-- Placeholder para imagem futura -->
+                <div class="placeholder-wrapper">
+                    <span class="material-symbols-outlined placeholder-icon">code</span>
+                    <p>Imagem em destaque - breve</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title fs-5">Conversor de Volume</h1>
-                <p class="card-text text-truncate">
-                    Converta entre unidades de volume como litros, mililitros, galões e mais.
-                </p>
-                <a [routerLink]="['./conversores/volume']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Card de categoria simplificado -->
+    <section class="categories-section">
+        <div class="category-cards">
+            <a routerLink="/validadores" class="category-card">
+                <span class="material-symbols-outlined">fact_check</span>
+                <h3>Validadores</h3>
+            </a>
 
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title fs-5">Conversor de Peso e Massa</h1>
-                <p class="card-text text-truncate">
-                    Converta entre unidades de peso como gramas, quilogramas, libras, onças e mais.
-                </p>
-                <a [routerLink]="['./conversores/peso-massa']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
+            <!-- Mais categorias podem ser adicionadas aqui futuramente -->
         </div>
-    </div> -->
+    </section>
 
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title fs-5">
-                    Validador de CPF
-                </h5>
-                <p class="card-text">
-                    Verifique se um CPF é válido.
-                </p>
-                <a [routerLink]="['./validadores/cpf']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
+    <!-- Sobre o site -->
+    <section class="about-section">
+        <div class="section-title">
+            <h2>Sobre o Calculadora Dev</h2>
         </div>
-    </div>
+        <div class="about-content">
+            <p>O Calculadora Dev é uma plataforma de ferramentas online desenvolvida para ajudar programadores e
+                profissionais de TI a validar dados, realizar conversões e executar cálculos específicos da área de
+                desenvolvimento.</p>
+            <p>Nossas ferramentas são projetadas para serem rápidas, precisas e fáceis de usar, economizando seu tempo e
+                evitando erros comuns.</p>
+            <p>Escolha uma categoria abaixo para explorar nossas calculadoras e validadores:</p>
+        </div>
+    </section>
 
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title fs-5">
-                    Validador de CNPJ
-                </h5>
-                <p class="card-text">
-                    Verifique se um CNPJ é válido.
-                </p>
-                <a [routerLink]="['./validadores/cnpj']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
+    <!-- Ferramentas mais populares -->
+    <section class="popular-tools-section">
+        <div class="section-title">
+            <h2>Ferramentas Populares</h2>
         </div>
-    </div>
+        <div class="tools-grid">
+            <a routerLink="/validadores/cpf" class="tool-card">
+                <div class="tool-icon">
+                    <span class="material-symbols-outlined">person_check</span>
+                </div>
+                <h3>Validador de CPF</h3>
+                <p>Verifique se um número de CPF é válido</p>
+            </a>
 
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title fs-5">
-                    Gerador de CPF
-                </h5>
-                <p class="card-text">
-                    Gerador de número de CPF.
-                </p>
-                <a [routerLink]="['./geradores/cpf']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
-        </div>
-    </div>
+            <a routerLink="/validadores/cnpj" class="tool-card">
+                <div class="tool-icon">
+                    <span class="material-symbols-outlined">fact_check</span>
+                </div>
+                <h3>Validador de CNPJ</h3>
+                <p>Verifique se um número de CNPJ é válido</p>
+            </a>
 
-    <div class="col-12 col-sm-12 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title fs-5">
-                    Gerador de CNPJ
-                </h5>
-                <p class="card-text">
-                    Gerador de número de CNPJ.
-                </p>
-                <a [routerLink]="['./geradores/cnpj']" class="btn btn-primary btn-sm">
-                    Acessar
-                </a>
-            </div>
+            <!-- <a routerLink="/conversores/tempo" class="tool-card">
+                <div class="tool-icon">
+                    <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <h3>Conversor de Tempo</h3>
+                <p>Converta horas para formato decimal</p>
+            </a> -->
         </div>
-    </div>
+    </section>
 </div>
