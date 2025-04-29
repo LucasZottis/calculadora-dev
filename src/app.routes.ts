@@ -6,23 +6,25 @@ import { CnpjValidatorPageComponent } from 'src/validators/cnpj/pages/cnpj-valid
 import { CpfValidatorPageComponent } from 'src/validators/cpf/pages/cpf-validator-page/cpf-validator-page.component';
 import { HomePageComponent } from './shared/pages/home-page/home-page.component';
 import { PrivacyPolicyPageComponent } from './shared/pages/privacy-police-page/privacy-policy-page.component';
-import { MainLayoutComponent } from './shared/pages/main-layout/main-layout.component';
 import { ValidatorsPageComponent } from './validators/shared/pages/validators-page/validators-page.component';
+import { GeneratorsPageComponent } from './generators/shared/pages/generatos-page/generators-page.component';
 
 export const routes: Routes = [
     {
         path: '',
         children: [
             { path: '', component: HomePageComponent },
+            { path: 'politica-de-privacidade', component: PrivacyPolicyPageComponent },
 
             { path: 'validadores', component: ValidatorsPageComponent, },
             { path: 'validadores/cpf', component: CpfValidatorPageComponent, },
             { path: 'validadores/cnpj', component: CnpjValidatorPageComponent, },
 
             // Rotas para geradores
+            { path: 'geradores', component: GeneratorsPageComponent },
             { path: 'geradores/cpf', component: CpfGeneratorPageComponent },
             { path: 'geradores/cnpj', component: CnpjGeneratorPageComponent },
-            { path: 'politica-de-privacidade', component: PrivacyPolicyPageComponent },
+
         ]
     },
     // {
