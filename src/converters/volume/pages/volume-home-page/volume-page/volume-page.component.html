@@ -1,0 +1,55 @@
+<!-- src/converters/volume/pages/volume-converter-category-page/volume-converter-category-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Volume</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">deployed_code</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Volume</h1>
+            <p>Faça conversões precisas entre diferentes unidades de volume e capacidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de volume permite transformar valores entre várias unidades de medida de capacidade e volume,
+                como litros, mililitros, metros cúbicos, galões e muito mais.</p>
+            <p>Ideal para estudantes, profissionais de química e engenharia, ou qualquer pessoa que precise fazer
+                conversões precisas entre unidades de volume de diferentes sistemas de medida.</p>
+        </div>
+    </section>
+
+    <!-- Todas as combinações possíveis de conversão -->
+    <section class="conversion-links-section">
+        <h2>Todas as Combinações de Conversão</h2>
+
+        <div class="conversion-links-grid">
+            <ng-container *ngFor="let sourceUnit of availableUnits">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="sourceUnit.id !== targetUnit.id">
+                        <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl(sourceUnit.id, targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">deployed_code</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>{{ sourceUnit.name }} para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </section>
+</div>

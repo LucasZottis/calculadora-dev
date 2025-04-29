@@ -1,1 +1,91 @@
-<p>converters-page works!</p>
+<!-- src/converters/pages/converters-category-page/converters-category-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><span>Conversores</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Categoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">sync_alt</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversores</h1>
+            <p>Ferramentas para converter entre diferentes unidades de medida com precisão e facilidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Categoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>Nossos conversores permitem transformar valores entre diferentes unidades de medida de forma rápida e
+                precisa. Ideal para estudantes, profissionais e qualquer pessoa que precise realizar conversões entre
+                sistemas de medida.</p>
+            <p>Cada conversor possui uma explicação detalhada sobre as fórmulas utilizadas e oferece resultados
+                calculados com alta precisão.</p>
+        </div>
+    </section>
+
+    <!-- Lista de Subcategorias de Conversores -->
+    <section class="subcategories-section">
+        <h2>Categorias de Conversores</h2>
+
+        <div class="subcategories-grid">
+            <a *ngFor="let category of converterCategories" [routerLink]="getCategoryRoute(category.id)"
+                class="subcategory-card">
+                <div class="subcategory-icon">
+                    <span class="material-symbols-outlined">{{ category.icon }}</span>
+                </div>
+                <div class="subcategory-content">
+                    <h3>{{ category.name }}</h3>
+                </div>
+                <div class="subcategory-action">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="benefits-section">
+        <h2>Por que usar nossos conversores?</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">calculate</span>
+                </div>
+                <h3>Precisão</h3>
+                <p>Algoritmos de conversão precisos que seguem padrões internacionais de medida</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">bolt</span>
+                </div>
+                <h3>Rapidez</h3>
+                <p>Conversão instantânea entre qualquer unidade de medida da mesma categoria</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <h3>Educativo</h3>
+                <p>Explicações detalhadas sobre as fórmulas e os fatores de conversão utilizados</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">devices</span>
+                </div>
+                <h3>Multiplataforma</h3>
+                <p>Funciona em qualquer dispositivo com acesso à internet, sem necessidade de instalação</p>
+            </div>
+        </div>
+    </section>
+</div>

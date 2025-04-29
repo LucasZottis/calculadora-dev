@@ -4,6 +4,7 @@ import { CalculatorCategory } from 'src/converters/shared/models/calculatorCateg
 import { ConverterRegistration } from 'src/converters/shared/models/converterRegistration';
 import { VolumeConverterService } from '../../../volume/services/volume-converter/volume-converter.service';
 import { ADDITIONAL_CONVERTERS } from '../../provider';
+import { WeightMassConverterService } from 'src/converters/weight-and-mass/services/weight-mass/weight-mass-converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,11 @@ export class ConverterFactoryService {
     @Optional() @Inject(ADDITIONAL_CONVERTERS) private additionalConverters?: ConverterRegistration[]
   ) {
     // Registrar categoria de volume por padrão
-    this.categories.push({
-      id: 'volume',
-      name: 'Volume',
-      icon: 'water_full'
-    });
+    // this.categories.push({
+    //   id: 'volume',
+    //   name: 'Volume',
+    //   icon: 'deployed_code'
+    // });
 
     // Registrar conversores adicionais
     this.registerAdditionalConverters();
@@ -79,14 +80,8 @@ export class ConverterFactoryService {
       case 'volume':
         // Injetar o serviço dinamicamente
         return this.injector.get(VolumeConverterService);
-      // case 'tempo':
-      //   return this.timeService;
-      // case 'comprimento':
-      //   return this.lengthService;
-      // case 'peso':
-      //   return this.weightService;
-      // case 'area':
-      //   return this.areaService;
+      case 'peso':
+        return this.injector.get(WeightMassConverterService);
       default:
         throw new Error(`Categoria não suportada: ${categoryId}`);
     }

@@ -18,9 +18,9 @@ export const appConfig: ApplicationConfig = {
         serviceType: VolumeConverterService
       },
       {
-        categoryId: 'peso-massa',
+        categoryId: 'peso-e-massa',
         categoryName: 'Peso e Massa',
-        categoryIcon: 'monitor_weight',
+        categoryIcon: 'weight',
         serviceType: WeightMassConverterService
       }
       // Adicione mais conversores aqui conforme necessário

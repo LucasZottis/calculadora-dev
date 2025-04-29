@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VolumeLayoutComponent } from './volume-layout.component';
+import { WeightMassPageComponent } from './weight-mass-page.component';
 
-describe('VolumeLayoutComponent', () => {
-  let component: VolumeLayoutComponent;
-  let fixture: ComponentFixture<VolumeLayoutComponent>;
+describe('WeightMassPageComponent', () => {
+  let component: WeightMassPageComponent;
+  let fixture: ComponentFixture<WeightMassPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VolumeLayoutComponent]
+      imports: [WeightMassPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(VolumeLayoutComponent);
+    fixture = TestBed.createComponent(WeightMassPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

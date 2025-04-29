@@ -1,0 +1,55 @@
+<!-- src/converters/weight-mass/pages/weight-mass-converter-category-page/weight-mass-converter-category-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Peso e Massa</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">weight</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Peso e Massa</h1>
+            <p>Faça conversões precisas entre diferentes unidades de peso e massa</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de peso e massa permite transformar valores entre várias unidades de medida de peso e massa,
+                como quilogramas, gramas, libras, onças e muito mais.</p>
+            <p>Ideal para estudantes, profissionais da saúde e engenharia, ou qualquer pessoa que precise fazer
+                conversões precisas entre unidades de peso e massa de diferentes sistemas de medida.</p>
+        </div>
+    </section>
+
+    <!-- Todas as combinações possíveis de conversão -->
+    <section class="conversion-links-section">
+        <h2>Todas as Combinações de Conversão</h2>
+
+        <div class="conversion-links-grid">
+            <ng-container *ngFor="let sourceUnit of availableUnits">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="sourceUnit.id !== targetUnit.id">
+                        <a [routerLink]="['/conversores/peso-massa', weightMassConverterService.generateConversionUrl(sourceUnit.id, targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>{{ sourceUnit.name }} para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+    </section>
+</div>

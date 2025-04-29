@@ -1,4 +1,4 @@
-/* src/converters/pages/converters-category-page/converters-category-page.component.scss */
+/* src/converters/volume/pages/volume-converter-category-page/volume-converter-category-page.component.scss */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -106,8 +106,8 @@
     }
 }
 
-/* Subcategories Section */
-.subcategories-section {
+/* Available Units Section */
+.available-units-section {
     margin-bottom: 3rem;
 
     h2 {
@@ -129,88 +129,63 @@
     }
 }
 
-.subcategories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1.5rem;
+.units-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
 }
 
-.subcategory-card {
+.unit-chip {
     background-color: var(--second-background-color);
-    border-radius: 8px;
-    padding: 1.5rem;
     border: 1px solid var(--border-color-base);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    text-decoration: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
     color: #a5d6a7;
+    transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.15);
-        border-color: var(--bs-primary);
-
-        .subcategory-icon {
-            background-color: var(--bs-primary);
-
-            .material-symbols-outlined {
-                color: white;
-            }
-        }
-
-        h3 {
-            color: white;
-        }
-
-        .subcategory-action .material-symbols-outlined {
-            transform: translateX(5px);
-            color: var(--bs-primary);
-        }
-    }
-
-    .subcategory-icon {
-        width: 60px;
-        height: 60px;
-        min-width: 60px;
-        border-radius: 50%;
         background-color: rgba(76, 175, 80, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
+        border-color: var(--bs-primary);
+        transform: translateY(-2px);
+    }
+}
 
-        .material-symbols-outlined {
-            font-size: 2rem;
-            color: #4caf50;
-            transition: all 0.3s ease;
+/* Quick Converter Section */
+.quick-converter-section {
+    margin-bottom: 3rem;
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--bs-primary);
+            border-radius: 10px;
         }
     }
+}
 
-    .subcategory-content {
-        flex: 1;
+.conversor-placeholder {
+    background-color: var(--second-background-color);
+    border: 1px solid var(--border-color-base);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
 
-        h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            line-height: 1.4;
-        }
-    }
-
-    .subcategory-action {
-        .material-symbols-outlined {
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            color: #a5d6a7;
-            opacity: 0.7;
-        }
+    p {
+        margin: 0;
+        color: #a5d6a7;
+        opacity: 0.8;
     }
 }
 
@@ -237,74 +212,8 @@
     }
 }
 
-.popular-conversions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.conversion-card {
-    background-color: var(--second-background-color);
-    border-radius: 8px;
-    padding: 1.2rem;
-    border: 1px solid var(--border-color-base);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: #a5d6a7;
-
-    &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 3px 12px rgba(76, 175, 80, 0.12);
-        border-color: var(--bs-primary);
-
-        .conversion-icon {
-            background-color: var(--bs-primary);
-
-            .material-symbols-outlined {
-                color: white;
-            }
-        }
-
-        h3 {
-            color: white;
-        }
-    }
-
-    .conversion-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        border-radius: 50%;
-        background-color: rgba(76, 175, 80, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-
-        .material-symbols-outlined {
-            font-size: 1.5rem;
-            color: #4caf50;
-            transition: all 0.3s ease;
-        }
-    }
-
-    .conversion-content {
-        flex: 1;
-
-        h3 {
-            margin: 0;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            line-height: 1.3;
-        }
-    }
-}
-
-/* Benefits Section */
-.benefits-section {
+/* Estilos para a seção de links de conversão */
+.conversion-links-section {
     margin-bottom: 3rem;
 
     h2 {
@@ -326,61 +235,146 @@
     }
 }
 
-.benefits-grid {
+.conversion-links-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
 }
 
-.benefit-card {
+.conversion-link-card {
     background-color: var(--second-background-color);
     border-radius: 8px;
-    padding: 2rem 1.5rem;
+    padding: 0.8rem 1rem;
     border: 1px solid var(--border-color-base);
     transition: all 0.3s ease;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: #a5d6a7;
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(76, 175, 80, 0.12);
         border-color: var(--bs-primary);
 
-        .benefit-icon {
+        .conversion-link-icon {
             background-color: var(--bs-primary);
 
             .material-symbols-outlined {
                 color: white;
             }
         }
+
+        h3 {
+            color: white;
+        }
     }
 
-    .benefit-icon {
-        width: 70px;
-        height: 70px;
+    .conversion-link-icon {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
         border-radius: 50%;
         background-color: rgba(76, 175, 80, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1.5rem;
         transition: all 0.3s ease;
 
         .material-symbols-outlined {
-            font-size: 2.5rem;
+            font-size: 1.2rem;
             color: #4caf50;
             transition: all 0.3s ease;
         }
     }
 
-    h3 {
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
+    .conversion-link-content {
+        flex: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            line-height: 1.3;
+        }
     }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .conversion-link-card {
+        padding: 0.6rem 0.8rem;
+
+        .conversion-link-icon {
+            width: 25px;
+            height: 25px;
+            min-width: 25px;
+
+            .material-symbols-outlined {
+                font-size: 1rem;
+            }
+        }
+
+        .conversion-link-content h3 {
+            font-size: 0.8rem;
+        }
+    }
+}
+
+/* Units Info Section */
+.units-info-section {
+    margin-bottom: 3rem;
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--bs-primary);
+            border-radius: 10px;
+        }
+    }
+}
+
+.info-content {
+    background-color: var(--second-background-color);
+    border-radius: 8px;
+    padding: 2rem;
+    border: 1px solid var(--border-color-base);
 
     p {
-        font-size: 0.95rem;
-        opacity: 0.9;
-        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 1rem 0;
+        color: #4caf50;
+    }
+
+    ul {
+        margin: 0 0 1.5rem 1.5rem;
+        padding: 0;
+
+        li {
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
@@ -396,19 +390,6 @@
         font-size: 2rem;
     }
 
-    .subcategory-card {
-        flex-direction: column;
-        text-align: center;
-
-        .subcategory-icon {
-            margin-bottom: 1rem;
-        }
-
-        .subcategory-action {
-            display: none;
-        }
-    }
-
     .conversion-card {
         flex-direction: column;
         text-align: center;
@@ -416,9 +397,5 @@
         .conversion-icon {
             margin-bottom: 0.8rem;
         }
-    }
-
-    .benefits-grid {
-        grid-template-columns: 1fr;
     }
 }
