@@ -37,7 +37,7 @@ export class WeightMassPageComponent extends PageBase implements OnInit {
     // Obter todas as unidades disponíveis
     this.availableUnits = this.weightMassConverterService.getUnits();
 
-    const description = 'Converta facilmente entre diferentes unidades de peso e massa como quilogramas, gramas, libras, onças e muito mais. Calculadora precisa com explicações detalhadas.';
+    const description = 'Converta facilmente entre diferentes unidades de peso e massa como quilogramas, gramas, libras, onças, toneladas e muito mais. Calculadora precisa com explicações detalhadas.';
     const pageTitle = 'Conversor de Peso e Massa - Todas as Unidades';
 
     this.setTitle(pageTitle);
@@ -47,7 +47,7 @@ export class WeightMassPageComponent extends PageBase implements OnInit {
     this.updateSeo({
       title: pageTitle,
       description: description,
-      keywords: 'conversor de peso, conversor de massa, quilogramas para gramas, libras para quilos, onças, conversão de peso, calculadora de massa corporal, IMC'
+      keywords: 'conversor de peso, conversor de massa, quilogramas para gramas, libras para quilos, onças, conversão de peso, calculadora de massa corporal, toneladas, quilates'
     });
 
     // Adicionar Schema.org para rich snippets
@@ -74,9 +74,31 @@ export class WeightMassPageComponent extends PageBase implements OnInit {
   // Método para filtrar unidades por sistema
   getUnitsBySystem(system: string): CalculatorUnit[] {
     const systemMapping: Record<string, string[]> = {
-      'metric': ['micrograma', 'miligrama', 'centigrama', 'decigrama', 'grama', 'decagrama', 'hectograma', 'quilograma', 'tonelada-metrica'],
-      'imperial': ['onca', 'libra', 'pedra', 'grao', 'tonelada-curta', 'tonelada-longa'],
-      'other': ['quilates', 'quintal']
+      'metric': [
+        'micrograma',
+        'miligrama',
+        'centigrama',
+        'decigrama',
+        'grama',
+        'decagrama',
+        'hectograma',
+        'quilograma',
+        'tonelada-metrica'
+      ],
+      'imperial': [
+        'onca',
+        'libra',
+        'pedra',
+        'grao',
+        'dram',
+        'escrupulo',
+        'quintal',
+        'tonelada-curta',
+        'tonelada-longa'
+      ],
+      'specialized': [
+        'quilates'
+      ]
     };
 
     if (!systemMapping[system]) {
@@ -98,8 +120,8 @@ export class WeightMassPageComponent extends PageBase implements OnInit {
         units: this.getUnitsBySystem('imperial')
       },
       {
-        name: 'Outras Unidades Especializadas',
-        units: this.getUnitsBySystem('other')
+        name: 'Unidades Especializadas',
+        units: this.getUnitsBySystem('specialized')
       }
     ];
   }

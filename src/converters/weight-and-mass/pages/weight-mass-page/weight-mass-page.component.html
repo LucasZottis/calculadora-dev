@@ -34,6 +34,90 @@
 
     <!-- Links de conversão agrupados por unidade de medida -->
     <div class="conversion-groups-container">
+        <!-- MICROGRAMA -->
+        <section class="conversion-group" id="micrograma">
+            <h2>Conversões de Micrograma (μg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'micrograma'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('micrograma', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Micrograma para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- MILIGRAMA -->
+        <section class="conversion-group" id="miligrama">
+            <h2>Conversões de Miligrama (mg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'miligrama'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('miligrama', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Miligrama para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- CENTIGRAMA -->
+        <section class="conversion-group" id="centigrama">
+            <h2>Conversões de Centigrama (cg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'centigrama'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('centigrama', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Centigrama para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- DECIGRAMA -->
+        <section class="conversion-group" id="decigrama">
+            <h2>Conversões de Decigrama (dg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'decigrama'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('decigrama', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Decigrama para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
         <!-- GRAMA -->
         <section class="conversion-group" id="grama">
             <h2>Conversões de Grama (g)</h2>
@@ -55,8 +139,257 @@
             </div>
         </section>
 
-        <!-- Seções para outras unidades como QUILOGRAMA, MILIGRAMA, etc. seguem o mesmo padrão -->
-        <!-- ... -->
+        <!-- DECAGRAMA -->
+        <section class="conversion-group" id="decagrama">
+            <h2>Conversões de Decagrama (dag)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'decagrama'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('decagrama', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Decagrama para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- HECTOGRAMA -->
+        <section class="conversion-group" id="hectograma">
+            <h2>Conversões de Hectograma (hg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'hectograma'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('hectograma', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Hectograma para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- QUILOGRAMA -->
+        <section class="conversion-group" id="quilograma">
+            <h2>Conversões de Quilograma (kg)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'quilograma'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('quilograma', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Quilograma para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- TONELADA MÉTRICA -->
+        <section class="conversion-group" id="tonelada-metrica">
+            <h2>Conversões de Tonelada Métrica (t)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'tonelada-metrica'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('tonelada-metrica', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Tonelada Métrica para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- QUILATES -->
+        <section class="conversion-group" id="quilates">
+            <h2>Conversões de Quilates (ct)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'quilates'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('quilates', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Quilates para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- ONÇA -->
+        <section class="conversion-group" id="onca">
+            <h2>Conversões de Onça (oz)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'onca'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('onca', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Onça para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- LIBRA -->
+        <section class="conversion-group" id="libra">
+            <h2>Conversões de Libra (lb)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'libra'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('libra', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Libra para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- PEDRA -->
+        <section class="conversion-group" id="pedra">
+            <h2>Conversões de Pedra (st)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'pedra'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('pedra', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Pedra para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- GRÃO -->
+        <section class="conversion-group" id="grao">
+            <h2>Conversões de Grão (gr)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'grao'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('grao', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Grão para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- QUINTAL -->
+        <section class="conversion-group" id="quintal">
+            <h2>Conversões de Quintal (cwt)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'quintal'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('quintal', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Quintal para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- TONELADA CURTA -->
+        <section class="conversion-group" id="tonelada-curta">
+            <h2>Conversões de Tonelada Curta (EUA)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'tonelada-curta'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('tonelada-curta', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Tonelada Curta para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
+
+        <!-- TONELADA LONGA -->
+        <section class="conversion-group" id="tonelada-longa">
+            <h2>Conversões de Tonelada Longa (Reino Unido)</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                <ng-container *ngFor="let targetUnit of availableUnits">
+                    <ng-container *ngIf="targetUnit.id !== 'tonelada-longa'">
+                        <a [routerLink]="['/conversores/peso-e-massa', weightMassConverterService.generateConversionUrl('tonelada-longa', targetUnit.id)]"
+                            class="conversion-link-card">
+                            <div class="conversion-link-icon">
+                                <span class="material-symbols-outlined">weight</span>
+                            </div>
+                            <div class="conversion-link-content">
+                                <h3>Tonelada Longa para {{ targetUnit.name }}</h3>
+                            </div>
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </section>
     </div>
 
     <!-- Informações adicionais -->
@@ -71,7 +404,11 @@
             <ul>
                 <li><strong>Micrograma (μg)</strong>: Um milionésimo de grama (0,000001g)</li>
                 <li><strong>Miligrama (mg)</strong>: Um milésimo de grama (0,001g)</li>
+                <li><strong>Centigrama (cg)</strong>: Um centésimo de grama (0,01g)</li>
+                <li><strong>Decigrama (dg)</strong>: Um décimo de grama (0,1g)</li>
                 <li><strong>Grama (g)</strong>: Unidade básica de massa no SI</li>
+                <li><strong>Decagrama (dag)</strong>: Dez gramas (10g)</li>
+                <li><strong>Hectograma (hg)</strong>: Cem gramas (100g)</li>
                 <li><strong>Quilograma (kg)</strong>: Mil gramas (1.000g)</li>
                 <li><strong>Tonelada métrica (t)</strong>: Mil quilogramas (1.000kg)</li>
             </ul>
@@ -79,12 +416,21 @@
             <h3>Sistema Imperial/Americano</h3>
             <p>Utilizado principalmente nos Estados Unidos e em alguns países de influência britânica:</p>
             <ul>
-                <li><strong>Grão (gr)</strong>: Unidade muito pequena, usada em farmácia e balística</li>
-                <li><strong>Onça (oz)</strong>: Equivalente a cerca de 28,35 gramas</li>
+                <li><strong>Grão (gr)</strong>: Unidade muito pequena, usada em farmácia e balística (1 grão = 0,0648g)
+                </li>
+                <li><strong>Onça (oz)</strong>: Equivalente a cerca de 28,35 gramas (16 onças = 1 libra)</li>
                 <li><strong>Libra (lb)</strong>: 16 onças ou aproximadamente 453,6 gramas</li>
                 <li><strong>Pedra (st)</strong>: 14 libras, usado principalmente no Reino Unido</li>
-                <li><strong>Tonelada curta</strong>: 2.000 libras, usada nos EUA</li>
-                <li><strong>Tonelada longa</strong>: 2.240 libras, usada no Reino Unido</li>
+                <li><strong>Quintal (cwt)</strong>: 100 libras (EUA) ou 112 libras (Reino Unido)</li>
+                <li><strong>Tonelada curta</strong>: 2.000 libras, usada nos EUA (907,2kg)</li>
+                <li><strong>Tonelada longa</strong>: 2.240 libras, usada no Reino Unido (1.016kg)</li>
+            </ul>
+
+            <h3>Unidades Especializadas</h3>
+            <ul>
+                <li><strong>Quilate (ct)</strong>: Usado para gemas e metais preciosos (1 quilate = 0,2g)</li>
+                <li><strong>Dram</strong>: Pequena unidade usada em farmácia (aproximadamente 1,77g)</li>
+                <li><strong>Escrúpulo</strong>: Unidade usada em farmácia (aproximadamente 1,3g)</li>
             </ul>
 
             <h3>Conversões Comuns</h3>
@@ -92,7 +438,11 @@
                 <li>1 quilograma = 2,20462 libras</li>
                 <li>1 libra = 0,453592 quilogramas</li>
                 <li>1 onça = 28,3495 gramas</li>
-                <li>1 quilate = 0,2 gramas (usado para gemas e metais preciosos)</li>
+                <li>1 quilate = 0,2 gramas</li>
+                <li>1 tonelada métrica = 1.000 quilogramas</li>
+                <li>1 tonelada métrica = 2.204,62 libras</li>
+                <li>1 tonelada curta (EUA) = 907,185 quilogramas</li>
+                <li>1 tonelada longa (Reino Unido) = 1.016,05 quilogramas</li>
             </ul>
         </div>
     </section>
