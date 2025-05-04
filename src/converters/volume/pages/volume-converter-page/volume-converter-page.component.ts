@@ -8,6 +8,7 @@ import { VolumeConverterService } from 'src/converters/volume/services/volume-co
 import { PageBase } from 'src/shared/pages/pageBase';
 import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';
+import { ConverterUrlService } from 'src/converters/shared/services/converter-url-service/converter-url.service';
 
 @Component({
   selector: 'volume-converter-page',
@@ -23,7 +24,6 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 })
 export class VolumeConverterPageComponent extends PageBase implements OnInit {
   // Valores selecionados
-  categoriaSelecionada: string = 'volume';
   unidadeOrigemSelecionada: string = 'mililitros';
   unidadeDestinoSelecionada: string = 'litros';
   valorOrigem: string = '0';
@@ -42,7 +42,9 @@ export class VolumeConverterPageComponent extends PageBase implements OnInit {
     title: Title,
     private volumeService: VolumeConverterService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private volumeConverterService: VolumeConverterService,
+    private _converterUrlService: ConverterUrlService
   ) {
     super(meta, title);
     this.setTitle('Conversor de Volume');
@@ -68,10 +70,6 @@ export class VolumeConverterPageComponent extends PageBase implements OnInit {
         this.gerarConversoesSugeridas();
       }
     });
-  }
-
-  onCategoriaChange(categoria: string): void {
-    this.categoriaSelecionada = categoria;
   }
 
   onUnidadeOrigemChange(unidade: string): void {

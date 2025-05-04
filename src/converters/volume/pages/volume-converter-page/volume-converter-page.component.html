@@ -1,43 +1,43 @@
 <div class="text-center mb-5">
-    <h1>Conversor de Volume</h1>
-    <p class="fs-3">
-        Converta facilmente entre diferentes unidades de volume com precisão.
-    </p>
+  <h1>Conversor de Volume</h1>
+  <p class="fs-3">
+    Converta facilmente entre diferentes unidades de volume com precisão.
+  </p>
 </div>
 
 <!-- Instruções de uso -->
 <div class="card mb-4">
-    <div class="card-body">
-        <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
-        <p>
-            Esta calculadora permite converter entre diversas unidades de volume, incluindo medidas métricas, imperiais
-            e de uso culinário. Basta selecionar as unidades de origem e destino, e inserir o valor a ser convertido.
-        </p>
-        <ol>
-            <li>Escolha a unidade de origem (de onde deseja converter)</li>
-            <li>Escolha a unidade de destino (para onde deseja converter)</li>
-            <li>Digite o valor na unidade de origem</li>
-            <li>O resultado será calculado automaticamente</li>
-        </ol>
-    </div>
+  <div class="card-body">
+    <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+    <p>
+      Esta calculadora permite converter entre diversas unidades de volume, incluindo medidas métricas, imperiais
+      e de uso culinário. Basta selecionar as unidades de origem e destino, e inserir o valor a ser convertido.
+    </p>
+    <ol>
+      <li>Escolha a unidade de origem (de onde deseja converter)</li>
+      <li>Escolha a unidade de destino (para onde deseja converter)</li>
+      <li>Digite o valor na unidade de origem</li>
+      <li>O resultado será calculado automaticamente</li>
+    </ol>
+  </div>
 </div>
 
 <!-- Componente de calculadora -->
-<calculator [selectedCategoryId]="categoriaSelecionada" [selectedSourceUnitId]="unidadeOrigemSelecionada"
-    [selectedTargetUnitId]="unidadeDestinoSelecionada" (categoryChange)="onCategoriaChange($event)"
-    (sourceUnitChange)="onUnidadeOrigemChange($event)" (targetUnitChange)="onUnidadeDestinoChange($event)"
-    (valueChange)="onValorChange($event)" (calculate)="calcular($event)">
+<calculator [selectedCategoryId]="'volume'" [selectedSourceUnitId]="unidadeOrigemSelecionada"
+  [selectedTargetUnitId]="unidadeDestinoSelecionada" (sourceUnitChange)="onUnidadeOrigemChange($event)"
+  (targetUnitChange)="onUnidadeDestinoChange($event)" (valueChange)="onValorChange($event)"
+  (calculate)="calcular($event)">
 </calculator>
 
 <!-- Explicação da fórmula de cálculo -->
 <div class="mt-5 card" *ngIf="mostrarFormula">
-    <div class="card-body">
-        <h2 class="card-title fs-4">Explicação do Cálculo</h2>
-        <p>{{ formulaDescricao }}</p>
-        <div class="bg-dark text-light p-3 rounded">
-            <pre class="mb-0">{{ formulaCalculo }}</pre>
-        </div>
+  <div class="card-body">
+    <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+    <p>{{ formulaDescricao }}</p>
+    <div class="bg-dark text-light p-3 rounded">
+      <pre class="mb-0">{{ formulaCalculo }}</pre>
     </div>
+  </div>
 </div>
 
 <!-- Links para conversões populares -->
@@ -98,21 +98,21 @@
 
 <!-- Informações adicionais -->
 <div class="mt-5">
-    <h2 class="text-center fs-4">Informações sobre Unidades de Volume</h2>
-    <div class="texto-explicativo">
-        <p>
-            O volume é a quantidade de espaço ocupado por um objeto ou substância tridimensional.
-            Existem diversos sistemas de medição de volume em uso ao redor do mundo:
-        </p>
-        <ul>
-            <li><strong>Sistema Métrico</strong>: Mililitros (ml), Litros (l), metros cúbicos (m³)</li>
-            <li><strong>Sistema Imperial</strong>: Onças fluidas, galões, colheres (Reino Unido e EUA têm sistemas
-                diferentes)</li>
-            <li><strong>Medidas Culinárias</strong>: Xícaras, colheres de sopa, colheres de chá (variam por país)</li>
-        </ul>
-        <p>
-            Todos os cálculos são realizados com alta precisão usando fatores de conversão padrão.
-            A unidade base utilizada para todas as conversões é o mililitro (ml).
-        </p>
-    </div>
+  <h2 class="text-center fs-4">Informações sobre Unidades de Volume</h2>
+  <div class="texto-explicativo">
+    <p>
+      O volume é a quantidade de espaço ocupado por um objeto ou substância tridimensional.
+      Existem diversos sistemas de medição de volume em uso ao redor do mundo:
+    </p>
+    <ul>
+      <li><strong>Sistema Métrico</strong>: Mililitros (ml), Litros (l), metros cúbicos (m³)</li>
+      <li><strong>Sistema Imperial</strong>: Onças fluidas, galões, colheres (Reino Unido e EUA têm sistemas
+        diferentes)</li>
+      <li><strong>Medidas Culinárias</strong>: Xícaras, colheres de sopa, colheres de chá (variam por país)</li>
+    </ul>
+    <p>
+      Todos os cálculos são realizados com alta precisão usando fatores de conversão padrão.
+      A unidade base utilizada para todas as conversões é o mililitro (ml).
+    </p>
+  </div>
 </div>

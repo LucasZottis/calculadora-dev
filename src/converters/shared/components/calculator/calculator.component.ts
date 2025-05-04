@@ -1,12 +1,9 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IConverterService } from 'src/converters/shared/interfaces/IConverterService';
-import { CalculatorCategory } from 'src/converters/shared/models/calculatorCategory';
+import { ConverterFactory, IConverter, Unit } from 'dev-toolz.library';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
 import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
-import { ConverterFactoryService } from 'src/converters/shared/services/converter-factory/converter-factory.service';
-import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
 
 @Component({
   selector: 'calculator',
@@ -37,28 +34,28 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   showTargetUnitSelector: boolean = false;
 
   // Serviço de conversão atual
-  private currentService: IConverterService;
+  private currentService: IConverter;
   private documentClickListener: any;
 
-  constructor(private converterFactory: ConverterFactoryService) {
+  constructor(private converterFactory: ConverterFactory) {
     // Inicializamos com o serviço padrão, será atualizado no ngOnInit
-    this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
+    this.currentService = this.converterFactory.getConverter(this.selectedCategoryId);
   }
 
   // Getters para acessar informações conforme a categoria atual
-  get categories(): CalculatorCategory[] {
-    return this.converterFactory.getCategories();
-  }
+  // get categories(): CalculatorCategory[] {
+  //   return this.converterFactory.getCategories();
+  // }
 
-  get selectedCategory(): CalculatorCategory {
-    return this.converterFactory.getCategoryById(this.selectedCategoryId) || this.categories[0];
-  }
+  // get selectedCategory(): CalculatorCategory {
+  //   return this.converterFactory.getCategoryById(this.selectedCategoryId) || this.categories[0];
+  // }
 
-  get availableUnits(): CalculatorUnit[] {
+  get availableUnits(): Unit[] {
     return this.currentService.getUnits();
   }
 
-  get sourceUnit(): CalculatorUnit | undefined {
+  get sourceUnit(): Unit | undefined {
     if (!this.selectedSourceUnitId && this.availableUnits.length > 0) {
       this.selectedSourceUnitId = this.availableUnits[0].id;
     }
@@ -71,6 +68,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         ? this.availableUnits[1].id
         : this.availableUnits[0].id;
     }
+    
     return this.currentService.getUnitById(this.selectedTargetUnitId);
   }
 
@@ -92,14 +90,14 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
   private updateConverterService(): void {
     try {
-      this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
+      this.currentService = this.converterFactory.getConverter(this.selectedCategoryId);
     } catch (error) {
       console.error('Erro ao obter serviço de conversão:', error);
       // Fallback para o primeiro serviço disponível
-      if (this.categories.length > 0) {
-        this.selectedCategoryId = this.categories[0].id;
-        this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
-      }
+      // if (this.categories.length > 0) {
+      //   this.selectedCategoryId = this.categories[0].id;
+      //   this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
+      // }
     }
   }
 
@@ -176,18 +174,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.calculateConversion();
   }
 
-  // toggleCategorySelector(event?: MouseEvent): void {
-  //   if (event) {
-  //     event.stopPropagation();
-  //   }
-
-  //   this.showCategorySelector = !this.showCategorySelector;
-  //   if (this.showCategorySelector) {
-  //     this.showSourceUnitSelector = false;
-  //     this.showTargetUnitSelector = false;
-  //   }
-  // }
-
   toggleSourceUnitSelector(event?: MouseEvent): void {
     if (event) {
       event.stopPropagation();
@@ -198,6 +184,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     if (this.showSourceUnitSelector) {
       this.showCategorySelector = false;
       this.showTargetUnitSelector = false;
+
       // Posicionar o dropdown corretamente após renderização
       setTimeout(() => this.positionDropdown('source'), 0);
     }
