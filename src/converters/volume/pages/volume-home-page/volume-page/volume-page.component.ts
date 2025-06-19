@@ -1,12 +1,9 @@
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
+import { ConverterFactory } from 'dev-toolz.library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
-import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
-import { NavigationHelper } from 'src/shared/helpers/navigationHelper';
-import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
   selector: 'volume-page',
