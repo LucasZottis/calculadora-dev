@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ConverterFactory } from 'dev-toolz.library';
 import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
@@ -19,6 +18,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
   // converterCategories: Converter[] = [];
   categories: Array<{ id: string, name: string, icon: string }> = [
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
+    { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
   ];
 
   constructor(

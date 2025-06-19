@@ -38,7 +38,7 @@
             <hr>
             <div class="conversion-links-grid">
                 @for(unit of item.units; track unit.id) {
-                <a [routerLink]="['/conversores/volume', volumeConverterService.generateConversionUrl(item.key.id, unit.id)]"
+                <a [routerLink]="['/conversores/volume', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
                     class="conversion-link-card">
                     <div class="conversion-link-icon">
                         <span class="material-symbols-outlined">deployed_code</span>

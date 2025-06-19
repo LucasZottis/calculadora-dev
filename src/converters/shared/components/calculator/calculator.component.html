@@ -112,26 +112,26 @@
         <div class="row gap-1">
             <div class="col-9">
                 <div class="row gap-1">
-                    <button class="col key" (click)="onDigitClick('1')">1</button>
-                    <button class="col key" (click)="onDigitClick('2')">2</button>
-                    <button class="col key" (click)="onDigitClick('3')">3</button>
+                    <button class="col key" (click)="onClickDigitButton('1')">1</button>
+                    <button class="col key" (click)="onClickDigitButton('2')">2</button>
+                    <button class="col key" (click)="onClickDigitButton('3')">3</button>
                 </div>
 
                 <div class="row gap-1">
-                    <button class="col key" (click)="onDigitClick('4')">4</button>
-                    <button class="col key" (click)="onDigitClick('5')">5</button>
-                    <button class="col key" (click)="onDigitClick('6')">6</button>
+                    <button class="col key" (click)="onClickDigitButton('4')">4</button>
+                    <button class="col key" (click)="onClickDigitButton('5')">5</button>
+                    <button class="col key" (click)="onClickDigitButton('6')">6</button>
                 </div>
 
                 <div class="row gap-$event,1">
-                    <button class="col key" (click)="onDigitClick('7')">7</button>
-                    <button class="col key" (click)="onDigitClick('8')">8</button>
-                    <button class="col key" (click)="onDigitClick('9')">9</button>
+                    <button class="col key" (click)="onClickDigitButton('7')">7</button>
+                    <button class="col key" (click)="onClickDigitButton('8')">8</button>
+                    <button class="col key" (click)="onClickDigitButton('9')">9</button>
                 </div>
 
                 <div class="row gap-1">
-                    <button class="col key">,</button>
-                    <button class="col key" (click)="onDigitClick('0')">0</button>
+                    <button class="col key" (click)="onClickDigitButton(',')">,</button>
+                    <button class="col key" (click)="onClickDigitButton('0')">0</button>
                     <button class="col key" disabled></button>
                 </div>
             </div>

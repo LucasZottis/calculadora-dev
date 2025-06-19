@@ -33,19 +33,18 @@
   </div>
 
   <!-- Componente de calculadora -->
-  <calculator [selectedCategoryId]="'volume'" [selectedSourceUnitId]="selectedSourceUnit.id"
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
     [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
-    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)"
-    (calculate)="calculate($event)">
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
   </calculator>
 
   <!-- Explicação da fórmula de cálculo -->
-  <div class="mt-5 card" *ngIf="mostrarFormula">
+  <div class="mt-5 card" *ngIf="showFormula">
     <div class="card-body">
       <h2 class="card-title fs-4">Explicação do Cálculo</h2>
-      <p>{{ formulaDescricao }}</p>
+      <p>{{ formulaDescription }}</p>
       <div class="bg-dark text-light p-3 rounded">
-        <pre class="mb-0">{{ formulaCalculo }}</pre>
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
       </div>
     </div>
   </div>

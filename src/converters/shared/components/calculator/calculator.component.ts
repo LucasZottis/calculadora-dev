@@ -25,7 +25,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   @Output() sourceUnitChange = new EventEmitter<Unit>();
   @Output() targetUnitChange = new EventEmitter<Unit>();
   @Output() valueChange = new EventEmitter<CalculatorResult>();
-  @Output() calculate = new EventEmitter<CalculatorResult>();
+  // @Output() calculate = new EventEmitter<void>();
 
   sourceValue: string = '0';
   targetValue: string = '0';
@@ -131,15 +131,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       console.error('Erro na conversão:', error);
       return '0';
     }
-  }
-
-  private emitCalculate(): void {
-    this.calculate.emit({
-      sourceValue: this.sourceValue,
-      targetValue: this.targetValue,
-      sourceUnit: this.selectedSourceUnitId,
-      targetUnit: this.selectedTargetUnitId
-    });
   }
 
   // Método para posicionar o dropdown de unidades
@@ -273,7 +264,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDigitClick(digit: string): void {
+  onClickDigitButton(digit: string): void {
     const input = document.getElementById(`${this.activeDisplay}-input`) as HTMLInputElement;
 
     if (this._clearValue) {
@@ -281,7 +272,21 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       this._clearValue = false;
     }
 
-    input.value = input.value === '0' ? digit : input.value + digit;
+    if (input.value === '0') {
+      if (digit === ',') {
+        input.value = '0,';
+      } else {
+        input.value = digit;
+      }
+    } else {
+      if (digit === ',') {
+        if (!input.value.includes(',')) {
+          input.value += ',';
+        }
+      } else {
+        input.value += digit;
+      }
+    }
 
     if (this.activeDisplay === 'source')
       this._inputChanged(input, value => this._setSourceValue(value));

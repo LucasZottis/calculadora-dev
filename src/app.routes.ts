@@ -9,8 +9,6 @@ import { PrivacyPolicyPageComponent } from './shared/pages/privacy-police-page/p
 import { ValidatorsPageComponent } from './validators/shared/pages/validators-page/validators-page.component';
 import { GeneratorsPageComponent } from './generators/shared/pages/generatos-page/generators-page.component';
 import { ConvertersPageComponent } from './converters/shared/pages/converters-page/converters-page.component';
-// import { VolumePageComponent } from './converters/volume/pages/volume-home-page/volume-page/volume-page.component';
-// import { WeightMassPageComponent } from './converters/weight-and-mass/pages/weight-mass-page/weight-mass-page.component';
 
 export const routes: Routes = [
     {
@@ -31,22 +29,7 @@ export const routes: Routes = [
             // Rotas para geradores
             { path: 'conversores', component: ConvertersPageComponent },
             { path: 'conversores/volume', loadChildren: () => import('./converters/volume/volume.routes').then(m => m.VOLUME_ROUTES) },
-            // { path: 'conversores/peso-e-massa', loadChildren: () => import('./converters/weight-and-mass/weight-mass.routes').then(m => m.WEIGHT_MASS_ROUTES) },
-            // { path: 'conversores/peso-e-massa', component: CnpjGeneratorPageComponent },
+            { path: 'conversores/peso-e-massa', loadChildren: () => import('./converters/weight-and-mass/weight-mass.routes').then(m => m.WEIGHT_MASS_ROUTES) },
         ]
     },
-    // {
-    //     path: 'conversores',
-    //     children: [
-    //         {
-    //             path: 'volume',
-    //             loadChildren: () => import('./converters/volume/volume.routes').then(m => m.VOLUME_ROUTES)
-    //         },
-    //         {
-    //             path: 'tempo',
-    //             loadChildren: () => import('./converters/time/time.routes').then(m => m.TIME_ROUTES)
-    //         }
-    //     ]
-    // },
-    // { path: '**', redirectTo: '' }
 ];

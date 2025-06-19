@@ -44,12 +44,12 @@ describe('WeightMassConverterPageComponent', () => {
   });
 
   it('should update source unit', () => {
-    component.onUnidadeOrigemChange('quilograma');
+    component.onSourceUnitChange('quilograma');
     expect(component.unidadeOrigemSelecionada).toBe('quilograma');
   });
 
   it('should update target unit', () => {
-    component.onUnidadeDestinoChange('libra');
+    component.onTargetUnitChange('libra');
     expect(component.unidadeDestinoSelecionada).toBe('libra');
   });
 
