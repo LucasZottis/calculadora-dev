@@ -31,6 +31,7 @@ export const routes: Routes = [
             { path: 'conversores/volume', loadChildren: () => import('./converters/volume/volume.routes').then(m => m.VOLUME_ROUTES) },
             { path: 'conversores/peso-e-massa', loadChildren: () => import('./converters/weight-and-mass/weight-mass.routes').then(m => m.WEIGHT_MASS_ROUTES) },
             { path: 'conversores/comprimento', loadChildren: () => import('./converters/length/length.routes').then(m => m.LENGTH_ROUTES) },
+            { path: 'conversores/temperatura', loadChildren: () => import('./converters/temperature/temperature.routes').then(m => m.TEMPERATURE_ROUTES) },
         ]
     },
 ];

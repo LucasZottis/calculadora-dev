@@ -20,6 +20,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
     { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
     { id: 'comprimento', name: 'Comprimento', icon: 'square_foot' },
+    { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
   ];
 
   constructor(
