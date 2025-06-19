@@ -1,0 +1,66 @@
+<!-- src/converters/volume/pages/volume-home-page/volume-page/volume-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Comprimento</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">square_foot</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Comprimento</h1>
+            <p>Faça conversões precisas entre diferentes unidades de comprimento</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de comprimento permite transformar valores entre diversas unidades de medida lineares,
+                como metros, milímetros, polegadas, milhas, anos-luz e muito mais.</p>
+            <p>Ideal para estudantes, engenheiros, astrônomos, profissionais da construção civil ou qualquer pessoa que
+                precise realizar conversões precisas entre unidades de comprimento de diferentes sistemas métricos e
+                imperiais.</p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <section class="conversion-groups-container">
+        @for(item of groupedUnits; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(unit of item.units; track unit.id) {
+                <a [routerLink]="['/conversores/comprimento', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">square_foot</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{ unit.name }}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedUnits; track item.key.id){
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+</div>
