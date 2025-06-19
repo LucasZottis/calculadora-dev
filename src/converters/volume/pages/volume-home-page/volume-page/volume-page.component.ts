@@ -1,43 +1,38 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
+import { ConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
 import { VolumeConverterService } from 'src/converters/volume/services/volume-converter/volume-converter.service';
 import { NavigationHelper } from 'src/shared/helpers/navigationHelper';
 import { PageBase } from 'src/shared/pages/pageBase';
-
-// Interface para auxiliar no agrupamento de unidades
-interface UnitGroup {
-  name: string;
-  units: CalculatorUnit[];
-}
 
 @Component({
   selector: 'volume-page',
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './volume-page.component.html',
   styleUrl: './volume-page.component.scss'
 })
 export class VolumePageComponent extends PageBase implements OnInit {
-  availableUnits: CalculatorUnit[] = [];
+  service!: IUnitConverter;
+  availableUnits: Unit[] = [];
+  groupedUnits: Array<{ key: Unit, units: Unit[] }> = [];
 
   constructor(
     meta: Meta,
     title: Title,
-    public volumeConverterService: VolumeConverterService
+    public volumeConverterService: VolumeConverterService,
+    private _convertersFactory: ConverterFactory,
   ) {
     super(meta, title);
+    this.service = this._convertersFactory.getConverter('volume');
   }
 
-  ngOnInit() {
-    // Obter todas as unidades disponíveis
-    this.availableUnits = this.volumeConverterService.getUnits();
-
+  private _setSEOInfo() {
     const description = 'Converta facilmente entre diferentes unidades de volume como litros, mililitros, metros cúbicos, galões e muito mais. Calculadora precisa com explicações detalhadas.';
     const pageTitle = 'Conversor de Volume - Todas as Unidades';
 
@@ -60,48 +55,40 @@ export class VolumePageComponent extends PageBase implements OnInit {
     });
   }
 
+
+  private _groupList(): void {
+    for (const unitKey of this.availableUnits) {
+      const key = unitKey.id;
+
+      for (const unit of this.availableUnits) {
+        if (unit.id === key) {
+          continue; // Ignorar unidades iguais
+        }
+
+        // Verifica se o grupo já existe
+        const existingGroup = this.groupedUnits.find(g => g.key.id === key);
+
+        if (existingGroup) {
+          // Se o grupo já existe, adiciona a unidade
+          existingGroup.units.push(unit);
+        } else {
+          // Se não existe, cria um novo grupo
+          this.groupedUnits.push({ key: unitKey, units: [unit] });
+        }
+      }
+    }
+  }
+
+  ngOnInit() {
+    this.availableUnits = this.service.getUnits();
+    this._groupList();
+    this._setSEOInfo();
+  }
+
   ngAfterViewInit() {
     // Configurar navegação por âncoras na página
     NavigationHelper.setupAnchorNavigation();
     // Configurar exibição da navegação rápida durante rolagem
     NavigationHelper.setupScrollWatch(400);
-  }
-
-  // Método para ordenar as unidades por nome
-  getSortedUnits(): CalculatorUnit[] {
-    return [...this.availableUnits].sort((a, b) => a.name.localeCompare(b.name));
-  }
-  
-  // Método para filtrar unidades por sistema
-  getUnitsBySystem(system: string): CalculatorUnit[] {
-    const systemMapping: Record<string, string[]> = {
-      'metric': ['mililitros', 'centilitro', 'decilitro', 'litros', 'hectolitro', 'centimetro-cubico', 'decimetro-cubico', 'metro-cubico'],
-      'imperial': ['onca-fluida-eua', 'onca-fluida-ru', 'galao-eua', 'xicara-eua', 'colher-cha-ru']
-    };
-    
-    if (!systemMapping[system]) {
-      return [];
-    }
-    
-    return this.availableUnits.filter(unit => systemMapping[system].includes(unit.id));
-  }
-  
-  // Método para agrupar unidades por tipo
-  getUnitGroups(): UnitGroup[] {
-    return [
-      {
-        name: 'Sistema Métrico',
-        units: this.getUnitsBySystem('metric')
-      },
-      {
-        name: 'Sistema Imperial/Americano',
-        units: this.getUnitsBySystem('imperial')
-      }
-    ];
-  }
-  
-  // Método para obter uma unidade pelo ID
-  getUnitById(id: string): CalculatorUnit | undefined {
-    return this.availableUnits.find(unit => unit.id === id);
   }
 }

@@ -147,7 +147,7 @@
     margin-bottom: 3rem;
     margin-top: 4rem;
     position: sticky;
-    top: 1rem;
+    bottom: 1rem;
     z-index: 10;
     padding: 1rem;
     background-color: var(--primary-background-color);
@@ -285,6 +285,7 @@
     0% {
         background-color: rgba(76, 175, 80, 0.1);
     }
+
     100% {
         background-color: transparent;
     }

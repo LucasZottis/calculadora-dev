@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { ConverterFactory } from 'dev-toolz.library';
 import { PageBase } from 'src/shared/pages/pageBase';
-import { ConverterCategory } from '../../models/converterCategory';
-import { CalculatorCategory } from '../../models/calculatorCategory';
-import { ConverterFactoryService } from '../../services/converter-factory/converter-factory.service';
 
 @Component({
   selector: 'converters-page',
@@ -18,20 +16,19 @@ import { ConverterFactoryService } from '../../services/converter-factory/conver
   styleUrl: './converters-page.component.scss'
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
-  converterCategories: CalculatorCategory[] = [];
+  // converterCategories: Converter[] = [];
+  categories: Array<{ id: string, name: string, icon: string }> = [
+    { id: 'volume', name: 'Volume', icon: 'deployed_code' },
+  ];
 
   constructor(
     meta: Meta,
     title: Title,
-    private converterFactory: ConverterFactoryService
   ) {
     super(meta, title);
   }
 
   ngOnInit() {
-    // Obter as categorias disponíveis do serviço de fábrica de conversores
-    this.converterCategories = this.converterFactory.getCategories();
-
     const description = 'Ferramentas para converter entre diferentes unidades de medida como volume, peso, massa e tempo. Conversões rápidas e precisas.';
     const pageTitle = 'Conversores de Unidades';
 
@@ -49,7 +46,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     this.addSchemaOrgData('ItemList', {
       name: 'Conversores de Unidades',
       description: description,
-      itemListElement: this.converterCategories.map((category, index) => ({
+      itemListElement: this.categories.map((category, index) => ({
         '@type': 'ListItem',
         'position': index + 1,
         'item': {

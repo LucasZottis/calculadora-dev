@@ -36,7 +36,8 @@
         <!-- Display principal com seletores -->
         <div class="unified-display-row">
             <!-- Seletor de origem -->
-            <div class="unit-selector-mini source-unit-selector-mini" (click)="toggleSourceUnitSelector($event)">
+            <div class="unit-selector-mini source-unit-selector-mini"
+                (click)="toggleSourceUnitSelectorDropDown($event)">
                 <span>{{ sourceUnit?.symbol }}</span>
                 @if (!showSourceUnitSelector) {
                 <span class="material-symbols-outlined dropdown-icon">
@@ -63,15 +64,17 @@
             }
 
             <!-- Input do valor de origem -->
-            <input type="text" class="calculator-input" [class.active]="activeDisplay === 'source'"
-                [(ngModel)]="sourceValue" (focus)="setActiveDisplay('source')" (input)="onSourceInputChange($event)"
+            <input type="text" max="20" id="source-input" class="calculator-input"
+                [class.active]="activeDisplay === 'source'" [(ngModel)]="sourceValue"
+                (focus)="setActiveDisplay('source')" (input)="onSourceInputChange($event)" (keydown)="onKeyDown($event)"
                 inputmode="numeric" />
         </div>
 
         <!-- Linha do valor de destino -->
         <div class="unified-display-row">
             <!-- Seletor de destino -->
-            <div class="unit-selector-mini target-unit-selector-mini" (click)="toggleTargetUnitSelector($event)">
+            <div class="unit-selector-mini target-unit-selector-mini"
+                (click)="toggleTargetUnitSelectorDropDown($event)">
                 <span>{{ targetUnit?.symbol }}</span>
                 @if (!showTargetUnitSelector) {
                 <span class="material-symbols-outlined dropdown-icon">
@@ -97,8 +100,9 @@
             }
 
             <!-- Input do valor de destino -->
-            <input type="text" class="calculator-input" [class.active]="activeDisplay === 'target'"
-                [(ngModel)]="targetValue" (focus)="setActiveDisplay('target')" (input)="onTargetInputChange($event)"
+            <input type="text" max="20" id="target-input" class="calculator-input"
+                [class.active]="activeDisplay === 'target'" [(ngModel)]="targetValue"
+                (focus)="setActiveDisplay('target')" (input)="onTargetInputChange($event)" (keydown)="onKeyDown($event)"
                 inputmode="numeric" />
         </div>
     </div>
@@ -119,22 +123,22 @@
                     <button class="col key" (click)="onDigitClick('6')">6</button>
                 </div>
 
-                <div class="row gap-1">
+                <div class="row gap-$event,1">
                     <button class="col key" (click)="onDigitClick('7')">7</button>
                     <button class="col key" (click)="onDigitClick('8')">8</button>
                     <button class="col key" (click)="onDigitClick('9')">9</button>
                 </div>
 
                 <div class="row gap-1">
-                    <button class="col key" disabled></button>
+                    <button class="col key">,</button>
                     <button class="col key" (click)="onDigitClick('0')">0</button>
                     <button class="col key" disabled></button>
                 </div>
             </div>
             <div class="col">
                 <div class="row gap-3" style="height: 48%;">
-                    <button class="col key operation-key" (click)="onOperationClick('AC')">AC</button>
-                    <button class="col key operation-key">
+                    <button class="col key operation-key" (click)="onClickResetCalculator()">AC</button>
+                    <button class="col key operation-key" (click)="onClickBackspace()">
                         <span class="material-symbols-outlined">
                             backspace
                         </span>

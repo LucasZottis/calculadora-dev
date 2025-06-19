@@ -1,108 +1,74 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
+// src/converters/shared/components/calculator/calculator.component.ts
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ConverterFactory, IConverter, Unit } from 'dev-toolz.library';
+import { ConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
-import { CalculatorUnit } from 'src/converters/shared/models/calculatorUnit';
 
 @Component({
   selector: 'calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgFor],
+  imports: [CommonModule, FormsModule],
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
+  private currentConverter: IUnitConverter;
+  private documentClickListener: any;
+  private _clearValue: boolean = false;
+
   @Input() selectedCategoryId: string = 'volume';
   @Input() selectedSourceUnitId: string = '';
   @Input() selectedTargetUnitId: string = '';
 
   @Output() categoryChange = new EventEmitter<string>();
-  @Output() sourceUnitChange = new EventEmitter<string>();
-  @Output() targetUnitChange = new EventEmitter<string>();
+  @Output() sourceUnitChange = new EventEmitter<Unit>();
+  @Output() targetUnitChange = new EventEmitter<Unit>();
   @Output() valueChange = new EventEmitter<CalculatorResult>();
   @Output() calculate = new EventEmitter<CalculatorResult>();
 
-  // Valores e estado do componente
   sourceValue: string = '0';
   targetValue: string = '0';
+
   activeDisplay: 'source' | 'target' = 'source';
 
-  // Estados UI
-  showCategorySelector: boolean = false;
   showSourceUnitSelector: boolean = false;
   showTargetUnitSelector: boolean = false;
 
-  // Serviço de conversão atual
-  private currentService: IConverter;
-  private documentClickListener: any;
-
   constructor(private converterFactory: ConverterFactory) {
-    // Inicializamos com o serviço padrão, será atualizado no ngOnInit
-    this.currentService = this.converterFactory.getConverter(this.selectedCategoryId);
+    this.currentConverter = this.converterFactory.getConverter(this.selectedCategoryId);
   }
 
-  // Getters para acessar informações conforme a categoria atual
-  // get categories(): CalculatorCategory[] {
-  //   return this.converterFactory.getCategories();
-  // }
-
-  // get selectedCategory(): CalculatorCategory {
-  //   return this.converterFactory.getCategoryById(this.selectedCategoryId) || this.categories[0];
-  // }
-
   get availableUnits(): Unit[] {
-    return this.currentService.getUnits();
+    return this.currentConverter.getUnits();
   }
 
   get sourceUnit(): Unit | undefined {
     if (!this.selectedSourceUnitId && this.availableUnits.length > 0) {
       this.selectedSourceUnitId = this.availableUnits[0].id;
     }
-    return this.currentService.getUnitById(this.selectedSourceUnitId);
+    return this.currentConverter.getUnitById(this.selectedSourceUnitId);
   }
 
-  get targetUnit(): CalculatorUnit | undefined {
+  get targetUnit(): Unit | undefined {
     if (!this.selectedTargetUnitId && this.availableUnits.length > 0) {
       this.selectedTargetUnitId = this.availableUnits.length > 1
         ? this.availableUnits[1].id
         : this.availableUnits[0].id;
     }
-    
-    return this.currentService.getUnitById(this.selectedTargetUnitId);
+    return this.currentConverter.getUnitById(this.selectedTargetUnitId);
   }
 
-  ngOnInit(): void {
-    // Inicializar o serviço de conversão com base na categoria selecionada
-    this.updateConverterService();
-
-    // Inicializar unidades, se necessário
-    this.initializeUnits();
-
-    this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
-    document.addEventListener('click', this.documentClickListener);
-  }
-
-  ngOnDestroy(): void {
-    // Remover event listener quando o componente for destruído
-    document.removeEventListener('click', this.documentClickListener);
-  }
-
-  private updateConverterService(): void {
+  private updateConverter(): void {
     try {
-      this.currentService = this.converterFactory.getConverter(this.selectedCategoryId);
+      this.currentConverter = this.converterFactory.getConverter(this.selectedCategoryId);
     } catch (error) {
-      console.error('Erro ao obter serviço de conversão:', error);
-      // Fallback para o primeiro serviço disponível
-      // if (this.categories.length > 0) {
-      //   this.selectedCategoryId = this.categories[0].id;
-      //   this.currentService = this.converterFactory.getConverterService(this.selectedCategoryId);
-      // }
+      console.error('Erro ao obter conversor:', error);
     }
   }
 
   private initializeUnits(): void {
-    const units = this.currentService.getUnits();
+    const units = this.currentConverter.getUnits();
     if (units.length > 0) {
       if (!this.selectedSourceUnitId) {
         this.selectedSourceUnitId = units[0].id;
@@ -113,255 +79,24 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método para lidar com cliques no documento
   private onDocumentClick(event: MouseEvent): void {
-    // Verificar se há algum dropdown aberto
-    if (!this.showSourceUnitSelector && !this.showTargetUnitSelector && !this.showCategorySelector) {
+    if (!this.showSourceUnitSelector && !this.showTargetUnitSelector) {
       return;
     }
 
-    // Verificar se o clique foi dentro de um elemento seletor ou dropdown
     const target = event.target as HTMLElement;
     const isClickInsideSourceSelector = this.isClickInsideElement(target, 'source-unit-selector-mini');
     const isClickInsideTargetSelector = this.isClickInsideElement(target, 'target-unit-selector-mini');
-    const isClickInsideCategorySelector = this.isClickInsideElement(target, 'category-selector');
-    const isClickInsideDropdown = target.closest('.unit-dropdown') !== null ||
-      target.closest('.category-dropdown') !== null;
+    const isClickInsideDropdown = target.closest('.unit-dropdown') !== null;
 
-    // Se não clicou em nenhum elemento relacionado a seletores ou dropdowns, fecha todos
-    if (!isClickInsideSourceSelector && !isClickInsideTargetSelector &&
-      !isClickInsideCategorySelector && !isClickInsideDropdown) {
+    if (!isClickInsideSourceSelector && !isClickInsideTargetSelector && !isClickInsideDropdown) {
       this.showSourceUnitSelector = false;
       this.showTargetUnitSelector = false;
-      this.showCategorySelector = false;
     }
   }
 
-  // Método auxiliar para verificar se o clique foi dentro de um elemento específico
   private isClickInsideElement(element: HTMLElement, className: string): boolean {
-    return element.classList.contains(className) ||
-      element.closest(`.${className}`) !== null;
-  }
-
-  // Manipulação de eventos UI
-  onCategorySelect(categoryId: string): void {
-    this.selectedCategoryId = categoryId;
-    this.showCategorySelector = false;
-    this.categoryChange.emit(categoryId);
-
-    // Atualizar o serviço de conversão
-    this.updateConverterService();
-
-    // Atualizar unidades padrão para a nova categoria
-    this.initializeUnits();
-    this.sourceUnitChange.emit(this.selectedSourceUnitId);
-    this.targetUnitChange.emit(this.selectedTargetUnitId);
-
-    this.resetCalculator();
-  }
-
-  onSourceUnitSelect(unitId: string): void {
-    this.selectedSourceUnitId = unitId;
-    this.showSourceUnitSelector = false;
-    this.sourceUnitChange.emit(unitId);
-    this.calculateConversion();
-  }
-
-  onTargetUnitSelect(unitId: string): void {
-    this.selectedTargetUnitId = unitId;
-    this.showTargetUnitSelector = false;
-    this.targetUnitChange.emit(unitId);
-    this.calculateConversion();
-  }
-
-  toggleSourceUnitSelector(event?: MouseEvent): void {
-    if (event) {
-      event.stopPropagation();
-    }
-
-    this.showSourceUnitSelector = !this.showSourceUnitSelector;
-
-    if (this.showSourceUnitSelector) {
-      this.showCategorySelector = false;
-      this.showTargetUnitSelector = false;
-
-      // Posicionar o dropdown corretamente após renderização
-      setTimeout(() => this.positionDropdown('source'), 0);
-    }
-  }
-
-  toggleTargetUnitSelector(event?: MouseEvent): void {
-    if (event) {
-      event.stopPropagation();
-    }
-
-    this.showTargetUnitSelector = !this.showTargetUnitSelector;
-    if (this.showTargetUnitSelector) {
-      this.showCategorySelector = false;
-      this.showSourceUnitSelector = false;
-      // Posicionar o dropdown corretamente após renderização
-      setTimeout(() => this.positionDropdown('target'), 0);
-    }
-  }
-
-  private positionDropdown(type: 'source' | 'target'): void {
-    const selectorId = type === 'source' ? 'sourceUnitSelector' : 'targetUnitSelector';
-    const dropdown = document.querySelector(`.unit-dropdown`);
-    const trigger = document.querySelector(`.${type === 'source' ? 'source' : 'target'}-unit-selector-mini`);
-
-    if (dropdown && trigger) {
-      const rect = trigger.getBoundingClientRect();
-      (dropdown as HTMLElement).style.top = `${rect.bottom}px`;
-      (dropdown as HTMLElement).style.left = `${rect.left}px`;
-    }
-  }
-
-  setActiveDisplay(display: 'source' | 'target'): void {
-    this.activeDisplay = display;
-  }
-
-  // Manipulação de entrada
-  onSourceInputChange(event: Event): void {
-    // Validar entrada: permitir apenas números e vírgula
-    const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/[^0-9,]/g, '');
-
-    // Limitar a uma vírgula
-    const commaCount = (input.value.match(/,/g) || []).length;
-    if (commaCount > 1) {
-      input.value = input.value.replace(/,/g, (match, index, original) => {
-        return index === original.indexOf(',') ? match : '';
-      });
-    }
-
-    this.sourceValue = input.value || '0';
-    this.calculateConversion();
-  }
-
-  onTargetInputChange(event: Event): void {
-    // Validar entrada: permitir apenas números e vírgula
-    const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/[^0-9,]/g, '');
-
-    // Limitar a uma vírgula
-    const commaCount = (input.value.match(/,/g) || []).length;
-    if (commaCount > 1) {
-      input.value = input.value.replace(/,/g, (match, index, original) => {
-        return index === original.indexOf(',') ? match : '';
-      });
-    }
-
-    this.targetValue = input.value || '0';
-    this.calculateReverseConversion();
-  }
-
-  // Manipulação de teclado
-  onDigitClick(digit: string): void {
-    if (this.activeDisplay === 'source') {
-      // Para o primeiro dígito, substituir o 0 inicial
-      if (this.sourceValue === '0' && digit !== ',') {
-        this.sourceValue = digit;
-      } else if (digit === ',' && this.sourceValue.includes(',')) {
-        // Evitar múltiplas vírgulas
-        return;
-      } else {
-        this.sourceValue += digit;
-      }
-
-      this.calculateConversion();
-    } else {
-      // Para o primeiro dígito, substituir o 0 inicial
-      if (this.targetValue === '0' && digit !== ',') {
-        this.targetValue = digit;
-      } else if (digit === ',' && this.targetValue.includes(',')) {
-        // Evitar múltiplas vírgulas
-        return;
-      } else {
-        this.targetValue += digit;
-      }
-
-      this.calculateReverseConversion();
-    }
-
-    this.emitValueChange();
-  }
-
-  onOperationClick(operation: string): void {
-    if (operation === 'AC') {
-      this.resetCalculator();
-      return;
-    }
-
-    if (operation === 'delete') {
-      if (this.activeDisplay === 'source') {
-        if (this.sourceValue.length > 1) {
-          this.sourceValue = this.sourceValue.substring(0, this.sourceValue.length - 1);
-          if (this.sourceValue === '') {
-            this.sourceValue = '0';
-          }
-        } else {
-          this.sourceValue = '0';
-        }
-        this.calculateConversion();
-      } else {
-        if (this.targetValue.length > 1) {
-          this.targetValue = this.targetValue.substring(0, this.targetValue.length - 1);
-          if (this.targetValue === '') {
-            this.targetValue = '0';
-          }
-        } else {
-          this.targetValue = '0';
-        }
-        this.calculateReverseConversion();
-      }
-
-      this.emitValueChange();
-      return;
-    }
-
-    if (operation === '=') {
-      this.emitCalculate();
-      return;
-    }
-  }
-
-  // Lógica de conversão delegada ao serviço
-  calculateConversion(): void {
-    if (!this.sourceUnit || !this.targetUnit) return;
-
-    const sourceValue = parseFloat(this.sourceValue.replace(',', '.'));
-    if (isNaN(sourceValue)) return;
-
-    try {
-      const targetValue = this.currentService.convert(
-        sourceValue,
-        this.selectedSourceUnitId,
-        this.selectedTargetUnitId
-      );
-      this.targetValue = targetValue.toFixed(4).replace('.', ',');
-      this.emitValueChange();
-    } catch (error) {
-      console.error('Erro na conversão:', error);
-    }
-  }
-
-  calculateReverseConversion(): void {
-    if (!this.sourceUnit || !this.targetUnit) return;
-
-    const targetValue = parseFloat(this.targetValue.replace(',', '.'));
-    if (isNaN(targetValue)) return;
-
-    try {
-      const sourceValue = this.currentService.convert(
-        targetValue,
-        this.selectedTargetUnitId,
-        this.selectedSourceUnitId
-      );
-      this.sourceValue = sourceValue.toFixed(4).replace('.', ',');
-      this.emitValueChange();
-    } catch (error) {
-      console.error('Erro na conversão inversa:', error);
-    }
+    return element.classList.contains(className) || element.closest(`.${className}`) !== null;
   }
 
   private emitValueChange(): void {
@@ -373,6 +108,31 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     });
   }
 
+  private _convert(value: string): string {
+    if (!this.sourceUnit || !this.targetUnit)
+      return '0';
+
+    const parsedValue = parseFloat(value.replace(',', '.'));
+
+    if (isNaN(parsedValue))
+      return '0';
+
+    try {
+      const result = this.currentConverter.convert(
+        parsedValue,
+        this.selectedSourceUnitId,
+        this.selectedTargetUnitId
+      );
+
+      // return result.toFixed(4).replace('.', ',');
+      const stringResult = result.toString().replace('.', ',');
+      return stringResult;
+    } catch (error) {
+      console.error('Erro na conversão:', error);
+      return '0';
+    }
+  }
+
   private emitCalculate(): void {
     this.calculate.emit({
       sourceValue: this.sourceValue,
@@ -382,7 +142,174 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     });
   }
 
-  private resetCalculator(): void {
+  // Método para posicionar o dropdown de unidades
+  private positionDropdown(type: 'source' | 'target'): void {
+    const dropdown = document.querySelector(`.unit-dropdown`);
+    const trigger = document.querySelector(`.${type === 'source' ? 'source' : 'target'}-unit-selector-mini`);
+
+    if (dropdown && trigger) {
+      const rect = trigger.getBoundingClientRect();
+      (dropdown as HTMLElement).style.top = `${rect.bottom}px`;
+      (dropdown as HTMLElement).style.left = `${rect.left}px`;
+    }
+  }
+
+  private _setSourceValue(value: string): void {
+    this.sourceValue = value || '0';
+    this.targetValue = this._convert(this.sourceValue);
+    this.emitValueChange();
+  }
+
+  private _setTargetValue(value: string): void {
+    this.targetValue = value || '0';
+    this.sourceValue = this._convert(this.targetValue);
+    this.emitValueChange();
+  }
+
+  private _inputChanged(input: HTMLInputElement, callback: (value: string) => void): void {
+    input.value = input.value.replace(/[^0-9,]/g, '');
+    const commaCount = (input.value.match(/,/g) || []).length;
+
+    if (commaCount > 1) {
+      input.value = input.value.replace(/,/g, (match, index, original) => {
+        return index === original.indexOf(',') ? match : '';
+      });
+    }
+
+    // this._setSourceValue(input.value || '0');
+    callback(input.value || '0');
+  }
+
+  ngOnInit(): void {
+    this.updateConverter();
+    this.initializeUnits();
+
+    this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
+    document.addEventListener('click', this.documentClickListener);
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('click', this.documentClickListener);
+  }
+
+  onSourceUnitSelect(unitId: string): void {
+    this.selectedSourceUnitId = unitId;
+    this.showSourceUnitSelector = false;
+    const unit = this.currentConverter.getUnitById(unitId);
+    this.sourceUnitChange.emit(unit);
+
+    if (this.activeDisplay === 'source') {
+      const input = document.getElementById('source-input') as HTMLInputElement;
+      this._inputChanged(input, value => this._setSourceValue(value));
+    } else {
+      const input = document.getElementById('target-input') as HTMLInputElement;
+      this._inputChanged(input, value => this._setTargetValue(value));
+    }
+  }
+
+  onTargetUnitSelect(unitId: string): void {
+    this.selectedTargetUnitId = unitId;
+    this.showTargetUnitSelector = false;
+    const unit = this.currentConverter.getUnitById(unitId);
+    this.targetUnitChange.emit(unit);
+
+    if (this.activeDisplay === 'source') {
+      const input = document.getElementById('source-input') as HTMLInputElement;
+      this._inputChanged(input, value => this._setSourceValue(value));
+    } else {
+      const input = document.getElementById('target-input') as HTMLInputElement;
+      this._inputChanged(input, value => this._setTargetValue(value));
+    }
+  }
+
+  // Método para mostrar os dropdowns das unidades de origem
+  toggleSourceUnitSelectorDropDown(event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    this.showSourceUnitSelector = !this.showSourceUnitSelector;
+
+    if (this.showSourceUnitSelector) {
+      this.showTargetUnitSelector = false;
+      setTimeout(() => this.positionDropdown('source'), 0);
+    }
+  }
+
+  // Método para mostrar os dropdowns das unidades de destino
+  toggleTargetUnitSelectorDropDown(event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.showTargetUnitSelector = !this.showTargetUnitSelector;
+    if (this.showTargetUnitSelector) {
+      this.showSourceUnitSelector = false;
+      setTimeout(() => this.positionDropdown('target'), 0);
+    }
+  }
+
+  // Define o display ativo (source ou target)
+  setActiveDisplay(display: 'source' | 'target'): void {
+    this._clearValue = this.activeDisplay !== display;
+    this.activeDisplay = display;
+  }
+
+  onSourceInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this._inputChanged(input, value => this._setSourceValue(value));
+  }
+
+  onTargetInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this._inputChanged(input, value => this._setTargetValue(value));
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+
+    if (this._clearValue) {
+      input.value = '';
+      this._clearValue = false;
+    }
+  }
+
+  onDigitClick(digit: string): void {
+    const input = document.getElementById(`${this.activeDisplay}-input`) as HTMLInputElement;
+
+    if (this._clearValue) {
+      input.value = '';
+      this._clearValue = false;
+    }
+
+    input.value = input.value === '0' ? digit : input.value + digit;
+
+    if (this.activeDisplay === 'source')
+      this._inputChanged(input, value => this._setSourceValue(value));
+    else
+      this._inputChanged(input, value => this._setTargetValue(value));
+  }
+
+  onClickBackspace(): void {
+    const input = document.getElementById(`${this.activeDisplay}-input`) as HTMLInputElement;
+
+    if (this._clearValue) {
+      input.value = '';
+      this._clearValue = false;
+    }
+
+    input.value = input.value.substring(0, input.value.length - 1);
+
+    if (input.value === '') {
+      input.value = '0';
+    }
+
+    if (this.activeDisplay === 'source')
+      this._inputChanged(input, value => this._setSourceValue(value));
+    else
+      this._inputChanged(input, value => this._setTargetValue(value));
+  }
+
+  onClickResetCalculator(): void {
     this.sourceValue = '0';
     this.targetValue = '0';
     this.activeDisplay = 'source';

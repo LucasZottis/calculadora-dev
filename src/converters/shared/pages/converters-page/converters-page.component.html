@@ -35,7 +35,7 @@
         <h2>Categorias de Conversores</h2>
 
         <div class="subcategories-grid">
-            <a *ngFor="let category of converterCategories" [routerLink]="getCategoryRoute(category.id)"
+            <a *ngFor="let category of categories" [routerLink]="'/conversores/' + category.id"
                 class="subcategory-card">
                 <div class="subcategory-icon">
                     <span class="material-symbols-outlined">{{ category.icon }}</span>

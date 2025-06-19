@@ -1,37 +1,41 @@
-import { Inject, Injectable, Injector, Optional } from '@angular/core';
-import { ConverterRegistration } from '../../models/converterRegistration';
-import { ADDITIONAL_CONVERTERS } from '../../provider';
-import { ConverterCategory } from '../../models/converterCategory';
+import { Optional } from '@angular/core';
+import { ConverterFactory, IConverter } from 'dev-toolz.library';
+import { ConverterUrlService } from '../converter-url-service/converter-url.service';
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 export class ConvertersBaseService {
-  private _selectedCategory: string = 'volume';
-  private _converters: ConverterCategory[] = [];
+  protected converter: IConverter;
+  protected converterFactory: ConverterFactory = new ConverterFactory();
 
   constructor(
-    // private injector: Injector,
-    category: string,
-    @Optional() @Inject(ADDITIONAL_CONVERTERS) private converters?: ConverterRegistration[]
+    protected categoryId: string,
+    @Optional() protected urlService?: ConverterUrlService
   ) {
-    // Registrar conversores adicionais
-    this.registerCategories();
-    this._selectedCategory = category;
+    this.converter = this.converterFactory.getConverter(categoryId);
+    if (this.urlService) {
+      this.urlService.units = this.converter.getUnits();
+    }
   }
 
-  private registerCategories(): void {
-    if (!this.converters) return;
+  getUnits() {
+    return this.converter.getUnits();
+  }
 
-    for (const converter of this.converters) {
-      // Adiciona a categoria se ainda não existir
-      if (!this._converters.some(cat => cat.id === converter.categoryId)) {
-        this._converters.push({
-          id: converter.categoryId,
-          name: converter.categoryName,
-          icon: converter.categoryIcon
-        });
-      }
-    }
+  getUnitById(unitId: string) {
+    return this.converter.getUnitById(unitId);
+  }
+
+  convert(value: number, sourceUnitId: string, targetUnitId: string): number {
+    return this.converter.convert(value, sourceUnitId, targetUnitId);
+  }
+
+  generateConversionUrl(sourceUnitId: string, targetUnitId: string): string {
+    return this.urlService?.generateConversionUrl(sourceUnitId, targetUnitId) || '';
+  }
+
+  parseConversionUrl(url: string) {
+    return this.urlService?.parseConversionUrl(url);
   }
 }
