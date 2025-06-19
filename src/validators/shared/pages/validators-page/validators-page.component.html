@@ -1,0 +1,92 @@
+<!-- src/validators/pages/validators-category-page/validators-category-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><span>Validadores</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Categoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">fact_check</span>
+        </div>
+        <div class="category-info">
+            <h1>Validadores</h1>
+            <p>Ferramentas para verificar a validade de documentos e informações usadas no desenvolvimento de software
+            </p>
+        </div>
+    </div>
+
+    <!-- Descrição da Categoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>Os validadores são ferramentas essenciais para desenvolvedores que trabalham com dados de usuários e
+                precisam verificar a autenticidade de documentos brasileiros. Nossas ferramentas implementam os
+                algoritmos oficiais de validação, facilitando a verificação e o entendimento do processo.</p>
+            <p>Além de simplesmente validar os dados, também explicamos o processo de validação, o que ajuda no
+                entendimento e na implementação dos algoritmos em seus próprios projetos.</p>
+        </div>
+    </section>
+
+    <!-- Lista de Validadores -->
+    <section class="tools-section">
+        <h2>Validadores Disponíveis</h2>
+
+        <div class="tools-grid">
+            <a *ngFor="let validator of validators" [routerLink]="validator.route" class="tool-card">
+                <div class="tool-icon">
+                    <span class="material-symbols-outlined">{{ validator.icon }}</span>
+                </div>
+                <div class="tool-content">
+                    <h3>{{ validator.name }}</h3>
+                    <p>{{ validator.description }}</p>
+                </div>
+                <div class="tool-action">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="benefits-section">
+        <h2>Por que usar nossos validadores?</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">verified</span>
+                </div>
+                <h3>Precisão</h3>
+                <p>Algoritmos de validação precisos que implementam as regras oficiais de cada documento</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">bolt</span>
+                </div>
+                <h3>Rapidez</h3>
+                <p>Validação instantânea, sem necessidade de enviar os dados para servidores externos</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <h3>Educativo</h3>
+                <p>Explicações detalhadas sobre o funcionamento dos algoritmos de validação</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+                <h3>Segurança</h3>
+                <p>Processamento local dos dados, sem armazenamento ou envio para servidores externos</p>
+            </div>
+        </div>
+    </section>
+</div>

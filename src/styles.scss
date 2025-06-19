@@ -31,6 +31,7 @@
     /* Sobreescritos */
     --bs-btn-hover-bg: var(--primary-color) !important;
     --bs-primary-rgb: var(--primary-color) !important;
+    --bs-body-bg: var(--primary-background-color) !important;
 }
 
 * {
@@ -42,9 +43,8 @@
 
 html,
 body {
-    height: 100%;
-    width: 100vw;
-    overflow: hidden;
+    min-height: 100%;
+    // width: 100vw;
 }
 
 body {
@@ -53,8 +53,9 @@ body {
 }
 
 a {
-    text-decoration: none !important;
     color: inherit !important;
+    cursor: pointer;
+    text-decoration: none !important;
 }
 
 hr {
@@ -80,6 +81,47 @@ main-layout {
 
 .material-symbols-outlined {
     font-family: "Material Symbols Outlined" !important;
+}
+
+.breadcrumbs {
+    margin-bottom: 2rem;
+
+    ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        color: #a5d6a7;
+        opacity: 0.8;
+
+        &:not(:last-child):after {
+            content: '/';
+            margin: 0 0.5rem;
+            opacity: 0.5;
+        }
+
+        a {
+            color: #a5d6a7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #4caf50;
+                text-decoration: underline;
+            }
+        }
+
+        span {
+            color: #4caf50;
+        }
+    }
 }
 
 .btn {

@@ -1,0 +1,65 @@
+<!-- src/converters/volume/pages/volume-home-page/volume-page/volume-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Volume</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">deployed_code</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Volume</h1>
+            <p>Faça conversões precisas entre diferentes unidades de volume e capacidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de volume permite transformar valores entre várias unidades de medida de capacidade e volume,
+                como litros, mililitros, metros cúbicos, galões e muito mais.</p>
+            <p>Ideal para estudantes, profissionais de química e engenharia, ou qualquer pessoa que precise fazer
+                conversões precisas entre unidades de volume de diferentes sistemas de medida.</p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <section class="conversion-groups-container">
+        @for(item of groupedUnits; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(unit of item.units; track unit.id) {
+                <a [routerLink]="['/conversores/volume', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">deployed_code</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{ unit.name }}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedUnits; track item.key.id){
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+</div>

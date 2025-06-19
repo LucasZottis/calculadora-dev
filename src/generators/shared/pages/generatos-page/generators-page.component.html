@@ -1,0 +1,90 @@
+<!-- src/generators/pages/generators-category-page/generators-category-page.component.html -->
+<div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><span>Geradores</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Categoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">smart_toy</span>
+        </div>
+        <div class="category-info">
+            <h1>Geradores</h1>
+            <p>Ferramentas para criar dados válidos para uso em desenvolvimento e testes de software</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Categoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>Nossos geradores criam documentos e números de identificação válidos que seguem as regras oficiais de
+                validação, ideais para uso em ambientes de teste, desenvolvimento e homologação.</p>
+            <p>Estas ferramentas são essenciais para desenvolvedores que precisam testar seus sistemas com dados que
+                passarão por validações, sem precisar usar dados reais de pessoas ou empresas.</p>
+        </div>
+    </section>
+
+    <!-- Lista de Geradores -->
+    <section class="tools-section">
+        <h2>Geradores Disponíveis</h2>
+
+        <div class="tools-grid">
+            <a *ngFor="let generator of generators" [routerLink]="generator.route" class="tool-card">
+                <div class="tool-icon">
+                    <span class="material-symbols-outlined">{{ generator.icon }}</span>
+                </div>
+                <div class="tool-content">
+                    <h3>{{ generator.name }}</h3>
+                    <p>{{ generator.description }}</p>
+                </div>
+                <div class="tool-action">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="benefits-section">
+        <h2>Por que usar nossos geradores?</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">verified</span>
+                </div>
+                <h3>Válidos</h3>
+                <p>Todos os dados gerados seguem os algoritmos oficiais e passarão por validações rigorosas</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">bolt</span>
+                </div>
+                <h3>Rápidos</h3>
+                <p>Geração instantânea de documentos em quantidade, sem necessidade de configurações complexas</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">data_object</span>
+                </div>
+                <h3>Aleatórios</h3>
+                <p>Dados gerados de forma verdadeiramente aleatória, ideais para testes de todas as naturezas</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+                <h3>Seguros</h3>
+                <p>Geração local sem armazenamento ou envio de dados para servidores externos</p>
+            </div>
+        </div>
+    </section>
+</div>

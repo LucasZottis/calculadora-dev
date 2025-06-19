@@ -1,0 +1,79 @@
+// Estilos específicos para a página de conversor de peso e massa
+
+// Estilo para cards das conversões populares
+.conversion-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+        border-color: var(--bs-primary) !important;
+
+        .material-symbols-outlined {
+            color: var(--bs-primary);
+        }
+    }
+}
+
+// Estilo para o bloco da fórmula
+pre {
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: #a5d6a7;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+// Estilo para instrução de uso
+.card-title {
+    color: #4caf50 !important;
+    font-weight: bold;
+}
+
+// Estilo para o bloco de código da fórmula
+.bg-dark {
+    background-color: #121212 !important;
+    border: 1px solid var(--border-color-base);
+}
+
+// Estilo para links de conversões populares
+a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+// Animação para o bloco da fórmula quando aparece
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    &:has(pre) {
+        animation: fadeIn 0.3s ease-out;
+    }
+}
+
+// Responsividade 
+@media (max-width: 576px) {
+    .texto-explicativo {
+        width: 100%;
+    }
+
+    pre {
+        font-size: 0.8rem;
+    }
+}
