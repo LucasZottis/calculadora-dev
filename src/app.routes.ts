@@ -27,11 +27,11 @@ export const routes: Routes = [
             { path: 'geradores/cnpj', component: CnpjGeneratorPageComponent },
 
             // Rotas para geradores
-            { path: 'conversores', component: ConvertersPageComponent },
-            { path: 'conversores/volume', loadChildren: () => import('./converters/volume/volume.routes').then(m => m.VOLUME_ROUTES) },
-            { path: 'conversores/peso-e-massa', loadChildren: () => import('./converters/weight-and-mass/weight-mass.routes').then(m => m.WEIGHT_MASS_ROUTES) },
-            { path: 'conversores/comprimento', loadChildren: () => import('./converters/length/length.routes').then(m => m.LENGTH_ROUTES) },
-            { path: 'conversores/temperatura', loadChildren: () => import('./converters/temperature/temperature.routes').then(m => m.TEMPERATURE_ROUTES) },
+            // { path: 'conversores', component: ConvertersPageComponent },
+            { path: 'conversores', loadChildren: () => import('./converters/shared/converters.routes').then(m => m.CONVERTERS_ROUTES) },
+            // { path: 'conversores/peso-e-massa', loadChildren: () => import('./converters/weight-and-mass/weight-mass.routes').then(m => m.WEIGHT_MASS_ROUTES) },
+            // { path: 'conversores/comprimento', loadChildren: () => import('./converters/length/length.routes').then(m => m.LENGTH_ROUTES) },
+            // { path: 'conversores/temperatura', loadChildren: () => import('./converters/temperature/temperature.routes').then(m => m.TEMPERATURE_ROUTES) },
         ]
     },
 ];
