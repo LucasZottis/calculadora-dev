@@ -1,32 +1,32 @@
-<!-- src/converters/volume/pages/volume-home-page/volume-page/volume-page.component.html -->
 <div class="container">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
         <ol>
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/conversores">Conversores</a></li>
-            <li><span>Temperatura</span></li>
+            <li><span>Energia</span></li>
         </ol>
     </nav>
 
     <!-- Título da Subcategoria -->
     <div class="category-header">
         <div class="category-icon">
-            <span class="material-symbols-outlined">device_thermostat</span>
+            <span class="material-symbols-outlined">bolt</span>
         </div>
         <div class="category-info">
-            <h1>Conversor de Temperatura</h1>
-            <p>Faça conversões precisas entre diferentes escalas de temperatura</p>
+            <h1>Conversor de Energia</h1>
+            <p>Realize conversões precisas entre diversas unidades de energia, desde joules até quilowatt-horas</p>
         </div>
     </div>
 
     <!-- Descrição da Subcategoria -->
     <section class="category-description">
         <div class="description-content">
-            <p>O conversor de temperatura permite transformar valores entre diversas escalas térmicas, como Celsius,
-                Fahrenheit, Kelvin, Rankine e Réaumur, com total precisão e confiabilidade.</p>
-            <p>Ideal para estudantes, profissionais de física, engenharia térmica, meteorologia ou qualquer pessoa que
-                precise converter temperaturas entre sistemas científicos e práticos de medição.</p>
+            <p>Este conversor de energia permite transformar valores entre múltiplas unidades de energia, como joules,
+                quilojoules, calorias, elétron-volts, BTUs, quilowatt-horas e outras.</p>
+            <p>Ferramenta essencial para estudantes, engenheiros, físicos e profissionais que demandam conversões
+                rigorosas
+                entre sistemas internacionais e tradicionais de unidades energéticas.</p>
         </div>
     </section>
 
@@ -39,10 +39,10 @@
             <hr>
             <div class="conversion-links-grid">
                 @for(unit of item.units; track unit.id) {
-                <a [routerLink]="['/conversores/temperatura', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                <a [routerLink]="['/conversores/energia', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
                     class="conversion-link-card">
                     <div class="conversion-link-icon">
-                        <span class="material-symbols-outlined">device_thermostat</span>
+                        <span class="material-symbols-outlined">bolt</span>
                     </div>
                     <div class="conversion-link-content">
                         <h3>{{item.key.name}} para {{ unit.name }}</h3>
