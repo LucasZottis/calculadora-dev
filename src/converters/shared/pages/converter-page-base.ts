@@ -1,4 +1,4 @@
-import { ConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
+import { UnitConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
 import { PageBase } from "src/shared/pages/pageBase"
 import { UnitUrlFormatterService } from "../services/unit-url-formatter.service";
 import { inject } from "@angular/core";
@@ -10,7 +10,7 @@ export class ConverterPageBase extends PageBase {
     protected readonly unitUrlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
     protected readonly route: ActivatedRoute = inject(ActivatedRoute);
     protected readonly router: Router = inject(Router);
-    protected readonly convertersFactory = inject(ConverterFactory);
+    protected readonly convertersFactory = inject(UnitConverterFactory);
     protected readonly service!: IUnitConverter;
     protected readonly units!: Unit[];
     protected readonly selectedCategory!: string;
@@ -35,7 +35,7 @@ export class ConverterPageBase extends PageBase {
         super(meta, title);
         this.selectedCategory = selectedCategory;
         this.urlPrefix = urlPrefix;
-        this.service = this.convertersFactory.getConverter(selectedCategory);
+        this.service = this.convertersFactory.createService(selectedCategory);
         this.units = this.service.getUnits();
     }
 

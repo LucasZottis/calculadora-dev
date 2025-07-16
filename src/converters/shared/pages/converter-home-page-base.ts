@@ -1,5 +1,5 @@
 import { Meta, Title } from "@angular/platform-browser";
-import { ConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
+import { UnitConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
 import { NavigationHelper } from "src/shared/helpers/navigationHelper";
 import { PageBase } from "src/shared/pages/pageBase";
 import { UnitUrlFormatterService } from '../services/unit-url-formatter.service';
@@ -12,13 +12,13 @@ export class ConverterHomePageBase extends PageBase {
     protected readonly groupedUnits: Array<{ key: Unit, units: Unit[] }> = [];
 
     constructor(
-        factory: ConverterFactory,
+        factory: UnitConverterFactory,
         meta: Meta,
         title: Title,
         categoryId: string,
     ) {
         super(meta, title);
-        this._service = factory.getConverter(categoryId);
+        this._service = factory.createService(categoryId);
         this.availableUnits = this._service.getUnits();
         this._groupList();
     }
