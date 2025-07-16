@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ConverterFactory } from 'dev-toolz.library';
+import { UnitConverterFactory } from 'dev-toolz.library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
 @Component({
@@ -17,7 +17,7 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
 })
 export class EnergyHomePageComponent  extends ConverterHomePageBase implements OnInit {
   constructor(
-    factory: ConverterFactory,
+    factory: UnitConverterFactory,
     meta: Meta,
     title: Title,
   ) {

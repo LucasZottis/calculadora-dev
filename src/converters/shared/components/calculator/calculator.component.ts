@@ -2,7 +2,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
+import { UnitConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
 
 @Component({
@@ -35,8 +35,8 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   showSourceUnitSelector: boolean = false;
   showTargetUnitSelector: boolean = false;
 
-  constructor(private converterFactory: ConverterFactory) {
-    this.currentConverter = this.converterFactory.getConverter(this.selectedCategoryId);
+  constructor(private converterFactory: UnitConverterFactory) {
+    this.currentConverter = this.converterFactory.createService(this.selectedCategoryId);
   }
 
   get availableUnits(): Unit[] {
@@ -61,7 +61,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
   private updateConverter(): void {
     try {
-      this.currentConverter = this.converterFactory.getConverter(this.selectedCategoryId);
+      this.currentConverter = this.converterFactory.createService(this.selectedCategoryId);
     } catch (error) {
       console.error('Erro ao obter conversor:', error);
     }

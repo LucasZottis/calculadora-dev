@@ -1,12 +1,12 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { ConverterFactory } from 'dev-toolz.library';
+import { UnitConverterFactory } from 'dev-toolz.library';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    ConverterFactory,
+    UnitConverterFactory,
     // Registrar conversores adicionais
     // provideConverters([
     //   {
