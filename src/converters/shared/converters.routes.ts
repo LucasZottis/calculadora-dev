@@ -9,4 +9,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'comprimento', loadChildren: () => import('../length/length.routes').then(m => m.LENGTH_ROUTES) },
     { path: 'temperatura', loadChildren: () => import('../temperature/temperature.routes').then(m => m.TEMPERATURE_ROUTES) },
     { path: 'energia', loadChildren: () => import('../energy/energy.routes').then(m => m.ENERGY_ROUTES) },
+    { path: 'area', loadChildren: () => import('../area/area.routes').then(m => m.AREA_ROUTES) },
 ];
