@@ -19,9 +19,10 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
   categories: Array<{ id: string, name: string, icon: string }> = [
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
     { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
-    { id: 'comprimento', name: 'Comprimento', icon: 'square_foot' },
+    { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
     { id: 'energia', name: 'Energia', icon: 'bolt' },
+    { id: 'area', name: 'Área', icon: 'square_foot' },
   ];
 
   constructor(
