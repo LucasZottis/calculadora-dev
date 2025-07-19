@@ -1,15 +1,18 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { ExplanationCpfCalculationComponent } from "src/shared/components/explanation-cpf-calculation/explanation-cpf-calculation.component";
 
 @Component({
   selector: 'cpf-validator-page',
   standalone: true,
   imports: [
-    NgIf,
+    RouterModule,
     FormsModule,
-  ],
+    ExplanationCpfCalculationComponent
+],
   templateUrl: './cpf-validator-page.component.html',
   styleUrl: './cpf-validator-page.component.scss'
 })

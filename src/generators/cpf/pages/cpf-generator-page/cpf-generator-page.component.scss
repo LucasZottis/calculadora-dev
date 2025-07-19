@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .generator-form .generator-inputs {
@@ -25,7 +26,6 @@
     align-self: center;
     display: flex;
     gap: 30px;
-    // justify-content: space-evenly;
 }
 
 @media(min-width: 400px) {
@@ -60,6 +60,6 @@
 
 @media(min-width: 1920px) {
     .generator-form .generator-inputs {
-        width: 15%;
+        width: 20%;
     }
 }

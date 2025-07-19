@@ -2,12 +2,16 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { ExplanationCpfCalculationComponent } from "src/shared/components/explanation-cpf-calculation/explanation-cpf-calculation.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'cpf-generator-page',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    ExplanationCpfCalculationComponent,
+    RouterModule
   ],
   templateUrl: './cpf-generator-page.component.html',
   styleUrl: './cpf-generator-page.component.scss'

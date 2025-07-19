@@ -79,6 +79,13 @@ main-layout {
     height: 100%;
 }
 
+.page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
 .material-symbols-outlined {
     font-family: "Material Symbols Outlined" !important;
 }
@@ -192,4 +199,76 @@ main-layout {
 .card {
     --bs-card-bg: #181b1e !important;
     --bs-card-border-color: var(--border-color-base) !important;
+}
+
+/* Category Header */
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+
+    .category-icon {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        border-radius: 50%;
+        background-color: var(--bs-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .material-symbols-outlined {
+            font-size: 3rem;
+            color: white;
+        }
+    }
+
+    .category-info {
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #a5d6a7;
+            max-width: 800px;
+        }
+    }
+}
+
+/* Conteúdo descritivo e outras seções com fundo */
+.description-content {
+    background-color: var(--second-background-color);
+    border-radius: 8px;
+    padding: 2rem;
+    border: 1px solid var(--border-color-base);
+    margin-bottom: 2rem;
+
+    p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.form {
+    background-color: var(--second-background-color);
+    border: 1px solid var(--border-color-base);
+    border-radius: 8px;
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.form-control {
+    background-color: var(--bs-black) !important;
+    color: #4caf50 !important;
+}
+
+.form-control::placeholder {
+    color: #a5d6a7 !important;
 }

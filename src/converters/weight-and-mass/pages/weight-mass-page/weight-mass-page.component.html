@@ -1,6 +1,6 @@
-<div class="container">
+<div class="page-container">
     <!-- src/converters/weight-and-mass/pages/weight-mass-page/weight-mass-page.component.html -->
-    <div class="container">
+    <div class="page-container">
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs">
             <ol>
@@ -35,7 +35,7 @@
         </section>
 
         <!-- Links de conversão agrupados por unidade de medida -->
-        <section class="conversion-groups-container">
+        <section class="conversion-groups-page-container">
             @for(item of groupedUnits; track item.key.id) {
             <section class="conversion-group" [id]="item.key.id">
                 <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
