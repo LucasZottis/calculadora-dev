@@ -2,12 +2,16 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { ExplanationCnpjCalculationComponent } from "src/shared/components/explanation-cnpj-calculation/explanation-cnpj-calculation.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'cnpj-generator-page',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterModule,
+    ExplanationCnpjCalculationComponent
   ],
   templateUrl: './cnpj-generator-page.component.html',
   styleUrl: './cnpj-generator-page.component.scss'

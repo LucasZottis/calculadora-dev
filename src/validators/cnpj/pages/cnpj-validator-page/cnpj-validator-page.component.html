@@ -3,7 +3,7 @@
         <ol>
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/validadores">Validadores</a></li>
-            <li><span>CNPJ</span></li>
+            <li><span>Validador de CNPJ</span></li>
         </ol>
     </nav>
 
@@ -13,12 +13,27 @@
             <span class="material-symbols-outlined">fact_check</span>
         </div>
         <div class="category-info">
-            <h1>Validdor de CNPJ</h1>
+            <h1>Validador de CNPJ</h1>
             <p>Verifique se um número de CNPJ é válido e aprenda como calcular os dígitos verificadores</p>
         </div>
     </div>
 
-    <form class="form">
+    <section class="category-description">
+        <div class="description-content">
+            <p>
+                O CNPJ (Cadastro Nacional da Pessoa Jurídica) é um número único que identifica uma empresa no Brasil.
+                Ele é composto por 14 dígitos, sendo os 12 primeiros o número base e os 2 últimos os dígitos
+                verificadores.
+                A validação do CNPJ envolve a verificação dos dígitos verificadores para garantir que o número é válido.
+            </p>
+            <p>
+                Para validar um CNPJ, você pode utilizar a ferramenta abaixo. Basta inserir o número do CNPJ e clicar em
+                "Validar".
+            </p>
+        </div>
+    </section>
+
+    <form>
         <div class="row">
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 mx-auto">
                 <div id="formulario">
@@ -38,6 +53,7 @@
 
     <section class="category-description">
         <div class="description-content">
+            <h4 class="fw-bold text-center mb-3">Como validar um CNPJ?</h4>
             <explanation-cnpj-calculation />
         </div>
     </section>
