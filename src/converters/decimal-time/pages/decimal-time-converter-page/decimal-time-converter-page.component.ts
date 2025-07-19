@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
   selector: 'decimal-time-converter-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+  ],
   templateUrl: './decimal-time-converter-page.component.html',
   styleUrl: './decimal-time-converter-page.component.scss'
 })

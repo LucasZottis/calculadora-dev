@@ -1,114 +1,132 @@
-<!-- tempo-decimal-conversor.component.html -->
-<div class="text-center mb-5">
-    <h1>Converter número decimal para horas</h1>
-    <p class="fs-3">
-        Você sabia que é possível transformar um valor de tempo expresso em horas, minutos e segundos em um
-        formato decimal?
-    </p>
-    <p class="fs-5">
-        Esse cálculo é extremamente útil em diversas situações, como em cálculos de pagamento de salário por
-        hora trabalhada ou em cálculos de tempo gasto em atividades.
-        Abaixo nós criamos uma ferramenta que permite que você faça essa conversão de forma simples e rápida.
-    </p>
-</div>
-
-<!-- <hr> -->
-
-<div class="watch">
-    <div class="display-section">
-        <div class="display-box main">
-            <div class="display-label">Tempo</div>
-            <div class="time-display">
-                <input type="text" maxlength="3" [(ngModel)]="hoursValue" (input)="onHoursInputChange()"
-                    (blur)="onTimeInputBlur()" class="time-input hour-input">
-                <span class="time-separator">:</span>
-                <input type="text" maxlength="2" [(ngModel)]="minutesValue" (input)="onMinutesInputChange()"
-                    (blur)="onTimeInputBlur()" class="time-input minute-input">
-                <span class="time-separator">:</span>
-                <input type="text" maxlength="2" [(ngModel)]="secondsValue" (input)="onSecondsInputChange()"
-                    (blur)="onTimeInputBlur()" class="time-input second-input">
-            </div>
-        </div>
-
-        <div class="display-box main">
-            <div class="display-label">Decimal (Horas)</div>
-            <div class="decimal-display">{{ decimalHours.toFixed(4) }}</div>
-        </div>
-
-        <div class="sub-displays">
-            <div class="display-box secondary">
-                <div class="display-label">Decimal (Minutos)</div>
-                <div class="minutes-decimal-display">{{ decimalMinutes.toFixed(4) }}</div>
-            </div>
-
-            <div class="display-box secondary">
-                <div class="display-label">Decimal (Segundos)</div>
-                <div class="seconds-decimal-display">{{ decimalSeconds.toFixed(4) }}</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- <hr> -->
-
-<div class="mt-5">
-    <h2 class="text-center fs-1">
-        Como utilizar a ferramenta
-    </h2>
-    <div class="texto-explicativo">
-        <p>
-            A utilização desta ferramenta é simples e intuitiva:
-        </p>
+<div class="container">
+    <nav class="breadcrumbs">
         <ol>
-            <li>
-                <strong>Digite o tempo no formato HH:MM:SS</strong> - Você pode inserir os valores diretamente em cada
-                campo (horas, minutos e segundos).
-            </li>
-            <li>
-                <strong>Ajuste automático de valores</strong> - Se você digitar valores de minutos ou segundos maiores
-                que 59, a ferramenta ajustará automaticamente, incrementando a unidade superior.
-                Por exemplo, se você digitar 75 minutos, será convertido para 1 hora e 15 minutos.
-            </li>
-            <li>
-                <strong>Suporte a horas extensas</strong> - Esta ferramenta suporta até 999 horas, ideal para cálculos
-                de projetos de longa duração.
-            </li>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Tempo Decimal</span></li>
         </ol>
-        <p>
-            Os resultados são exibidos automaticamente em três formatos decimais diferentes:
-        </p>
-        <ul>
-            <li><strong>Decimal (Horas)</strong>: O tempo total convertido em horas decimais.</li>
-            <li><strong>Decimal (Minutos)</strong>: O tempo total convertido em minutos decimais.</li>
-            <li><strong>Decimal (Segundos)</strong>: O tempo total convertido em segundos.</li>
-        </ul>
-    </div>
-</div>
+    </nav>
 
-<div>
-    <h2 class="text-center fs-1">
-        Como é feito esse cálculo?
-    </h2>
-    <div class="texto-explicativo">
-        <p>
-            O processo é simples: primeiro, transformamos os minutos em fração de hora, dividindo-os por 60.
-            Em seguida, fazemos o mesmo com os segundos, dividindo-os por 3600.
-            Depois, é só somar as frações de hora obtidas para obter a parte fracionária do valor em horas
-            decimais.
-            Por fim, somamos o número inteiro de horas com a parte fracionária para obter o valor em horas
-            decimais.
-        </p>
-        <p>
-            Por exemplo, se quisermos converter 1 hora, 15 minutos e 36 segundos para formato decimal, seguimos
-            essas etapas e obtemos o resultado de 1,26 horas em formato decimal.
-        </p>
-        <p>
-            Agora você já sabe como transformar um valor de tempo em horas decimais!
-            Esse cálculo pode ser uma ferramenta muito útil em diversos cenários e pode facilitar muito seus
-            cálculos matemáticos e financeiros.
-        </p>
-        <p>
-            Que tal experimentar?
-        </p>
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">speed_1_75</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de número decimal para horas</h1>
+            <p>
+                Você sabia que é possível transformar um valor de tempo expresso em horas, minutos e segundos em um
+                formato decimal?
+            </p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>
+                Esse cálculo é extremamente útil em diversas situações, como em cálculos de pagamento de salário por
+                hora trabalhada ou em cálculos de tempo gasto em atividades.
+                Abaixo nós criamos uma ferramenta que permite que você faça essa conversão de forma simples e rápida.
+            </p>
+        </div>
+    </section>
+
+    <!-- Instruções de uso -->
+    <section class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+            <p>
+                A utilização desta ferramenta é simples e intuitiva:
+            </p>
+            <ol>
+                <li>
+                    Digite o tempo no formato HH:MM:SS: Você pode inserir os valores diretamente em
+                    cada
+                    campo (horas, minutos e segundos).
+                </li>
+                <li>
+                    Ajuste automático de valores: Se você digitar valores de minutos ou segundos
+                    maiores
+                    que 59, a ferramenta ajustará automaticamente, incrementando a unidade superior.
+                    Por exemplo, se você digitar 75 minutos, será convertido para 1 hora e 15 minutos.
+                </li>
+                <li>
+                    Suporte a horas extensas: Esta ferramenta suporta até 999 horas, ideal para
+                    cálculos
+                    de projetos de longa duração.
+                </li>
+                <li>
+                    Os resultados são exibidos automaticamente em três formatos decimais diferentes:
+                    <ul>
+                        <li>Decimal (Horas): O tempo total convertido em horas decimais.</li>
+                        <li>Decimal (Minutos): O tempo total convertido em minutos decimais.</li>
+                        <li>Decimal (Segundos): O tempo total convertido em segundos.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <div class="watch">
+        <div class="display-section">
+            <div class="display-box main">
+                <div class="display-label">Tempo</div>
+                <div class="time-display">
+                    <input type="text" maxlength="3" [(ngModel)]="hoursValue" (input)="onHoursInputChange()"
+                        (blur)="onTimeInputBlur()" class="time-input hour-input">
+                    <span class="time-separator">:</span>
+                    <input type="text" maxlength="2" [(ngModel)]="minutesValue" (input)="onMinutesInputChange()"
+                        (blur)="onTimeInputBlur()" class="time-input minute-input">
+                    <span class="time-separator">:</span>
+                    <input type="text" maxlength="2" [(ngModel)]="secondsValue" (input)="onSecondsInputChange()"
+                        (blur)="onTimeInputBlur()" class="time-input second-input">
+                </div>
+            </div>
+
+            <div class="display-box main">
+                <div class="display-label">Decimal (Horas)</div>
+                <div class="decimal-display">{{ decimalHours.toFixed(4) }}</div>
+            </div>
+
+            <div class="sub-displays">
+                <div class="display-box secondary">
+                    <div class="display-label">Decimal (Minutos)</div>
+                    <div class="minutes-decimal-display">{{ decimalMinutes.toFixed(4) }}</div>
+                </div>
+
+                <div class="display-box secondary">
+                    <div class="display-label">Decimal (Segundos)</div>
+                    <div class="seconds-decimal-display">{{ decimalSeconds.toFixed(4) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informações adicionais -->
+    <div class="mt-5">
+        <h2 class="text-center fs-4">Como é feito esse cálculo?</h2>
+        <div class="texto-explicativo">
+            <p>
+                O processo é simples: primeiro, transformamos os minutos em fração de hora, dividindo-os por 60.
+                Em seguida, fazemos o mesmo com os segundos, dividindo-os por 3600.
+                Depois, é só somar as frações de hora obtidas para obter a parte fracionária do valor em horas
+                decimais.
+                Por fim, somamos o número inteiro de horas com a parte fracionária para obter o valor em horas
+                decimais.
+            </p>
+            <p>
+                Por exemplo, se quisermos converter 1 hora, 15 minutos e 36 segundos para formato decimal, seguimos
+                essas etapas e obtemos o resultado de 1,26 horas em formato decimal.
+            </p>
+            <p>
+                Agora você já sabe como transformar um valor de tempo em horas decimais!
+                Esse cálculo pode ser uma ferramenta muito útil em diversos cenários e pode facilitar muito seus
+                cálculos matemáticos e financeiros.
+            </p>
+            <p>
+                Que tal experimentar?
+            </p>
+        </div>
     </div>
 </div>
