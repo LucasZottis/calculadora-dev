@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
 
 @Component({
   selector: 'cnpj-validator-page',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RouterModule,
   ],
   templateUrl: './cnpj-validator-page.component.html',
   styleUrl: './cnpj-validator-page.component.scss'

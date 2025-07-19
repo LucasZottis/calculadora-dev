@@ -1,60 +1,60 @@
-<div class="container">
-    <nav class="breadcrumbs">
-        <ol>
-            <li><a routerLink="/">Início</a></li>
-            <li><a routerLink="/conversores">Conversores</a></li>
-            <li><a routerLink="/conversores/area">Energia</a></li>
-            <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
-        </ol>
-    </nav>
+<div class="page-container">
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/area">Energia</a></li>
+      <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
 
-    <div class="text-center mb-5">
-        <h1>Conversor de Área</h1>
-        <p class="fs-3">
-            Converta facilmente entre diferentes unidades de medida de área com precisão e rapidez.
-        </p>
+  <div class="text-center mb-5">
+    <h1>Conversor de Área</h1>
+    <p class="fs-3">
+      Converta facilmente entre diferentes unidades de medida de área com precisão e rapidez.
+    </p>
+  </div>
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+      <p>
+        Esta calculadora permite realizar conversões entre diversas unidades de área, englobando medidas dos
+        sistemas métrico,
+        imperial e outras unidades especializadas. Basta selecionar as unidades de origem e destino, inserir o
+        valor desejado e
+        obter a conversão com precisão e rapidez.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (de onde deseja converter)</li>
+        <li>Escolha a unidade de destino (para onde deseja converter)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado e exibido automaticamente</li>
+      </ol>
     </div>
+  </div>
 
-    <!-- Instruções de uso -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
-            <p>
-                Esta calculadora permite realizar conversões entre diversas unidades de área, englobando medidas dos
-                sistemas métrico,
-                imperial e outras unidades especializadas. Basta selecionar as unidades de origem e destino, inserir o
-                valor desejado e
-                obter a conversão com precisão e rapidez.
-            </p>
-            <ol>
-                <li>Escolha a unidade de origem (de onde deseja converter)</li>
-                <li>Escolha a unidade de destino (para onde deseja converter)</li>
-                <li>Digite o valor na unidade de origem</li>
-                <li>O resultado será calculado e exibido automaticamente</li>
-            </ol>
-        </div>
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
     </div>
+  </div>
 
-
-    <!-- Componente de calculadora -->
-    <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
-        [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
-        (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
-    </calculator>
-
-    <!-- Explicação da fórmula de cálculo -->
-    <div class="mt-5 card" *ngIf="showFormula">
-        <div class="card-body">
-            <h2 class="card-title fs-4">Explicação do Cálculo</h2>
-            <p>{{ formulaDescription }}</p>
-            <div class="bg-dark text-light p-3 rounded">
-                <pre class="mb-0">{{ formulaCalculation }}</pre>
-            </div>
-        </div>
-    </div>
-
-    <!-- Links para conversões populares -->
-    <!-- <div class="mt-5">
+  <!-- Links para conversões populares -->
+  <!-- <div class="mt-5">
       <h2 class="text-center fs-4">Conversões Populares</h2>
       <div class="row g-3 mt-2">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let conversao of conversoesSugeridas">
@@ -70,8 +70,8 @@
       </div>
     </div> -->
 
-    <!-- Seção de links para outros conversores (comentada por enquanto) -->
-    <!--
+  <!-- Seção de links para outros conversores (comentada por enquanto) -->
+  <!--
       <div class="mt-5">
         <h2 class="text-center fs-4">Outros Conversores</h2>
         <div class="row g-3 mt-2">
@@ -109,29 +109,29 @@
       </div>
       -->
 
-    <!-- Informações adicionais -->
-    <div class="mt-5">
-        <h2 class="text-center fs-4">Informações sobre Unidades de Área</h2>
-        <div class="texto-explicativo">
-            <p>
-                Área refere-se à medida da superfície de uma figura ou espaço, expressa em múltiplas unidades conforme a
-                aplicação.
-                Diferentes sistemas de medição de área são utilizados mundialmente:
-            </p>
-            <ul>
-                <li>
-                    <strong>Sistema Métrico</strong>: Metros quadrados (m²), Centímetros quadrados (cm²), Hectares (ha)
-                </li>
-                <li><strong>Sistema Imperial</strong>: Pés quadrados (ft²), Jardas quadradas (yd²), Acres</li>
-                <li><strong>Unidades Específicas</strong>: Polegadas quadradas (in²), Milhas quadradas (mi²)</li>
-            </ul>
-            <p>
-                Todos os cálculos são realizados com alta precisão utilizando fatores de conversão internacionalmente
-                padronizados.
-                A unidade base adotada para as conversões é o metro quadrado (m²).
-            </p>
-        </div>
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Área</h2>
+    <div class="texto-explicativo">
+      <p>
+        Área refere-se à medida da superfície de uma figura ou espaço, expressa em múltiplas unidades conforme a
+        aplicação.
+        Diferentes sistemas de medição de área são utilizados mundialmente:
+      </p>
+      <ul>
+        <li>
+          <strong>Sistema Métrico</strong>: Metros quadrados (m²), Centímetros quadrados (cm²), Hectares (ha)
+        </li>
+        <li><strong>Sistema Imperial</strong>: Pés quadrados (ft²), Jardas quadradas (yd²), Acres</li>
+        <li><strong>Unidades Específicas</strong>: Polegadas quadradas (in²), Milhas quadradas (mi²)</li>
+      </ul>
+      <p>
+        Todos os cálculos são realizados com alta precisão utilizando fatores de conversão internacionalmente
+        padronizados.
+        A unidade base adotada para as conversões é o metro quadrado (m²).
+      </p>
     </div>
+  </div>
 
 
 </div>

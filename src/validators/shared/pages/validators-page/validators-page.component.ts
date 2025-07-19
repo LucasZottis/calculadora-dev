@@ -28,7 +28,7 @@ export class ValidatorsPageComponent extends PageBase implements OnInit {
     {
       id: 'cnpj',
       name: 'Validador de CNPJ',
-      description: 'Verifique se um número de CNPJ é válido e aprenda o algoritmo por trás da validação',
+      description: 'Verifique se um número de CNPJ é válido e aprenda como calcular os dígitos verificadores',
       icon: 'fact_check',
       route: '/validadores/cnpj'
     }

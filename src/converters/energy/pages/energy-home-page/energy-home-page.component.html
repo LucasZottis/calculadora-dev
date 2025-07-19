@@ -1,4 +1,4 @@
-<div class="container">
+<div class="page-container">
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
         <ol>
@@ -32,7 +32,7 @@
 
 
     <!-- Links de conversão agrupados por unidade de medida -->
-    <section class="conversion-groups-container">
+    <section class="conversion-groups-page-container">
         @for(item of groupedUnits; track item.key.id) {
         <section class="conversion-group" [id]="item.key.id">
             <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
