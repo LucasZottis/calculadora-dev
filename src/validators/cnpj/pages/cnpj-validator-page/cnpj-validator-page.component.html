@@ -1,0 +1,60 @@
+<div class="page-container">
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/validadores">Validadores</a></li>
+            <li><span>Validador de CNPJ</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">fact_check</span>
+        </div>
+        <div class="category-info">
+            <h1>Validador de CNPJ</h1>
+            <p>Verifique se um número de CNPJ é válido e aprenda como calcular os dígitos verificadores</p>
+        </div>
+    </div>
+
+    <section class="category-description">
+        <div class="description-content">
+            <p>
+                O CNPJ (Cadastro Nacional da Pessoa Jurídica) é um número único que identifica uma empresa no Brasil.
+                Ele é composto por 14 dígitos, sendo os 12 primeiros o número base e os 2 últimos os dígitos
+                verificadores.
+                A validação do CNPJ envolve a verificação dos dígitos verificadores para garantir que o número é válido.
+            </p>
+            <p>
+                Para validar um CNPJ, você pode utilizar a ferramenta abaixo. Basta inserir o número do CNPJ e clicar em
+                "Validar".
+            </p>
+        </div>
+    </section>
+
+    <form>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 mx-auto">
+                <div id="formulario">
+                    <!-- <label for="txt-cnpj" class="form-label">Digite o CNPJ</label> -->
+                    <input type="text" class="form-control text-center" id="txt-cnpj" maxlength="18" name="txt-cnpj"
+                        placeholder="00.000.000/0000-00" [(ngModel)]="cnpj" (keypress)="onKeypress($event)"
+                        (paste)="onPaste($event)">
+                    <input type="button" class="btn btn-primary btn-sm mt-2 w-100" value="Validar"
+                        (click)="validate()" />
+                    <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
+                        {{result}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <section class="category-description">
+        <div class="description-content">
+            <h4 class="fw-bold text-center mb-3">Como validar um CNPJ?</h4>
+            <explanation-cnpj-calculation />
+        </div>
+    </section>
+</div>

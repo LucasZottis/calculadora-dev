@@ -1,0 +1,66 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Energia</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">bolt</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Energia</h1>
+            <p>Realize conversões precisas entre diversas unidades de energia, desde joules até quilowatt-horas</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>Este conversor de energia permite transformar valores entre múltiplas unidades de energia, como joules,
+                quilojoules, calorias, elétron-volts, BTUs, quilowatt-horas e outras.</p>
+            <p>Ferramenta essencial para estudantes, engenheiros, físicos e profissionais que demandam conversões
+                rigorosas
+                entre sistemas internacionais e tradicionais de unidades energéticas.</p>
+        </div>
+    </section>
+
+
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <section class="conversion-groups-page-container">
+        @for(item of groupedUnits; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(unit of item.units; track unit.id) {
+                <a [routerLink]="['/conversores/energia', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">bolt</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{ unit.name }}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedUnits; track item.key.id){
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+</div>

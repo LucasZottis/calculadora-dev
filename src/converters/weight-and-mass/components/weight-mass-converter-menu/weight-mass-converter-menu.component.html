@@ -1,0 +1,45 @@
+<!-- Menu para conversor de peso e massa -->
+<div class="menu-items">
+    <!-- Campo de busca para filtrar conversões -->
+    <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Buscar conversão..." (input)="filtrarConversoes($event)">
+    </div>
+
+    <!-- Conversões populares -->
+    @for (conversao of conversoesFiltradas; track conversao.origem + conversao.destino) {
+    <a class="menu-item"
+        [routerLink]="['/conversores/peso-massa', gerarUrlConversao(conversao.origem, conversao.destino)]"
+        routerLinkActive="active" (click)="onToggleSidebar()">
+        <span class="material-symbols-outlined">
+            swap_horiz
+        </span>
+        <span>{{ conversao.rotuloOrigem }} para {{ conversao.rotuloDestino }}</span>
+    </a>
+    }
+
+    <!-- Mensagem quando não há resultados -->
+    @if (conversoesFiltradas.length === 0) {
+    <div class="no-results">
+        <span class="material-symbols-outlined">search_off</span>
+        <p>Nenhuma conversão encontrada para "{{ termoBusca }}"</p>
+    </div>
+    }
+
+    <hr>
+
+    <!-- Botões de navegação -->
+    <a class="menu-item menu-back" (click)="onVoltarParaConversores()">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+        <span>Voltar para Conversores</span>
+    </a>
+
+    <a class="menu-item menu-home" (click)="onVoltarParaMenuPrincipal()">
+        <span class="material-symbols-outlined">
+            home
+        </span>
+        <span>Menu Principal</span>
+    </a>
+</div>

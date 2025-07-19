@@ -1,0 +1,55 @@
+<div class="page-container">
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/validadores">Validadores</a></li>
+            <li><span>CPF</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">fact_check</span>
+        </div>
+        <div class="category-info">
+            <h1>Validdor de CPF</h1>
+            <p>Verifique se um número de CPF é válido e aprenda como calcular os dígitos verificadores</p>
+        </div>
+    </div>
+
+    <form class="form">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-auto">
+                <!-- <label for="txt-cpf" class="form-label">Digite o CPF</label> -->
+                <input type="text" class="form-control text-center" id="txt-cpf" maxlength="14" name="txt-cpf"
+                    placeholder="000.000.000-00" [(ngModel)]="cpf" (keypress)="onKeypress($event)"
+                    (paste)="onPaste($event)">
+                <input type="button" class="btn btn-primary btn-sm mt-2 w-100" value="Validar" (click)="validate()" />
+                @if(result !== undefined) {
+                <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
+                    {{ result }}
+                </p>
+                }
+            </div>
+        </div>
+    </form>
+
+    <section class="category-description">
+        <div class="description-content">
+            <h4 class="fw-bold text-center mb-3">Como funciona a validação de um CPF?</h4>
+
+            <p>
+                A validação de um CPF (Cadastro de Pessoa Física) segue um cálculo simples, mas eficiente, que garante
+                que o número informado seja válido conforme as regras da Receita Federal. O CPF é composto por 9 números
+                base e 2 dígitos verificadores que servem para validar a sequência.
+            </p>
+
+            <p>
+                Vamos considerar o CPF 111.444.777-35 e a partir dele vamos calcular o primeiro dígito
+                verificador para verificar se a sequência é válida.
+            </p>
+            <explanation-cpf-calculation />
+        </div>
+    </section>
+</div>
