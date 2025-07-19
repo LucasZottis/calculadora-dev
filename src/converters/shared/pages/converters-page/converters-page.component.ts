@@ -15,7 +15,6 @@ import { PageBase } from 'src/shared/pages/pageBase';
   styleUrl: './converters-page.component.scss'
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
-  // converterCategories: Converter[] = [];
   categories: Array<{ id: string, name: string, icon: string }> = [
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
     { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
@@ -23,6 +22,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
     { id: 'energia', name: 'Energia', icon: 'bolt' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
+    { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
   ];
 
   constructor(
