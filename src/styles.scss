@@ -7,8 +7,8 @@
 
 /* Adiciona fonte DS Digi - Fallback para quando a fonte não está disponível */
 @font-face {
-    font-family: "DS Digi";
-    src: url("assets/fonts/DS-DIGI.TTF") format("truetype");
+    font-family: "Roboto";
+    src: url("assets/fonts/roboto/Roboto-VariableFont_wdth\,wght.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -38,13 +38,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Chau Philomene One";
+    // font-family: "Roboto";
+    --bs-body-font-family: "Roboto", sans-serif !important;
 }
 
 html,
 body {
     min-height: 100%;
-    // width: 100vw;
 }
 
 body {
@@ -257,11 +257,11 @@ main-layout {
 }
 
 .form {
-    background-color: var(--second-background-color);
-    border: 1px solid var(--border-color-base);
-    border-radius: 8px;
+    // background-color: var(--second-background-color);
+    // border: 1px solid var(--border-color-base);
+    // border-radius: 8px;
     margin: 2rem 0;
-    padding: 2rem;
+    padding: 2rem 0;
 }
 
 .form-control {
