@@ -33,19 +33,20 @@
         </div>
     </section>
 
-    <form>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2 mx-auto">
+    <form class="form">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
                 <div id="formulario">
-                    <!-- <label for="txt-cnpj" class="form-label">Digite o CNPJ</label> -->
                     <input type="text" class="form-control text-center" id="txt-cnpj" maxlength="18" name="txt-cnpj"
                         placeholder="00.000.000/0000-00" [(ngModel)]="cnpj" (keypress)="onKeypress($event)"
                         (paste)="onPaste($event)">
                     <input type="button" class="btn btn-primary btn-sm mt-2 w-100" value="Validar"
                         (click)="validate()" />
-                    <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
-                        {{result}}
-                    </p>
+                    <div class="result-container">
+                        <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3 result" [style]="style">
+                            {{result}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
