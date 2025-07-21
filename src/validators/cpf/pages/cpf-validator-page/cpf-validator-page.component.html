@@ -3,7 +3,7 @@
         <ol>
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/validadores">Validadores</a></li>
-            <li><span>CPF</span></li>
+            <li><span>Validador de CPF</span></li>
         </ol>
     </nav>
 
@@ -13,24 +13,37 @@
             <span class="material-symbols-outlined">fact_check</span>
         </div>
         <div class="category-info">
-            <h1>Validdor de CPF</h1>
+            <h1>Validador de CPF</h1>
             <p>Verifique se um número de CPF é válido e aprenda como calcular os dígitos verificadores</p>
         </div>
     </div>
 
+    <section class="category-description">
+        <div class="description-content">
+            <p>
+                CPF é a sigla para Cadastro de Pessoa Física. É um registro obrigatório para todos os brasileiros e
+                serve para identificar cada pessoa em um grande banco de dados da Receita Federal. Com ele, é possível
+                ser reconhecido em serviços públicos e privados, como bancos, cadastros em lojas, ou declarações de
+                imposto de renda. Por isso, o CPF é considerado um dos documentos mais importantes no dia a dia do
+                brasileiro.
+            </p>
+        </div>
+    </section>
+
     <form class="form">
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-auto">
-                <!-- <label for="txt-cpf" class="form-label">Digite o CPF</label> -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <input type="text" class="form-control text-center" id="txt-cpf" maxlength="14" name="txt-cpf"
                     placeholder="000.000.000-00" [(ngModel)]="cpf" (keypress)="onKeypress($event)"
                     (paste)="onPaste($event)">
                 <input type="button" class="btn btn-primary btn-sm mt-2 w-100" value="Validar" (click)="validate()" />
-                @if(result !== undefined) {
-                <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3" [style]="style">
-                    {{ result }}
-                </p>
-                }
+                <div class="result-container">
+                    @if(result !== undefined) {
+                    <p id="lbl-resultado" class="text-center mx-0 mb-0 mt-2 fs-3 result" [style]="style">
+                        {{ result }}
+                    </p>
+                    }
+                </div>
             </div>
         </div>
     </form>
