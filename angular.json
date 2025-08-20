@@ -30,7 +30,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", "src/netlify.toml"],
+            "assets": ["src/assets", "src/netlify.toml", "scr/ads.txt"],
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
