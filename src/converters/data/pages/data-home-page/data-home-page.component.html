@@ -1,0 +1,72 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Área</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">bolt</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Área</h1>
+            <p>Realize conversões precisas entre diversas unidades de área, desde milímetros quadrados até quilômetros
+                quadrados,
+                passando por hectares, acres, pés e polegadas quadradas.</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>
+                Este conversor de área permite transformar valores entre diversas unidades de medida de superfície, como
+                metros quadrados, quilômetros quadrados, hectares, acres, pés quadrados, polegadas quadradas, entre
+                outras.
+            </p>
+            <p>
+                Trata-se de uma ferramenta indispensável para arquitetos, engenheiros civis, agrimensores, profissionais
+                do mercado imobiliário e demais usuários que necessitam de conversões precisas entre sistemas métricos e
+                imperiais de unidades de área.
+            </p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <section class="conversion-groups-container">
+        @for(item of groupedUnits; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(unit of item.units; track unit.id) {
+                <a [routerLink]="['/conversores/dados/converter-', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">bolt</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{ unit.name }}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedUnits; track item.key.id){
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+</div>

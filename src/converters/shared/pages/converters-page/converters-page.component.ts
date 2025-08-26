@@ -23,6 +23,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'energia', name: 'Energia', icon: 'bolt' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
+    { id: 'dados', name: 'Dados', icon: 'database' },
   ];
 
   constructor(

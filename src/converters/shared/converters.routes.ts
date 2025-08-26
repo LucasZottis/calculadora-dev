@@ -1,6 +1,7 @@
 // src/converters/volume/volume.routes.ts
 import { Routes } from '@angular/router';
 import { ConvertersPageComponent } from './pages/converters-page/converters-page.component';
+import { DATA_ROUTES } from '../data/data.routes';
 
 export const CONVERTERS_ROUTES: Routes = [
     { path: '', component: ConvertersPageComponent },
@@ -11,4 +12,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'energia', loadChildren: () => import('../energy/energy.routes').then(m => m.ENERGY_ROUTES) },
     { path: 'area', loadChildren: () => import('../area/area.routes').then(m => m.AREA_ROUTES) },
     { path: 'tempo-decimal', loadChildren: () => import('../decimal-time/decimal-time.routes').then(m => m.DECIMAL_TIME_ROUTES) },
+    { path: 'dados', loadChildren: () => import('../data/data.routes').then(m => m.DATA_ROUTES) },
 ];
