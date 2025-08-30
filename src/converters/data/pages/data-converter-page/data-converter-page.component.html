@@ -8,22 +8,15 @@
     </ol>
   </nav>
 
-  <!-- <div class="text-center mb-5">
-    <h1>Converter {{selectedSourceUnit.name}} ({{selectedSourceUnit.symbol}}) para {{selectedTargetUnit.name}}
-      ({{selectedTargetUnit.symbol}})</h1>
-    <p class="fs-3">
-      Faça a conversão facilmente entre {{selectedSourceUnit.name.toLowerCase()}} e
-      {{selectedTargetUnit.name.toLowerCase()}}.
-    </p>
-  </div> -->
-
   <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 
   <!-- Instruções de uso -->
   <div class="card mb-4">
     <div class="card-body">
-      <h2 class="card-title fs-4">Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
-        {{selectedTargetUnit.name.toLowerCase()}}</h2>
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
       <p>
         Este conversor permite realizar transformações entre diversas unidades de dados digitais, abrangendo
         bits, bytes e múltiplos como kilobytes, megabytes, gigabytes, terabytes e além.
