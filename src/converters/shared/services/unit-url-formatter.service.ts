@@ -39,7 +39,7 @@ export class UnitUrlFormatterService {
   // Método para auxiliar a converter entre a URL e os IDs das unidades
   parseConversionUrl(url: string): { sourceUnitId: string, targetUnitId: string } | undefined {
     // Formato esperado: unidade-origem-para-unidade-destino
-    const parts = url.split('-para-');
+    const parts = url.substring('converter-'.length).split('-para-');
 
     if (parts.length !== 2)
       return undefined;
@@ -58,6 +58,6 @@ export class UnitUrlFormatterService {
     // const sourceUrlPart = this.getUnitForUrl(sourceUnitId);
     // const targetUrlPart = this.getUnitForUrl(targetUnitId);
 
-    return `${sourceUnitId}-para-${targetUnitId}`;
+    return `converter-${sourceUnitId}-para-${targetUnitId}`;
   }
 }
