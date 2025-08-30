@@ -4,5 +4,5 @@ import { DataConverterPageComponent } from './pages/data-converter-page/data-con
 
 export const DATA_ROUTES: Routes = [
     { path: '', component: DataHomePageComponent },
-    { path: 'converter-:conversion', component: DataConverterPageComponent }
+    { path: ':conversion', component: DataConverterPageComponent }
 ];

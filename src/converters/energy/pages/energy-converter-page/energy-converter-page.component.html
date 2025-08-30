@@ -4,26 +4,23 @@
       <li><a routerLink="/">Início</a></li>
       <li><a routerLink="/conversores">Conversores</a></li>
       <li><a routerLink="/conversores/energia">Energia</a></li>
-      <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
     </ol>
   </nav>
 
-  <div class="text-center mb-5">
-    <h1>Conversor de Energia</h1>
-    <p class="fs-3">
-      Converta facilmente entre diferentes unidades de energia com precisão e rapidez.
-    </p>
-  </div>
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 
   <!-- Instruções de uso -->
   <div class="card mb-4">
     <div class="card-body">
-      <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
       <p>
         Esta calculadora permite converter entre diversas unidades de energia, abrangendo medidas do sistema
-        métrico,
-        imperial e unidades específicas da física. Basta selecionar as unidades de origem e destino, e inserir o
-        valor a ser convertido.
+        métrico, imperial e unidades específicas da física. Basta selecionar as unidades de origem e destino, e inserir
+        o valor a ser convertido.
       </p>
       <ol>
         <li>Escolha a unidade de origem (de onde deseja converter)</li>

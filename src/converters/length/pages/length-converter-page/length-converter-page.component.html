@@ -4,21 +4,19 @@
       <li><a routerLink="/">Início</a></li>
       <li><a routerLink="/conversores">Conversores</a></li>
       <li><a routerLink="/conversores/comprimento">Comprimento</a></li>
-      <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
     </ol>
   </nav>
 
-  <div class="text-center mb-5">
-    <h1>Conversor de Comprimento</h1>
-    <p class="fs-3">
-      Converta facilmente entre diferentes unidades de comprimento com precisão.
-    </p>
-  </div>
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 
   <!-- Instruções de uso -->
   <div class="card mb-4">
     <div class="card-body">
-      <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
       <p>
         Esta calculadora permite converter entre diversas unidades de comprimento, abrangendo sistemas
         métricos, imperiais e astronômicos. Basta selecionar as unidades de origem e destino, inserir o valor

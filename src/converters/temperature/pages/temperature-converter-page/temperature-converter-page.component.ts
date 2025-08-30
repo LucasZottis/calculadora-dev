@@ -5,6 +5,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
+import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
 @Component({
   selector: 'temperature-converter-page',
@@ -14,7 +15,8 @@ import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-ba
     FormsModule,
     RouterModule,
     CalculatorComponent,
-  ],
+    ConverterTitleComponent
+],
   templateUrl: './temperature-converter-page.component.html',
   styleUrl: './temperature-converter-page.component.scss'
 })

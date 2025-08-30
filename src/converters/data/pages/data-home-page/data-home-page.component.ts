@@ -21,7 +21,7 @@ export class DataHomePageComponent extends ConverterHomePageBase implements OnIn
     meta: Meta,
     title: Title,
   ) {
-    super(factory, meta, title, "area");
+    super(factory, meta, title, "data");
   }
 
   ngOnInit() {

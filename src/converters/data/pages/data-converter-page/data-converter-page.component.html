@@ -1,60 +1,65 @@
 <div class="page-container">
-    <nav class="breadcrumbs">
-        <ol>
-            <li><a routerLink="/">Início</a></li>
-            <li><a routerLink="/conversores">Conversores</a></li>
-            <li><a routerLink="/conversores/area">Dados</a></li>
-            <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
-        </ol>
-    </nav>
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/area">Dados</a></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
 
-    <div class="text-center mb-5">
-        <h1>Conversor de Dados</h1>
-        <p class="fs-3">
-            Converta facilmente entre diferentes unidades de medida de dados digitais com precisão e rapidez.
-        </p>
+  <!-- <div class="text-center mb-5">
+    <h1>Converter {{selectedSourceUnit.name}} ({{selectedSourceUnit.symbol}}) para {{selectedTargetUnit.name}}
+      ({{selectedTargetUnit.symbol}})</h1>
+    <p class="fs-3">
+      Faça a conversão facilmente entre {{selectedSourceUnit.name.toLowerCase()}} e
+      {{selectedTargetUnit.name.toLowerCase()}}.
+    </p>
+  </div> -->
+
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}</h2>
+      <p>
+        Este conversor permite realizar transformações entre diversas unidades de dados digitais, abrangendo
+        bits, bytes e múltiplos como kilobytes, megabytes, gigabytes, terabytes e além.
+        Basta selecionar as unidades de origem e destino, inserir o valor desejado e obter a conversão
+        com precisão e rapidez.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (ex.: Megabytes)</li>
+        <li>Escolha a unidade de destino (ex.: Gigabytes)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado e exibido automaticamente</li>
+      </ol>
     </div>
+  </div>
 
-    <!-- Instruções de uso -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
-            <p>
-                Este conversor permite realizar transformações entre diversas unidades de dados digitais, abrangendo
-                bits, bytes e múltiplos como kilobytes, megabytes, gigabytes, terabytes e além.
-                Basta selecionar as unidades de origem e destino, inserir o valor desejado e obter a conversão
-                com precisão e rapidez.
-            </p>
-            <ol>
-                <li>Escolha a unidade de origem (ex.: Megabytes)</li>
-                <li>Escolha a unidade de destino (ex.: Gigabytes)</li>
-                <li>Digite o valor na unidade de origem</li>
-                <li>O resultado será calculado e exibido automaticamente</li>
-            </ol>
-        </div>
+
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
     </div>
+  </div>
 
-
-
-    <!-- Componente de calculadora -->
-    <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
-        [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
-        (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
-    </calculator>
-
-    <!-- Explicação da fórmula de cálculo -->
-    <div class="mt-5 card" *ngIf="showFormula">
-        <div class="card-body">
-            <h2 class="card-title fs-4">Explicação do Cálculo</h2>
-            <p>{{ formulaDescription }}</p>
-            <div class="bg-dark text-light p-3 rounded">
-                <pre class="mb-0">{{ formulaCalculation }}</pre>
-            </div>
-        </div>
-    </div>
-
-    <!-- Links para conversões populares -->
-    <!-- <div class="mt-5">
+  <!-- Links para conversões populares -->
+  <!-- <div class="mt-5">
       <h2 class="text-center fs-4">Conversões Populares</h2>
       <div class="row g-3 mt-2">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let conversao of conversoesSugeridas">
@@ -70,8 +75,8 @@
       </div>
     </div> -->
 
-    <!-- Seção de links para outros conversores (comentada por enquanto) -->
-    <!--
+  <!-- Seção de links para outros conversores (comentada por enquanto) -->
+  <!--
       <div class="mt-5">
         <h2 class="text-center fs-4">Outros Conversores</h2>
         <div class="row g-3 mt-2">
@@ -109,31 +114,31 @@
       </div>
       -->
 
-    <!-- Informações adicionais -->
-    <div class="mt-5">
-        <h2 class="text-center fs-4">Informações sobre Unidades de Dados</h2>
-        <div class="texto-explicativo">
-            <p>
-                Dados digitais representam a quantidade de informação armazenada ou transmitida, expressa em diferentes
-                unidades conforme o contexto tecnológico. Diversos padrões de medição são utilizados mundialmente:
-            </p>
-            <ul>
-                <li>
-                    <strong>Unidades básicas</strong>: Bits (b) e Bytes (B)
-                </li>
-                <li>
-                    <strong>Sistema Binário (base 2)</strong>: Quilobyte (1 KB = 1024 B), Megabyte (1 MB = 1024 KB),
-                    Gigabyte (1 GB = 1024 MB), Terabyte (1 TB = 1024 GB)
-                </li>
-                <li>
-                    <strong>Sistema Decimal (base 10)</strong>: Quilobyte (1 KB = 1000 B), Megabyte (1 MB = 1000 KB),
-                    Gigabyte (1 GB = 1000 MB), Terabyte (1 TB = 1000 GB)
-                </li>
-            </ul>
-            <p>
-                Todos os cálculos são realizados com alta precisão utilizando fatores de conversão internacionalmente
-                reconhecidos. A unidade base adotada para as conversões é o <strong>Byte (B)</strong>.
-            </p>
-        </div>
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Dados</h2>
+    <div class="texto-explicativo">
+      <p>
+        Dados digitais representam a quantidade de informação armazenada ou transmitida, expressa em diferentes
+        unidades conforme o contexto tecnológico. Diversos padrões de medição são utilizados mundialmente:
+      </p>
+      <ul>
+        <li>
+          <strong>Unidades básicas</strong>: Bits (b) e Bytes (B)
+        </li>
+        <li>
+          <strong>Sistema Binário (base 2)</strong>: Quilobyte (1 KB = 1024 B), Megabyte (1 MB = 1024 KB),
+          Gigabyte (1 GB = 1024 MB), Terabyte (1 TB = 1024 GB)
+        </li>
+        <li>
+          <strong>Sistema Decimal (base 10)</strong>: Quilobyte (1 KB = 1000 B), Megabyte (1 MB = 1000 KB),
+          Gigabyte (1 GB = 1000 MB), Terabyte (1 TB = 1000 GB)
+        </li>
+      </ul>
+      <p>
+        Todos os cálculos são realizados com alta precisão utilizando fatores de conversão internacionalmente
+        reconhecidos. A unidade base adotada para as conversões é o <strong>Byte (B)</strong>.
+      </p>
     </div>
+  </div>
 </div>

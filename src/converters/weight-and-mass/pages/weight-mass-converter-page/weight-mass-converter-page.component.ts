@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from 'src/converters/shared/components/calculator/calculator.component';
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
+import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
 @Component({
   selector: 'weight-mass-converter-page',
@@ -13,8 +14,9 @@ import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-ba
     CommonModule,
     FormsModule,
     RouterModule,
-    CalculatorComponent
-  ],
+    CalculatorComponent,
+    ConverterTitleComponent
+],
   templateUrl: './weight-mass-converter-page.component.html',
   styleUrl: './weight-mass-converter-page.component.scss'
 })

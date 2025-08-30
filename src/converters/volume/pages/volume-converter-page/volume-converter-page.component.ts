@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from "../../../shared/components/calculator/calculator.component";
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
+import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
 @Component({
   selector: 'volume-converter-page',
@@ -14,7 +15,8 @@ import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-ba
     FormsModule,
     RouterModule,
     CalculatorComponent,
-  ],
+    ConverterTitleComponent
+],
   templateUrl: './volume-converter-page.component.html',
   styleUrl: './volume-converter-page.component.scss'
 })
