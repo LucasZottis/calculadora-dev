@@ -1,7 +1,6 @@
 // src/converters/volume/volume.routes.ts
 import { Routes } from '@angular/router';
 import { ConvertersPageComponent } from './pages/converters-page/converters-page.component';
-import { DATA_ROUTES } from '../data/data.routes';
 
 export const CONVERTERS_ROUTES: Routes = [
     { path: '', component: ConvertersPageComponent },

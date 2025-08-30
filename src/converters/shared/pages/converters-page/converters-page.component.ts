@@ -16,14 +16,14 @@ import { PageBase } from 'src/shared/pages/pageBase';
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
   categories: Array<{ id: string, name: string, icon: string }> = [
-    { id: 'volume', name: 'Volume', icon: 'deployed_code' },
-    { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
-    { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
-    { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
-    { id: 'energia', name: 'Energia', icon: 'bolt' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
-    { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
+    { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
     { id: 'dados', name: 'Dados', icon: 'database' },
+    { id: 'energia', name: 'Energia', icon: 'bolt' },
+    { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
+    { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
+    { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
+    { id: 'volume', name: 'Volume', icon: 'deployed_code' },
   ];
 
   constructor(

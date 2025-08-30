@@ -4,26 +4,23 @@
       <li><a routerLink="/">Início</a></li>
       <li><a routerLink="/conversores">Conversores</a></li>
       <li><a routerLink="/conversores/temperatura">Temperatura</a></li>
-      <li><span>{{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
     </ol>
   </nav>
 
-  <div class="text-center mb-5">
-    <h1>Conversor de Temperatura</h1>
-    <p class="fs-3">
-      Converta facilmente entre diferentes escalas de temperatura com precisão científica.
-    </p>
-  </div>
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 
   <!-- Instruções de uso -->
   <div class="card mb-4">
     <div class="card-body">
-      <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
       <p>
         Esta calculadora permite converter entre diversas escalas de temperatura, incluindo Celsius, Fahrenheit,
-        Kelvin, Rankine e Réaumur.
-        Basta selecionar as escalas de origem e destino, inserir o valor desejado e o sistema calculará
-        automaticamente o resultado com base nos parâmetros termodinâmicos apropriados.
+        Kelvin, Rankine e Réaumur. Basta selecionar as escalas de origem e destino, inserir o valor desejado e o sistema
+        calculará automaticamente o resultado com base nos parâmetros termodinâmicos apropriados.
       </p>
       <ol>
         <li>Escolha a escala de origem (de onde deseja converter)</li>
