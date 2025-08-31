@@ -4,7 +4,7 @@
         <ol>
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/conversores">Conversores</a></li>
-            <li><span>Área</span></li>
+            <li><span>Dados</span></li>
         </ol>
     </nav>
 
@@ -14,10 +14,11 @@
             <span class="material-symbols-outlined">bolt</span>
         </div>
         <div class="category-info">
-            <h1>Conversor de Área</h1>
+            <h1>Conversor de Unidades de Armazenamento</h1>
             <p>
-                Realize conversões precisas entre diversas unidades de área, desde milímetros quadrados até quilômetros
-                quadrados, passando por hectares, acres, pés e polegadas quadradas.
+                Realize conversões precisas entre diferentes unidades de armazenamento digital, desde bytes até
+                terabytes,
+                passando por kilobytes, megabytes e gigabytes, garantindo clareza e confiabilidade nos cálculos.
             </p>
         </div>
     </div>
@@ -26,14 +27,14 @@
     <section class="category-description">
         <div class="description-content">
             <p>
-                Este conversor de área permite transformar valores entre diversas unidades de medida de superfície, como
-                metros quadrados, quilômetros quadrados, hectares, acres, pés quadrados, polegadas quadradas, entre
-                outras.
+                Este conversor de dados permite transformar valores entre diversas unidades de armazenamento digital,
+                como bytes, kilobytes, megabytes, gigabytes, terabytes, entre outras, assegurando precisão e
+                confiabilidade nos resultados.
             </p>
             <p>
-                Trata-se de uma ferramenta indispensável para arquitetos, engenheiros civis, agrimensores, profissionais
-                do mercado imobiliário e demais usuários que necessitam de conversões precisas entre sistemas métricos e
-                imperiais de unidades de área.
+                Trata-se de uma ferramenta indispensável para profissionais de tecnologia, cientistas de dados,
+                analistas de sistemas, engenheiros de software e demais usuários que necessitam de conversões
+                precisas entre diferentes unidades de armazenamento digital nos padrões binário e decimal.
             </p>
         </div>
     </section>
@@ -46,7 +47,7 @@
             <hr>
             <div class="conversion-links-grid">
                 @for(unit of item.units; track unit.id) {
-                <a [routerLink]="['/conversores/area', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                <a [routerLink]="['/conversores/dados/', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
                     class="conversion-link-card">
                     <div class="conversion-link-icon">
                         <span class="material-symbols-outlined">bolt</span>

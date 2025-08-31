@@ -8,7 +8,7 @@ import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-ba
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
 @Component({
-  selector: 'temperature-converter-page',
+  selector: 'data-converter-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -16,21 +16,24 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     RouterModule,
     CalculatorComponent,
     ConverterTitleComponent
-],
-  templateUrl: './temperature-converter-page.component.html',
-  styleUrl: './temperature-converter-page.component.scss'
+  ],
+  templateUrl: './data-converter-page.component.html',
+  styleUrl: './data-converter-page.component.scss'
 })
-export class TemperatureConverterPageComponent extends ConverterPageBase implements OnInit {
+export class DataConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor(
     meta: Meta,
     title: Title,
   ) {
-    super(meta, title, "temperature", "temperatura");
-    this.setTitle('Conversor de Temperatura');
-    this.addDescription('Ferramenta para converter entre diferentes escalas de temperatura como Celsius, Fahrenheit, Kelvin, Rankine e Réaumur. Conversão precisa, instantânea e confiável.');
+    super(meta, title, "data", "dado");
+    this.setTitle('Conversor de Dados');
+    this.addDescription(
+      'Ferramenta para converter entre diferentes unidades de dados, como bits, bytes, kilobytes, megabytes, gigabytes, terabytes e muito mais. \
+      Conversão precisa, instantânea e ideal para aplicações técnicas, computacionais e acadêmicas.'
+    );
   }
 
   ngOnInit(): void {
-    this.onInit('kelvin', 'celsius');
+    this.onInit('byte', 'megabyte');
   }
 }
