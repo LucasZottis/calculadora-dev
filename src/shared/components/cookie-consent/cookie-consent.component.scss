@@ -1,12 +1,15 @@
 .cookie-modal {
-    position: fixed;
+    align-items: flex-end;
+    background-color: black;
+    border-top: 1px solid var(--border-color-base, #2c5a2c);
     bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    position: fixed;
+    z-index: 1000;
 }
 
 .cookie-overlay {

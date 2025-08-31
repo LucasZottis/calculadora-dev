@@ -23,6 +23,16 @@ export class CookieConsentComponent implements OnInit, OnDestroy {
 
   constructor(private cookieService: CookieService) { }
 
+  private setMicrosoftClarityConsent(adStorage: boolean, analyticStorage: boolean): void {
+    if (!window.clarity)
+      return;
+
+    window.clarity('consentv2', {
+      ad_Storage: adStorage ? "granted" : "denied",
+      analytics_Storage: analyticStorage ? "granted" : "denied"
+    });
+  }
+
   ngOnInit(): void {
     // Verifica se o usuário já aceitou os cookies
     const temConsentimento = this.cookieService.verificarConsentimento();
@@ -38,6 +48,7 @@ export class CookieConsentComponent implements OnInit, OnDestroy {
 
     // Adiciona listener para o evento personalizado
     window.addEventListener('mostrar-cookie-dialog', this.abrirModal.bind(this));
+    window.clarity =>
   }
 
   ngOnDestroy(): void {
