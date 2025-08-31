@@ -1,14 +1,14 @@
 <!-- Modal de cookies -->
 <div class="cookie-modal" *ngIf="mostrarModal">
     <!-- Overlay para escurecer o fundo -->
-    <div class="cookie-overlay" (click)="fecharModal()"></div>
+    <!-- <div class="cookie-overlay" (click)="fecharModal()"></div> -->
 
     <!-- Container do modal -->
     <div class="cookie-page-container">
         <!-- Cabeçalho do modal -->
         <div class="cookie-header">
             <h3>Política de Cookies</h3>
-            <button class="close-button" (click)="fecharModal()">
+            <button class="btn close-button" (click)="fecharModal()">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <div class="cookie-option">
+                <!-- <div class="cookie-option">
                     <div class="option-header">
                         <div>
                             <h5>Cookies de personalização</h5>
@@ -71,7 +71,7 @@
                             <input class="form-check-input" type="checkbox" [(ngModel)]="cookieConfig.personalizacao">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
