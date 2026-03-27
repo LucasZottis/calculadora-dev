@@ -56,8 +56,16 @@ export class ConverterPageBase extends PageBase {
             if (conversionParam) {
                 const conversionInfo = this.unitUrlFormatter.parseConversionUrl(conversionParam);
                 if (conversionInfo) {
-                    this.selectedSourceUnit = this.service.getUnitById(conversionInfo.sourceUnitId)!;
-                    this.selectedTargetUnit = this.service.getUnitById(conversionInfo.targetUnitId)!;
+                    const sourceUnit = this.service.getUnitById(conversionInfo.sourceUnitId);
+                    const targetUnit = this.service.getUnitById(conversionInfo.targetUnitId);
+
+                    if (!sourceUnit || !targetUnit) {
+                        this.router.navigate(['/conversores/' + this.urlPrefix]);
+                        return;
+                    }
+
+                    this.selectedSourceUnit = sourceUnit;
+                    this.selectedTargetUnit = targetUnit;
                     this.updateTitle();
                     // this.gerarConversoesSugeridas();
                 } else {
