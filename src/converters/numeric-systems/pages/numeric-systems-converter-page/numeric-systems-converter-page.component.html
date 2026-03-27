@@ -1,0 +1,111 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><a routerLink="/conversores/sistemas-numericos">Sistemas Numéricos</a></li>
+            <li><span>Converter {{sourceSystem?.name}} para {{targetSystem?.name}}</span></li>
+        </ol>
+    </nav>
+
+    <div class="text-center mb-5" *ngIf="sourceSystem && targetSystem">
+        <h1>Converter {{sourceSystem.name}} para {{targetSystem.name}}</h1>
+        <p class="fs-3">
+            Faça a conversão facilmente entre {{sourceSystem.name.toLowerCase()}} ({{sourceSystem.symbol}}) e
+            {{targetSystem.name.toLowerCase()}} ({{targetSystem.symbol}}).
+        </p>
+    </div>
+
+    <!-- Instruções de uso -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+            <p>
+                Selecione o sistema de origem e de destino, depois digite o valor a ser convertido. O resultado será
+                calculado automaticamente.
+            </p>
+            <ol>
+                <li>Escolha o sistema de origem (de onde deseja converter)</li>
+                <li>Escolha o sistema de destino (para onde deseja converter)</li>
+                <li>Digite o valor no sistema de origem</li>
+                <li>O resultado aparecerá automaticamente no campo de resultado</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Conversor -->
+    <div class="converter-panel" *ngIf="sourceSystem && targetSystem">
+        <!-- Linha de origem -->
+        <div class="converter-row">
+            <div class="system-selector-wrapper">
+                <label class="system-label">De</label>
+                <select class="system-select" [(ngModel)]="sourceSystem"
+                    [compareWith]="compareById"
+                    (ngModelChange)="onSourceSystemChange()">
+                    @for(s of systems; track s.id) {
+                    <option [ngValue]="s">{{s.name}} ({{s.symbol}})</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <input
+                    type="text"
+                    class="value-input"
+                    [(ngModel)]="sourceValue"
+                    (ngModelChange)="onSourceValueChange()"
+                    [placeholder]="getInputPlaceholder()"
+                    [pattern]="getValidationPattern()"
+                    autocomplete="off"
+                    spellcheck="false"
+                />
+            </div>
+        </div>
+
+        <!-- Ícone de conversão -->
+        <div class="converter-arrow">
+            <span class="material-symbols-outlined">arrow_downward</span>
+        </div>
+
+        <!-- Linha de destino -->
+        <div class="converter-row">
+            <div class="system-selector-wrapper">
+                <label class="system-label">Para</label>
+                <select class="system-select" [(ngModel)]="targetSystem"
+                    [compareWith]="compareById"
+                    (ngModelChange)="onTargetSystemChange()">
+                    @for(s of systems; track s.id) {
+                    <option [ngValue]="s">{{s.name}} ({{s.symbol}})</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <div class="value-display">{{targetValue}}</div>
+            </div>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="material-symbols-outlined">error</span>
+            <span>{{errorMessage}}</span>
+        </div>
+    </div>
+
+    <!-- Informações adicionais -->
+    <div class="mt-5">
+        <h2 class="text-center fs-4">Sobre os Sistemas Numéricos</h2>
+        <div class="texto-explicativo">
+            <p>
+                Um sistema numérico é um conjunto de símbolos e regras para representar números.
+                Os principais sistemas utilizados em computação e matemática são:
+            </p>
+            <ul>
+                <li><strong>Decimal (base 10)</strong>: O sistema que usamos no dia a dia, com os dígitos de 0 a 9.</li>
+                <li><strong>Binário (base 2)</strong>: Utilizado por computadores; usa apenas 0 e 1.</li>
+                <li><strong>Octal (base 8)</strong>: Usa dígitos de 0 a 7; era comum em computadores antigos.</li>
+                <li><strong>Hexadecimal (base 16)</strong>: Usa dígitos de 0 a 9 e letras de A a F; muito usado em programação para representar cores e endereços de memória.</li>
+                <li><strong>Romano</strong>: Sistema aditivo com símbolos I, V, X, L, C, D e M; suporta valores de 1 a 3999.</li>
+            </ul>
+        </div>
+    </div>
+</div>

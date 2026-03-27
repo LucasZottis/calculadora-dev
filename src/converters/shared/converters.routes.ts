@@ -12,4 +12,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'area', loadChildren: () => import('../area/area.routes').then(m => m.AREA_ROUTES) },
     { path: 'tempo-decimal', loadChildren: () => import('../decimal-time/decimal-time.routes').then(m => m.DECIMAL_TIME_ROUTES) },
     { path: 'dados', loadChildren: () => import('../data/data.routes').then(m => m.DATA_ROUTES) },
+    { path: 'sistemas-numericos', loadChildren: () => import('../numeric-systems/numeric-systems.routes').then(m => m.NUMERIC_SYSTEMS_ROUTES) },
 ];

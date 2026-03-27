@@ -21,6 +21,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'dados', name: 'Dados', icon: 'database' },
     { id: 'energia', name: 'Energia', icon: 'bolt' },
     { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
+    { id: 'sistemas-numericos', name: 'Sistemas Numéricos', icon: 'tag' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
