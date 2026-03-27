@@ -1,5 +1,5 @@
 import { Component, Input, input } from '@angular/core';
-import { Unit } from 'dev-toolz.library';
+import { Unit } from 'devtoolz-library';
 
 @Component({
   selector: 'converter-title',

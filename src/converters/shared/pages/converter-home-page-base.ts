@@ -1,5 +1,5 @@
 import { Meta, Title } from "@angular/platform-browser";
-import { UnitConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
+import { UnitConverterFactory, IUnitConverter, Unit } from "devtoolz-library";
 import { NavigationHelper } from "src/shared/helpers/navigationHelper";
 import { PageBase } from "src/shared/pages/pageBase";
 import { UnitUrlFormatterService } from '../services/unit-url-formatter.service';

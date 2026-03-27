@@ -2,7 +2,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UnitConverterFactory, IUnitConverter, Unit } from 'dev-toolz.library';
+import { UnitConverterFactory, IUnitConverter, Unit } from 'devtoolz-library';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
 
 @Component({
