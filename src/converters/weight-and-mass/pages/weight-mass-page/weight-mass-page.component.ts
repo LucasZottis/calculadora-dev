@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UnitConverterFactory } from 'dev-toolz.library';
+import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
 @Component({

@@ -1,4 +1,4 @@
-import { UnitConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
+import { UnitConverterFactory, IUnitConverter, Unit } from "devtoolz-library";
 import { PageBase } from "src/shared/pages/pageBase"
 import { UnitUrlFormatterService } from "../services/unit-url-formatter.service";
 import { inject } from "@angular/core";
