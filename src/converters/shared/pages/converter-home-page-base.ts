@@ -1,4 +1,3 @@
-import { Meta, Title } from "@angular/platform-browser";
 import { UnitConverterFactory, IUnitConverter, Unit } from "devtoolz-library";
 import { NavigationHelper } from "src/shared/helpers/navigationHelper";
 import { PageBase } from "src/shared/pages/pageBase";
@@ -7,18 +6,17 @@ import { inject } from "@angular/core";
 
 export class ConverterHomePageBase extends PageBase {
     private readonly _service!: IUnitConverter;
+    private readonly _factory: UnitConverterFactory = inject(UnitConverterFactory);
     protected readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
     protected readonly availableUnits: Unit[] = [];
     protected readonly groupedUnits: Array<{ key: Unit, units: Unit[] }> = [];
 
+
     constructor(
-        factory: UnitConverterFactory,
-        meta: Meta,
-        title: Title,
         categoryId: string,
     ) {
-        super(meta, title);
-        this._service = factory.createService(categoryId);
+        super();
+        this._service = this._factory.createService(categoryId);
         this.availableUnits = this._service.getUnits();
         this._groupList();
     }

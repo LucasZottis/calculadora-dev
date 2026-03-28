@@ -21,11 +21,8 @@ export class CnpjGeneratorPageComponent extends PageBase {
   cnpj: string = "";
   masked: number = 1;
 
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
+  constructor() {
+    super();
     this.addDescription('Ferramenta para geração CNPJ aleatório válido.');
     this.setTitle('Gerador de CNPJ');
   }

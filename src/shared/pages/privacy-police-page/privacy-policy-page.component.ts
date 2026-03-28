@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from '../pageBase';
 
@@ -9,12 +9,8 @@ import { PageBase } from '../pageBase';
   templateUrl: './privacy-policy-page.component.html',
   styleUrl: './privacy-policy-page.component.scss'
 })
-export class PrivacyPolicyPageComponent extends PageBase {
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
+export class PrivacyPolicyPageComponent extends PageBase implements OnInit {
+  ngOnInit(): void {
     this.addDescription('Política de Privacidade e Cookies - Saiba como utilizamos seus dados.');
     this.setTitle('Política de Privacidade');
   }

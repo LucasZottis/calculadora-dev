@@ -16,16 +16,13 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     RouterModule,
     CalculatorComponent,
     ConverterTitleComponent
-],
+  ],
   templateUrl: './energy-converter-page.component.html',
   styleUrl: './energy-converter-page.component.scss'
 })
 export class EnergyConverterPageComponent extends ConverterPageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title, "energy", "energia");
+  constructor() {
+    super("energy", "energia");
     this.setTitle('Conversor de Volume');
     this.addDescription('Ferramenta para converter entre diferentes unidades de volume como mililitros, litros, galões, xícaras, onças fluídas e mais. Conversão precisa e instantânea.');
   }

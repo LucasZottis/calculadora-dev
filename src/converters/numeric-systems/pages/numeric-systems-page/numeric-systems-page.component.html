@@ -1,0 +1,64 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Sistemas Numéricos</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">tag</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Sistemas Numéricos</h1>
+            <p>Converta valores entre os principais sistemas de numeração com precisão e facilidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de sistemas numéricos permite transformar valores entre diferentes bases numéricas, como
+                binário (base 2), octal (base 8), decimal (base 10), hexadecimal (base 16) e algarismos romanos.</p>
+            <p>Ideal para estudantes de computação, desenvolvedores e qualquer pessoa que precise converter números
+                entre diferentes sistemas de numeração.</p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por sistema de numeração -->
+    <section class="conversion-groups-container">
+        @for(item of groupedSystems; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(target of item.targets; track target.id) {
+                <a [routerLink]="['/conversores/sistemas-numericos', unitUrlFormatterService.generateConversionUrl(item.key.id, target.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">tag</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{target.name}}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedSystems; track item.key.id) {
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+</div>

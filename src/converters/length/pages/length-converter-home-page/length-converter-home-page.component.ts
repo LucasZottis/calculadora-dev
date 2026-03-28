@@ -16,12 +16,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
   styleUrl: './length-converter-home-page.component.scss'
 })
 export class LengthConverterHomePageComponent extends ConverterHomePageBase implements OnInit {
-  constructor(
-    factory: UnitConverterFactory,
-    meta: Meta,
-    title: Title,
-  ) {
-    super(factory, meta, title, "length");
+  constructor() {
+    super("length");
   }
 
   ngOnInit() {

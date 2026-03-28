@@ -16,16 +16,13 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     RouterModule,
     CalculatorComponent,
     ConverterTitleComponent
-],
+  ],
   templateUrl: './weight-mass-converter-page.component.html',
   styleUrl: './weight-mass-converter-page.component.scss'
 })
 export class WeightMassConverterPageComponent extends ConverterPageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title, "weight-mass", "peso-e-massa");
+  constructor() {
+    super("weight-mass", "peso-e-massa");
     this.setTitle('Conversor de Peso e Massa');
     this.addDescription('Ferramenta para converter entre diferentes unidades de peso e massa como gramas, quilogramas, libras, onças e mais. Conversão precisa e instantânea.');
   }

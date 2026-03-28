@@ -16,12 +16,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
   styleUrl: './area-home-page.component.scss'
 })
 export class AreaHomePageComponent extends ConverterHomePageBase implements OnInit {
-  constructor(
-    factory: UnitConverterFactory,
-    meta: Meta,
-    title: Title,
-  ) {
-    super(factory, meta, title, "area");
+  constructor() {
+    super("area");
   }
 
   ngOnInit() {
