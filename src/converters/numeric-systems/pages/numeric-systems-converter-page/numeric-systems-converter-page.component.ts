@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -21,25 +21,19 @@ import { NumericSystem } from '../../models/numeric-system.model';
     styleUrl: './numeric-systems-converter-page.component.scss'
 })
 export class NumericSystemsConverterPageComponent extends PageBase implements OnInit {
+    private readonly route: ActivatedRoute = inject(ActivatedRoute);
+    private readonly router: Router = inject(Router);
+    private readonly urlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
+
     readonly systems: NumericSystem[] = NUMERIC_SYSTEMS;
 
     sourceSystem!: NumericSystem;
     targetSystem!: NumericSystem;
-    sourceValue: string = '0';
+    sourceValue: string = '';
     targetValue: string = '';
     errorMessage: string = '';
 
     private readonly converter = new NumericSystemConverter();
-
-    constructor(
-        meta: Meta,
-        title: Title,
-        private readonly route: ActivatedRoute,
-        private readonly router: Router,
-        private readonly urlFormatter: UnitUrlFormatterService,
-    ) {
-        super(meta, title);
-    }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
@@ -122,23 +116,23 @@ export class NumericSystemsConverterPageComponent extends PageBase implements On
 
     getValidationPattern(): string {
         switch (this.sourceSystem?.id) {
-            case 'binary':      return '[01]*';
+            case 'binary': return '[01]*';
             case 'octadecimal': return '[0-7]*';
-            case 'decimal':     return '[0-9]*';
+            case 'decimal': return '[0-9]*';
             case 'hexadecimal': return '[0-9a-fA-F]*';
-            case 'roman':       return '[IVXLCDMivxlcdm]*';
-            default:            return '.*';
+            case 'roman': return '[IVXLCDMivxlcdm]*';
+            default: return '.*';
         }
     }
 
     getInputPlaceholder(): string {
         switch (this.sourceSystem?.id) {
-            case 'binary':      return 'Ex: 1010';
+            case 'binary': return 'Ex: 1010';
             case 'octadecimal': return 'Ex: 17';
-            case 'decimal':     return 'Ex: 255';
+            case 'decimal': return 'Ex: 255';
             case 'hexadecimal': return 'Ex: FF';
-            case 'roman':       return 'Ex: XIV';
-            default:            return '';
+            case 'roman': return 'Ex: XIV';
+            default: return '';
         }
     }
 

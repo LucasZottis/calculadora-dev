@@ -16,16 +16,13 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     RouterModule,
     CalculatorComponent,
     ConverterTitleComponent
-],
+  ],
   templateUrl: './length-converter-page.component.html',
   styleUrl: './length-converter-page.component.scss'
 })
 export class LengthConverterPageComponent extends ConverterPageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title, "length", "comprimento");
+  constructor() {
+    super("length", "comprimento");
     this.setTitle('Conversor de Comprimento');
     this.addDescription('Ferramenta para converter entre diferentes unidades de comprimento como milímetros, metros, polegadas, pés, milhas, anos-luz e mais. Conversões precisas, instantâneas e confiáveis.');
   }

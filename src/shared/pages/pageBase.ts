@@ -10,15 +10,15 @@ import { SeoService } from "../services/seoService/seo.service";
     template: '',
 })
 export class PageBase implements OnDestroy {
-    private _meta: Meta;
-    private _title: Title;
-    private _seoService: SeoService;
+    private _meta: Meta = inject(Meta);
+    private _title: Title = inject(Title);
+    private _seoService: SeoService = inject(SeoService);
 
-    constructor(meta?: Meta, title?: Title) {
-        this._meta = meta || inject(Meta);
-        this._title = title || inject(Title);
-        this._seoService = inject(SeoService);
-    }
+    // constructor(meta?: Meta, title?: Title) {
+    //     this._meta = meta || inject(Meta);
+    //     this._title = title || inject(Title);
+    //     this._seoService = inject(SeoService);
+    // }
 
     protected setTitle(title: string): void {
         this._title.setTitle(title + " - Calculadora Dev");

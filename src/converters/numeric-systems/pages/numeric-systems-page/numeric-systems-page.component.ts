@@ -23,11 +23,9 @@ export class NumericSystemsPageComponent extends PageBase implements OnInit, Aft
     readonly groupedSystems: Array<{ key: NumericSystem, targets: NumericSystem[] }> = [];
 
     constructor(
-        meta: Meta,
-        title: Title,
         protected readonly unitUrlFormatterService: UnitUrlFormatterService,
     ) {
-        super(meta, title);
+        super();
         this._buildGroups();
     }
 

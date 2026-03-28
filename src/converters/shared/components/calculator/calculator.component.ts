@@ -1,5 +1,5 @@
 // src/converters/shared/components/calculator/calculator.component.ts
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UnitConverterFactory, IUnitConverter, Unit } from 'devtoolz-library';
@@ -13,7 +13,9 @@ import { CalculatorResult } from 'src/converters/shared/models/calculatorResult'
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
-  private currentConverter: IUnitConverter;
+  private readonly _converterFactory: UnitConverterFactory = inject(UnitConverterFactory);
+
+  private currentConverter!: IUnitConverter;
   private documentClickListener: any;
   private _clearValue: boolean = false;
 
@@ -34,10 +36,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
   showSourceUnitSelector: boolean = false;
   showTargetUnitSelector: boolean = false;
-
-  constructor(private converterFactory: UnitConverterFactory) {
-    this.currentConverter = this.converterFactory.createService(this.selectedCategoryId);
-  }
 
   get availableUnits(): Unit[] {
     return this.currentConverter.getUnits();
@@ -61,7 +59,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
   private updateConverter(): void {
     try {
-      this.currentConverter = this.converterFactory.createService(this.selectedCategoryId);
+      this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
     } catch (error) {
       console.error('Erro ao obter conversor:', error);
     }
@@ -175,7 +173,9 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.updateConverter();
     this.initializeUnits();
 
+    this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
     this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
+
     document.addEventListener('click', this.documentClickListener);
   }
 

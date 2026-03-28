@@ -21,11 +21,8 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
   styleUrl: './data-converter-page.component.scss'
 })
 export class DataConverterPageComponent extends ConverterPageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title, "data", "dado");
+  constructor() {
+    super("data", "dado");
     this.setTitle('Conversor de Dados');
     this.addDescription(
       'Ferramenta para converter entre diferentes unidades de dados, como bits, bytes, kilobytes, megabytes, gigabytes, terabytes e muito mais. \

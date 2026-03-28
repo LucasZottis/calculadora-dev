@@ -27,12 +27,10 @@ export class ConverterPageBase extends PageBase {
     protected formulaCalculation: string = '';
 
     constructor(
-        meta: Meta,
-        title: Title,
         selectedCategory: string,
         urlPrefix: string,
     ) {
-        super(meta, title);
+        super();
         this.selectedCategory = selectedCategory;
         this.urlPrefix = urlPrefix;
         this.service = this.convertersFactory.createService(selectedCategory);

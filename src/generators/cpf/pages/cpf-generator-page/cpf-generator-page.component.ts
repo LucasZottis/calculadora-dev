@@ -21,11 +21,8 @@ export class CpfGeneratorPageComponent extends PageBase {
   cpf: string = "";
   masked: number = 1;
 
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
+  constructor() {
+    super();
     this.addDescription('Ferramenta para geração CPF aleatório válido.');
     this.setTitle('Gerador de CPF');
   }

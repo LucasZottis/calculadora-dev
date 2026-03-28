@@ -16,12 +16,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
   styleUrl: './data-home-page.component.scss'
 })
 export class DataHomePageComponent extends ConverterHomePageBase implements OnInit {
-  constructor(
-    factory: UnitConverterFactory,
-    meta: Meta,
-    title: Title,
-  ) {
-    super(factory, meta, title, "data");
+  constructor() {
+    super("data");
   }
 
   ngOnInit() {

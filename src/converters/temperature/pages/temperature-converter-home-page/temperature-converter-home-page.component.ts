@@ -16,12 +16,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
   styleUrl: './temperature-converter-home-page.component.scss'
 })
 export class TemperatureConverterHomePageComponent extends ConverterHomePageBase implements OnInit {
-  constructor(
-    factory: UnitConverterFactory,
-    meta: Meta,
-    title: Title,
-  ) {
-    super(factory, meta, title, "temperature");
+  constructor() {
+    super("temperature");
   }
 
   ngOnInit() {

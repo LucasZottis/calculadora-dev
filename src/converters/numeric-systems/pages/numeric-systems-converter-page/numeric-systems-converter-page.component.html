@@ -5,7 +5,7 @@
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/conversores">Conversores</a></li>
             <li><a routerLink="/conversores/sistemas-numericos">Sistemas Numéricos</a></li>
-            <li><span>Converter {{sourceSystem?.name}} para {{targetSystem?.name}}</span></li>
+            <li><span>Converter {{sourceSystem.name}} para {{targetSystem.name}}</span></li>
         </ol>
     </nav>
 
@@ -40,8 +40,7 @@
         <div class="converter-row">
             <div class="system-selector-wrapper">
                 <label class="system-label">De</label>
-                <select class="system-select" [(ngModel)]="sourceSystem"
-                    [compareWith]="compareById"
+                <select class="system-select" [(ngModel)]="sourceSystem" [compareWith]="compareById"
                     (ngModelChange)="onSourceSystemChange()">
                     @for(s of systems; track s.id) {
                     <option [ngValue]="s">{{s.name}} ({{s.symbol}})</option>
@@ -49,16 +48,9 @@
                 </select>
             </div>
             <div class="value-wrapper">
-                <input
-                    type="text"
-                    class="value-input"
-                    [(ngModel)]="sourceValue"
-                    (ngModelChange)="onSourceValueChange()"
-                    [placeholder]="getInputPlaceholder()"
-                    [pattern]="getValidationPattern()"
-                    autocomplete="off"
-                    spellcheck="false"
-                />
+                <input type="text" class="value-input" [(ngModel)]="sourceValue" (ngModelChange)="onSourceValueChange()"
+                    [placeholder]="getInputPlaceholder()" [pattern]="getValidationPattern()" autocomplete="off"
+                    spellcheck="false" />
             </div>
         </div>
 
@@ -71,8 +63,7 @@
         <div class="converter-row">
             <div class="system-selector-wrapper">
                 <label class="system-label">Para</label>
-                <select class="system-select" [(ngModel)]="targetSystem"
-                    [compareWith]="compareById"
+                <select class="system-select" [(ngModel)]="targetSystem" [compareWith]="compareById"
                     (ngModelChange)="onTargetSystemChange()">
                     @for(s of systems; track s.id) {
                     <option [ngValue]="s">{{s.name}} ({{s.symbol}})</option>
@@ -103,8 +94,10 @@
                 <li><strong>Decimal (base 10)</strong>: O sistema que usamos no dia a dia, com os dígitos de 0 a 9.</li>
                 <li><strong>Binário (base 2)</strong>: Utilizado por computadores; usa apenas 0 e 1.</li>
                 <li><strong>Octal (base 8)</strong>: Usa dígitos de 0 a 7; era comum em computadores antigos.</li>
-                <li><strong>Hexadecimal (base 16)</strong>: Usa dígitos de 0 a 9 e letras de A a F; muito usado em programação para representar cores e endereços de memória.</li>
-                <li><strong>Romano</strong>: Sistema aditivo com símbolos I, V, X, L, C, D e M; suporta valores de 1 a 3999.</li>
+                <li><strong>Hexadecimal (base 16)</strong>: Usa dígitos de 0 a 9 e letras de A a F; muito usado em
+                    programação para representar cores e endereços de memória.</li>
+                <li><strong>Romano</strong>: Sistema aditivo com símbolos I, V, X, L, C, D e M; suporta valores de 1 a
+                    3999.</li>
             </ul>
         </div>
     </div>

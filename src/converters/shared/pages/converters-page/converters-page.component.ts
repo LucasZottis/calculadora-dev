@@ -27,11 +27,8 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
   ];
 
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title);
+  constructor() {
+    super();
   }
 
   ngOnInit() {

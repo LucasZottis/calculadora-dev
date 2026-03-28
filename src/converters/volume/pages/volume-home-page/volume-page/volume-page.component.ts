@@ -16,12 +16,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
   styleUrl: './volume-page.component.scss'
 })
 export class VolumePageComponent extends ConverterHomePageBase implements OnInit {
-  constructor(
-    factory: UnitConverterFactory,
-    meta: Meta,
-    title: Title,
-  ) {
-    super(factory, meta, title, "volume");
+  constructor() {
+    super("volume");
   }
 
   ngOnInit() {
