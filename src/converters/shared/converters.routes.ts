@@ -13,4 +13,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'tempo-decimal', loadChildren: () => import('../decimal-time/decimal-time.routes').then(m => m.DECIMAL_TIME_ROUTES) },
     { path: 'dados', loadChildren: () => import('../data/data.routes').then(m => m.DATA_ROUTES) },
     { path: 'sistemas-numericos', loadChildren: () => import('../numeric-systems/numeric-systems.routes').then(m => m.NUMERIC_SYSTEMS_ROUTES) },
+    { path: 'texto-para-binario', loadChildren: () => import('../texto-binario/texto-binario.routes').then(m => m.TEXTO_BINARIO_ROUTES) },
 ];
