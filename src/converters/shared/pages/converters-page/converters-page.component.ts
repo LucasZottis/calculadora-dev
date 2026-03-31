@@ -24,6 +24,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'sistemas-numericos', name: 'Sistemas Numéricos', icon: 'tag' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
+    { id: 'texto-para-binario', name: 'Texto para Binário', icon: 'text_fields' },
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
   ];
 
