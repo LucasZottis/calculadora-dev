@@ -38,24 +38,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: "Roboto";
-    --bs-body-font-family: "Roboto", sans-serif !important;
-}
-
-html,
-body {
-    min-height: 100%;
-}
-
-body {
     color: #a5d6a7 !important;
-    display: flex;
+    font-family: "Roboto", sans-serif !important;
 }
 
 a {
     color: inherit !important;
     cursor: pointer;
-    text-decoration: none !important;
+    // text-decoration: none !important;
 }
 
 hr {
@@ -90,6 +80,7 @@ main-layout {
     font-family: "Material Symbols Outlined" !important;
 }
 
+// /* Breadcrumbs */
 .breadcrumbs {
     margin-bottom: 2rem;
 
