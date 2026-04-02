@@ -1,0 +1,73 @@
+<div class="page-container">
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/pressao">Pressão</a></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
+
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
+      <p>
+        Esta calculadora permite converter entre diversas unidades de pressão, incluindo Pascal, Bar, Atmosfera padrão,
+        Quilopascal, Milímetro de mercúrio (mmHg) e Libra por polegada quadrada (PSI).
+        Basta selecionar as unidades de origem e destino, inserir o valor desejado e o sistema
+        calculará automaticamente o resultado com base nos fatores de conversão apropriados.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (de onde deseja converter)</li>
+        <li>Escolha a unidade de destino (para onde deseja converter)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado automaticamente</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Pressão</h2>
+    <div class="texto-explicativo">
+      <p>
+        A pressão é a força exercida por unidade de área sobre uma superfície.
+        Existem diferentes unidades utilizadas para medir pressão ao redor do mundo:
+      </p>
+      <ul>
+        <li><strong>Pascal (Pa)</strong>: unidade do Sistema Internacional (SI), equivale a 1 Newton por metro quadrado</li>
+        <li><strong>Quilopascal (kPa)</strong>: equivale a 1.000 Pascais, muito usado em meteorologia e engenharia</li>
+        <li><strong>Bar (bar)</strong>: aproximadamente igual à pressão atmosférica ao nível do mar; 1 bar = 100.000 Pa</li>
+        <li><strong>Atmosfera padrão (atm)</strong>: pressão atmosférica ao nível do mar; 1 atm = 101.325 Pa</li>
+        <li><strong>Milímetro de mercúrio (mmHg)</strong>: unidade tradicional usada na medicina para medir pressão arterial; 1 mmHg ≈ 133,32 Pa</li>
+        <li><strong>Libra por polegada quadrada (PSI)</strong>: unidade do sistema imperial amplamente usada nos EUA para pneus e sistemas hidráulicos; 1 PSI ≈ 6.894,76 Pa</li>
+      </ul>
+      <p>
+        Todas as conversões são realizadas com alta precisão, utilizando o Pascal como unidade base conforme o Sistema Internacional de Unidades.
+      </p>
+    </div>
+  </div>
+</div>
