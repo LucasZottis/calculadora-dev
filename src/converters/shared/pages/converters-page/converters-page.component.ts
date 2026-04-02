@@ -27,6 +27,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
     { id: 'texto-para-binario', name: 'Texto para Binário', icon: 'text_fields' },
+    { id: 'texto-para-morse', name: 'Código Morse', icon: 'rss_feed' },
     { id: 'velocidade', name: 'Velocidade', icon: 'speed' },
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
   ];
