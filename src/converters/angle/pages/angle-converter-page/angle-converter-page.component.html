@@ -1,0 +1,70 @@
+<div class="page-container">
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/angulo">Ângulo</a></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
+
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
+      <p>
+        Esta calculadora permite converter entre diversas unidades de ângulo, incluindo Graus, Radianos e Grados (gon).
+        Basta selecionar as unidades de origem e destino, inserir o valor desejado e o sistema
+        calculará automaticamente o resultado com base nos fatores de conversão apropriados.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (de onde deseja converter)</li>
+        <li>Escolha a unidade de destino (para onde deseja converter)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado automaticamente</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Ângulo</h2>
+    <div class="texto-explicativo">
+      <p>
+        O ângulo é uma grandeza geométrica que representa a abertura entre duas semirretas com origem em um mesmo ponto.
+        Existem diferentes unidades utilizadas para medir ângulos:
+      </p>
+      <ul>
+        <li><strong>Grau (°)</strong>: a unidade mais comum no cotidiano, onde uma volta completa equivale a 360°</li>
+        <li><strong>Radiano (rad)</strong>: a unidade padrão do Sistema Internacional, utilizada em matemática e física; uma volta completa equivale a 2π rad</li>
+        <li><strong>Grado/Gon (gon)</strong>: sistema centesimal onde uma volta completa equivale a 400 gon, muito utilizado em topografia e engenharia</li>
+      </ul>
+      <p>
+        Todas as conversões são realizadas com alta precisão, utilizando o Radiano como unidade base conforme o Sistema Internacional de Unidades.
+      </p>
+    </div>
+  </div>
+
+</div>

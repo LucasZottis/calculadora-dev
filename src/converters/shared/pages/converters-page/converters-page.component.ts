@@ -16,6 +16,7 @@ import { PageBase } from 'src/shared/pages/pageBase';
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
   categories: Array<{ id: string, name: string, icon: string }> = [
+    { id: 'angulo', name: 'Ângulo', icon: '360' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
     { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
     { id: 'dados', name: 'Dados', icon: 'database' },
