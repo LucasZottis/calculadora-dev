@@ -1,0 +1,79 @@
+<div class="page-container">
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/velocidade">Velocidade</a></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
+
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
+      <p>
+        Esta calculadora permite converter entre diversas unidades de velocidade, incluindo metros por segundo,
+        quilômetros por hora, milhas por hora, nós náuticos, Mach e velocidade da luz. Basta selecionar as unidades
+        de origem e destino, inserir o valor desejado e o sistema calculará automaticamente o resultado.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (de onde deseja converter)</li>
+        <li>Escolha a unidade de destino (para onde deseja converter)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado automaticamente</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Velocidade</h2>
+    <div class="texto-explicativo">
+      <p>
+        A velocidade é uma grandeza física que expressa a variação da posição de um corpo em relação ao tempo.
+        Ela está presente em diversos contextos científicos, industriais, esportivos e cotidianos.
+        Existem diferentes unidades utilizadas para medir velocidade ao redor do mundo:
+      </p>
+      <ul>
+        <li><strong>Metro por segundo (m/s)</strong>: unidade padrão do Sistema Internacional de Unidades (SI)</li>
+        <li><strong>Quilômetro por hora (km/h)</strong>: amplamente utilizada no cotidiano, especialmente em transportes terrestres</li>
+        <li><strong>Milha por hora (mph)</strong>: comum nos Estados Unidos e no Reino Unido</li>
+        <li><strong>Nó náutico (kn)</strong>: utilizada na navegação marítima e aérea</li>
+        <li><strong>Mach</strong>: razão entre a velocidade do objeto e a velocidade do som, usada em aeronáutica</li>
+        <li><strong>Velocidade da luz (c)</strong>: constante fundamental da física, aproximadamente 299.792.458 m/s no vácuo</li>
+        <li><strong>Quilômetro por segundo (km/s)</strong>: usada em contextos astronômicos e espaciais</li>
+        <li><strong>Centímetro por segundo (cm/s)</strong>: utilizada em contextos científicos para pequenas velocidades</li>
+        <li><strong>Pés por segundo (ft/s)</strong>: unidade do sistema imperial, comum em engenharia nos EUA</li>
+        <li><strong>Polegada por segundo (in/s)</strong>: utilizada em contextos técnicos de precisão</li>
+      </ul>
+      <p>
+        Todas as conversões são realizadas com alta precisão, utilizando o metro por segundo (m/s) como unidade base
+        conforme o Sistema Internacional de Unidades.
+      </p>
+    </div>
+  </div>
+
+</div>

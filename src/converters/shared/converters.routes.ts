@@ -16,4 +16,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'texto-para-binario', loadChildren: () => import('../texto-binario/texto-binario.routes').then(m => m.TEXTO_BINARIO_ROUTES) },
     { path: 'angulo', loadChildren: () => import('../angle/angle.routes').then(m => m.ANGLE_ROUTES) },
     { path: 'pressao', loadChildren: () => import('../pressure/pressure.routes').then(m => m.PRESSURE_ROUTES) },
+    { path: 'velocidade', loadChildren: () => import('../speed/speed.routes').then(m => m.SPEED_ROUTES) },
 ];
