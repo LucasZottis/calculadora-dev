@@ -14,4 +14,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'dados', loadChildren: () => import('../data/data.routes').then(m => m.DATA_ROUTES) },
     { path: 'sistemas-numericos', loadChildren: () => import('../numeric-systems/numeric-systems.routes').then(m => m.NUMERIC_SYSTEMS_ROUTES) },
     { path: 'texto-para-binario', loadChildren: () => import('../texto-binario/texto-binario.routes').then(m => m.TEXTO_BINARIO_ROUTES) },
+    { path: 'angulo', loadChildren: () => import('../angle/angle.routes').then(m => m.ANGLE_ROUTES) },
 ];
