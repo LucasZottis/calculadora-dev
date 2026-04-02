@@ -17,4 +17,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'angulo', loadChildren: () => import('../angle/angle.routes').then(m => m.ANGLE_ROUTES) },
     { path: 'pressao', loadChildren: () => import('../pressure/pressure.routes').then(m => m.PRESSURE_ROUTES) },
     { path: 'velocidade', loadChildren: () => import('../speed/speed.routes').then(m => m.SPEED_ROUTES) },
+    { path: 'potencia', loadChildren: () => import('../power/power.routes').then(m => m.POWER_ROUTES) },
 ];
