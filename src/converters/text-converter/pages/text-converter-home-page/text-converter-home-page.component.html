@@ -1,0 +1,52 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Conversor de Texto</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">text_fields</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Texto</h1>
+            <p>Converta texto para diferentes formatos de codificação com precisão e facilidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de texto permite transformar texto entre diferentes formatos de codificação,
+                como binário e código Morse.</p>
+            <p>Ideal para estudantes, desenvolvedores e entusiastas de comunicação que precisam codificar
+                ou decodificar mensagens em diferentes representações textuais.</p>
+        </div>
+    </section>
+
+    <!-- Cards de conversão -->
+    <section class="conversion-groups-container">
+        <section class="conversion-group">
+            <h2>Formatos disponíveis</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for (converter of converters; track converter.route) {
+                <a [routerLink]="converter.route" class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">{{ converter.icon }}</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{ converter.name }}</h3>
+                        <p>{{ converter.description }}</p>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+    </section>
+</div>
