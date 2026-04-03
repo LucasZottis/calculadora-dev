@@ -87,6 +87,22 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
         this._convert();
     }
 
+    onSourceInputEvent(event: Event): void {
+        if (this.sourceFormat?.id !== 'morse') return;
+
+        const textarea = event.target as HTMLTextAreaElement;
+        const filtered = this._sanitizeMorseInput(textarea.value);
+
+        if (filtered !== textarea.value) {
+            const cursorPos = textarea.selectionStart ?? filtered.length;
+            textarea.value = filtered;
+            this.sourceValue = filtered;
+            const newCursor = Math.min(cursorPos, filtered.length);
+            textarea.setSelectionRange(newCursor, newCursor);
+            this._convert();
+        }
+    }
+
     get sourcePlaceholder(): string {
         switch (this.sourceFormat?.id) {
             case 'texto': return 'Ex: Olá, mundo!';
@@ -98,6 +114,10 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
 
     compareById(a: TextFormat, b: TextFormat): boolean {
         return a?.id === b?.id;
+    }
+
+    private _sanitizeMorseInput(value: string): string {
+        return value.replace(/[^.\- ]/g, '');
     }
 
     private _isValidPair(sourceId: string, targetId: string): boolean {
