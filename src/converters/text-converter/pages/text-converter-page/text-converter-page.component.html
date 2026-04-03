@@ -5,7 +5,7 @@
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/conversores">Conversores</a></li>
             <li><a routerLink="/conversores/texto">Conversor de Texto</a></li>
-            <li><span>Converter {{ sourceFormat?.name }} para {{ targetFormat?.name }}</span></li>
+            <li><span>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</span></li>
         </ol>
     </nav>
 
@@ -86,7 +86,7 @@
     </div>
 
     <!-- Informações adicionais: Binário -->
-    @if (sourceFormat?.id === 'binario' || targetFormat?.id === 'binario') {
+    @if (sourceFormat.id === 'binario' || targetFormat.id === 'binario') {
         <div class="mt-5">
             <h2 class="text-center fs-4">Sobre a Conversão de Texto para Binário</h2>
             <div class="texto-explicativo">
@@ -111,7 +111,7 @@
     }
 
     <!-- Informações adicionais: Morse -->
-    @if (sourceFormat?.id === 'morse' || targetFormat?.id === 'morse') {
+    @if (sourceFormat.id === 'morse' || targetFormat.id === 'morse') {
         <div class="mt-5">
             <h2 class="text-center fs-4">Sobre o Código Morse</h2>
             <div class="texto-explicativo">
