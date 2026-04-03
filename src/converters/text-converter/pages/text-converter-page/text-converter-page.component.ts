@@ -84,6 +84,9 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
     }
 
     onSourceValueChange(): void {
+        if (this.sourceFormat?.id === 'morse') {
+            this.sourceValue = this._sanitizeMorseInput(this.sourceValue);
+        }
         this._convert();
     }
 
@@ -98,6 +101,10 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
 
     compareById(a: TextFormat, b: TextFormat): boolean {
         return a?.id === b?.id;
+    }
+
+    private _sanitizeMorseInput(value: string): string {
+        return value.replace(/[^.\- ]/g, '');
     }
 
     private _isValidPair(sourceId: string, targetId: string): boolean {
