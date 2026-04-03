@@ -44,6 +44,6 @@ export class TextConverterHomePageComponent extends PageBase implements OnInit {
     }
 
     private _isValidPair(sourceId: string, targetId: string): boolean {
-        return sourceId !== targetId && (sourceId === 'texto' || targetId === 'texto');
+        return sourceId !== targetId;
     }
 }

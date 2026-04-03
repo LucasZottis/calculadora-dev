@@ -101,7 +101,7 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
     }
 
     private _isValidPair(sourceId: string, targetId: string): boolean {
-        return sourceId !== targetId && (sourceId === 'texto' || targetId === 'texto');
+        return sourceId !== targetId;
     }
 
     private _convert(): void {
@@ -115,7 +115,13 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
         try {
             const sourceApiId = this._toApiFormat(this.sourceFormat.id);
             const targetApiId = this._toApiFormat(this.targetFormat.id);
-            this.targetValue = this.converter.convert(this.sourceValue, sourceApiId, targetApiId);
+
+            if (sourceApiId !== 'text' && targetApiId !== 'text') {
+                const intermediate = this.converter.convert(this.sourceValue, sourceApiId, 'text');
+                this.targetValue = this.converter.convert(intermediate, 'text', targetApiId);
+            } else {
+                this.targetValue = this.converter.convert(this.sourceValue, sourceApiId, targetApiId);
+            }
         } catch {
             this.errorMessage = 'Valor inválido. Verifique o formato e tente novamente.';
             this.targetValue = '';
