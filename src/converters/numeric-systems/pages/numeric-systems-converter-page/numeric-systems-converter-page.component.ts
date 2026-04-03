@@ -66,6 +66,7 @@ export class NumericSystemsConverterPageComponent extends PageBase implements On
             const next = this.systems.find(s => s.id !== this.sourceSystem.id);
             if (next) this.targetSystem = next;
         }
+        this.sourceValue = '';
         this._updateUrl();
         this._updatePageMeta();
         this._convert();
@@ -83,6 +84,44 @@ export class NumericSystemsConverterPageComponent extends PageBase implements On
 
     onSourceValueChange(): void {
         this._convert();
+    }
+
+    onKeyDown(event: KeyboardEvent): void {
+        const controlKeys = ['Backspace', 'Delete', 'Tab', 'Enter', 'Escape', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+        if (controlKeys.includes(event.key) || event.ctrlKey || event.metaKey) {
+            return;
+        }
+
+        const pattern = this._getAllowedCharsPattern();
+        if (pattern && !pattern.test(event.key)) {
+            event.preventDefault();
+        }
+    }
+
+    onPaste(event: ClipboardEvent): void {
+        const pattern = this._getAllowedCharsPattern();
+        if (!pattern) return;
+
+        event.preventDefault();
+        const pasted = event.clipboardData?.getData('text') ?? '';
+        const filtered = pasted.split('').filter(c => pattern.test(c)).join('');
+        const input = event.target as HTMLInputElement;
+        const start = input.selectionStart ?? 0;
+        const end = input.selectionEnd ?? 0;
+        const current = this.sourceValue ?? '';
+        this.sourceValue = current.substring(0, start) + filtered + current.substring(end);
+        this._convert();
+    }
+
+    private _getAllowedCharsPattern(): RegExp | null {
+        switch (this.sourceSystem?.id) {
+            case 'binary': return /^[01]$/;
+            case 'octadecimal': return /^[0-7]$/;
+            case 'decimal': return /^[0-9]$/;
+            case 'hexadecimal': return /^[0-9a-fA-F]$/;
+            case 'roman': return /^[IVXLCDMivxlcdm]$/;
+            default: return null;
+        }
     }
 
     private _convert(): void {
