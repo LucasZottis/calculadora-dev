@@ -84,10 +84,23 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
     }
 
     onSourceValueChange(): void {
-        if (this.sourceFormat?.id === 'morse') {
-            this.sourceValue = this._sanitizeMorseInput(this.sourceValue);
-        }
         this._convert();
+    }
+
+    onSourceInputEvent(event: Event): void {
+        if (this.sourceFormat?.id !== 'morse') return;
+
+        const textarea = event.target as HTMLTextAreaElement;
+        const filtered = this._sanitizeMorseInput(textarea.value);
+
+        if (filtered !== textarea.value) {
+            const cursorPos = textarea.selectionStart ?? filtered.length;
+            textarea.value = filtered;
+            this.sourceValue = filtered;
+            const newCursor = Math.min(cursorPos, filtered.length);
+            textarea.setSelectionRange(newCursor, newCursor);
+            this._convert();
+        }
     }
 
     get sourcePlaceholder(): string {

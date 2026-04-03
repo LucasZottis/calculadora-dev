@@ -49,6 +49,7 @@
                     class="value-input"
                     [(ngModel)]="sourceValue"
                     (ngModelChange)="onSourceValueChange()"
+                    (input)="onSourceInputEvent($event)"
                     [placeholder]="sourcePlaceholder"
                     autocomplete="off"
                     spellcheck="false"
