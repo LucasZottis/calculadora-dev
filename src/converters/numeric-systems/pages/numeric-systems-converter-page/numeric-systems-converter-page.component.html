@@ -50,7 +50,7 @@
             <div class="value-wrapper">
                 <input type="text" class="value-input" [(ngModel)]="sourceValue" (ngModelChange)="onSourceValueChange()"
                     [placeholder]="getInputPlaceholder()" [pattern]="getValidationPattern()" autocomplete="off"
-                    spellcheck="false" />
+                    spellcheck="false" (keydown)="onKeyDown($event)" (paste)="onPaste($event)" />
             </div>
         </div>
 
