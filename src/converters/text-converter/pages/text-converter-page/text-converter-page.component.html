@@ -4,17 +4,16 @@
         <ol>
             <li><a routerLink="/">Início</a></li>
             <li><a routerLink="/conversores">Conversores</a></li>
-            <li><span>{{ format === 'binary' ? 'Texto para Binário' : 'Texto para Morse' }}</span></li>
+            <li><a routerLink="/conversores/texto">Conversor de Texto</a></li>
+            <li><span>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</span></li>
         </ol>
     </nav>
 
     <!-- Título -->
-    <div class="text-center mb-5">
-        <h1>{{ format === 'binary' ? 'Converter Texto para Binário' : 'Converter Texto para Código Morse' }}</h1>
+    <div class="text-center mb-5" *ngIf="sourceFormat && targetFormat">
+        <h1>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</h1>
         <p class="fs-3">
-            {{ format === 'binary'
-                ? 'Converta texto em código binário e binário em texto de forma rápida e precisa.'
-                : 'Converta texto em código Morse e código Morse em texto de forma rápida e precisa.' }}
+            Converta {{ sourceFormat.name.toLowerCase() }} para {{ targetFormat.name.toLowerCase() }} de forma rápida e precisa.
         </p>
     </div>
 
@@ -22,31 +21,28 @@
     <div class="card mb-4">
         <div class="card-body">
             <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
-            <p>Escolha o modo de conversão e insira o valor no campo de origem. O resultado será calculado automaticamente.</p>
+            <p>Selecione o formato de origem e de destino, depois insira o valor a ser convertido. O resultado será calculado automaticamente.</p>
             <ol>
-                <li>Selecione o modo: <strong>{{ forwardLabel }}</strong> ou <strong>{{ reverseLabel }}</strong></li>
+                <li>Escolha o formato de origem (de onde deseja converter)</li>
+                <li>Escolha o formato de destino (para onde deseja converter)</li>
                 <li>Digite o valor no campo de origem</li>
                 <li>O resultado aparecerá automaticamente no campo de resultado</li>
             </ol>
         </div>
     </div>
 
-    <!-- Seletor de modo -->
-    <div class="mode-selector mb-3">
-        <button class="mode-btn" [class.active]="direction === 'forward'" (click)="direction = 'forward'; onDirectionChange()">
-            {{ forwardLabel }}
-        </button>
-        <button class="mode-btn" [class.active]="direction === 'reverse'" (click)="direction = 'reverse'; onDirectionChange()">
-            {{ reverseLabel }}
-        </button>
-    </div>
-
     <!-- Conversor -->
-    <div class="converter-panel">
+    <div class="converter-panel" *ngIf="sourceFormat && targetFormat">
         <!-- Entrada -->
         <div class="converter-row">
-            <div class="field-label-wrapper">
-                <label class="field-label">{{sourceLabel}}</label>
+            <div class="format-selector-wrapper">
+                <label class="format-label">De</label>
+                <select class="format-select" [(ngModel)]="sourceFormat" [compareWith]="compareById"
+                    (ngModelChange)="onSourceFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
             </div>
             <div class="value-wrapper">
                 <textarea
@@ -68,31 +64,29 @@
 
         <!-- Saída -->
         <div class="converter-row">
-            <div class="field-label-wrapper">
-                <label class="field-label">{{targetLabel}}</label>
+            <div class="format-selector-wrapper">
+                <label class="format-label">Para</label>
+                <select class="format-select" [(ngModel)]="targetFormat" [compareWith]="compareById"
+                    (ngModelChange)="onTargetFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
             </div>
             <div class="value-wrapper">
-                <div class="value-display">{{targetValue}}</div>
+                <div class="value-display">{{ targetValue }}</div>
             </div>
         </div>
 
         <!-- Mensagem de erro -->
         <div class="error-message" *ngIf="errorMessage">
             <span class="material-symbols-outlined">error</span>
-            <span>{{errorMessage}}</span>
+            <span>{{ errorMessage }}</span>
         </div>
     </div>
 
-    <!-- Navegação cruzada -->
-    <div class="text-center mb-5">
-        <a [routerLink]="otherFormatRoute" class="other-format-link">
-            <span class="material-symbols-outlined">swap_horiz</span>
-            {{ otherFormatLabel }}
-        </a>
-    </div>
-
     <!-- Informações adicionais: Binário -->
-    @if (format === 'binary') {
+    @if (sourceFormat.id === 'binario' || targetFormat.id === 'binario') {
         <div class="mt-5">
             <h2 class="text-center fs-4">Sobre a Conversão de Texto para Binário</h2>
             <div class="texto-explicativo">
@@ -117,7 +111,7 @@
     }
 
     <!-- Informações adicionais: Morse -->
-    @if (format === 'morse') {
+    @if (sourceFormat.id === 'morse' || targetFormat.id === 'morse') {
         <div class="mt-5">
             <h2 class="text-center fs-4">Sobre o Código Morse</h2>
             <div class="texto-explicativo">

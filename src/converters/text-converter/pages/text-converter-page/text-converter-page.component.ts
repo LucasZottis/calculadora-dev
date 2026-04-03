@@ -3,10 +3,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TextConverter } from 'devtoolz-library/dist/converters/text-format/textFormatConverter.converter';
+import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url-formatter.service';
 import { PageBase } from 'src/shared/pages/pageBase';
-
-type TextFormat = 'binary' | 'morse';
-type ConversionDirection = 'forward' | 'reverse';
+import { TEXT_FORMATS } from '../../text-converter.data';
+import { TextFormat } from '../../models/text-format.model';
 
 @Component({
     selector: 'text-converter-page',
@@ -20,64 +20,88 @@ type ConversionDirection = 'forward' | 'reverse';
     styleUrl: './text-converter-page.component.scss'
 })
 export class TextConverterPageComponent extends PageBase implements OnInit {
+    readonly formats: TextFormat[] = TEXT_FORMATS;
+
+    sourceFormat!: TextFormat;
+    targetFormat!: TextFormat;
     sourceValue: string = '';
     targetValue: string = '';
     errorMessage: string = '';
-    direction: ConversionDirection = 'forward';
-    format!: TextFormat;
 
     private readonly route: ActivatedRoute = inject(ActivatedRoute);
     private readonly router: Router = inject(Router);
+    private readonly urlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
     private readonly converter = new TextConverter();
 
     ngOnInit(): void {
-        this.format = this.route.snapshot.data['format'] as TextFormat;
+        this.route.params.subscribe(params => {
+            const conversionParam = params['conversion'];
+            const parsed = conversionParam
+                ? this.urlFormatter.parseConversionUrl(conversionParam)
+                : null;
+
+            const source = parsed
+                ? this.formats.find(f => f.id === parsed.sourceUnitId)
+                : null;
+            const target = parsed
+                ? this.formats.find(f => f.id === parsed.targetUnitId)
+                : null;
+
+            if (!source || !target || source.id === target.id || !this._isValidPair(source.id, target.id)) {
+                this.router.navigate(['/conversores/texto']);
+                return;
+            }
+
+            this.sourceFormat = source;
+            this.targetFormat = target;
+            this._updatePageMeta();
+            this._convert();
+        });
+    }
+
+    onSourceFormatChange(): void {
+        if (this.sourceFormat.id === this.targetFormat.id || !this._isValidPair(this.sourceFormat.id, this.targetFormat.id)) {
+            const next = this.formats.find(f => f.id !== this.sourceFormat.id && this._isValidPair(this.sourceFormat.id, f.id));
+            if (next) this.targetFormat = next;
+        }
+        this.sourceValue = '';
+        this.targetValue = '';
+        this.errorMessage = '';
+        this._updateUrl();
         this._updatePageMeta();
     }
 
-    get sourceLabel(): string {
-        if (this.direction === 'forward') return 'Texto';
-        return this.format === 'binary' ? 'Binário' : 'Morse';
-    }
-
-    get targetLabel(): string {
-        if (this.direction === 'forward') return this.format === 'binary' ? 'Binário' : 'Morse';
-        return 'Texto';
-    }
-
-    get sourcePlaceholder(): string {
-        if (this.direction === 'forward') return 'Ex: Olá, mundo!';
-        return this.format === 'binary'
-            ? 'Ex: 01001111 01101100 11000011 10100001'
-            : 'Ex: ... --- ...   .-. ..- -. -.. ---';
-    }
-
-    get forwardLabel(): string {
-        return this.format === 'binary' ? 'Texto → Binário' : 'Texto → Morse';
-    }
-
-    get reverseLabel(): string {
-        return this.format === 'binary' ? 'Binário → Texto' : 'Morse → Texto';
-    }
-
-    get otherFormatRoute(): string {
-        return this.format === 'binary'
-            ? '/conversores/texto-para-morse'
-            : '/conversores/texto-para-binario';
-    }
-
-    get otherFormatLabel(): string {
-        return this.format === 'binary' ? 'Converter Texto para Morse' : 'Converter Texto para Binário';
+    onTargetFormatChange(): void {
+        if (this.targetFormat.id === this.sourceFormat.id || !this._isValidPair(this.sourceFormat.id, this.targetFormat.id)) {
+            const next = this.formats.find(f => f.id !== this.targetFormat.id && this._isValidPair(f.id, this.targetFormat.id));
+            if (next) this.sourceFormat = next;
+        }
+        this.sourceValue = '';
+        this.targetValue = '';
+        this.errorMessage = '';
+        this._updateUrl();
+        this._updatePageMeta();
     }
 
     onSourceValueChange(): void {
         this._convert();
     }
 
-    onDirectionChange(): void {
-        this.sourceValue = '';
-        this.targetValue = '';
-        this.errorMessage = '';
+    get sourcePlaceholder(): string {
+        switch (this.sourceFormat?.id) {
+            case 'texto': return 'Ex: Olá, mundo!';
+            case 'binario': return 'Ex: 01001111 01101100 11000011 10100001';
+            case 'morse': return 'Ex: ... --- ...   .-. ..- -. -.. ---';
+            default: return '';
+        }
+    }
+
+    compareById(a: TextFormat, b: TextFormat): boolean {
+        return a?.id === b?.id;
+    }
+
+    private _isValidPair(sourceId: string, targetId: string): boolean {
+        return sourceId !== targetId;
     }
 
     private _convert(): void {
@@ -89,10 +113,14 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
         }
 
         try {
-            if (this.direction === 'forward') {
-                this.targetValue = this.converter.convert(this.sourceValue, 'text', this.format);
+            const sourceApiId = this._toApiFormat(this.sourceFormat.id);
+            const targetApiId = this._toApiFormat(this.targetFormat.id);
+
+            if (sourceApiId !== 'text' && targetApiId !== 'text') {
+                const intermediate = this.converter.convert(this.sourceValue, sourceApiId, 'text');
+                this.targetValue = this.converter.convert(intermediate, 'text', targetApiId);
             } else {
-                this.targetValue = this.converter.convert(this.sourceValue, this.format, 'text');
+                this.targetValue = this.converter.convert(this.sourceValue, sourceApiId, targetApiId);
             }
         } catch {
             this.errorMessage = 'Valor inválido. Verifique o formato e tente novamente.';
@@ -100,15 +128,24 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
         }
     }
 
+    private _toApiFormat(formatId: string): string {
+        switch (formatId) {
+            case 'texto': return 'text';
+            case 'binario': return 'binary';
+            case 'morse': return 'morse';
+            default: return formatId;
+        }
+    }
+
+    private _updateUrl(): void {
+        const url = this.urlFormatter.generateConversionUrl(this.sourceFormat.id, this.targetFormat.id);
+        this.router.navigate(['/conversores/texto/' + url], { replaceUrl: true });
+    }
+
     private _updatePageMeta(): void {
-        const isBinary = this.format === 'binary';
-        const pageTitle = isBinary ? 'Converter Texto para Binário' : 'Converter Texto para Código Morse';
-        const description = isBinary
-            ? 'Converta texto para binário e binário para texto de forma rápida e precisa. Ferramenta online gratuita para codificação e decodificação binária.'
-            : 'Converta texto para código Morse e código Morse para texto de forma rápida e precisa. Ferramenta online gratuita para codificação e decodificação Morse.';
-        const keywords = isBinary
-            ? 'converter texto para binario, texto binario, binario para texto, codificacao binaria, decodificacao binaria, ASCII binario'
-            : 'converter texto para morse, codigo morse, morse para texto, decodificar morse, codificar morse, alfabeto morse';
+        const pageTitle = `Converter ${this.sourceFormat.name} para ${this.targetFormat.name}`;
+        const description = `Converta ${this.sourceFormat.name.toLowerCase()} para ${this.targetFormat.name.toLowerCase()} de forma rápida e precisa. Ferramenta online gratuita para codificação e decodificação de texto.`;
+        const keywords = `converter ${this.sourceFormat.name.toLowerCase()} para ${this.targetFormat.name.toLowerCase()}, ${this.sourceFormat.name.toLowerCase()} ${this.targetFormat.name.toLowerCase()}, codificacao texto`;
 
         this.setTitle(pageTitle);
         this.addDescription(description);
