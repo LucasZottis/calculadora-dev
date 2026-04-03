@@ -1,33 +1,5 @@
 @import url('../../../shared/converter.style.scss');
 
-.mode-selector {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.mode-btn {
-    background-color: var(--second-background-color, #2a2a2a);
-    border: 1px solid var(--border-color-base, #444);
-    border-radius: 8px;
-    color: inherit;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.5rem 1.25rem;
-    transition: background-color 0.2s, border-color 0.2s;
-
-    &.active {
-        background-color: var(--bs-primary, #0d6efd);
-        border-color: var(--bs-primary, #0d6efd);
-        color: #fff;
-    }
-
-    &:not(.active):hover {
-        border-color: var(--bs-primary, #0d6efd);
-    }
-}
-
 .converter-panel {
     background-color: var(--second-background-color, #2a2a2a);
     border: 1px solid var(--border-color-base, #444);
@@ -50,23 +22,40 @@
     overflow: hidden;
 }
 
-.field-label-wrapper {
+.format-selector-wrapper {
     display: flex;
     flex-direction: column;
     padding: 0.75rem 1rem;
     border-right: 1px solid var(--border-color-base, #444);
-    min-width: 100px;
+    min-width: 160px;
     gap: 0.25rem;
     justify-content: center;
 }
 
-.field-label {
+.format-label {
     font-size: 0.75rem;
     color: var(--bs-primary, #0d6efd);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
     margin: 0;
+}
+
+.format-select {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    appearance: auto;
+
+    option {
+        background-color: var(--second-background-color, #2a2a2a);
+        color: inherit;
+    }
 }
 
 .value-wrapper {
@@ -123,23 +112,6 @@
     }
 }
 
-.other-format-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--bs-primary, #0d6efd);
-    font-size: 0.95rem;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
-
-    .material-symbols-outlined {
-        font-size: 1.1rem;
-    }
-}
-
 @media (max-width: 576px) {
     .converter-panel {
         padding: 1.25rem;
@@ -149,7 +121,7 @@
         flex-direction: column;
     }
 
-    .field-label-wrapper {
+    .format-selector-wrapper {
         border-right: none;
         border-bottom: 1px solid var(--border-color-base, #444);
         min-width: unset;
@@ -158,10 +130,5 @@
     .value-input,
     .value-display {
         font-size: 1rem;
-    }
-
-    .mode-selector {
-        flex-direction: column;
-        align-items: center;
     }
 }
