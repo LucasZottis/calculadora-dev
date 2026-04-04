@@ -83,6 +83,17 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
         this._updatePageMeta();
     }
 
+    swapFormats(): void {
+        const temp = this.sourceFormat;
+        this.sourceFormat = this.targetFormat;
+        this.targetFormat = temp;
+        this.sourceValue = '';
+        this.targetValue = '';
+        this.errorMessage = '';
+        this._updateUrl();
+        this._updatePageMeta();
+    }
+
     onSourceValueChange(): void {
         this._convert();
     }
