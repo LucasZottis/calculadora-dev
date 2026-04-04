@@ -82,6 +82,17 @@ export class NumericSystemsConverterPageComponent extends PageBase implements On
         this._convert();
     }
 
+    swapSystems(): void {
+        const temp = this.sourceSystem;
+        this.sourceSystem = this.targetSystem;
+        this.targetSystem = temp;
+        this.sourceValue = '';
+        this.targetValue = '0';
+        this.errorMessage = '';
+        this._updateUrl();
+        this._updatePageMeta();
+    }
+
     onSourceValueChange(): void {
         this._convert();
     }
