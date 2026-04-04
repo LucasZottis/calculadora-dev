@@ -88,10 +88,15 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
     }
 
     onSourceInputEvent(event: Event): void {
-        if (this.sourceFormat?.id !== 'morse') return;
+        const isMorse = this.sourceFormat?.id === 'morse';
+        const isBinary = this.sourceFormat?.id === 'binario';
+
+        if (!isMorse && !isBinary) return;
 
         const textarea = event.target as HTMLTextAreaElement;
-        const filtered = this._sanitizeMorseInput(textarea.value);
+        const filtered = isMorse
+            ? this._sanitizeMorseInput(textarea.value)
+            : this._sanitizeBinaryInput(textarea.value);
 
         if (filtered !== textarea.value) {
             const cursorPos = textarea.selectionStart ?? filtered.length;
@@ -118,6 +123,10 @@ export class TextConverterPageComponent extends PageBase implements OnInit {
 
     private _sanitizeMorseInput(value: string): string {
         return value.replace(/[^.\- ]/g, '');
+    }
+
+    private _sanitizeBinaryInput(value: string): string {
+        return value.replace(/[^01 ]/g, '');
     }
 
     private _isValidPair(sourceId: string, targetId: string): boolean {
