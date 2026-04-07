@@ -22,7 +22,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   @Input() selectedCategoryId: string = 'volume';
   @Input() selectedSourceUnitId: string = '';
   @Input() selectedTargetUnitId: string = '';
-  @Input() externalConverter: IUnitConverter | null = null;
 
   @Output() categoryChange = new EventEmitter<string>();
   @Output() sourceUnitChange = new EventEmitter<Unit>();
@@ -59,10 +58,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   private updateConverter(): void {
-    if (this.externalConverter) {
-      this.currentConverter = this.externalConverter;
-      return;
-    }
     try {
       this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
     } catch (error) {
@@ -178,9 +173,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.updateConverter();
     this.initializeUnits();
 
-    if (!this.externalConverter) {
-      this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
-    }
+    this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
     this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
 
     document.addEventListener('click', this.documentClickListener);

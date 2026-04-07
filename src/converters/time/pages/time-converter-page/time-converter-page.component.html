@@ -33,7 +33,7 @@
 
   <!-- Componente de calculadora -->
   <calculator
-    [externalConverter]="timeService"
+    [selectedCategoryId]="selectedCategory"
     [selectedSourceUnitId]="selectedSourceUnit.id"
     [selectedTargetUnitId]="selectedTargetUnit.id"
     (sourceUnitChange)="onSourceUnitChange($event)"

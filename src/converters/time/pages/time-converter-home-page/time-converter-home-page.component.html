@@ -37,7 +37,7 @@
             <hr>
             <div class="conversion-links-grid">
                 @for(unit of item.units; track unit.id) {
-                <a [routerLink]="['/conversores/tempo', urlFormatter.generateConversionUrl(item.key.id, unit.id)]"
+                <a [routerLink]="['/conversores/tempo', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
                     class="conversion-link-card">
                     <div class="conversion-link-icon">
                         <span class="material-symbols-outlined">timer</span>
