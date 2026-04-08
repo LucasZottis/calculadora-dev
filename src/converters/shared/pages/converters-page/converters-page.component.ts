@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
-import { Category } from '../models/categpry.model';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'converters-page',
@@ -27,7 +27,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'pressao', name: 'Pressão', icon: 'compress' },
     { id: 'sistemas-numericos', name: 'Sistemas Numéricos', icon: 'tag' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
-    // { id: 'tempo', name: 'Tempo', icon: 'nest_clock_farsight_analog' },
+    { id: 'tempo', name: 'Tempo', icon: 'nest_clock_farsight_analog' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
     { id: 'texto', name: 'Conversor de Texto', icon: 'text_fields' },
     { id: 'velocidade', name: 'Velocidade', icon: 'speed' },
