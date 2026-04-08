@@ -1,13 +1,6 @@
 <div class="page-container">
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
   <div class="text-center mb-5">
-    <nav class="breadcrumbs">
-      <ol>
-        <li><a routerLink="/">Início</a></li>
-        <li><a routerLink="/conversores">Conversores</a></li>
-        <li><a routerLink="/conversores/peso-e-massa">Peso e Massa</a></li>
-        <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
-      </ol>
-    </nav>
 
     <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 

@@ -5,6 +5,7 @@ import { inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Meta, Title } from "@angular/platform-browser";
 import { CalculatorResult } from "../models/calculatorResult";
+import { BreadcrumbItem } from "src/shared/models/breadcrumb-item";
 
 export class ConverterPageBase extends PageBase {
     protected readonly unitUrlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
@@ -26,13 +27,26 @@ export class ConverterPageBase extends PageBase {
     protected formulaDescription: string = '';
     protected formulaCalculation: string = '';
 
+    protected readonly categoryLabel: string;
+
+    get breadcrumbItems(): BreadcrumbItem[] {
+        return [
+            { label: 'Início', link: '/' },
+            { label: 'Conversores', link: '/conversores' },
+            { label: this.categoryLabel, link: `/conversores/${this.urlPrefix}` },
+            { label: `Converter ${this.selectedSourceUnit?.name} para ${this.selectedTargetUnit?.name}` },
+        ];
+    }
+
     constructor(
         selectedCategory: string,
         urlPrefix: string,
+        categoryLabel: string = '',
     ) {
         super();
         this.selectedCategory = selectedCategory;
         this.urlPrefix = urlPrefix;
+        this.categoryLabel = categoryLabel;
         this.service = this.convertersFactory.createService(selectedCategory);
         this.units = this.service.getUnits();
     }

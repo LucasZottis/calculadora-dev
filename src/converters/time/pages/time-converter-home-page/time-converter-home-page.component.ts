@@ -3,16 +3,19 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'time-converter-home-page',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule,
+    BreadcrumbsComponent
+  ],
   templateUrl: './time-converter-home-page.component.html',
   styleUrl: './time-converter-home-page.component.scss'
 })
 export class TimeConverterHomePageComponent extends ConverterHomePageBase implements OnInit, AfterViewInit {
   constructor() {
-    super('time');
+    super('time', 'Tempo');
   }
 
   ngOnInit(): void {

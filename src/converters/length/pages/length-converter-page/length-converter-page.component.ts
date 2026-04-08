@@ -7,6 +7,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'length-converter-page',
   standalone: true,
@@ -15,14 +16,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './length-converter-page.component.html',
   styleUrl: './length-converter-page.component.scss'
 })
 export class LengthConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("length", "comprimento");
+    super("length", "comprimento", "Comprimento");
     this.setTitle('Conversor de Comprimento');
     this.addDescription('Ferramenta para converter entre diferentes unidades de comprimento como milímetros, metros, polegadas, pés, milhas, anos-luz e mais. Conversões precisas, instantâneas e confiáveis.');
   }

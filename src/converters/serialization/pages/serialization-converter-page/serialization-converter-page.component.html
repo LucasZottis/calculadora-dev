@@ -1,13 +1,5 @@
 <div class="page-container">
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <ol>
-            <li><a routerLink="/">Início</a></li>
-            <li><a routerLink="/conversores">Conversores</a></li>
-            <li><a routerLink="/conversores/serialization">Serialização de Dados</a></li>
-            <li><span>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</span></li>
-        </ol>
-    </nav>
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
 
     <!-- Título -->
     <div class="text-center mb-5" *ngIf="sourceFormat && targetFormat">

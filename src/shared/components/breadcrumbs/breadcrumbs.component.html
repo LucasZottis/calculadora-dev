@@ -1,0 +1,13 @@
+<nav class="breadcrumbs">
+  <ol>
+    @for (item of items; track $index) {
+      <li>
+        @if (item.link) {
+          <a [routerLink]="item.link">{{ item.label }}</a>
+        } @else {
+          <span>{{ item.label }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

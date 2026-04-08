@@ -4,18 +4,26 @@ import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
 import { Category } from '../models/category.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'converters-page',
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './converters-page.component.html',
   styleUrl: './converters-page.component.scss'
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Conversores' },
+  ];
+
   categories: Array<Category> = [
     { id: 'angulo', name: 'Ângulo', icon: '360' },
     { id: 'serialization', name: 'Serialização de Dados', icon: 'data_object' },

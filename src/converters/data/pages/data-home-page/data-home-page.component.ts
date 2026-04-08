@@ -5,19 +5,21 @@ import { RouterModule } from '@angular/router';
 import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'data-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './data-home-page.component.html',
   styleUrl: './data-home-page.component.scss'
 })
 export class DataHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("data");
+    super("data", "Dados");
   }
 
   ngOnInit() {

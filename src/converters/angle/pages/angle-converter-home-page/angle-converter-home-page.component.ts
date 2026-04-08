@@ -3,19 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'angle-converter-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './angle-converter-home-page.component.html',
   styleUrl: './angle-converter-home-page.component.scss'
 })
 export class AngleConverterHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("angle");
+    super("angle", "Ângulo");
   }
 
   ngOnInit() {

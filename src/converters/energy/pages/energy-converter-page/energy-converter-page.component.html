@@ -1,12 +1,5 @@
 <div class="page-container">
-  <nav class="breadcrumbs">
-    <ol>
-      <li><a routerLink="/">Início</a></li>
-      <li><a routerLink="/conversores">Conversores</a></li>
-      <li><a routerLink="/conversores/energia">Energia</a></li>
-      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
-    </ol>
-  </nav>
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
 
   <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 

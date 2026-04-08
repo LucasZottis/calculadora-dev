@@ -4,19 +4,27 @@ import { Meta, Title } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { PageBase } from "src/shared/pages/pageBase";
 import { ValidatorTool } from "../../models/validatorTool";
+import { BreadcrumbItem } from "src/shared/models/breadcrumb-item";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'validators-page',
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    BreadcrumbsComponent
   ],
 
   templateUrl: './validators-page.component.html',
   styleUrl: './validators-page.component.scss'
 })
 export class ValidatorsPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Validadores' },
+  ];
+
   validators: ValidatorTool[] = [
     {
       id: 'cpf',

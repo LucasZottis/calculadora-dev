@@ -6,6 +6,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from 'src/converters/shared/components/converter-title/converter-title.component';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'pressure-converter-page',
   standalone: true,
@@ -14,14 +15,15 @@ import { ConverterTitleComponent } from 'src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './pressure-converter-page.component.html',
   styleUrl: './pressure-converter-page.component.scss'
 })
 export class PressureConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("pressure", "pressao");
+    super("pressure", "pressao", "Pressão");
     this.setTitle('Conversor de Pressão');
     this.addDescription('Ferramenta para converter entre diferentes unidades de pressão como Pascal, Bar, Atmosfera, Quilopascal, Milímetro de mercúrio e PSI. Conversão precisa, instantânea e confiável.');
   }

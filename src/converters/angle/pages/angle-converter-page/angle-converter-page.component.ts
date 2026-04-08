@@ -6,6 +6,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'angle-converter-page',
   standalone: true,
@@ -14,14 +15,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './angle-converter-page.component.html',
   styleUrl: './angle-converter-page.component.scss'
 })
 export class AngleConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("angle", "angulo");
+    super("angle", "angulo", "Ângulo");
     this.setTitle('Conversor de Ângulo');
     this.addDescription('Ferramenta para converter entre diferentes unidades de ângulo como Graus, Radianos e Grados (gon). Conversão precisa, instantânea e confiável.');
   }

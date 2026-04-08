@@ -3,21 +3,30 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 import { ExplanationCpfCalculationComponent } from "src/shared/components/explanation-cpf-calculation/explanation-cpf-calculation.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'cpf-validator-page',
   standalone: true,
   imports: [
     RouterModule,
     FormsModule,
-    ExplanationCpfCalculationComponent
-],
+    ExplanationCpfCalculationComponent,
+    BreadcrumbsComponent
+  ],
   templateUrl: './cpf-validator-page.component.html',
   styleUrl: './cpf-validator-page.component.scss'
 })
 
 export class CpfValidatorPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Validadores', link: '/validadores' },
+    { label: 'Validador de CPF' },
+  ];
+
   result: string | undefined;
   style: string = "";
   cpf: string = "";
