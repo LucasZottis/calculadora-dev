@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SerializationConverter } from 'devtoolz-library/dist/converters/serialization/serialization.converter';
 import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url-formatter.service';
 import { PageBase } from 'src/shared/pages/pageBase';
-import { DATA_FORMATS } from '../../csv-json.data';
+import { DATA_FORMATS } from '../../serialization.data';
 import { DataFormat } from '../../models/data-format.model';
 
 interface SeparatorOption {
@@ -14,17 +14,17 @@ interface SeparatorOption {
 }
 
 @Component({
-    selector: 'csv-json-converter-page',
+    selector: 'serialization-converter-page',
     standalone: true,
     imports: [
         CommonModule,
         FormsModule,
         RouterModule,
     ],
-    templateUrl: './csv-json-converter-page.component.html',
-    styleUrl: './csv-json-converter-page.component.scss'
+    templateUrl: './serialization-converter-page.component.html',
+    styleUrl: './serialization-converter-page.component.scss'
 })
-export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
+export class SerializationConverterPageComponent extends PageBase implements OnInit {
     readonly formats: DataFormat[] = DATA_FORMATS;
 
     readonly separatorOptions: SeparatorOption[] = [
@@ -66,7 +66,7 @@ export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
                 : null;
 
             if (!source || !target || source.id === target.id) {
-                this.router.navigate(['/conversores/csv-json']);
+                this.router.navigate(['/conversores/serialization']);
                 return;
             }
 
@@ -185,7 +185,7 @@ export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
 
     private _updateUrl(): void {
         const url = this.urlFormatter.generateConversionUrl(this.sourceFormat.id, this.targetFormat.id);
-        this.router.navigate(['/conversores/csv-json/' + url], { replaceUrl: true });
+        this.router.navigate(['/conversores/serialization/' + url], { replaceUrl: true });
     }
 
     private _updatePageMeta(): void {

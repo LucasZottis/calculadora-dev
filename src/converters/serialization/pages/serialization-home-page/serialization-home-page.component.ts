@@ -3,20 +3,20 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url-formatter.service';
 import { PageBase } from 'src/shared/pages/pageBase';
-import { DATA_FORMATS } from '../../csv-json.data';
+import { DATA_FORMATS } from '../../serialization.data';
 import { DataFormat } from '../../models/data-format.model';
 
 @Component({
-    selector: 'csv-json-home-page',
+    selector: 'serialization-home-page',
     standalone: true,
     imports: [
         RouterModule,
         CommonModule,
     ],
-    templateUrl: './csv-json-home-page.component.html',
-    styleUrl: './csv-json-home-page.component.scss'
+    templateUrl: './serialization-home-page.component.html',
+    styleUrl: './serialization-home-page.component.scss'
 })
-export class CsvJsonHomePageComponent extends PageBase implements OnInit {
+export class SerializationHomePageComponent extends PageBase implements OnInit {
     readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
 
     readonly groupedFormats: { key: DataFormat; targets: DataFormat[] }[] = DATA_FORMATS
