@@ -1,0 +1,178 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><a routerLink="/conversores/serialization">Serialização de Dados</a></li>
+            <li><span>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título -->
+    <div class="text-center mb-5" *ngIf="sourceFormat && targetFormat">
+        <h1>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</h1>
+        <p class="fs-3">
+            Converta {{ sourceFormat.name }} para {{ targetFormat.name }} de forma rápida e precisa.
+        </p>
+    </div>
+
+    <!-- Instruções de uso -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+            <ol>
+                <li>Escolha o formato de origem (De) e o formato de destino (Para)</li>
+                <li>Ajuste as opções de personalização conforme necessário</li>
+                <li>Cole ou digite o conteúdo no campo de entrada</li>
+                <li>Clique em <strong>Converter</strong> para realizar a conversão</li>
+                <li>O resultado aparecerá no campo de saída</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Opções -->
+    <div class="options-panel mb-4" *ngIf="sourceFormat && targetFormat">
+        <h2 class="options-title">
+            <span class="material-symbols-outlined">tune</span>
+            Opções
+        </h2>
+        <div class="options-grid">
+            <!-- Separador (ambas as direções) -->
+            <div class="option-group">
+                <label class="option-label" for="separator">Separador</label>
+                <select id="separator" class="option-select" [(ngModel)]="separatorCharacter">
+                    @for (opt of separatorOptions; track opt.value) {
+                    <option [value]="opt.value">{{ opt.label }}</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Campo vazio como nulo (apenas CSV → JSON) -->
+            @if (isCsvToJson) {
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="considerEmptyAsNull" />
+                    <span>Campo vazio como <code>null</code></span>
+                </label>
+                <p class="option-hint">Campos em branco no CSV serão tratados como <code>null</code> no JSON.</p>
+            </div>
+
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="compactOutput" />
+                    <span>JSON compacto</span>
+                </label>
+                <p class="option-hint">Gera o JSON em uma única linha, sem indentação.</p>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Conversor -->
+    <div class="converter-panel" *ngIf="sourceFormat && targetFormat">
+        <!-- Entrada -->
+        <div class="converter-row">
+            <div class="format-selector-wrapper">
+                <label class="format-label">De</label>
+                <select class="format-select" [(ngModel)]="sourceFormat" [compareWith]="compareById"
+                    (ngModelChange)="onSourceFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <textarea
+                    class="value-input"
+                    [(ngModel)]="sourceValue"
+                    [placeholder]="sourcePlaceholder"
+                    autocomplete="off"
+                    spellcheck="false"
+                    rows="10">
+                </textarea>
+            </div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="converter-actions">
+            <button class="swap-button" (click)="swapFormats()" title="Alternar formatos">
+                <span class="material-symbols-outlined">swap_vert</span>
+            </button>
+            <button class="convert-button" (click)="onConvert()">
+                <span class="material-symbols-outlined">transform</span>
+                Converter
+            </button>
+            <button class="clear-button" (click)="onClear()">
+                <span class="material-symbols-outlined">delete</span>
+                Limpar
+            </button>
+        </div>
+
+        <!-- Aviso -->
+        <div class="warning-message" *ngIf="warningMessage">
+            <span class="material-symbols-outlined">warning</span>
+            <span>{{ warningMessage }}</span>
+        </div>
+
+        <!-- Erro -->
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="material-symbols-outlined">error</span>
+            <span>{{ errorMessage }}</span>
+        </div>
+
+        <!-- Saída -->
+        <div class="converter-row">
+            <div class="format-selector-wrapper">
+                <label class="format-label">Para</label>
+                <select class="format-select" [(ngModel)]="targetFormat" [compareWith]="compareById"
+                    (ngModelChange)="onTargetFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <div class="value-display">{{ targetValue }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informações adicionais: CSV -->
+    @if (sourceFormat.id === 'csv' || targetFormat.id === 'csv') {
+        <div class="mt-5">
+            <h2 class="text-center fs-4">Sobre o formato CSV</h2>
+            <div class="texto-explicativo">
+                <p>
+                    O formato <strong>CSV</strong> (Comma-Separated Values) representa dados tabulares em texto plano,
+                    onde cada linha corresponde a uma linha da tabela e os valores são separados por um caractere delimitador.
+                </p>
+                <p>A primeira linha geralmente contém os <strong>cabeçalhos das colunas</strong>. Exemplo:</p>
+                <pre>nome,idade,cidade
+Ana,30,São Paulo
+Bruno,25,Rio de Janeiro</pre>
+            </div>
+        </div>
+    }
+
+    <!-- Informações adicionais: JSON -->
+    @if (sourceFormat.id === 'json' || targetFormat.id === 'json') {
+        <div class="mt-5">
+            <h2 class="text-center fs-4">Sobre o formato JSON</h2>
+            <div class="texto-explicativo">
+                <p>
+                    O formato <strong>JSON</strong> (JavaScript Object Notation) é um formato leve de intercâmbio de dados,
+                    amplamente utilizado em APIs e configurações de sistemas.
+                </p>
+                <p>
+                    Para a conversão, o JSON deve ser um <strong>array de objetos</strong> com estrutura simples
+                    (sem aninhamento). Exemplo:
+                </p>
+                <pre>[
+  &#123; "nome": "Ana", "idade": 30, "cidade": "São Paulo" &#125;,
+  &#123; "nome": "Bruno", "idade": 25, "cidade": "Rio de Janeiro" &#125;
+]</pre>
+            </div>
+        </div>
+    }
+</div>

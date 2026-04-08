@@ -19,4 +19,5 @@ export const CONVERTERS_ROUTES: Routes = [
     { path: 'pressao', loadChildren: () => import('../pressure/pressure.routes').then(m => m.PRESSURE_ROUTES) },
     { path: 'velocidade', loadChildren: () => import('../speed/speed.routes').then(m => m.SPEED_ROUTES) },
     { path: 'potencia', loadChildren: () => import('../power/power.routes').then(m => m.POWER_ROUTES) },
+    { path: 'serialization', loadChildren: () => import('../serialization/serialization.routes').then(m => m.SERIALIZATION_ROUTES) },
 ];
