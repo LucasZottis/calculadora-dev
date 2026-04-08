@@ -2,10 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { SerializationConverter } from 'devtoolz-library/dist/converters/serialization/serialization.converter';
 import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url-formatter.service';
 import { PageBase } from 'src/shared/pages/pageBase';
 import { DATA_FORMATS } from '../../csv-json.data';
 import { DataFormat } from '../../models/data-format.model';
+
+interface SeparatorOption {
+    label: string;
+    value: string;
+}
 
 @Component({
     selector: 'csv-json-converter-page',
@@ -21,6 +27,13 @@ import { DataFormat } from '../../models/data-format.model';
 export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
     readonly formats: DataFormat[] = DATA_FORMATS;
 
+    readonly separatorOptions: SeparatorOption[] = [
+        { label: 'Vírgula (,)', value: ',' },
+        { label: 'Ponto e vírgula (;)', value: ';' },
+        { label: 'Tabulação (\\t)', value: '\t' },
+        { label: 'Pipe (|)', value: '|' },
+    ];
+
     sourceFormat!: DataFormat;
     targetFormat!: DataFormat;
     sourceValue: string = '';
@@ -28,9 +41,15 @@ export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
     errorMessage: string = '';
     warningMessage: string = '';
 
+    // Opções de personalização
+    separatorCharacter: string = ',';
+    considerEmptyAsNull: boolean = false;
+    compactOutput: boolean = false;
+
     private readonly route: ActivatedRoute = inject(ActivatedRoute);
     private readonly router: Router = inject(Router);
     private readonly urlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
+    private readonly converter = new SerializationConverter();
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
@@ -99,9 +118,13 @@ export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
         return a?.id === b?.id;
     }
 
+    get isCsvToJson(): boolean {
+        return this.sourceFormat?.id === 'csv' && this.targetFormat?.id === 'json';
+    }
+
     get sourcePlaceholder(): string {
         switch (this.sourceFormat?.id) {
-            case 'csv': return 'Ex:\nnome,idade,cidade\nAna,30,São Paulo\nBruno,25,Rio de Janeiro';
+            case 'csv': return `Ex:\nnome,idade,cidade\nAna,30,São Paulo\nBruno,25,Rio de Janeiro`;
             case 'json': return 'Ex:\n[\n  { "nome": "Ana", "idade": 30 },\n  { "nome": "Bruno", "idade": 25 }\n]';
             default: return '';
         }
@@ -124,116 +147,40 @@ export class CsvJsonConverterPageComponent extends PageBase implements OnInit {
         }
 
         try {
-            if (this.sourceFormat.id === 'csv' && this.targetFormat.id === 'json') {
-                this.targetValue = this._csvToJson(this.sourceValue);
-            } else if (this.sourceFormat.id === 'json' && this.targetFormat.id === 'csv') {
-                this.targetValue = this._jsonToCsv(this.sourceValue);
+            let result = this.converter.convert(
+                this.sourceValue,
+                this.sourceFormat.id,
+                this.targetFormat.id,
+                { separatorCharacter: this.separatorCharacter, considerEmptyAsNull: false }
+            );
+
+            if (this.isCsvToJson) {
+                result = this._applyJsonOptions(result);
             }
+
+            this.targetValue = result;
         } catch (err: any) {
             this.errorMessage = err?.message ?? 'Valor inválido. Verifique o formato e tente novamente.';
             this.targetValue = '';
         }
     }
 
-    private _csvToJson(csv: string): string {
-        const lines = csv.split('\n').map(l => l.trimEnd()).filter(l => l.trim().length > 0);
+    private _applyJsonOptions(jsonString: string): string {
+        let data = JSON.parse(jsonString);
 
-        if (lines.length === 0) {
-            throw new Error('CSV inválido: conteúdo vazio.');
-        }
-
-        const headers = this._parseCSVLine(lines[0]);
-
-        if (headers.length === 0 || headers.every(h => h === '')) {
-            throw new Error('CSV inválido: a primeira linha deve conter os cabeçalhos das colunas.');
-        }
-
-        if (lines.length === 1) {
-            return '[]';
-        }
-
-        const result: Record<string, string>[] = [];
-
-        for (let i = 1; i < lines.length; i++) {
-            const values = this._parseCSVLine(lines[i]);
-            const obj: Record<string, string> = {};
-            headers.forEach((header, index) => {
-                obj[header] = values[index] ?? '';
-            });
-            result.push(obj);
-        }
-
-        return JSON.stringify(result, null, 2);
-    }
-
-    private _parseCSVLine(line: string): string[] {
-        const result: string[] = [];
-        let current = '';
-        let inQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-
-            if (char === '"') {
-                if (inQuotes && line[i + 1] === '"') {
-                    current += '"';
-                    i++;
-                } else {
-                    inQuotes = !inQuotes;
+        if (this.considerEmptyAsNull) {
+            data = data.map((obj: Record<string, any>) => {
+                const result: Record<string, any> = {};
+                for (const key of Object.keys(obj)) {
+                    result[key] = obj[key] === '' ? null : obj[key];
                 }
-            } else if (char === ',' && !inQuotes) {
-                result.push(current.trim());
-                current = '';
-            } else {
-                current += char;
-            }
+                return result;
+            });
         }
 
-        result.push(current.trim());
-        return result;
-    }
-
-    private _jsonToCsv(json: string): string {
-        let data: any;
-
-        try {
-            data = JSON.parse(json);
-        } catch {
-            throw new Error('JSON inválido: verifique a sintaxe e tente novamente.');
-        }
-
-        if (!Array.isArray(data)) {
-            throw new Error('JSON inválido: o conteúdo deve ser um array de objetos.');
-        }
-
-        if (data.length === 0) {
-            throw new Error('JSON inválido: o array está vazio.');
-        }
-
-        const hasNestedObjects = data.some((item: any) =>
-            Object.values(item).some(v => typeof v === 'object' && v !== null)
-        );
-
-        if (hasNestedObjects) {
-            throw new Error('JSON inválido: estruturas aninhadas não são suportadas. Use apenas objetos simples.');
-        }
-
-        const headers = Object.keys(data[0]);
-        const csvLines = [
-            headers.map(h => this._escapeCSVValue(h)).join(','),
-            ...data.map((obj: Record<string, any>) =>
-                headers.map(h => this._escapeCSVValue(String(obj[h] ?? ''))).join(',')
-            )
-        ];
-
-        return csvLines.join('\n');
-    }
-
-    private _escapeCSVValue(value: string): string {
-        if (value.includes(',') || value.includes('"') || value.includes('\n')) {
-            return '"' + value.replace(/"/g, '""') + '"';
-        }
-        return value;
+        return this.compactOutput
+            ? JSON.stringify(data)
+            : JSON.stringify(data, null, 2);
     }
 
     private _updateUrl(): void {
