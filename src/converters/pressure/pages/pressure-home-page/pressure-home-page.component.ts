@@ -3,19 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'pressure-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './pressure-home-page.component.html',
   styleUrl: './pressure-home-page.component.scss'
 })
 export class PressureHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("pressure");
+    super("pressure", "Pressão");
   }
 
   ngOnInit() {

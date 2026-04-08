@@ -1,12 +1,28 @@
 <div class="page-container">
-  <nav class="breadcrumbs">
-    <ol>
-      <li><a routerLink="/">Início</a></li>
-      <li><a routerLink="/conversores">Conversores</a></li>
-      <li><a routerLink="/conversores/peso-e-massa">Peso e Massa</a></li>
-      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
-    </ol>
-  </nav>
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
+  <div class="text-center mb-5">
+
+    <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+    <!-- Instruções de uso -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title fs-4">
+          Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+          {{selectedTargetUnit.name.toLowerCase()}}
+        </h2>
+        <p>
+          Esta calculadora permite converter entre diversas unidades de peso e massa, incluindo medidas métricas e
+          imperiais. Basta selecionar as unidades de origem e destino, e inserir o valor a ser convertido.
+        </p>
+        <ol>
+          <li>Escolha a unidade de origem (de onde deseja converter)</li>
+          <li>Escolha a unidade de destino (para onde deseja converter)</li>
+          <li>Digite o valor na unidade de origem</li>
+          <li>O resultado será calculado automaticamente</li>
+        </ol>
+      </div>
+    </div>
 
   <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
 

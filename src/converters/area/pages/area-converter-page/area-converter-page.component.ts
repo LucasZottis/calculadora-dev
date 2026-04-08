@@ -7,6 +7,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'area-converter-page',
   standalone: true,
@@ -15,14 +16,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './area-converter-page.component.html',
   styleUrl: './area-converter-page.component.scss'
 })
 export class AreaConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("area", "area");
+    super("area", "area", "Área");
     this.setTitle('Conversor de Área');
     this.addDescription('Ferramenta para converter entre diferentes unidades de área, como metros quadrados, centímetros quadrados, hectares, acres, pés quadrados e muito mais. Conversão precisa, instantânea e ideal para aplicações técnicas, imobiliárias e acadêmicas.');
   }

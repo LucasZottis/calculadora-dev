@@ -8,7 +8,9 @@ import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url
 import { PageBase } from 'src/shared/pages/pageBase';
 import { NUMERIC_SYSTEMS } from '../../numeric-systems.data';
 import { NumericSystem } from '../../models/numeric-system.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
     selector: 'numeric-systems-converter-page',
     standalone: true,
@@ -16,7 +18,8 @@ import { NumericSystem } from '../../models/numeric-system.model';
         CommonModule,
         FormsModule,
         RouterModule,
-    ],
+    BreadcrumbsComponent
+  ],
     templateUrl: './numeric-systems-converter-page.component.html',
     styleUrl: './numeric-systems-converter-page.component.scss'
 })
@@ -26,6 +29,15 @@ export class NumericSystemsConverterPageComponent extends PageBase implements On
     private readonly urlFormatter: UnitUrlFormatterService = inject(UnitUrlFormatterService);
 
     readonly systems: NumericSystem[] = NUMERIC_SYSTEMS;
+
+    get breadcrumbItems(): BreadcrumbItem[] {
+        return [
+            { label: 'Início', link: '/' },
+            { label: 'Conversores', link: '/conversores' },
+            { label: 'Sistemas Numéricos', link: '/conversores/sistemas-numericos' },
+            { label: `Converter ${this.sourceSystem?.name} para ${this.targetSystem?.name}` },
+        ];
+    }
 
     sourceSystem!: NumericSystem;
     targetSystem!: NumericSystem;

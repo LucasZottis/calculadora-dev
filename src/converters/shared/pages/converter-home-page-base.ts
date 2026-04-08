@@ -3,6 +3,7 @@ import { NavigationHelper } from "src/shared/helpers/navigationHelper";
 import { PageBase } from "src/shared/pages/pageBase";
 import { UnitUrlFormatterService } from '../services/unit-url-formatter.service';
 import { inject } from "@angular/core";
+import { BreadcrumbItem } from "src/shared/models/breadcrumb-item";
 
 export class ConverterHomePageBase extends PageBase {
     private readonly _service!: IUnitConverter;
@@ -10,12 +11,22 @@ export class ConverterHomePageBase extends PageBase {
     protected readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
     protected readonly availableUnits: Unit[] = [];
     protected readonly groupedUnits: Array<{ key: Unit, units: Unit[] }> = [];
+    protected readonly categoryLabel: string;
 
+    get breadcrumbItems(): BreadcrumbItem[] {
+        return [
+            { label: 'Início', link: '/' },
+            { label: 'Conversores', link: '/conversores' },
+            { label: this.categoryLabel },
+        ];
+    }
 
     constructor(
         categoryId: string,
+        categoryLabel: string = '',
     ) {
         super();
+        this.categoryLabel = categoryLabel;
         this._service = this._factory.createService(categoryId);
         this.availableUnits = this._service.getUnits();
         this._groupList();

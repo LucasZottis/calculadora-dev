@@ -5,19 +5,21 @@ import { RouterModule } from '@angular/router';
 import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'area-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './area-home-page.component.html',
   styleUrl: './area-home-page.component.scss'
 })
 export class AreaHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("area");
+    super("area", "Área");
   }
 
   ngOnInit() {

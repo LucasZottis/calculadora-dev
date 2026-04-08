@@ -2,22 +2,31 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 import { ExplanationCnpjCalculationComponent } from "src/shared/components/explanation-cnpj-calculation/explanation-cnpj-calculation.component";
 import { RouterModule } from '@angular/router';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'cnpj-generator-page',
   standalone: true,
   imports: [
     FormsModule,
     RouterModule,
-    ExplanationCnpjCalculationComponent
+    ExplanationCnpjCalculationComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './cnpj-generator-page.component.html',
   styleUrl: './cnpj-generator-page.component.scss'
 })
 
 export class CnpjGeneratorPageComponent extends PageBase {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Geradores', link: '/geradores' },
+    { label: 'Gerador de CNPJ' },
+  ];
+
   cnpj: string = "";
   masked: number = 1;
 

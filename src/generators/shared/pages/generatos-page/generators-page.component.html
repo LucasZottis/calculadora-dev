@@ -1,12 +1,6 @@
 <!-- src/generators/pages/generators-category-page/generators-category-page.component.html -->
 <div class="page-container">
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <ol>
-            <li><a routerLink="/">Início</a></li>
-            <li><span>Geradores</span></li>
-        </ol>
-    </nav>
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
 
     <!-- Título da Categoria -->
     <div class="category-header">

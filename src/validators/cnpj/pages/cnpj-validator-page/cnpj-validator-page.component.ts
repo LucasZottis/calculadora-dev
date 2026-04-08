@@ -2,20 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 import { ExplanationCnpjCalculationComponent } from "src/shared/components/explanation-cnpj-calculation/explanation-cnpj-calculation.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'cnpj-validator-page',
   standalone: true,
   imports: [
     FormsModule,
     RouterModule,
-    ExplanationCnpjCalculationComponent
-],
+    ExplanationCnpjCalculationComponent,
+    BreadcrumbsComponent
+  ],
   templateUrl: './cnpj-validator-page.component.html',
   styleUrl: './cnpj-validator-page.component.scss'
 })
 export class CnpjValidatorPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Validadores', link: '/validadores' },
+    { label: 'Validador de CNPJ' },
+  ];
 
   result: string | undefined;
   style: string = "";

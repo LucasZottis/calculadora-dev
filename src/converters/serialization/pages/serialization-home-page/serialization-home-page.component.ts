@@ -5,19 +5,28 @@ import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url
 import { PageBase } from 'src/shared/pages/pageBase';
 import { DATA_FORMATS } from '../../serialization.data';
 import { DataFormat } from '../../models/data-format.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
     selector: 'serialization-home-page',
     standalone: true,
     imports: [
         RouterModule,
         CommonModule,
-    ],
+    BreadcrumbsComponent
+  ],
     templateUrl: './serialization-home-page.component.html',
     styleUrl: './serialization-home-page.component.scss'
 })
 export class SerializationHomePageComponent extends PageBase implements OnInit {
     readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
+
+    readonly breadcrumbItems: BreadcrumbItem[] = [
+        { label: 'Início', link: '/' },
+        { label: 'Conversores', link: '/conversores' },
+        { label: 'Serialização de Dados' },
+    ];
 
     readonly groupedFormats: { key: DataFormat; targets: DataFormat[] }[] = DATA_FORMATS
         .map(source => ({

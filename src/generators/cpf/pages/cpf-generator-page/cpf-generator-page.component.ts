@@ -2,22 +2,31 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 import { ExplanationCpfCalculationComponent } from "src/shared/components/explanation-cpf-calculation/explanation-cpf-calculation.component";
 import { RouterModule } from '@angular/router';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'cpf-generator-page',
   standalone: true,
   imports: [
     FormsModule,
     ExplanationCpfCalculationComponent,
-    RouterModule
+    RouterModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './cpf-generator-page.component.html',
   styleUrl: './cpf-generator-page.component.scss'
 })
 
 export class CpfGeneratorPageComponent extends PageBase {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Geradores', link: '/geradores' },
+    { label: 'Gerador de CPF' },
+  ];
+
   cpf: string = "";
   masked: number = 1;
 

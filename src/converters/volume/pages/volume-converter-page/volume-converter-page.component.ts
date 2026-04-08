@@ -7,6 +7,7 @@ import { CalculatorComponent } from "../../../shared/components/calculator/calcu
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'volume-converter-page',
   standalone: true,
@@ -15,14 +16,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './volume-converter-page.component.html',
   styleUrl: './volume-converter-page.component.scss'
 })
 export class VolumeConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("volume", "volume");
+    super("volume", "volume", "Volume");
     this.setTitle('Conversor de Volume');
     this.addDescription('Ferramenta para converter entre diferentes unidades de volume como mililitros, litros, galões, xícaras, onças fluídas e mais. Conversão precisa e instantânea.');
   }

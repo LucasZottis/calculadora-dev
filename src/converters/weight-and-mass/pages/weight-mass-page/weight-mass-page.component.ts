@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
     selector: 'weight-mass-page',
     standalone: true,
     imports: [
         RouterModule,
-        CommonModule
-    ],
+        CommonModule,
+    BreadcrumbsComponent
+  ],
     templateUrl: './weight-mass-page.component.html',
     styleUrl: './weight-mass-page.component.scss'
 })
 export class WeightMassPageComponent extends ConverterHomePageBase implements OnInit {
     constructor() {
-        super('weight-mass');
+        super('weight-mass', 'Peso e Massa');
     }
 
     ngOnInit() {

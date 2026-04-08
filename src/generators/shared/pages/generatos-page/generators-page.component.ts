@@ -5,18 +5,26 @@ import { Meta, Title } from '@angular/platform-browser';
 import { PageBase } from 'src/shared/pages/pageBase';
 import { CommonModule } from '@angular/common';
 import { GeneratorTool } from '../../models/generatorTool';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'generators-page',
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './generators-page.component.html',
   styleUrl: './generators-page.component.scss'
 })
 export class GeneratorsPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Geradores' },
+  ];
+
   generators: GeneratorTool[] = [
     {
       id: 'cpf',
