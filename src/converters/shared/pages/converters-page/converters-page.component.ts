@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { Category } from '../models/categpry.model';
 
 @Component({
   selector: 'converters-page',
@@ -15,7 +16,7 @@ import { PageBase } from 'src/shared/pages/pageBase';
   styleUrl: './converters-page.component.scss'
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
-  categories: Array<{ id: string, name: string, icon: string }> = [
+  categories: Array<Category> = [
     { id: 'angulo', name: 'Ângulo', icon: '360' },
     { id: 'serialization', name: 'Serialização de Dados', icon: 'data_object' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
@@ -26,6 +27,7 @@ export class ConvertersPageComponent extends PageBase implements OnInit {
     { id: 'pressao', name: 'Pressão', icon: 'compress' },
     { id: 'sistemas-numericos', name: 'Sistemas Numéricos', icon: 'tag' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
+    // { id: 'tempo', name: 'Tempo', icon: 'nest_clock_farsight_analog' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
     { id: 'texto', name: 'Conversor de Texto', icon: 'text_fields' },
     { id: 'velocidade', name: 'Velocidade', icon: 'speed' },
