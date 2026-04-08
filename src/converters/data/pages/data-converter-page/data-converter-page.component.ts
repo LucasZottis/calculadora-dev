@@ -7,6 +7,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'data-converter-page',
   standalone: true,
@@ -15,14 +16,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './data-converter-page.component.html',
   styleUrl: './data-converter-page.component.scss'
 })
 export class DataConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("data", "dado");
+    super("data", "dados", "Dados");
     this.setTitle('Conversor de Dados');
     this.addDescription(
       'Ferramenta para converter entre diferentes unidades de dados, como bits, bytes, kilobytes, megabytes, gigabytes, terabytes e muito mais. \

@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'decimal-time-converter-page',
   standalone: true,
@@ -11,11 +13,18 @@ import { PageBase } from 'src/shared/pages/pageBase';
     CommonModule,
     FormsModule,
     RouterModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './decimal-time-converter-page.component.html',
   styleUrl: './decimal-time-converter-page.component.scss'
 })
 export class DecimalTimeConverterPageComponent extends PageBase implements OnInit {
+  readonly breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Início', link: '/' },
+    { label: 'Conversores', link: '/conversores' },
+    { label: 'Converter horas, minutos e segundos para número decimal' },
+  ];
+
   // Valores dos campos separados
   hoursValue: string = '00';
   minutesValue: string = '00';

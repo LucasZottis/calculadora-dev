@@ -5,19 +5,21 @@ import { RouterModule } from '@angular/router';
 import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'temperature-converter-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './temperature-converter-home-page.component.html',
   styleUrl: './temperature-converter-home-page.component.scss'
 })
 export class TemperatureConverterHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("temperature");
+    super("temperature", "Temperatura");
   }
 
   ngOnInit() {

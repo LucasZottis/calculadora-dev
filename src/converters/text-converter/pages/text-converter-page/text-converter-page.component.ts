@@ -7,7 +7,9 @@ import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url
 import { PageBase } from 'src/shared/pages/pageBase';
 import { TEXT_FORMATS } from '../../text-converter.data';
 import { TextFormat } from '../../models/text-format.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
     selector: 'text-converter-page',
     standalone: true,
@@ -15,12 +17,22 @@ import { TextFormat } from '../../models/text-format.model';
         CommonModule,
         FormsModule,
         RouterModule,
-    ],
+    BreadcrumbsComponent
+  ],
     templateUrl: './text-converter-page.component.html',
     styleUrl: './text-converter-page.component.scss'
 })
 export class TextConverterPageComponent extends PageBase implements OnInit {
     readonly formats: TextFormat[] = TEXT_FORMATS;
+
+    get breadcrumbItems(): BreadcrumbItem[] {
+        return [
+            { label: 'Início', link: '/' },
+            { label: 'Conversores', link: '/conversores' },
+            { label: 'Conversor de Texto', link: '/conversores/texto' },
+            { label: `Converter ${this.sourceFormat?.name} para ${this.targetFormat?.name}` },
+        ];
+    }
 
     sourceFormat!: TextFormat;
     targetFormat!: TextFormat;

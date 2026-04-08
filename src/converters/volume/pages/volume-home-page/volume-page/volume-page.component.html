@@ -1,13 +1,6 @@
 <!-- src/converters/volume/pages/volume-home-page/volume-page/volume-page.component.html -->
 <div class="page-container">
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumbs">
-        <ol>
-            <li><a routerLink="/">Início</a></li>
-            <li><a routerLink="/conversores">Conversores</a></li>
-            <li><span>Volume</span></li>
-        </ol>
-    </nav>
+<app-breadcrumbs [items]="breadcrumbItems"></app-breadcrumbs>
 
     <!-- Título da Subcategoria -->
     <div class="category-header">

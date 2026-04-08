@@ -5,19 +5,21 @@ import { RouterModule } from '@angular/router';
 import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'speed-converter-home-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './speed-converter-home-page.component.html',
   styleUrl: './speed-converter-home-page.component.scss'
 })
 export class SpeedConverterHomePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("speed");
+    super("speed", "Velocidade");
   }
 
   ngOnInit() {

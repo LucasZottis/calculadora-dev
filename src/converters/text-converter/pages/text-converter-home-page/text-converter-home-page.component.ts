@@ -5,19 +5,28 @@ import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url
 import { PageBase } from 'src/shared/pages/pageBase';
 import { TEXT_FORMATS } from '../../text-converter.data';
 import { TextFormat } from '../../models/text-format.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
     selector: 'text-converter-home-page',
     standalone: true,
     imports: [
         RouterModule,
         CommonModule,
-    ],
+    BreadcrumbsComponent
+  ],
     templateUrl: './text-converter-home-page.component.html',
     styleUrl: './text-converter-home-page.component.scss'
 })
 export class TextConverterHomePageComponent extends PageBase implements OnInit {
     readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
+
+    readonly breadcrumbItems: BreadcrumbItem[] = [
+        { label: 'Início', link: '/' },
+        { label: 'Conversores', link: '/conversores' },
+        { label: 'Conversor de Texto' },
+    ];
 
     readonly groupedFormats: { key: TextFormat; targets: TextFormat[] }[] = TEXT_FORMATS
         .map(source => ({

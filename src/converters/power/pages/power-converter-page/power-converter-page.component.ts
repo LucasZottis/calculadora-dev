@@ -6,6 +6,7 @@ import { CalculatorComponent } from 'src/converters/shared/components/calculator
 import { ConverterPageBase } from 'src/converters/shared/pages/converter-page-base';
 import { ConverterTitleComponent } from "src/converters/shared/components/converter-title/converter-title.component";
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'power-converter-page',
   standalone: true,
@@ -14,14 +15,15 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     FormsModule,
     RouterModule,
     CalculatorComponent,
-    ConverterTitleComponent
+    ConverterTitleComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './power-converter-page.component.html',
   styleUrl: './power-converter-page.component.scss'
 })
 export class PowerConverterPageComponent extends ConverterPageBase implements OnInit {
   constructor() {
-    super("power", "potencia");
+    super("power", "potencia", "Potência");
     this.setTitle('Conversor de Potência');
     this.addDescription('Ferramenta para converter entre diferentes unidades de potência como Watt, Quilowatt, Cavalo-vapor (EUA), Libra-pé por minuto e BTU por minuto. Conversão precisa, instantânea e confiável.');
   }

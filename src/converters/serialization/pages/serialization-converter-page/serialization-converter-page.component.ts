@@ -7,7 +7,9 @@ import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url
 import { PageBase } from 'src/shared/pages/pageBase';
 import { DATA_FORMATS } from '../../serialization.data';
 import { DataFormat } from '../../models/data-format.model';
+import { BreadcrumbItem } from 'src/shared/models/breadcrumb-item';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 interface SeparatorOption {
     label: string;
     value: string;
@@ -20,12 +22,22 @@ interface SeparatorOption {
         CommonModule,
         FormsModule,
         RouterModule,
-    ],
+    BreadcrumbsComponent
+  ],
     templateUrl: './serialization-converter-page.component.html',
     styleUrl: './serialization-converter-page.component.scss'
 })
 export class SerializationConverterPageComponent extends PageBase implements OnInit {
     readonly formats: DataFormat[] = DATA_FORMATS;
+
+    get breadcrumbItems(): BreadcrumbItem[] {
+        return [
+            { label: 'Início', link: '/' },
+            { label: 'Conversores', link: '/conversores' },
+            { label: 'Serialização de Dados', link: '/conversores/serialization' },
+            { label: `Converter ${this.sourceFormat?.name} para ${this.targetFormat?.name}` },
+        ];
+    }
 
     readonly separatorOptions: SeparatorOption[] = [
         { label: 'Vírgula (,)', value: ',' },

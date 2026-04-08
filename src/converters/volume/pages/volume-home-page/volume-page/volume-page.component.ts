@@ -5,19 +5,21 @@ import { RouterModule } from '@angular/router';
 import { UnitConverterFactory } from 'devtoolz-library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
+import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcrumbs.component';
 @Component({
   selector: 'volume-page',
   standalone: true,
   imports: [
     RouterModule,
     CommonModule,
+    BreadcrumbsComponent
   ],
   templateUrl: './volume-page.component.html',
   styleUrl: './volume-page.component.scss'
 })
 export class VolumePageComponent extends ConverterHomePageBase implements OnInit {
   constructor() {
-    super("volume");
+    super("volume", "Volume");
   }
 
   ngOnInit() {
