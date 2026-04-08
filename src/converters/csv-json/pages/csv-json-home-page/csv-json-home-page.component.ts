@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UnitUrlFormatterService } from 'src/converters/shared/services/unit-url-formatter.service';
 import { PageBase } from 'src/shared/pages/pageBase';
-import { DATA_FORMATS } from '../../csv-json.data';
-import { DataFormat } from '../../models/data-format.model';
 
 @Component({
     selector: 'csv-json-home-page',
@@ -17,14 +14,10 @@ import { DataFormat } from '../../models/data-format.model';
     styleUrl: './csv-json-home-page.component.scss'
 })
 export class CsvJsonHomePageComponent extends PageBase implements OnInit {
-    readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
-
-    readonly groupedFormats: { key: DataFormat; targets: DataFormat[] }[] = DATA_FORMATS
-        .map(source => ({
-            key: source,
-            targets: DATA_FORMATS.filter(target => target.id !== source.id),
-        }))
-        .filter(group => group.targets.length > 0);
+    readonly conversions = [
+        { path: 'csv-para-json', label: 'CSV para JSON' },
+        { path: 'json-para-csv', label: 'JSON para CSV' },
+    ];
 
     ngOnInit(): void {
         const pageTitle = 'Conversor CSV/JSON';

@@ -1,0 +1,95 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><a routerLink="/conversores/csv-json">Conversor CSV/JSON</a></li>
+            <li><span>CSV para JSON</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título -->
+    <div class="text-center mb-5">
+        <h1>Converter CSV para JSON</h1>
+        <p class="fs-3">Converta dados CSV para JSON de forma rápida e precisa.</p>
+    </div>
+
+    <!-- Instruções de uso -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+            <ol>
+                <li>Cole ou digite o conteúdo CSV no campo de entrada</li>
+                <li>A primeira linha deve conter os cabeçalhos das colunas</li>
+                <li>Clique em <strong>Converter</strong> para realizar a conversão</li>
+                <li>O resultado JSON aparecerá no campo de saída</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Conversor -->
+    <div class="converter-panel">
+        <!-- Entrada CSV -->
+        <div class="field-group">
+            <label class="field-label">CSV</label>
+            <textarea
+                class="value-input"
+                [(ngModel)]="csvValue"
+                placeholder="Ex:&#10;nome,idade,cidade&#10;Ana,30,São Paulo&#10;Bruno,25,Rio de Janeiro"
+                autocomplete="off"
+                spellcheck="false"
+                rows="10">
+            </textarea>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="converter-actions">
+            <button class="convert-button" (click)="onConvert()">
+                <span class="material-symbols-outlined">transform</span>
+                Converter
+            </button>
+            <button class="clear-button" (click)="onClear()">
+                <span class="material-symbols-outlined">delete</span>
+                Limpar
+            </button>
+        </div>
+
+        <!-- Aviso -->
+        <div class="warning-message" *ngIf="warningMessage">
+            <span class="material-symbols-outlined">warning</span>
+            <span>{{ warningMessage }}</span>
+        </div>
+
+        <!-- Erro -->
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="material-symbols-outlined">error</span>
+            <span>{{ errorMessage }}</span>
+        </div>
+
+        <!-- Saída JSON -->
+        <div class="field-group">
+            <label class="field-label">JSON</label>
+            <div class="value-display">{{ jsonValue }}</div>
+        </div>
+    </div>
+
+    <!-- Informações adicionais -->
+    <div class="mt-5">
+        <h2 class="text-center fs-4">Sobre o formato CSV</h2>
+        <div class="texto-explicativo">
+            <p>
+                O formato <strong>CSV</strong> (Comma-Separated Values) representa dados tabulares em texto plano,
+                onde cada linha corresponde a uma linha da tabela e os valores são separados por vírgulas.
+            </p>
+            <p>A primeira linha geralmente contém os <strong>cabeçalhos das colunas</strong>. Exemplo:</p>
+            <pre>nome,idade,cidade
+Ana,30,São Paulo
+Bruno,25,Rio de Janeiro</pre>
+            <p>
+                Valores que contêm vírgulas ou aspas devem ser envolvidos por aspas duplas. Aspas dentro do valor
+                são representadas por duas aspas duplas consecutivas (<code>""</code>).
+            </p>
+        </div>
+    </div>
+</div>

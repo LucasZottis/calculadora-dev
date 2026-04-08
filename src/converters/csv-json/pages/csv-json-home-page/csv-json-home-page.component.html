@@ -29,36 +29,23 @@
         </div>
     </section>
 
-    <!-- Links de conversão agrupados por formato de origem -->
+    <!-- Links de conversão -->
     <section class="conversion-groups-container">
-        @for (group of groupedFormats; track group.key.id) {
-        <section class="conversion-group" [id]="group.key.id">
-            <h2>Conversões de {{ group.key.name }}</h2>
+        <section class="conversion-group">
+            <h2>Conversões disponíveis</h2>
             <hr>
             <div class="conversion-links-grid">
-                @for (target of group.targets; track target.id) {
-                <a [routerLink]="['/conversores/csv-json', unitUrlFormatterService.generateConversionUrl(group.key.id, target.id)]"
-                    class="conversion-link-card">
+                @for (conv of conversions; track conv.path) {
+                <a [routerLink]="['/conversores/csv-json', conv.path]" class="conversion-link-card">
                     <div class="conversion-link-icon">
                         <span class="material-symbols-outlined">data_object</span>
                     </div>
                     <div class="conversion-link-content">
-                        <h3>{{ group.key.name }} para {{ target.name }}</h3>
+                        <h3>{{ conv.label }}</h3>
                     </div>
                 </a>
                 }
             </div>
         </section>
-        }
-    </section>
-
-    <!-- Navegação rápida -->
-    <section class="quick-navigation">
-        <h2>Navegação Rápida</h2>
-        <div class="quick-nav-list">
-            @for (group of groupedFormats; track group.key.id) {
-            <a [href]="'#' + group.key.id" class="unit-chip">{{ group.key.name }}</a>
-            }
-        </div>
     </section>
 </div>
