@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <!-- Campo vazio como nulo (apenas CSV → JSON) -->
+            <!-- Opções exclusivas: CSV → JSON -->
             @if (isCsvToJson) {
             <div class="option-group option-group--checkbox">
                 <label class="option-checkbox-label">
@@ -64,6 +64,41 @@
                     <span>JSON compacto</span>
                 </label>
                 <p class="option-hint">Gera o JSON em uma única linha, sem indentação.</p>
+            </div>
+            }
+
+            <!-- Opções exclusivas: JSON → CSV -->
+            @if (isJsonToCsv) {
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="includeHeader" />
+                    <span>Incluir linha de cabeçalho</span>
+                </label>
+                <p class="option-hint">Inclui os nomes dos campos como primeira linha do CSV.</p>
+            </div>
+
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="quoteAllFields" />
+                    <span>Envolver campos entre aspas</span>
+                </label>
+                <p class="option-hint">Envolve todos os valores entre aspas duplas no CSV gerado.</p>
+            </div>
+
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="nullAsEmpty" />
+                    <span>Nulo como vazio</span>
+                </label>
+                <p class="option-hint">Valores <code>null</code> no JSON serão exportados como campos vazios no CSV.</p>
+            </div>
+
+            <div class="option-group option-group--checkbox">
+                <label class="option-checkbox-label">
+                    <input type="checkbox" [(ngModel)]="outputBom" />
+                    <span>Adicionar BOM (UTF-8)</span>
+                </label>
+                <p class="option-hint">Insere o marcador BOM no início do arquivo para compatibilidade com Excel.</p>
             </div>
             }
         </div>

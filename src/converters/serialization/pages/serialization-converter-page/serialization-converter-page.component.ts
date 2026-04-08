@@ -43,8 +43,16 @@ export class SerializationConverterPageComponent extends PageBase implements OnI
 
     // Opções de personalização
     separatorCharacter: string = ',';
+
+    // Opções CSV → JSON
     considerEmptyAsNull: boolean = false;
     compactOutput: boolean = false;
+
+    // Opções JSON → CSV
+    includeHeader: boolean = true;
+    quoteAllFields: boolean = false;
+    nullAsEmpty: boolean = false;
+    outputBom: boolean = false;
 
     private readonly route: ActivatedRoute = inject(ActivatedRoute);
     private readonly router: Router = inject(Router);
@@ -122,6 +130,10 @@ export class SerializationConverterPageComponent extends PageBase implements OnI
         return this.sourceFormat?.id === 'csv' && this.targetFormat?.id === 'json';
     }
 
+    get isJsonToCsv(): boolean {
+        return this.sourceFormat?.id === 'json' && this.targetFormat?.id === 'csv';
+    }
+
     get sourcePlaceholder(): string {
         switch (this.sourceFormat?.id) {
             case 'csv': return `Ex:\nnome,idade,cidade\nAna,30,São Paulo\nBruno,25,Rio de Janeiro`;
@@ -156,6 +168,8 @@ export class SerializationConverterPageComponent extends PageBase implements OnI
 
             if (this.isCsvToJson) {
                 result = this._applyJsonOptions(result);
+            } else if (this.isJsonToCsv) {
+                result = this._applyCsvOptions(result);
             }
 
             this.targetValue = result;
@@ -181,6 +195,63 @@ export class SerializationConverterPageComponent extends PageBase implements OnI
         return this.compactOutput
             ? JSON.stringify(data)
             : JSON.stringify(data, null, 2);
+    }
+
+    private _applyCsvOptions(csvString: string): string {
+        let lines = csvString.split('\n');
+
+        if (this.nullAsEmpty || this.quoteAllFields) {
+            lines = lines.map((line, index) => {
+                if (!line.trim()) return line;
+                const isHeader = index === 0;
+                const fields = this._parseCsvLine(line, this.separatorCharacter);
+                const processed = fields.map(f => {
+                    let value = (!isHeader && this.nullAsEmpty && f === 'null') ? '' : f;
+                    if (this.quoteAllFields) {
+                        return `"${value.replace(/"/g, '""')}"`;
+                    }
+                    return value;
+                });
+                return processed.join(this.separatorCharacter);
+            });
+        }
+
+        if (!this.includeHeader) {
+            lines = lines.slice(1);
+        }
+
+        let result = lines.join('\n');
+
+        if (this.outputBom) {
+            result = '\uFEFF' + result;
+        }
+
+        return result;
+    }
+
+    private _parseCsvLine(line: string, separator: string): string[] {
+        const fields: string[] = [];
+        let current = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            if (char === '"') {
+                if (inQuotes && line[i + 1] === '"') {
+                    current += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (char === separator && !inQuotes) {
+                fields.push(current);
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        fields.push(current);
+        return fields;
     }
 
     private _updateUrl(): void {
