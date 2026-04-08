@@ -27,7 +27,7 @@ export class CsvJsonHomePageComponent extends PageBase implements OnInit {
         .filter(group => group.targets.length > 0);
 
     ngOnInit(): void {
-        const pageTitle = 'Conversor de Formatos de Dados';
+        const pageTitle = 'Serialização de Dados';
         const description = 'Converta dados entre os formatos CSV e JSON de forma rápida e precisa. Ferramenta online gratuita para desenvolvedores e analistas de dados.';
         const keywords = 'conversor csv json, csv para json, json para csv, converter csv, converter json';
 
