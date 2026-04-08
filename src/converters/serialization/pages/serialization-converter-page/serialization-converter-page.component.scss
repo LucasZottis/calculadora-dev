@@ -1,0 +1,308 @@
+@import url('../../../shared/converter.style.scss');
+
+// ── Painel de opções ────────────────────────────────────────────────
+.options-panel {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--second-background-color, #2a2a2a);
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 12px;
+    padding: 1.25rem 2rem;
+}
+
+.options-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bs-primary, #0d6efd);
+    margin-bottom: 1rem;
+
+    .material-symbols-outlined {
+        font-size: 1.2rem;
+    }
+}
+
+.options-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    align-items: flex-start;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.option-label {
+    font-size: 0.75rem;
+    color: var(--bs-primary, #0d6efd);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.option-select {
+    background-color: var(--primary-background-color, #1a1a1a);
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 6px;
+    color: inherit;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+    outline: none;
+    cursor: pointer;
+    min-width: 200px;
+
+    &:focus {
+        border-color: var(--bs-primary, #0d6efd);
+    }
+
+    option {
+        background-color: var(--second-background-color, #2a2a2a);
+    }
+}
+
+.option-group--checkbox {
+    justify-content: center;
+}
+
+.option-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+
+    input[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+        accent-color: var(--bs-primary, #0d6efd);
+    }
+}
+
+.option-hint {
+    font-size: 0.75rem;
+    color: var(--border-color-base, #888);
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+// ── Painel do conversor ─────────────────────────────────────────────
+.converter-panel {
+    background-color: var(--second-background-color, #2a2a2a);
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.converter-row {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    background-color: var(--primary-background-color, #1a1a1a);
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.format-selector-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    border-right: 1px solid var(--border-color-base, #444);
+    min-width: 120px;
+    gap: 0.25rem;
+    justify-content: center;
+}
+
+.format-label {
+    font-size: 0.75rem;
+    color: var(--bs-primary, #0d6efd);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.format-select {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    appearance: auto;
+
+    option {
+        background-color: var(--second-background-color, #2a2a2a);
+        color: inherit;
+    }
+}
+
+.value-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    padding: 0.75rem 1rem;
+}
+
+.value-input {
+    background: transparent;
+    border: none;
+    color: var(--bs-primary, #0d6efd);
+    font-family: monospace;
+    font-size: 0.95rem;
+    outline: none;
+    width: 100%;
+    caret-color: var(--bs-primary, #0d6efd);
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.value-display {
+    color: var(--primary-color, #4caf50);
+    font-family: monospace;
+    font-size: 0.95rem;
+    width: 100%;
+    word-break: break-all;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    min-height: 10rem;
+}
+
+.converter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.swap-button {
+    background: none;
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 50%;
+    color: var(--border-color-base, #555);
+    cursor: pointer;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+
+    .material-symbols-outlined {
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        background-color: var(--bs-primary, #0d6efd);
+        border-color: var(--bs-primary, #0d6efd);
+        color: #fff;
+    }
+}
+
+.convert-button {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--bs-primary, #0d6efd);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    transition: opacity 0.2s;
+
+    .material-symbols-outlined {
+        font-size: 1.25rem;
+    }
+
+    &:hover {
+        opacity: 0.85;
+    }
+}
+
+.clear-button {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: 1px solid var(--border-color-base, #444);
+    border-radius: 8px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    .material-symbols-outlined {
+        font-size: 1.2rem;
+    }
+
+    &:hover {
+        background-color: rgba(220, 53, 69, 0.1);
+        border-color: var(--bs-danger, #dc3545);
+        color: var(--bs-danger, #dc3545);
+    }
+}
+
+.warning-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bs-warning, #ffc107);
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+
+    .material-symbols-outlined {
+        font-size: 1.2rem;
+    }
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bs-danger, #dc3545);
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+
+    .material-symbols-outlined {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .converter-panel {
+        padding: 1.25rem;
+    }
+
+    .converter-row {
+        flex-direction: column;
+    }
+
+    .format-selector-wrapper {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-base, #444);
+        min-width: unset;
+    }
+
+    .value-input,
+    .value-display {
+        font-size: 0.85rem;
+    }
+}

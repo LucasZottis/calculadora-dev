@@ -16,16 +16,13 @@ import { ConverterTitleComponent } from "src/converters/shared/components/conver
     RouterModule,
     CalculatorComponent,
     ConverterTitleComponent
-],
+  ],
   templateUrl: './temperature-converter-page.component.html',
   styleUrl: './temperature-converter-page.component.scss'
 })
 export class TemperatureConverterPageComponent extends ConverterPageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title, "temperature", "temperatura");
+  constructor() {
+    super("temperature", "temperatura");
     this.setTitle('Conversor de Temperatura');
     this.addDescription('Ferramenta para converter entre diferentes escalas de temperatura como Celsius, Fahrenheit, Kelvin, Rankine e Réaumur. Conversão precisa, instantânea e confiável.');
   }

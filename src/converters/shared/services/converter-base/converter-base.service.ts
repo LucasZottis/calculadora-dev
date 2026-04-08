@@ -1,22 +1,19 @@
 import { Optional } from '@angular/core';
-import { ConverterFactory, IConverter } from 'dev-toolz.library';
+import { UnitConverterFactory, IUnitConverter } from 'devtoolz-library';
 import { ConverterUrlService } from '../converter-url-service/converter-url.service';
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 export class ConvertersBaseService {
-  protected converter: IConverter;
-  protected converterFactory: ConverterFactory = new ConverterFactory();
+  protected converter: IUnitConverter;
+  protected converterFactory: UnitConverterFactory = new UnitConverterFactory();
 
   constructor(
     protected categoryId: string,
     @Optional() protected urlService?: ConverterUrlService
   ) {
-    this.converter = this.converterFactory.getConverter(categoryId);
-    if (this.urlService) {
-      this.urlService.units = this.converter.getUnits();
-    }
+    this.converter = this.converterFactory.createService(categoryId);
   }
 
   getUnits() {
@@ -32,10 +29,14 @@ export class ConvertersBaseService {
   }
 
   generateConversionUrl(sourceUnitId: string, targetUnitId: string): string {
-    return this.urlService?.generateConversionUrl(sourceUnitId, targetUnitId) || '';
+    if (!this.urlService) return '';
+    const sourceUnit = this.converter.getUnitById(sourceUnitId);
+    const targetUnit = this.converter.getUnitById(targetUnitId);
+    if (!sourceUnit || !targetUnit) return '';
+    return this.urlService.generateConversionUrl(sourceUnit, targetUnit);
   }
 
   parseConversionUrl(url: string) {
-    return this.urlService?.parseConversionUrl(url);
+    return this.urlService?.parseConversionUrl(this.converter.getUnits(), url);
   }
 }

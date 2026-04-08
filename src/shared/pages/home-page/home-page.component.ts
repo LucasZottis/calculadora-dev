@@ -16,13 +16,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent extends PageBase implements OnInit {
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
-  }
-
   ngOnInit() {
     const description = 'Ferramentas e calculadoras online para validação e conversão de dados - suporte para CPF, CNPJ, e mais.';
     const pageTitle = 'Ferramentas e Calculadoras para Desenvolvedores';

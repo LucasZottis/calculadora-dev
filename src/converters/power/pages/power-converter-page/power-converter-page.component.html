@@ -1,0 +1,73 @@
+<div class="page-container">
+  <nav class="breadcrumbs">
+    <ol>
+      <li><a routerLink="/">Início</a></li>
+      <li><a routerLink="/conversores">Conversores</a></li>
+      <li><a routerLink="/conversores/potencia">Potência</a></li>
+      <li><span>Converter {{selectedSourceUnit.name}} para {{selectedTargetUnit.name}}</span></li>
+    </ol>
+  </nav>
+
+  <converter-title [sourceUnit]="selectedSourceUnit" [targetUnit]="selectedTargetUnit" />
+
+  <!-- Instruções de uso -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title fs-4">
+        Como usar a ferramenta de conversão de {{selectedSourceUnit.name.toLowerCase()}} para
+        {{selectedTargetUnit.name.toLowerCase()}}
+      </h2>
+      <p>
+        Esta calculadora permite converter entre diversas unidades de potência, incluindo Watt, Quilowatt,
+        Cavalo-vapor (EUA), Libra-pé por minuto e BTU por minuto. Basta selecionar as unidades de origem e destino,
+        inserir o valor desejado e o sistema calculará automaticamente o resultado com base nos fatores de conversão
+        apropriados.
+      </p>
+      <ol>
+        <li>Escolha a unidade de origem (de onde deseja converter)</li>
+        <li>Escolha a unidade de destino (para onde deseja converter)</li>
+        <li>Digite o valor na unidade de origem</li>
+        <li>O resultado será calculado automaticamente</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Componente de calculadora -->
+  <calculator [selectedCategoryId]="selectedCategory" [selectedSourceUnitId]="selectedSourceUnit.id"
+    [selectedTargetUnitId]="selectedTargetUnit.id" (sourceUnitChange)="onSourceUnitChange($event)"
+    (targetUnitChange)="onTargetUnitChange($event)" (valueChange)="onValueChange($event)">
+  </calculator>
+
+  <!-- Explicação da fórmula de cálculo -->
+  <div class="mt-5 card" *ngIf="showFormula">
+    <div class="card-body">
+      <h2 class="card-title fs-4">Explicação do Cálculo</h2>
+      <p>{{ formulaDescription }}</p>
+      <div class="bg-dark text-light p-3 rounded">
+        <pre class="mb-0">{{ formulaCalculation }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Informações adicionais -->
+  <div class="mt-5">
+    <h2 class="text-center fs-4">Informações sobre Unidades de Potência</h2>
+    <div class="texto-explicativo">
+      <p>
+        A potência é a grandeza física que mede a taxa de realização de trabalho ou transferência de energia por
+        unidade de tempo. Existem diferentes unidades utilizadas para medir potência ao redor do mundo:
+      </p>
+      <ul>
+        <li><strong>Watt (W)</strong>: unidade padrão do Sistema Internacional de Unidades (SI); equivale a 1 Joule por segundo</li>
+        <li><strong>Quilowatt (kW)</strong>: equivale a 1.000 Watts; amplamente utilizado para expressar a potência de motores e aparelhos elétricos</li>
+        <li><strong>Cavalo-vapor (EUA) (hp)</strong>: unidade do sistema imperial norte-americano; 1 hp ≈ 745,7 W; comumente usada para especificar a potência de veículos e motores</li>
+        <li><strong>Libra-pé por minuto (lbf·ft/min)</strong>: unidade do sistema imperial que mede trabalho realizado por unidade de tempo; 1 lbf·ft/min ≈ 0,02260 W</li>
+        <li><strong>BTU por minuto (BTU/min)</strong>: unidade térmica britânica por minuto; utilizada em sistemas de aquecimento e refrigeração; 1 BTU/min ≈ 17,58 W</li>
+      </ul>
+      <p>
+        Todas as conversões são realizadas com alta precisão, utilizando o Watt como unidade base conforme o
+        Sistema Internacional de Unidades.
+      </p>
+    </div>
+  </div>
+</div>

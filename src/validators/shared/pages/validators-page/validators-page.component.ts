@@ -35,13 +35,6 @@ export class ValidatorsPageComponent extends PageBase implements OnInit {
     // Mais validadores podem ser adicionados aqui no futuro
   ];
 
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
-  }
-
   ngOnInit() {
     const description = 'Ferramentas de validação para CPF, CNPJ e outros documentos brasileiros. Valide dados com precisão e facilidade.';
     const pageTitle = 'Validadores de Documentos Brasileiros';

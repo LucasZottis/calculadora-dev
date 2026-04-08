@@ -39,6 +39,9 @@ export class UnitUrlFormatterService {
   // Método para auxiliar a converter entre a URL e os IDs das unidades
   parseConversionUrl(url: string): { sourceUnitId: string, targetUnitId: string } | undefined {
     // Formato esperado: unidade-origem-para-unidade-destino
+    if (!url.startsWith('converter-'))
+      return undefined;
+
     const parts = url.substring('converter-'.length).split('-para-');
 
     if (parts.length !== 2)

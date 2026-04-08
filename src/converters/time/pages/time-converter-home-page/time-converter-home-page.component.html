@@ -1,0 +1,89 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Tempo</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">timer</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor de Tempo</h1>
+            <p>Faça conversões precisas entre diferentes unidades de tempo</p>
+        </div>
+    </div>
+
+    <!-- Descrição da Subcategoria -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor de tempo permite transformar valores entre diversas unidades temporais, como anos, semanas,
+                dias, horas, minutos, segundos, milissegundos, microssegundos e picossegundos, com total precisão.</p>
+            <p>Ideal para estudantes, profissionais de tecnologia, física, engenharia ou qualquer pessoa que precise
+                converter unidades de tempo entre sistemas distintos de medição.</p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por unidade de medida -->
+    <section class="conversion-groups-container">
+        @for(item of groupedUnits; track item.key.id) {
+        <section class="conversion-group" [id]="item.key.id">
+            <h2>Conversões de {{item.key.name}} ({{item.key.symbol}})</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for(unit of item.units; track unit.id) {
+                <a [routerLink]="['/conversores/tempo', unitUrlFormatterService.generateConversionUrl(item.key.id, unit.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">timer</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{item.key.name}} para {{unit.name}}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Índice de navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for(item of groupedUnits; track item.key.id) {
+            <a [href]="'#' + item.key.id" class="unit-chip">{{item.key.name}}</a>
+            }
+        </div>
+    </section>
+
+    <!-- Informações sobre unidades de tempo -->
+    <div class="mt-5">
+        <h2 class="text-center fs-4">Informações sobre Unidades de Tempo</h2>
+        <div class="texto-explicativo">
+            <p>
+                O tempo é uma grandeza física fundamental do Sistema Internacional de Unidades (SI), cuja unidade base
+                é o <strong>segundo (s)</strong>. Diversas unidades derivadas são utilizadas conforme o contexto:
+            </p>
+            <ul>
+                <li><strong>Ano (a)</strong>: equivale a 365 dias ou 31.536.000 segundos</li>
+                <li><strong>Semana (sem)</strong>: equivale a 7 dias ou 604.800 segundos</li>
+                <li><strong>Dia (d)</strong>: equivale a 24 horas ou 86.400 segundos</li>
+                <li><strong>Hora (h)</strong>: equivale a 60 minutos ou 3.600 segundos</li>
+                <li><strong>Minuto (min)</strong>: equivale a 60 segundos</li>
+                <li><strong>Segundo (s)</strong>: unidade base do SI para tempo</li>
+                <li><strong>Milissegundo (ms)</strong>: equivale a 0,001 segundo (10⁻³ s)</li>
+                <li><strong>Microssegundo (µs)</strong>: equivale a 0,000001 segundo (10⁻⁶ s)</li>
+                <li><strong>Picossegundo (ps)</strong>: equivale a 0,000000000001 segundo (10⁻¹² s)</li>
+            </ul>
+            <p>
+                Todas as conversões utilizam o segundo como unidade base, garantindo precisão máxima nos cálculos.
+            </p>
+        </div>
+    </div>
+</div>

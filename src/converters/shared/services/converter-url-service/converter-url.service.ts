@@ -1,6 +1,6 @@
 // src/converters/shared/services/converter-url/converter-url.service.ts
 import { Injectable } from '@angular/core';
-import { Unit } from 'dev-toolz.library';
+import { Unit } from 'devtoolz-library';
 
 @Injectable({
     providedIn: 'root'

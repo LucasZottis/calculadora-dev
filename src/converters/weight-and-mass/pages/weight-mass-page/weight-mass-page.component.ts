@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UnitConverterFactory } from 'dev-toolz.library';
 import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-home-page-base';
 
 @Component({
@@ -16,12 +14,8 @@ import { ConverterHomePageBase } from 'src/converters/shared/pages/converter-hom
     styleUrl: './weight-mass-page.component.scss'
 })
 export class WeightMassPageComponent extends ConverterHomePageBase implements OnInit {
-    constructor(
-        factory: UnitConverterFactory,
-        meta: Meta,
-        title: Title,
-    ) {
-        super(factory, meta, title, 'weight-mass');
+    constructor() {
+        super('weight-mass');
     }
 
     ngOnInit() {

@@ -1,5 +1,4 @@
-import { Meta, Title } from "@angular/platform-browser";
-import { UnitConverterFactory, IUnitConverter, Unit } from "dev-toolz.library";
+import { UnitConverterFactory, IUnitConverter, Unit } from "devtoolz-library";
 import { NavigationHelper } from "src/shared/helpers/navigationHelper";
 import { PageBase } from "src/shared/pages/pageBase";
 import { UnitUrlFormatterService } from '../services/unit-url-formatter.service';
@@ -7,18 +6,17 @@ import { inject } from "@angular/core";
 
 export class ConverterHomePageBase extends PageBase {
     private readonly _service!: IUnitConverter;
+    private readonly _factory: UnitConverterFactory = inject(UnitConverterFactory);
     protected readonly unitUrlFormatterService: UnitUrlFormatterService = inject(UnitUrlFormatterService);
     protected readonly availableUnits: Unit[] = [];
     protected readonly groupedUnits: Array<{ key: Unit, units: Unit[] }> = [];
 
+
     constructor(
-        factory: UnitConverterFactory,
-        meta: Meta,
-        title: Title,
         categoryId: string,
     ) {
-        super(meta, title);
-        this._service = factory.createService(categoryId);
+        super();
+        this._service = this._factory.createService(categoryId);
         this.availableUnits = this._service.getUnits();
         this._groupList();
     }
@@ -51,9 +49,6 @@ export class ConverterHomePageBase extends PageBase {
         pageTitle: string,
         keyWords: string
     ) {
-        // const description = 'Converta facilmente entre diferentes unidades de volume como litros, mililitros, metros cúbicos, galões e muito mais. Calculadora precisa com explicações detalhadas.';
-        // const pageTitle = 'Conversor de Volume - Todas as Unidades';
-
         this.setTitle(pageTitle);
         this.addDescription(pageDescription);
 
@@ -79,47 +74,13 @@ export class ConverterHomePageBase extends PageBase {
         keyWords: string
     ): void {
         this._setSEOInfo(pageDescription, pageTitle, keyWords);
-        // // const description = 'Converta facilmente entre diferentes unidades de peso e massa como quilogramas, gramas, libras, onças, toneladas e muito mais. Calculadora precisa com explicações detalhadas.';
-        // // const pageTitle = 'Conversor de Peso e Massa - Todas as Unidades';
-
-        // this.setTitle(pageTitle);
-        // this.addDescription(pageDescription);
-
-        // // Atualizar metadados para SEO
-        // this.updateSeo({
-        //     title: pageTitle,
-        //     description: pageDescription,
-        //     // keywords: 'conversor de peso, conversor de massa, quilogramas para gramas, libras para quilos, onças, conversão de peso, calculadora de massa corporal, toneladas, quilates'
-        //     keywords: keyWords,
-        // });
-
-        // // Adicionar Schema.org para rich snippets
-        // // this.addSchemaOrgData('SoftwareApplication', {
-        // //     name: 'Conversor de Peso e Massa',
-        // //     description: description,
-        // //     applicationCategory: 'UtilityApplication',
-        // //     operatingSystem: 'Web'
-        // // });
-
-        // this.addSchemaOrgData('SoftwareApplication', {
-        //     name: pageTitle,
-        //     description: pageDescription,
-        //     applicationCategory: 'UtilityApplication',
-        //     operatingSystem: 'Web'
-        // });
     }
 
     protected navigationHelper() {
         // Configurar navegação por âncoras na página
         NavigationHelper.setupAnchorNavigation();
+
         // Configurar exibição da navegação rápida durante rolagem
         NavigationHelper.setupScrollWatch(400);
     }
-
-    // ngAfterViewInit() {
-    //     // Configurar navegação por âncoras na página
-    //     NavigationHelper.setupAnchorNavigation();
-    //     // Configurar exibição da navegação rápida durante rolagem
-    //     NavigationHelper.setupScrollWatch(400);
-    // }
 }

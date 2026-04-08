@@ -1,0 +1,141 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><a routerLink="/conversores/texto">Conversor de Texto</a></li>
+            <li><span>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título -->
+    <div class="text-center mb-5" *ngIf="sourceFormat && targetFormat">
+        <h1>Converter {{ sourceFormat.name }} para {{ targetFormat.name }}</h1>
+        <p class="fs-3">
+            Converta {{ sourceFormat.name.toLowerCase() }} para {{ targetFormat.name.toLowerCase() }} de forma rápida e precisa.
+        </p>
+    </div>
+
+    <!-- Instruções de uso -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title fs-4">Como usar esta ferramenta</h2>
+            <p>Selecione o formato de origem e de destino, depois insira o valor a ser convertido. O resultado será calculado automaticamente.</p>
+            <ol>
+                <li>Escolha o formato de origem (de onde deseja converter)</li>
+                <li>Escolha o formato de destino (para onde deseja converter)</li>
+                <li>Digite o valor no campo de origem</li>
+                <li>O resultado aparecerá automaticamente no campo de resultado</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Conversor -->
+    <div class="converter-panel" *ngIf="sourceFormat && targetFormat">
+        <!-- Entrada -->
+        <div class="converter-row">
+            <div class="format-selector-wrapper">
+                <label class="format-label">De</label>
+                <select class="format-select" [(ngModel)]="sourceFormat" [compareWith]="compareById"
+                    (ngModelChange)="onSourceFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <textarea
+                    class="value-input"
+                    [(ngModel)]="sourceValue"
+                    (ngModelChange)="onSourceValueChange()"
+                    (input)="onSourceInputEvent($event)"
+                    [placeholder]="sourcePlaceholder"
+                    autocomplete="off"
+                    spellcheck="false"
+                    rows="4">
+                </textarea>
+            </div>
+        </div>
+
+        <!-- Botão de alternância -->
+        <div class="converter-arrow">
+            <button class="swap-button" (click)="swapFormats()" title="Alternar formatos">
+                <span class="material-symbols-outlined">swap_vert</span>
+            </button>
+        </div>
+
+        <!-- Saída -->
+        <div class="converter-row">
+            <div class="format-selector-wrapper">
+                <label class="format-label">Para</label>
+                <select class="format-select" [(ngModel)]="targetFormat" [compareWith]="compareById"
+                    (ngModelChange)="onTargetFormatChange()">
+                    @for(f of formats; track f.id) {
+                    <option [ngValue]="f">{{ f.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="value-wrapper">
+                <div class="value-display">{{ targetValue }}</div>
+            </div>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="material-symbols-outlined">error</span>
+            <span>{{ errorMessage }}</span>
+        </div>
+    </div>
+
+    <!-- Informações adicionais: Binário -->
+    @if (sourceFormat.id === 'binario' || targetFormat.id === 'binario') {
+        <div class="mt-5">
+            <h2 class="text-center fs-4">Sobre a Conversão de Texto para Binário</h2>
+            <div class="texto-explicativo">
+                <p>
+                    A conversão de texto para binário representa cada caractere pelo seu valor numérico na tabela
+                    <strong>ASCII</strong> (ou <strong>Unicode/UTF-8</strong>), expresso em base 2 (binário).
+                </p>
+                <p>
+                    Cada caractere é convertido em um grupo de 8 bits (1 byte). Por exemplo:
+                </p>
+                <ul>
+                    <li>A letra <strong>A</strong> tem valor ASCII 65, que em binário é <strong>01000001</strong></li>
+                    <li>A letra <strong>a</strong> tem valor ASCII 97, que em binário é <strong>01100001</strong></li>
+                    <li>O número <strong>0</strong> tem valor ASCII 48, que em binário é <strong>00110000</strong></li>
+                </ul>
+                <p>
+                    Para converter binário de volta para texto, cada grupo de 8 bits é interpretado como um número decimal,
+                    que corresponde ao caractere na tabela ASCII.
+                </p>
+            </div>
+        </div>
+    }
+
+    <!-- Informações adicionais: Morse -->
+    @if (sourceFormat.id === 'morse' || targetFormat.id === 'morse') {
+        <div class="mt-5">
+            <h2 class="text-center fs-4">Sobre o Código Morse</h2>
+            <div class="texto-explicativo">
+                <p>
+                    O <strong>Código Morse</strong> é um sistema de comunicação que representa letras e números como
+                    sequências de pontos (<strong>.</strong>) e traços (<strong>-</strong>). Foi desenvolvido por
+                    Samuel Morse e Alfred Vail na década de 1830.
+                </p>
+                <p>
+                    Cada caractere é representado por uma combinação única de pontos e traços. Por exemplo:
+                </p>
+                <ul>
+                    <li>A letra <strong>S</strong> é representada por <strong>...</strong> (três pontos)</li>
+                    <li>A letra <strong>O</strong> é representada por <strong>---</strong> (três traços)</li>
+                    <li>A palavra <strong>SOS</strong> é <strong>... --- ...</strong></li>
+                </ul>
+                <p>
+                    Na conversão de texto para Morse, as letras dentro de uma mesma palavra são separadas por
+                    <strong>um espaço</strong>, e as palavras são separadas por <strong>três espaços</strong>.
+                </p>
+            </div>
+        </div>
+    }
+</div>

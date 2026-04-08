@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'converters-page',
@@ -15,22 +16,26 @@ import { PageBase } from 'src/shared/pages/pageBase';
   styleUrl: './converters-page.component.scss'
 })
 export class ConvertersPageComponent extends PageBase implements OnInit {
-  categories: Array<{ id: string, name: string, icon: string }> = [
+  categories: Array<Category> = [
+    { id: 'angulo', name: 'Ângulo', icon: '360' },
+    { id: 'serialization', name: 'Serialização de Dados', icon: 'data_object' },
     { id: 'area', name: 'Área', icon: 'square_foot' },
     { id: 'comprimento', name: 'Comprimento', icon: 'straighten' },
     { id: 'dados', name: 'Dados', icon: 'database' },
     { id: 'energia', name: 'Energia', icon: 'bolt' },
     { id: 'peso-e-massa', name: 'Peso e Massa', icon: 'weight' },
+    { id: 'pressao', name: 'Pressão', icon: 'compress' },
+    { id: 'sistemas-numericos', name: 'Sistemas Numéricos', icon: 'tag' },
     { id: 'temperatura', name: 'Temperatura', icon: 'device_thermostat' },
+    { id: 'tempo', name: 'Tempo', icon: 'nest_clock_farsight_analog' },
     { id: 'tempo-decimal', name: 'Tempo Decimal', icon: 'speed_1_75' },
+    { id: 'texto', name: 'Conversor de Texto', icon: 'text_fields' },
+    { id: 'velocidade', name: 'Velocidade', icon: 'speed' },
     { id: 'volume', name: 'Volume', icon: 'deployed_code' },
   ];
 
-  constructor(
-    meta: Meta,
-    title: Title,
-  ) {
-    super(meta, title);
+  constructor() {
+    super();
   }
 
   ngOnInit() {

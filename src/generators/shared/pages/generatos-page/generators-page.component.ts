@@ -35,11 +35,8 @@ export class GeneratorsPageComponent extends PageBase implements OnInit {
     // Mais geradores podem ser adicionados aqui no futuro
   ];
 
-  constructor(
-    meta: Meta,
-    title: Title
-  ) {
-    super(meta, title);
+  constructor() {
+    super();
   }
 
   ngOnInit() {
