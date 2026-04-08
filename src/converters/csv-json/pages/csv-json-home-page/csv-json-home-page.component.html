@@ -1,0 +1,64 @@
+<div class="page-container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/conversores">Conversores</a></li>
+            <li><span>Conversor CSV/JSON</span></li>
+        </ol>
+    </nav>
+
+    <!-- Título da Subcategoria -->
+    <div class="category-header">
+        <div class="category-icon">
+            <span class="material-symbols-outlined">data_object</span>
+        </div>
+        <div class="category-info">
+            <h1>Conversor CSV/JSON</h1>
+            <p>Converta dados entre os formatos CSV e JSON com precisão e facilidade</p>
+        </div>
+    </div>
+
+    <!-- Descrição -->
+    <section class="category-description">
+        <div class="description-content">
+            <p>O conversor CSV/JSON permite transformar dados tabulares entre os formatos CSV (Comma-Separated Values)
+                e JSON (JavaScript Object Notation).</p>
+            <p>Ideal para desenvolvedores, analistas de dados e qualquer pessoa que precise migrar dados entre
+                sistemas que utilizam diferentes formatos de arquivo.</p>
+        </div>
+    </section>
+
+    <!-- Links de conversão agrupados por formato de origem -->
+    <section class="conversion-groups-container">
+        @for (group of groupedFormats; track group.key.id) {
+        <section class="conversion-group" [id]="group.key.id">
+            <h2>Conversões de {{ group.key.name }}</h2>
+            <hr>
+            <div class="conversion-links-grid">
+                @for (target of group.targets; track target.id) {
+                <a [routerLink]="['/conversores/csv-json', unitUrlFormatterService.generateConversionUrl(group.key.id, target.id)]"
+                    class="conversion-link-card">
+                    <div class="conversion-link-icon">
+                        <span class="material-symbols-outlined">data_object</span>
+                    </div>
+                    <div class="conversion-link-content">
+                        <h3>{{ group.key.name }} para {{ target.name }}</h3>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </section>
+
+    <!-- Navegação rápida -->
+    <section class="quick-navigation">
+        <h2>Navegação Rápida</h2>
+        <div class="quick-nav-list">
+            @for (group of groupedFormats; track group.key.id) {
+            <a [href]="'#' + group.key.id" class="unit-chip">{{ group.key.name }}</a>
+            }
+        </div>
+    </section>
+</div>
