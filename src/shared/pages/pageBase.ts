@@ -42,6 +42,10 @@ export class PageBase implements OnDestroy {
         this._seoService.updateTags(config);
     }
 
+    protected setCanonical(path: string): void {
+        this._seoService.updateCanonical(path);
+    }
+
     protected addSchemaOrgData(type: string, data: any): void {
         this._seoService.addSchema(type, data);
     }

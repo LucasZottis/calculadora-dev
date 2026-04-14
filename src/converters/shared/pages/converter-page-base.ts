@@ -93,6 +93,11 @@ export class ConverterPageBase extends PageBase {
         if (unidadeOrigem && unidadeDestino) {
             this.setTitle(`Converter ${unidadeOrigem.name} para ${unidadeDestino.name}`);
             this.addDescription(`Ferramenta para converter ${unidadeOrigem.name} para ${unidadeDestino.name}. Cálculo instantâneo e preciso com explicação da fórmula de conversão.`);
+            const conversionPath = this.unitUrlFormatter.generateConversionUrl(
+                this.selectedSourceUnit.id,
+                this.selectedTargetUnit.id
+            );
+            this.setCanonical(`/conversores/${this.urlPrefix}/${conversionPath}`);
         } else {
             this.setTitle('Conversor de Volume');
         }
