@@ -9,7 +9,9 @@
     "test": "ng test",
     "serve:ssr": "node dist/calculadora-dev/server/server.mjs",
     "build:ssr": "ng build",
-    "prerender": "ng build --prerender"
+    "prerender": "ng build --prerender",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +45,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.8.0"
+    "typescript": "~5.8.0",
+    "wrangler": "^4.84.1"
   }
 }
