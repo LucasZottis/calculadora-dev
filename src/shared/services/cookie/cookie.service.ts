@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-// Declaração de interface para window que inclui Clarity
 declare global {
   interface Window {
     clarity?: (command: string) => void;
@@ -20,6 +20,8 @@ export interface CookieConfig {
 })
 export class CookieService {
 
+  private readonly _platformId = inject(PLATFORM_ID);
+
   private cookieConfigSubject = new BehaviorSubject<CookieConfig>({
     necessarios: true,
     analytics: false,
@@ -30,7 +32,9 @@ export class CookieService {
   cookieConfig$ = this.cookieConfigSubject.asObservable();
 
   constructor() {
-    this.carregarConfiguracoes();
+    if (isPlatformBrowser(this._platformId)) {
+      this.carregarConfiguracoes();
+    }
   }
 
   private carregarConfiguracoes(): void {
@@ -48,12 +52,17 @@ export class CookieService {
   }
 
   salvarConfiguracoes(config: CookieConfig): void {
-    localStorage.setItem('cookie-consent', JSON.stringify(config));
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.setItem('cookie-consent', JSON.stringify(config));
+    }
     this.cookieConfigSubject.next(config);
     this.aplicarConfiguracoes(config);
   }
 
   verificarConsentimento(): boolean {
+    if (!isPlatformBrowser(this._platformId)) {
+      return false;
+    }
     return localStorage.getItem('cookie-consent') !== null;
   }
 
@@ -62,9 +71,6 @@ export class CookieService {
   }
 
   private aplicarConfiguracoes(config: CookieConfig): void {
-    // Implementar a lógica para aplicar as configurações de cookies
-    // Por exemplo: ativar/desativar scripts de analytics, marketing, etc.
-
     if (config.analytics) {
       this.ativarAnalytics();
     } else {
@@ -79,34 +85,26 @@ export class CookieService {
   }
 
   private ativarAnalytics(): void {
-    // Implementar a lógica para ativar scripts de analytics
-    // Por exemplo: Google Analytics, Clarity, etc.
     console.log('Analytics ativado');
 
-    // Exemplo para o Microsoft Clarity (já presente no projeto)
-    if (window.clarity) {
+    if (isPlatformBrowser(this._platformId) && window.clarity) {
       window.clarity('consent');
     }
   }
 
   private desativarAnalytics(): void {
-    // Implementar a lógica para desativar scripts de analytics
     console.log('Analytics desativado');
 
-    // Exemplo para o Microsoft Clarity
-    if (window.clarity) {
+    if (isPlatformBrowser(this._platformId) && window.clarity) {
       window.clarity('stop');
     }
   }
 
   private ativarMarketing(): void {
-    // Implementar a lógica para ativar scripts de marketing
-    // Por exemplo: Google Ads, Facebook Pixel, etc.
     console.log('Marketing ativado');
   }
 
   private desativarMarketing(): void {
-    // Implementar a lógica para desativar scripts de marketing
     console.log('Marketing desativado');
   }
 }

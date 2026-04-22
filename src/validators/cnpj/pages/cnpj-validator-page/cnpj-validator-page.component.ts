@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PageBase } from 'src/shared/pages/pageBase';
@@ -19,6 +20,8 @@ import { BreadcrumbsComponent } from 'src/shared/components/breadcrumbs/breadcru
   styleUrl: './cnpj-validator-page.component.scss'
 })
 export class CnpjValidatorPageComponent extends PageBase implements OnInit {
+  private readonly _platformId = inject(PLATFORM_ID);
+
   readonly breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Início', link: '/' },
     { label: 'Validadores', link: '/validadores' },
@@ -182,19 +185,21 @@ export class CnpjValidatorPageComponent extends PageBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.injetarDadosTabela("760718080001", 2, "corpo-primeiro-digito");
-    this.injetarDadosTabela("7607180800012", 1, "corpo-segundo-digito");
-
-    this.injetarSomaResultados("760718080001", 2, "resultado-soma-primeiro-digito", "Em seguida, somamos os resultados: ");
-    this.injetarSomaResultados("7607180800012", 1, "resultado-soma-segundo-digito", "Em seguida, somamos os resultados: ");
-
-    this.injetarResultadoModuloOnze("760718080001", 2, "resultado-modulo-primeiro-digito", " O resto de {S} / 11 é {R}.");
-    this.injetarResultadoModuloOnze("7607180800012", 1, "resultado-modulo-segundo-digito", " O resto de {S} / 11 é {R}.");
-    this.injetarDigito(true, "primeiro-digito");
-    this.injetarDigito(false, "segundo-digito");
-
     this.addDescription('De vez em quando é necessário validar um CNPJ, aqui você consegue fazer.');
     this.setTitle('Validação de CNPJ');
+
+    if (isPlatformBrowser(this._platformId)) {
+      this.injetarDadosTabela("760718080001", 2, "corpo-primeiro-digito");
+      this.injetarDadosTabela("7607180800012", 1, "corpo-segundo-digito");
+
+      this.injetarSomaResultados("760718080001", 2, "resultado-soma-primeiro-digito", "Em seguida, somamos os resultados: ");
+      this.injetarSomaResultados("7607180800012", 1, "resultado-soma-segundo-digito", "Em seguida, somamos os resultados: ");
+
+      this.injetarResultadoModuloOnze("760718080001", 2, "resultado-modulo-primeiro-digito", " O resto de {S} / 11 é {R}.");
+      this.injetarResultadoModuloOnze("7607180800012", 1, "resultado-modulo-segundo-digito", " O resto de {S} / 11 é {R}.");
+      this.injetarDigito(true, "primeiro-digito");
+      this.injetarDigito(false, "segundo-digito");
+    }
   }
 
   validate(): void {

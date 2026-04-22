@@ -1,6 +1,6 @@
 // src/converters/shared/components/calculator/calculator.component.ts
-import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UnitConverterFactory, IUnitConverter, Unit } from 'devtoolz-library';
 import { CalculatorResult } from 'src/converters/shared/models/calculatorResult';
@@ -14,6 +14,7 @@ import { CalculatorResult } from 'src/converters/shared/models/calculatorResult'
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
   private readonly _converterFactory: UnitConverterFactory = inject(UnitConverterFactory);
+  private readonly _platformId = inject(PLATFORM_ID);
 
   private currentConverter!: IUnitConverter;
   private documentClickListener: any;
@@ -174,13 +175,17 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.initializeUnits();
 
     this.currentConverter = this._converterFactory.createService(this.selectedCategoryId);
-    this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
 
-    document.addEventListener('click', this.documentClickListener);
+    if (isPlatformBrowser(this._platformId)) {
+      this.documentClickListener = (event: MouseEvent) => this.onDocumentClick(event);
+      document.addEventListener('click', this.documentClickListener);
+    }
   }
 
   ngOnDestroy(): void {
-    document.removeEventListener('click', this.documentClickListener);
+    if (isPlatformBrowser(this._platformId) && this.documentClickListener) {
+      document.removeEventListener('click', this.documentClickListener);
+    }
   }
 
   onSourceUnitSelect(unitId: string): void {
