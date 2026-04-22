@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CookieConfig, CookieService } from 'src/shared/services/cookie/cookie.service';
 
@@ -21,28 +21,30 @@ export class CookieConsentComponent implements OnInit, OnDestroy {
     personalizacao: false
   };
 
+  private readonly _platformId = inject(PLATFORM_ID);
+
   constructor(private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    // Verifica se o usuário já aceitou os cookies
     const temConsentimento = this.cookieService.verificarConsentimento();
 
     if (!temConsentimento) {
       setTimeout(() => {
         this.mostrarModal = true;
-      }, 1000); // Atrasa a exibição do modal para não atrapalhar o carregamento inicial
+      }, 1000);
     } else {
-      // Carrega as configurações salvas
       this.cookieConfig = this.cookieService.obterConfiguracoes();
     }
 
-    // Adiciona listener para o evento personalizado
-    window.addEventListener('mostrar-cookie-dialog', this.abrirModal.bind(this));
+    if (isPlatformBrowser(this._platformId)) {
+      window.addEventListener('mostrar-cookie-dialog', this.abrirModal.bind(this));
+    }
   }
 
   ngOnDestroy(): void {
-    // Remove o listener ao destruir o componente
-    window.removeEventListener('mostrar-cookie-dialog', this.abrirModal.bind(this));
+    if (isPlatformBrowser(this._platformId)) {
+      window.removeEventListener('mostrar-cookie-dialog', this.abrirModal.bind(this));
+    }
   }
 
   abrirModal(): void {
