@@ -47,4 +47,4 @@ if (isMainModule(import.meta.url)) {
   run();
 }
 
-export const reqHandler = createNodeRequestHandler(app);
+export const reqHandler = createNodeRequestHandler(app());
