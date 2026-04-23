@@ -9,7 +9,8 @@
     "test": "ng test",
     "serve:ssr": "node dist/calculadora-dev/server/server.mjs",
     "build:ssr": "ng build",
-    "prerender": "ng build --prerender"
+    "prerender": "ng build --prerender",
+    "postinstall": "node scripts/patch-devtoolz.js"
   },
   "private": true,
   "dependencies": {
