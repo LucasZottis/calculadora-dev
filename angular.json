@@ -53,9 +53,7 @@
             "ssr": {
               "entry": "server.ts"
             },
-            "prerender": {
-              "routesFile": "routes.txt"
-            },
+            "prerender": true,
             "allowedCommonJsDependencies": ["devtoolz-library"]
           },
           "configurations": {

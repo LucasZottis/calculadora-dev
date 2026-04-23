@@ -2,12 +2,11 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { UnitConverterFactory } from 'devtoolz-library';
-import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    UnitConverterFactory, provideClientHydration(),
+    UnitConverterFactory,
     // Registrar conversores adicionais
     // provideConverters([
     //   {
